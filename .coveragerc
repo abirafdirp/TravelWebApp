@@ -1,0 +1,3 @@
+[run]
+include = kompres2015/*
+omit = *migrations*
