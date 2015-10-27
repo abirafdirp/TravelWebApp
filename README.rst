@@ -1,7 +1,7 @@
 kompres2015
 ==============================
 
-A short description of the project.
+This project will not get pushed to public repos until its release which is approximately December of 2015.
 
 
 LICENSE: BSD
