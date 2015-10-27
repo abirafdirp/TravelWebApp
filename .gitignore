@@ -58,3 +58,7 @@ node_modules/
 
 # User-uploaded media
 kompres2015/media/
+
+#migrations
+**/migrations/*.*
+**/staticfiles/CACHE/
