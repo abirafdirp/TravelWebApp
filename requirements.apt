@@ -19,6 +19,9 @@ libfreetype6-dev
 liblcms1-dev
 libwebp-dev
 
+##mysql dependencies
+libmysqlclient-dev
+
 
 ##django-extensions
 graphviz-dev
