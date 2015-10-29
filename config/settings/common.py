@@ -44,6 +44,8 @@ THIRD_PARTY_APPS = (
     'django_comments',
     'django.contrib.sites',  # override default comments view
     'threadedcomments',
+
+    'djangular',
 )
 
 # Apps specific for this project go here.

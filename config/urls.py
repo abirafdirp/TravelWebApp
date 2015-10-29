@@ -22,7 +22,7 @@ urlpatterns = [
     # Your stuff: custom urls includes go here
 
     # django-fluent-comments custom view
-    url(r'^traveldestination/comments/', include('fluent_comments.urls')),
+    url(r'^comments/', include('fluent_comments.urls')),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
