@@ -24,7 +24,6 @@ DJANGO_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
@@ -40,6 +39,11 @@ THIRD_PARTY_APPS = (
     'allauth.account',  # registration
     'allauth.socialaccount',  # registration
     'rest_framework',
+
+    'fluent_comments',  # comments
+    'django_comments',
+    'django.contrib.sites',  # override default comments view
+    'threadedcomments',
 )
 
 # Apps specific for this project go here.
@@ -48,6 +52,8 @@ LOCAL_APPS = (
     # Your stuff: custom apps go here
     'kompres2015.tourism',
     'kompres2015.region',
+    'kompres2015.image',
+    'kompres2015.util',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -278,3 +284,9 @@ LOGGING = {
 ADMIN_URL = r'^admin/'
 
 # Your common stuff: Below this line define 3rd party library settings
+
+# comments
+FLUENT_COMMENTS_USE_EMAIL_NOTIFICATION = False
+
+# django-threadedcomments
+COMMENTS_APP = 'fluent_comments'
