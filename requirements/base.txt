@@ -48,11 +48,13 @@ django-filter==0.11.0
 
 # mysql
 wheel==0.26.0
+
+# this is for linux, if you're using windows, install the wheel
+# package from this folder instead
 mysql-python==1.2.5
 
 # comments
 django-threadedcomments==1.0.1
 django-fluent-comments==1.0.5
 
-# django-angular
-django-angular==0.7.15
+django-ckeditor==5.0.2

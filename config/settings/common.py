@@ -45,7 +45,7 @@ THIRD_PARTY_APPS = (
     'django.contrib.sites',  # override default comments view
     'threadedcomments',
 
-    'djangular',
+    'ckeditor',  # WYSIWYG editor
 )
 
 # Apps specific for this project go here.
@@ -292,3 +292,6 @@ FLUENT_COMMENTS_USE_EMAIL_NOTIFICATION = False
 
 # django-threadedcomments
 COMMENTS_APP = 'fluent_comments'
+
+# django-ckeditor
+CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'

@@ -59,6 +59,9 @@ node_modules/
 # User-uploaded media
 kompres2015/media/
 
-#migrations
+# migrations
 **/migrations/*.*
 **/staticfiles/CACHE/
+
+# generated staticfiles folder
+**/staticfiles/*
