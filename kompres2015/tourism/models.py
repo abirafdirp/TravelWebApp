@@ -6,11 +6,13 @@ from kompres2015.users.models import User
 
 class TravelDestination(TimeStampedModel):
     name = models.CharField(max_length=30, primary_key=True)
-    region = models.ForeignKey(Region)
-    overall_rating = models.IntegerField()
-    facility_rating = models.IntegerField()
-    cleanliness_rating = models.IntegerField()
-    ease_of_travel_rating = models.IntegerField()
+    region = models.ForeignKey(Region, verbose_name='Wilayah')
+    full_description = models.TextField(verbose_name="Deskripsi lengkap")
+    tagline = models.CharField(verbose_name='Deskripsi Singkat/Tagline',
+                               max_length=100)
+    transport_method = models.TextField(verbose_name='Metode Transport')
+    important_info_contact = models.TextField(
+        verbose_name='kontak dan info penting lainnya')
 
     def __str__(self):
         return self.name
@@ -23,5 +25,7 @@ class Visit(models.Model):
 
     class Meta:
         unique_together = ('date', 'travel_destination', 'user')
+
+
 
 
