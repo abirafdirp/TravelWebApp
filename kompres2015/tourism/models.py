@@ -30,8 +30,6 @@ class Visit(models.Model):
 
     class Meta:
         verbose_name = "Kunjungan"
-
-    class Meta:
         unique_together = ('date', 'travel_destination', 'user')
 
 
