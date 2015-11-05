@@ -5,10 +5,9 @@ from kompres2015.region.models import District
 
 
 class DistrictSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = District
-        fields = ('id', 'name',)
+        fields = ('district_pk_api', 'id', 'name',)
 
 
 class ProvinceSerializer(serializers.ModelSerializer):
@@ -16,7 +15,7 @@ class ProvinceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Province
-        fields = ('id', 'name', 'districts')
+        fields = ('province_pk_api', 'id', 'name', 'districts')
 
 
 class RegionSerializer(serializers.ModelSerializer):
@@ -24,6 +23,6 @@ class RegionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Region
-        fields = ('id', 'name', 'provinces')
+        fields = ('region_pk_api', 'id', 'name', 'provinces')
 
 

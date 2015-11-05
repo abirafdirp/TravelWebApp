@@ -38,6 +38,11 @@ def add_district(name, province):
 
 cleardb()
 add_region('Jawa')
+add_region('Sumatera')
 add_province('Jakarta', 'Jawa')
+add_province('Jawa Barat', 'Jawa')
+add_province('Sumatera Utara', 'Sumatera')
 add_district('Jakarta Selatan', 'Jakarta')
+add_district('Jakarta Utara', 'Jakarta')
+add_district('Bandung', 'Jawa Barat')
 
