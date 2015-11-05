@@ -47,14 +47,15 @@ if settings.DEBUG:
     ]
 
 # DRF default router
-router = routers.DefaultRouter()
-router.register(r'regions', views.RegionViewSet)
-router.register(r'provinces', views.ProvinceViewSet)
-router.register(r'districts', views.DistrictViewSet)
+# router = routers.DefaultRouter()
+# router.register(r'regions', views.RegionViewSet)
+# router.register(r'provinces', views.ProvinceViewSet)
+# router.register(r'districts', views.DistrictViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns += [
+    # url(r'^', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
 
@@ -78,7 +79,7 @@ district_detail = DistrictViewSet.as_view({
 })
 
 urlpatterns += format_suffix_patterns([
-    url(r'^$', api_root),
+    url(r'^api/$', api_root),
     url(r'^regions/$', region_list, name='region-list'),
     url(r'^regions/(?P<pk>[0-9]+)/$', region_detail, name='region-detail'),
     url(r'^regions/(?P<pk>[0-9]+)/provinces/$', province_list, name='province-list'),
@@ -86,4 +87,3 @@ urlpatterns += format_suffix_patterns([
     url(r'^regions/(?P<pk>[0-9]+)/provinces/(?P<pk2>[0-9]+)/districts/$', district_list, name='district-list'),
     url(r'^regions/(?P<pk>[0-9]+)/provinces/(?P<pk2>[0-9]+)/districts/(?P<pk3>[0-9]+)/$', district_detail, name='district-detail'),
 ])
-

@@ -26,6 +26,7 @@ class DistrictViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = District.objects.all()
     serializer_class = DistrictSerializer
 
+
 @api_view(('GET',))
 def api_root(request, format=None):
     return Response({
