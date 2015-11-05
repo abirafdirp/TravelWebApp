@@ -14,7 +14,6 @@ from kompres2015.region.serializers import DistrictSerializer
 
 
 class RegionViewSet(viewsets.ReadOnlyModelViewSet):
-    lookup_field = 'region_pk_api'
     queryset = Region.objects.all()
     filter_fields = ('name',)
     serializer_class = RegionSerializer
@@ -28,13 +27,11 @@ class RegionViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class ProvinceViewSet(viewsets.ReadOnlyModelViewSet):
-    lookup_field = 'province_pk_api'
     queryset = Province.objects.all()
     serializer_class = ProvinceSerializer
 
 
 class DistrictViewSet(viewsets.ReadOnlyModelViewSet):
-    lookup_field = 'district_pk_api'
     queryset = District.objects.all()
     serializer_class = DistrictSerializer
 

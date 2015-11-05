@@ -80,15 +80,10 @@ district_detail = DistrictViewSet.as_view({
 
 urlpatterns += format_suffix_patterns([
     url(r'^api/$', api_root),
-    url(r'^regions/$', region_list, name='region-list'),
-    url(r'^regions/(?P<region_pk_api>[0-9]+)/$', region_detail, name='region-detail'),
-    url(r'^regions/(?P<region_pk_api>[0-9]+)/provinces/$', province_list,
-        name='province-list'),
-    url(r'^regions/(?P<region_pk_api>[0-9]+)/provinces/(?P<province_pk_api>[0-9]+)/$',
-        province_detail,
-        name='province-detail'),
-    url(r'^regions/(?P<region_pk_api>[0-9]+)/provinces/(?P<province_pk_api>[0-9]+)/districts/$',
-        district_list, name='district-list'),
-    url(r'^regions/(?P<region_pk_api>[0-9]+)/provinces/(?P<province_pk_api>[0-9]+)/districts/(?P<district_pk_api>[0-9]+)/$',
-        district_detail, name='district-detail'),
+    url(r'^api/regions/$', region_list, name='region-list'),
+    url(r'^api/regions/(?P<pk>[0-9]+)/$', region_detail, name='region-detail'),
+    url(r'^api/provinces/$', province_list, name='province-list'),
+    url(r'^api/provinces/(?P<pk>[0-9]+)/$', province_detail, name='province-detail'),
+    url(r'^api/districts/$', district_list, name='district-list'),
+    url(r'^api/districts/(?P<pk>[0-9]+)/$', district_detail, name='district-detail'),
 ])

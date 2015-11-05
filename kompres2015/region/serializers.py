@@ -4,25 +4,31 @@ from kompres2015.region.models import Province
 from kompres2015.region.models import District
 
 
-class DistrictSerializer(serializers.ModelSerializer):
+class DistrictSerializer(serializers.HyperlinkedModelSerializer):
+    region = serializers.HyperlinkedRelatedField(view_name='region-detail',
+                                                 source='province.region',
+                                                 read_only=True)
+
     class Meta:
         model = District
-        fields = ('district_pk_api', 'id', 'name',)
+        fields = ('id', 'name', 'province', 'region')
 
 
-class ProvinceSerializer(serializers.ModelSerializer):
-    districts = DistrictSerializer(many=True, read_only=True)
+class ProvinceSerializer(serializers.HyperlinkedModelSerializer):
+    districts = serializers.HyperlinkedRelatedField(many=True, read_only=True,
+                                                    view_name='district-detail')
 
     class Meta:
         model = Province
-        fields = ('province_pk_api', 'id', 'name', 'districts')
+        fields = ('id', 'name', 'districts', 'region')
 
 
-class RegionSerializer(serializers.ModelSerializer):
-    provinces = ProvinceSerializer(many=True, read_only=True)
+class RegionSerializer(serializers.HyperlinkedModelSerializer):
+    provinces = serializers.HyperlinkedRelatedField(many=True, read_only=True,
+                                                    view_name='province-detail')
 
     class Meta:
         model = Region
-        fields = ('region_pk_api', 'id', 'name', 'provinces')
+        fields = ('id', 'name', 'provinces')
 
 
