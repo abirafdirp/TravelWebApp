@@ -11,11 +11,13 @@ from django.views import defaults as default_views
 from rest_framework import routers
 from rest_framework.urlpatterns import format_suffix_patterns
 
-from kompres2015.region import views
 from kompres2015.region.views import RegionViewSet
 from kompres2015.region.views import ProvinceViewSet
 from kompres2015.region.views import DistrictViewSet
 from kompres2015.region.views import api_root
+
+from kompres2015.tourism.views import TravelDestinationViewset
+from kompres2015.tourism.views import VisitViewset
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name="home"),
@@ -77,6 +79,18 @@ district_list = DistrictViewSet.as_view({
 district_detail = DistrictViewSet.as_view({
     'get': 'retrieve',
 })
+travel_destination_list = TravelDestinationViewset.as_view({
+    'get': 'list',
+})
+travel_destination_detail = TravelDestinationViewset.as_view({
+    'get': 'retrieve',
+})
+visit_list = VisitViewset.as_view({
+    'get': 'list',
+})
+visit_detail = VisitViewset.as_view({
+    'get': 'retrieve',
+})
 
 urlpatterns += format_suffix_patterns([
     url(r'^api/$', api_root),
@@ -86,4 +100,8 @@ urlpatterns += format_suffix_patterns([
     url(r'^api/provinces/(?P<pk>[0-9]+)/$', province_detail, name='province-detail'),
     url(r'^api/districts/$', district_list, name='district-list'),
     url(r'^api/districts/(?P<pk>[0-9]+)/$', district_detail, name='district-detail'),
+    url(r'^api/traveldestinations/$', travel_destination_list, name='travel-destination-list'),
+    url(r'^api/traveldestinations/(?P<pk>[0-9]+)/$', travel_destination_detail, name='travel-destination-detail'),
+    url(r'^api/visits/$', visit_list, name='visit-list'),
+    url(r'^api/visits/(?P<pk>[0-9]+)/$', visit_detail, name='visit-detail'),
 ])

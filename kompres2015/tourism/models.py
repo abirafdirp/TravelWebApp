@@ -7,7 +7,7 @@ from kompres2015.users.models import User
 
 class TravelDestination(TimeStampedModel):
     name = models.CharField(max_length=30, primary_key=True)
-    district = models.ForeignKey(Region, verbose_name='Kabupaten')
+    district = models.ForeignKey(Region, verbose_name='Kabupaten', related_name='travel_destinations')
     full_description = RichTextField(verbose_name="Deskripsi lengkap")
     tagline = models.CharField(verbose_name='Deskripsi Singkat/Tagline',
                                max_length=100)
@@ -25,7 +25,7 @@ class TravelDestination(TimeStampedModel):
 
 class Visit(models.Model):
     date = models.DateField()
-    travel_destination = models.ForeignKey(TravelDestination)
+    travel_destination = models.ForeignKey(TravelDestination, related_name='visits')
     user = models.ForeignKey(User)
 
     class Meta:
