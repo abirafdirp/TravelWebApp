@@ -16,8 +16,8 @@ from kompres2015.region.views import ProvinceViewSet
 from kompres2015.region.views import DistrictViewSet
 from kompres2015.region.views import api_root
 
-from kompres2015.tourism.views import TravelDestinationViewset
-from kompres2015.tourism.views import VisitViewset
+from kompres2015.tourism.views import TravelDestinationViewSet
+from kompres2015.tourism.views import VisitViewSet
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name="home"),
@@ -79,16 +79,16 @@ district_list = DistrictViewSet.as_view({
 district_detail = DistrictViewSet.as_view({
     'get': 'retrieve',
 })
-travel_destination_list = TravelDestinationViewset.as_view({
+travel_destination_list = TravelDestinationViewSet.as_view({
     'get': 'list',
 })
-travel_destination_detail = TravelDestinationViewset.as_view({
+travel_destination_detail = TravelDestinationViewSet.as_view({
     'get': 'retrieve',
 })
-visit_list = VisitViewset.as_view({
+visit_list = VisitViewSet.as_view({
     'get': 'list',
 })
-visit_detail = VisitViewset.as_view({
+visit_detail = VisitViewSet.as_view({
     'get': 'retrieve',
 })
 

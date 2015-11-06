@@ -52,10 +52,10 @@ THIRD_PARTY_APPS = (
 LOCAL_APPS = (
     'kompres2015.users',  # custom users app
     # Your stuff: custom apps go here
+    'kompres2015.util',
     'kompres2015.tourism',
     'kompres2015.region',
     'kompres2015.image',
-    'kompres2015.util',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

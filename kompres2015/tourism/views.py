@@ -7,7 +7,7 @@ from kompres2015.tourism.serializers import TravelDestinationSerializer
 from kompres2015.tourism.serializers import VisitSerializer
 
 
-class TravelDestinationViewset(viewsets.ReadOnlyModelViewSet):
+class TravelDestinationViewSet(viewsets.ReadOnlyModelViewSet):
     filter_fields = ('name',)
     serializer_class = TravelDestinationSerializer
 
@@ -19,7 +19,7 @@ class TravelDestinationViewset(viewsets.ReadOnlyModelViewSet):
         return queryset
 
 
-class VisitViewset(viewsets.ReadOnlyModelViewSet):
+class VisitViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = VisitSerializer
 
     def get_queryset(self):
