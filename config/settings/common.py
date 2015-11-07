@@ -39,6 +39,7 @@ THIRD_PARTY_APPS = (
     'allauth.account',  # registration
     'allauth.socialaccount',  # registration
     'rest_framework',
+    'rest_framework_swagger',
 
     'fluent_comments',  # comments
     'django_comments',

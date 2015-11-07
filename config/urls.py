@@ -14,10 +14,16 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from kompres2015.region.views import RegionViewSet
 from kompres2015.region.views import ProvinceViewSet
 from kompres2015.region.views import DistrictViewSet
-from kompres2015.region.views import api_root
+
+from kompres2015.util.views import api_root
 
 from kompres2015.tourism.views import TravelDestinationViewSet
 from kompres2015.tourism.views import VisitViewSet
+from kompres2015.tourism.views import ReportViewSet
+
+from kompres2015.users.views import UserViewSet
+
+from kompres2015.image.views import ReportImageViewSet
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name="home"),
@@ -58,7 +64,8 @@ if settings.DEBUG:
 # Additionally, we include login URLs for the browsable API.
 urlpatterns += [
     # url(r'^', include(router.urls)),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api/docs/', include('rest_framework_swagger.urls'))
 ]
 
 region_list = RegionViewSet.as_view({
@@ -91,6 +98,25 @@ visit_list = VisitViewSet.as_view({
 visit_detail = VisitViewSet.as_view({
     'get': 'retrieve',
 })
+report_list = ReportViewSet.as_view({
+    'get': 'list',
+})
+report_detail = ReportViewSet.as_view({
+    'get': 'retrieve',
+})
+user_list = UserViewSet.as_view({
+    'get': 'list',
+})
+user_detail = UserViewSet.as_view({
+    'get': 'retrieve',
+})
+report_image_list = ReportImageViewSet.as_view({
+    'get': 'list',
+})
+report_image_detail = ReportImageViewSet.as_view({
+    'get': 'retrieve',
+})
+
 
 urlpatterns += format_suffix_patterns([
     url(r'^api/$', api_root),
@@ -104,4 +130,10 @@ urlpatterns += format_suffix_patterns([
     url(r'^api/traveldestinations/(?P<pk>[0-9]+)/$', travel_destination_detail, name='travel-destination-detail'),
     url(r'^api/visits/$', visit_list, name='visit-list'),
     url(r'^api/visits/(?P<pk>[0-9]+)/$', visit_detail, name='visit-detail'),
+    url(r'^api/reports/$', report_list, name='report-list'),
+    url(r'^api/reports/(?P<pk>[0-9]+)/$', report_detail, name='report-detail'),
+    url(r'^api/users/$', user_list, name='user-list'),
+    url(r'^api/users/(?P<pk>[0-9]+)/$', user_detail, name='user-detail'),
+    url(r'^api/reportimages/$', report_image_list, name='report-image-list'),
+    url(r'^api/reportimages/(?P<pk>[0-9]+)/$', report_image_detail, name='report-image-detail'),
 ])

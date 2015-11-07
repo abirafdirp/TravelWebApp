@@ -9,8 +9,8 @@ class TimeStampedModel(models.Model):
     fields.
     """
 
-    created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(auto_now_add=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+    creation_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         abstract = True
