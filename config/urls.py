@@ -24,6 +24,14 @@ from kompres2015.tourism.views import ReportViewSet
 from kompres2015.users.views import UserViewSet
 
 from kompres2015.image.views import ReportImageViewSet
+from kompres2015.image.views import ImageViewSet
+from kompres2015.image.views import TravelDestinationMainImageViewSet
+from kompres2015.image.views import TravelDestinationWhatToDoImageViewSet
+from kompres2015.image.views import TravelDestinationGalleryImageViewSet
+from kompres2015.image.views import ArticleMainImageViewSet
+
+from kompres2015.pages.views import FrontPageViewSet
+from kompres2015.pages.views import FeaturedTravelDestinationViewSet
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name="home"),
@@ -116,6 +124,48 @@ report_image_list = ReportImageViewSet.as_view({
 report_image_detail = ReportImageViewSet.as_view({
     'get': 'retrieve',
 })
+image_list = ImageViewSet.as_view({
+    'get': 'list',
+})
+image_detail = ImageViewSet.as_view({
+    'get': 'retrieve',
+})
+article_main_image_list = ArticleMainImageViewSet.as_view({
+    'get': 'list',
+})
+article_main_image_detail = ArticleMainImageViewSet.as_view({
+    'get': 'retrieve',
+})
+travel_destination_main_image_list = TravelDestinationMainImageViewSet.as_view({
+    'get': 'list',
+})
+travel_destination_main_image_detail = TravelDestinationMainImageViewSet.as_view({
+    'get': 'retrieve',
+})
+travel_destination_what_to_do_image_list = TravelDestinationWhatToDoImageViewSet.as_view({
+    'get': 'list',
+})
+travel_destination_what_to_do_image_detail = TravelDestinationWhatToDoImageViewSet.as_view({
+    'get': 'retrieve',
+})
+travel_destination_gallery_image_list = TravelDestinationGalleryImageViewSet.as_view({
+    'get': 'list',
+})
+travel_destination_gallery_image_detail = TravelDestinationGalleryImageViewSet.as_view({
+    'get': 'retrieve',
+})
+front_page_list = FrontPageViewSet.as_view({
+    'get': 'list',
+})
+front_page_detail = FrontPageViewSet.as_view({
+    'get': 'retrieve',
+})
+featured_travel_destination_list = FeaturedTravelDestinationViewSet.as_view({
+    'get': 'list',
+})
+featured_travel_destination_detail = FeaturedTravelDestinationViewSet.as_view({
+    'get': 'retrieve',
+})
 
 
 urlpatterns += format_suffix_patterns([
@@ -136,4 +186,16 @@ urlpatterns += format_suffix_patterns([
     url(r'^api/users/(?P<pk>[0-9]+)/$', user_detail, name='user-detail'),
     url(r'^api/reportimages/$', report_image_list, name='report-image-list'),
     url(r'^api/reportimages/(?P<pk>[0-9]+)/$', report_image_detail, name='report-image-detail'),
+    url(r'^api/images/$', image_list, name='image-list'),
+    url(r'^api/images/(?P<pk>[0-9]+)/$', image_detail, name='image-detail'),
+    url(r'^api/articlemainimages/$', article_main_image_list, name='article-main-image-list'),
+    url(r'^api/articlemainimages/(?P<pk>[0-9]+)/$', article_main_image_detail, name='article-main-image-detail'),
+    url(r'^api/traveldestinationmainimages/$', travel_destination_main_image_list, name='travel-destination-main-image-list'),
+    url(r'^api/traveldestinationmainimages/(?P<pk>[0-9]+)/$', travel_destination_main_image_detail, name='travel-destination-main-image-detail'),
+    url(r'^api/traveldestinationwhattodoimages/$', travel_destination_what_to_do_image_list, name='travel-destination-what-to-do-image-list'),
+    url(r'^api/traveldestinationwhattodoimages/(?P<pk>[0-9]+)/$', travel_destination_what_to_do_image_detail, name='travel-destination-what-to-do-image-detail'),
+    url(r'^api/traveldestinationgalleryimages/$', travel_destination_gallery_image_list, name='travel-destination-gallery-image-list'),
+    url(r'^api/traveldestinationgalleryimages/(?P<pk>[0-9]+)/$', travel_destination_gallery_image_detail, name='travel-destination-gallery-image-detail'),
+    url(r'^api/frontpage/$', front_page_list, name='front-page-list'),
+    url(r'^api/frontpage/(?P<pk>[0-9]+)/$', front_page_detail, name='front-page-detail'),
 ])

@@ -1,8 +1,14 @@
 from django.db import models
+
+from kompres2015.util.models import TimeStampedModel
+
 from kompres2015.tourism.models import TravelDestination
 
 
-class FrontPage(models.Model):
+class FrontPage(TimeStampedModel):
     video = models.TextField()
-    featured = models.ForeignKey(TravelDestination)
-    new = models.ForeignKey(TravelDestination)
+
+
+class FeaturedTravelDestination(TimeStampedModel):
+    travel_destination = models.ForeignKey(TravelDestination, related_name='featureds')
+    front_page = models.ForeignKey(FrontPage)

@@ -57,6 +57,8 @@ LOCAL_APPS = (
     'kompres2015.tourism',
     'kompres2015.region',
     'kompres2015.image',
+    'kompres2015.pages',
+    'kompres2015.article',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

@@ -1,32 +1,53 @@
 from rest_framework import viewsets
 
 from kompres2015.image.models import ReportImage
+from kompres2015.image.models import Image
+from kompres2015.image.models import TravelDestinationMainImage
+from kompres2015.image.models import TravelDestinationWhatToDoImage
+from kompres2015.image.models import TravelDestinationGalleryImage
+from kompres2015.image.models import ArticleMainImage
+
 from kompres2015.image.serializers import ReportImageSerializer
+from kompres2015.image.serializers import ImageSerializer
+from kompres2015.image.serializers import TravelDestinationMainImageSerializer
+from kompres2015.image.serializers import TravelDestinationWhatToDoImageSerializer
+from kompres2015.image.serializers import TravelDestinationGalleryImageSerializer
+from kompres2015.image.serializers import ArticleMainImageSerializer
 
 from kompres2015.util.views import CreateListRetrieveViewSet
 
 
 class ReportImageViewSet(CreateListRetrieveViewSet):
     queryset = ReportImage.objects.all()
-    filter_fields = ('tag',)
+    filter_fields = ('tag', 'name')
     serializer_class = ReportImageSerializer
 
 
 class ImageViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = ReportImage.objects.all()
-    filter_fields = ('tag',)
-    serializer_class = ReportImageSerializer
+    queryset = Image.objects.all()
+    filter_fields = ('tag', 'name')
+    serializer_class = ImageSerializer
 
 
-class TravelDestinationMainImageViewSet(CreateListRetrieveViewSet):
-    queryset = ReportImage.objects.all()
-    filter_fields = ('tag',)
-    serializer_class = ReportImageSerializer
+class TravelDestinationMainImageViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = TravelDestinationMainImage.objects.all()
+    filter_fields = ('tag', 'name',)
+    serializer_class = TravelDestinationMainImageSerializer
 
 
-class ReportImageViewSet(CreateListRetrieveViewSet):
-    queryset = ReportImage.objects.all()
-    filter_fields = ('tag',)
-    serializer_class = ReportImageSerializer
+class TravelDestinationWhatToDoImageViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = TravelDestinationWhatToDoImage.objects.all()
+    filter_fields = ('tag', 'name',)
+    serializer_class = TravelDestinationWhatToDoImageSerializer
 
 
+class TravelDestinationGalleryImageViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = TravelDestinationGalleryImage.objects.all()
+    filter_fields = ('tag', 'name')
+    serializer_class = TravelDestinationGalleryImageSerializer
+
+
+class ArticleMainImageViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = ArticleMainImage.objects.all()
+    filter_fields = ('tag', 'name')
+    serializer_class = ArticleMainImageSerializer

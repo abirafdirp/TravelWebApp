@@ -19,14 +19,15 @@ class RegionViewSet(viewsets.ReadOnlyModelViewSet):
         queryset = Region.objects.all()
         province = self.request.query_params.get('province', None)
         district = self.request.query_params.get('district', None)
-        if province is not None and district is not None:
-            queryset = queryset.filter(provinces__name=province,
-                                       provinces__districts__name=district)
-            return queryset
+
         if province is not None:
-            queryset = queryset.filter(provinces__name__contains='%')
+            queryset = queryset.filter(provinces__name=province)
+            return queryset
+
         if district is not None:
             queryset = queryset.filter(provinces__districts__name=district)
+            return queryset
+
         return queryset
 
 

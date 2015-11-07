@@ -23,5 +23,10 @@ def api_root(request, format=None):
         'visits': reverse('visit-list', request=request, format=format),
         'reports': reverse('report-list', request=request, format=format),
         'users': reverse('user-list', request=request, format=format),
-
+        'images': reverse('user-list', request=request, format=format),
+        'report images': reverse('report-image-list', request=request, format=format),
+        'travel destination main images': reverse('travel-destination-main-image-list', request=request, format=format),
+        'travel destination what to do images': reverse('travel-destination-what-to-do-image-list', request=request, format=format),
+        'travel destination gallery images': reverse('travel-destination-gallery-image-list', request=request, format=format),
+        'front page': reverse('front-page-list', request=request, format=format),
     })

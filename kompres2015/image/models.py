@@ -36,4 +36,8 @@ class TravelDestinationGalleryImage(Image):
     travel_destination = models.ForeignKey(TravelDestination)
 
     class Meta:
-        verbose = 'Foto galeri lokasi wisata'
+        verbose_name = 'Foto galeri lokasi wisata'
+
+
+class ArticleMainImage(Image):
+    pass

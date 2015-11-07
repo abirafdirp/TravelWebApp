@@ -1,5 +1,7 @@
 from django.db import models
+
 from ckeditor.fields import RichTextField
+
 from kompres2015.util.models import TimeStampedModel
 from kompres2015.region.models import District
 from kompres2015.users.models import User
