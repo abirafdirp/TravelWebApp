@@ -31,7 +31,7 @@ DJANGO_APPS = (
     # 'django.contrib.humanize',
 
     # Admin
-    'kompres2015.customadmin',
+    'grappelli',
     'django.contrib.admin',
 )
 THIRD_PARTY_APPS = (
@@ -47,6 +47,7 @@ THIRD_PARTY_APPS = (
     'django.contrib.sites',  # override default comments view
     'threadedcomments',
 
+    'django_extensions',
     'ckeditor',  # WYSIWYG editor
 )
 
@@ -298,7 +299,7 @@ FLUENT_COMMENTS_USE_EMAIL_NOTIFICATION = False
 COMMENTS_APP = 'fluent_comments'
 
 # django-ckeditor
-CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+#CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
 
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',),

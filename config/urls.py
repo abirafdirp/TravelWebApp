@@ -38,6 +38,7 @@ urlpatterns = [
     url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name="about"),
 
     # Django Admin, use {% url 'admin:index' %}
+    url(r'^grappelli/', include('grappelli.urls')),
     url(settings.ADMIN_URL, include(admin.site.urls)),
 
     # User management
