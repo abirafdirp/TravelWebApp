@@ -39,6 +39,9 @@ class Visit(TimeStampedModel):
         verbose_name = 'Kunjungan'
         unique_together = ('creation_date', 'travel_destination', 'user')
 
+    def __str__(self):
+        return self.created_date + ' ' + self.user.name + ' ' + self.travel_destination.name
+
 
 class Report(TimeStampedModel):
     CATEGORY_CHOICES = (
@@ -56,6 +59,8 @@ class Report(TimeStampedModel):
     class Meta:
         verbose_name = 'Komplain pengunjung'
 
+    def __str__(self):
+        return self.user.name + ' ' + self.travel_destination.name
 
 
 

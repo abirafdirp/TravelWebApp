@@ -33,6 +33,9 @@ class District(TimeStampedModel):
     def __str__(self):
         return self.name
 
+    def __unicode__(self):
+        return unicode(self.name).encode('utf-8')
+
 
 
 

@@ -31,6 +31,7 @@ DJANGO_APPS = (
     # 'django.contrib.humanize',
 
     # Admin
+    'kompres2015.customadmin',
     'django.contrib.admin',
 )
 THIRD_PARTY_APPS = (

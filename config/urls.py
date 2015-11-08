@@ -73,7 +73,7 @@ if settings.DEBUG:
 urlpatterns += [
     # url(r'^', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^api/docs/', include('rest_framework_swagger.urls'))
+    url(r'^api/docs/', include('rest_framework_swagger.urls')),
 ]
 
 region_list = RegionViewSet.as_view({
@@ -198,4 +198,6 @@ urlpatterns += format_suffix_patterns([
     url(r'^api/traveldestinationgalleryimages/(?P<pk>[0-9]+)/$', travel_destination_gallery_image_detail, name='travel-destination-gallery-image-detail'),
     url(r'^api/frontpage/$', front_page_list, name='front-page-list'),
     url(r'^api/frontpage/(?P<pk>[0-9]+)/$', front_page_detail, name='front-page-detail'),
+    url(r'^api/featuredtraveldestinations/$', featured_travel_destination_list, name='featured-travel-destination-list'),
+    url(r'^api/featuredtraveldestinations/(?P<pk>[0-9]+)/$', featured_travel_destination_detail, name='featured-travel-destination-detail'),
 ])

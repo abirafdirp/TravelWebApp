@@ -10,12 +10,17 @@ class Image(TimeStampedModel):
     image = models.ImageField()
     tag = models.TextField(null=True)
 
+    def __str__(self):
+        return self.name
 
 class ReportImage(Image):
     travel_destination = models.ForeignKey(TravelDestination)
 
     class Meta:
         verbose_name = 'Foto komplain'
+
+    def __str__(self):
+        return self.name
 
 
 class TravelDestinationMainImage(Image):
@@ -24,12 +29,18 @@ class TravelDestinationMainImage(Image):
     class Meta:
         verbose_name = 'Foto lokasi wisata utama'
 
+    def __str__(self):
+        return self.name
+
 
 class TravelDestinationWhatToDoImage(Image):
     travel_destination = models.ForeignKey(TravelDestination)
 
     class Meta:
         verbose_name = 'Foto what-to-do lokasi wisata'
+
+    def __str__(self):
+        return self.name
 
 
 class TravelDestinationGalleryImage(Image):
@@ -38,6 +49,10 @@ class TravelDestinationGalleryImage(Image):
     class Meta:
         verbose_name = 'Foto galeri lokasi wisata'
 
+    def __str__(self):
+        return self.name
+
 
 class ArticleMainImage(Image):
-    pass
+    def __str__(self):
+        return self.name

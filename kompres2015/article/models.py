@@ -18,3 +18,6 @@ class Article(TimeStampedModel):
     author = models.TextField(verbose_name='penulis')
     main_image = models.ForeignKey(ArticleMainImage)
 
+    def __str__(self):
+        return self.title
+

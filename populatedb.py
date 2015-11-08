@@ -30,8 +30,8 @@ def cleardb():
     print 'current database cleared'
 
 
-def add_user(username):
-    User.objects.create(username=username)
+def add_user(username, name):
+    User.objects.create(username=username, name=name)
 
 
 def add_region(name):
@@ -77,7 +77,7 @@ add_district('Jakarta Selatan', 'Jakarta')
 add_district('Jakarta Pusat', 'Jakarta')
 add_district('Bandung', 'Jawa Barat')
 
-add_user('lutfi')
+add_user('lutfi', 'lutfi')
 
 add_travel_destination('Monas', 'Jakarta Pusat')
 
