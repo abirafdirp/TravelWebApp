@@ -31,8 +31,13 @@ kompresControllers.controller('DistrictsCtrl', ['$scope', 'Districts',
 ]);
 
 kompresControllers.controller('TravelDestinationsCtrl', ['$scope', 'TravelDestinations',
-  function($scope, TravelDestinations) {
-    $scope.travel_destinations = TravelDestinations.query();
+  function($scope, $route, $routeParams, TravelDestinations) {
+    $scope.travel_destinations = TravelDestinations.list.query();
+
+    $scope.$route = $route;
+    $scope.params = $routeParams;
+    $scope.travel_destination_name = $scope.params.travel_destination_name;
+    $scope.travel_destination = TravelDestinations.detail.query({travel_destination_name:$scope.travel_destination_name})
   }
 ]);
 

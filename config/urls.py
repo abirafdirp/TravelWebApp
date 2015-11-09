@@ -33,11 +33,14 @@ from kompres2015.image.views import ArticleMainImageViewSet
 from kompres2015.pages.views import HomePageViewSet
 from kompres2015.pages.views import FeaturedTravelDestinationViewSet
 
+
+# cookiecutter default urls
 urlpatterns = [
     url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'),
         name="about"),
 
     # Django Admin, use {% url 'admin:index' %}
+    # grappelli urls must be placed before admin
     url(r'^grappelli/', include('grappelli.urls')),
     url(settings.ADMIN_URL, include(admin.site.urls)),
 
@@ -47,11 +50,16 @@ urlpatterns = [
 
     # Your stuff: custom urls includes go here
 
-    # django-fluent-comments custom view
-    url(r'^comments/', include('fluent_comments.urls')),
+
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+urlpatterns += [
+    # django-fluent-comments custom view
+    url(r'^comments/', include('fluent_comments.urls')),
+]
 
 if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit
@@ -63,20 +71,15 @@ if settings.DEBUG:
         url(r'^500/$', default_views.server_error),
     ]
 
-# DRF default router
-# router = routers.DefaultRouter()
-# router.register(r'regions', views.RegionViewSet)
-# router.register(r'provinces', views.ProvinceViewSet)
-# router.register(r'districts', views.DistrictViewSet)
-
-# Wire up our API using automatic URL routing.
-# Additionally, we include login URLs for the browsable API.
+# DRF api-auth and DRF swagger (docs)
 urlpatterns += [
-    # url(r'^', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/docs/', include('rest_framework_swagger.urls')),
 ]
 
+
+# because I use hyperlinkedfields, I can't use default routers anymore. Every
+# urls must be explicitly defined.
 region_list = RegionViewSet.as_view({
     'get': 'list',
 })
@@ -203,7 +206,21 @@ urlpatterns += format_suffix_patterns([
     url(r'^api/featuredtraveldestinations/(?P<pk>[0-9]+)/$', featured_travel_destination_detail, name='featured-travel-destination-detail'),
 ])
 
-urlpatterns += (
-    url(r'', TemplateView.as_view(template_name='pages/home.html'),
+
+# partial views
+urlpatterns += [
+    url(r'^home/$', TemplateView.as_view(template_name='pages/home.html'),
         name="home"),
-)
+    url(r'^article/$', TemplateView.as_view(template_name='article/article.html'),
+        name="home"),
+    url(r'^travel-destination-list/$', TemplateView.as_view(template_name='torism/travel_destination_list.html'),
+        name="travel-destination-list"),
+    url(r'^travel-destination-detail/$', TemplateView.as_view(template_name='torism/travel_destination_detail.html'),
+        name="travel-destination-detail"),
+]
+
+# any urls other than listed above will be redirected to angular base
+urlpatterns += [
+    url(r'', TemplateView.as_view(template_name='base.html'),
+        name="base"),
+]

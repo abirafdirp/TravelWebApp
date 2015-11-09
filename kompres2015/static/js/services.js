@@ -33,10 +33,15 @@ kompresServices.factory('Districts', ['$resource',
 ]);
 
 kompresServices.factory('TravelDestinations', ['$resource',
-  function($resource){
-    return $resource('/api/traveldestinations/?format=json', {}, {
-      query: {method:'GET'}
-    })
+  function($resource) {
+    return {
+      list : $resource('/api/traveldestinations/?format=json', {}, {
+      query: {method: 'GET'}
+      }),
+      detail : $resource('/api/traveldestinations/', {travel_destination_name:'@travel_destination_name'} ,'?format=json', {}, {
+      query: {method: 'GET'}
+      })
+    }
   }
 ]);
 
