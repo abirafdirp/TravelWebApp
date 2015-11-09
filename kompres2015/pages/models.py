@@ -5,7 +5,7 @@ from kompres2015.util.models import TimeStampedModel
 from kompres2015.tourism.models import TravelDestination
 
 
-class FrontPage(TimeStampedModel):
+class HomePage(TimeStampedModel):
     video = models.TextField()
 
     def __str__(self):
@@ -14,7 +14,7 @@ class FrontPage(TimeStampedModel):
 
 class FeaturedTravelDestination(TimeStampedModel):
     travel_destination = models.OneToOneField(TravelDestination)
-    front_page = models.ForeignKey(FrontPage, related_name='featureds')
+    front_page = models.ForeignKey(HomePage, related_name='featureds')
 
     def __str__(self):
         return self.travel_destination.name
