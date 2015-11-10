@@ -15,22 +15,22 @@ kompresApp.config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
     $routeProvider.
       when('/', {
-        templateUrl: 'home',
+        templateUrl: '/home/',
         controller: 'HomePageCtrl',
         activetab: 'home'
       }).
       when('/artikel', {
-        templateUrl: 'article',
+        templateUrl: '/article/',
         controller: 'ArticlesCtrl',
         activetab: 'article'
       }).
       when('/lokasi-wisata', {
-        templateUrl: 'travel-destination-list',
+        templateUrl: '/travel-destination-list/',
         controller: 'TravelDestinationsCtrl',
         activetab: 'travel-destination'
       }).
       when('/lokasi-wisata/:travel_destination_name', {
-        templateUrl: 'travel-destination-detail',
+        templateUrl: '/travel-destination-detail/',
         controller: 'TravelDestinationsCtrl',
         activetab: 'travel-destination',
         travel_destination_name: function (params) {return params.travel_destination_name}

@@ -49,10 +49,6 @@ urlpatterns = [
     url(r'^accounts/', include('allauth.urls')),
 
     # Your stuff: custom urls includes go here
-
-
-
-
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
@@ -212,10 +208,10 @@ urlpatterns += [
     url(r'^home/$', TemplateView.as_view(template_name='pages/home.html'),
         name="home"),
     url(r'^article/$', TemplateView.as_view(template_name='article/article.html'),
-        name="home"),
-    url(r'^travel-destination-list/$', TemplateView.as_view(template_name='torism/travel_destination_list.html'),
+        name="article"),
+    url(r'^travel-destination-list/$', TemplateView.as_view(template_name='tourism/travel_destination_list.html'),
         name="travel-destination-list"),
-    url(r'^travel-destination-detail/$', TemplateView.as_view(template_name='torism/travel_destination_detail.html'),
+    url(r'^travel-destination-detail/$', TemplateView.as_view(template_name='tourism/travel_destination_detail.html'),
         name="travel-destination-detail"),
 ]
 

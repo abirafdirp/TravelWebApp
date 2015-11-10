@@ -40,7 +40,7 @@ class Visit(TimeStampedModel):
         unique_together = ('creation_date', 'travel_destination', 'user')
 
     def __str__(self):
-        return self.created_date + ' ' + self.user.name + ' ' + self.travel_destination.name
+        return str(self.created_date) + ' ' + self.user.name + ' ' + self.travel_destination.name
 
 
 class Report(TimeStampedModel):
