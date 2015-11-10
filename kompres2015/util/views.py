@@ -6,8 +6,7 @@ from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
 
-class CreateListRetrieveViewSet(mixins.CreateModelMixin,
-                                mixins.RetrieveModelMixin,
+class CreateListViewSet(mixins.CreateModelMixin,
                                 mixins.ListModelMixin,
                                 viewsets.GenericViewSet):
     pass
@@ -29,4 +28,5 @@ def api_root(request, format=None):
         'travel destination what to do images': reverse('travel-destination-what-to-do-image-list', request=request, format=format),
         'travel destination gallery images': reverse('travel-destination-gallery-image-list', request=request, format=format),
         'home page': reverse('home-page-list', request=request, format=format),
+        'articles': reverse('article-list', request=request, format=None),
     })

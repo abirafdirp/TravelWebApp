@@ -8,6 +8,7 @@ from kompres2015.tourism.serializers import TravelDestinationSerializer
 from kompres2015.tourism.serializers import VisitSerializer
 from kompres2015.tourism.serializers import ReportSerializer
 
+from kompres2015.util.views import CreateListViewSet
 
 class TravelDestinationViewSet(viewsets.ReadOnlyModelViewSet):
     filter_fields = ('name',)
@@ -46,7 +47,7 @@ class VisitViewSet(viewsets.ReadOnlyModelViewSet):
         return queryset
 
 
-class ReportViewSet(viewsets.ReadOnlyModelViewSet):
+class ReportViewSet(CreateListViewSet):
     serializer_class = ReportSerializer
     filter_fields = ('report', )
 

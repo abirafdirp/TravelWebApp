@@ -30,9 +30,9 @@ class VisitSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class ReportSerializer(serializers.HyperlinkedModelSerializer):
-    image = Base64ImageField(max_length=None, use_url=True,)
+    # image = Base64ImageField(max_length=None, use_url=True,)
 
     class Meta:
         model = Report
-        fields = ('id', 'image', 'category', 'report', 'user')
+        fields = ('id', 'category', 'report', 'user')
 

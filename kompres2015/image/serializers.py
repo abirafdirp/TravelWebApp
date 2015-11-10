@@ -6,23 +6,25 @@ from kompres2015.image.models import TravelDestinationWhatToDoImage
 from kompres2015.image.models import TravelDestinationGalleryImage
 from kompres2015.image.models import ArticleMainImage
 
+from kompres2015.tourism.models import Report
 
-class ImageSerializer(serializers.ModelSerializer):
+
+class ImageSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Image
         fields = ('id', 'name', 'image', 'tag')
 
 
-class ReportImageSerializer(serializers.ModelSerializer):
-    travel_destination = serializers.HyperlinkedRelatedField(view_name='travel-destination-detail',
-                                                             read_only=True)
+class ReportImageSerializer(serializers.HyperlinkedModelSerializer):
+    report = serializers.HyperlinkedRelatedField(view_name='report-detail',
+                                                 queryset=Report.objects.all())
 
     class Meta:
         model = ReportImage
-        fields = ('id', 'name', 'image', 'tag', 'travel_destination')
+        fields = ('id', 'name', 'report', 'image', 'tag')
 
 
-class TravelDestinationMainImageSerializer(serializers.ModelSerializer):
+class TravelDestinationMainImageSerializer(serializers.HyperlinkedModelSerializer):
     travel_destination = serializers.HyperlinkedRelatedField(view_name='travel-destination-detail',
                                                              read_only=True)
 
@@ -31,7 +33,7 @@ class TravelDestinationMainImageSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'image', 'tag', 'travel_destination')
 
 
-class TravelDestinationWhatToDoImageSerializer(serializers.ModelSerializer):
+class TravelDestinationWhatToDoImageSerializer(serializers.HyperlinkedModelSerializer):
     travel_destination = serializers.HyperlinkedRelatedField(view_name='travel-destination-detail',
                                                              read_only=True)
 
@@ -40,7 +42,7 @@ class TravelDestinationWhatToDoImageSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'image', 'tag', 'travel_destination')
 
 
-class TravelDestinationGalleryImageSerializer(serializers.ModelSerializer):
+class TravelDestinationGalleryImageSerializer(serializers.HyperlinkedModelSerializer):
     travel_destination = serializers.HyperlinkedRelatedField(view_name='travel-destination-detail',
                                                              read_only=True)
 

@@ -1,4 +1,5 @@
 from rest_framework import viewsets
+from rest_framework import permissions
 
 from kompres2015.image.models import ReportImage
 from kompres2015.image.models import Image
@@ -14,13 +15,14 @@ from kompres2015.image.serializers import TravelDestinationWhatToDoImageSerializ
 from kompres2015.image.serializers import TravelDestinationGalleryImageSerializer
 from kompres2015.image.serializers import ArticleMainImageSerializer
 
-from kompres2015.util.views import CreateListRetrieveViewSet
+from kompres2015.util.views import CreateListViewSet
 
 
-class ReportImageViewSet(CreateListRetrieveViewSet):
+class ReportImageViewSet(CreateListViewSet):
     queryset = ReportImage.objects.all()
     filter_fields = ('tag', 'name')
     serializer_class = ReportImageSerializer
+    permission_classes = permissions.IsAuthenticatedOrReadOnly
 
 
 class ImageViewSet(viewsets.ReadOnlyModelViewSet):

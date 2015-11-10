@@ -1,6 +1,7 @@
 from django.db import models
 
 from kompres2015.tourism.models import TravelDestination
+from kompres2015.tourism.models import Report
 
 from kompres2015.util.models import TimeStampedModel
 
@@ -13,8 +14,9 @@ class Image(TimeStampedModel):
     def __str__(self):
         return self.name
 
+
 class ReportImage(Image):
-    travel_destination = models.ForeignKey(TravelDestination)
+    report = models.ForeignKey(Report, related_name='report_images')
 
     class Meta:
         verbose_name = 'Foto komplain'

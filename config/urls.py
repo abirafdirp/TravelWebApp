@@ -33,6 +33,8 @@ from kompres2015.image.views import ArticleMainImageViewSet
 from kompres2015.pages.views import HomePageViewSet
 from kompres2015.pages.views import FeaturedTravelDestinationViewSet
 
+from kompres2015.article.views import ArticleViewSet
+
 
 # cookiecutter default urls
 urlpatterns = [
@@ -108,6 +110,7 @@ visit_detail = VisitViewSet.as_view({
 })
 report_list = ReportViewSet.as_view({
     'get': 'list',
+    'post': 'create',
 })
 report_detail = ReportViewSet.as_view({
     'get': 'retrieve',
@@ -120,6 +123,7 @@ user_detail = UserViewSet.as_view({
 })
 report_image_list = ReportImageViewSet.as_view({
     'get': 'list',
+    'post': 'create',
 })
 report_image_detail = ReportImageViewSet.as_view({
     'get': 'retrieve',
@@ -166,6 +170,12 @@ featured_travel_destination_list = FeaturedTravelDestinationViewSet.as_view({
 featured_travel_destination_detail = FeaturedTravelDestinationViewSet.as_view({
     'get': 'retrieve',
 })
+article_list = ArticleViewSet.as_view({
+    'get': 'list',
+})
+article_detail = ArticleViewSet.as_view({
+    'get': 'retrieve',
+})
 
 
 urlpatterns += format_suffix_patterns([
@@ -200,6 +210,8 @@ urlpatterns += format_suffix_patterns([
     url(r'^api/homepages/(?P<pk>[0-9]+)/$', home_page_detail, name='home-page-detail'),
     url(r'^api/featuredtraveldestinations/$', featured_travel_destination_list, name='featured-travel-destination-list'),
     url(r'^api/featuredtraveldestinations/(?P<pk>[0-9]+)/$', featured_travel_destination_detail, name='featured-travel-destination-detail'),
+    url(r'^api/articles/$', article_list, name='article-list'),
+    url(r'^api/articles/(?P<pk>[0-9]+)/$', article_detail, name='article-detail'),
 ])
 
 
@@ -207,8 +219,10 @@ urlpatterns += format_suffix_patterns([
 urlpatterns += [
     url(r'^home/$', TemplateView.as_view(template_name='pages/home.html'),
         name="home"),
-    url(r'^article/$', TemplateView.as_view(template_name='article/article.html'),
-        name="article"),
+    url(r'^article-list/$', TemplateView.as_view(template_name='article/article_list.html'),
+        name="article-list"),
+    url(r'^article-detail/$', TemplateView.as_view(template_name='article/article_detail.html'),
+        name="article-detail"),
     url(r'^travel-destination-list/$', TemplateView.as_view(template_name='tourism/travel_destination_list.html'),
         name="travel-destination-list"),
     url(r'^travel-destination-detail/$', TemplateView.as_view(template_name='tourism/travel_destination_detail.html'),

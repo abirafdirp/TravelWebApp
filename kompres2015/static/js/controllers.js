@@ -30,14 +30,33 @@ kompresControllers.controller('DistrictsCtrl', ['$scope', 'Districts',
   }
 ]);
 
-kompresControllers.controller('TravelDestinationsCtrl', ['$scope', 'TravelDestinations',
+kompresControllers.controller('TravelDestinationsCtrl', ['$scope', '$route', '$routeParams', 'TravelDestinations',
   function($scope, $route, $routeParams, TravelDestinations) {
-    $scope.travel_destinations = TravelDestinations.list.query();
-
     $scope.$route = $route;
     $scope.params = $routeParams;
     $scope.travel_destination_name = $scope.params.travel_destination_name;
-    $scope.travel_destination = TravelDestinations.detail.query({travel_destination_name:$scope.travel_destination_name})
+
+    if (!$scope.travel_destination_name){
+      $scope.travel_destinations = TravelDestinations.list.query();
+    }
+    else {
+      $scope.travel_destination = TravelDestinations.detail.query({travel_destination_name:$scope.travel_destination_name})
+    }
+  }
+]);
+
+kompresControllers.controller('ArticlesCtrl', ['$scope', '$route', '$routeParams', 'Articles',
+  function($scope, $route, $routeParams, Articles) {
+    $scope.$route = $route;
+    $scope.params = $routeParams;
+    $scope.article_name = $scope.params.article_name;
+
+    if (!$scope.article_name){
+      $scope.articles = Articles.list.query();
+    }
+    else {
+      $scope.article = Articles.detail.query({article_name:$scope.article_name})
+    }
   }
 ]);
 

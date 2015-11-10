@@ -3,9 +3,17 @@ var kompresApp = angular.module('kompres', [
   'kompresControllers',
   'ui.bootstrap',
   'kompresServices',
-  'angularUtils.directives.dirPagination'
+  'hateoas'
 ]);
 
+
+
+// hateoas enabler
+kompresApp.config(function (HateoasInterceptorProvider) {
+    HateoasInterceptorProvider.transformAllResponses();
+});
+
+// differentiate angular and django template language
 kompresApp.config(function($interpolateProvider) {
     $interpolateProvider.startSymbol('{$');
     $interpolateProvider.endSymbol('$}');
@@ -16,22 +24,23 @@ kompresApp.config(['$routeProvider', '$locationProvider',
     $routeProvider.
       when('/', {
         templateUrl: '/home/',
-        controller: 'HomePageCtrl',
         activetab: 'home'
       }).
       when('/artikel', {
-        templateUrl: '/article/',
-        controller: 'ArticlesCtrl',
+        templateUrl: '/article-list/',
         activetab: 'article'
+      }).
+      when('/artikel/:artikel_name', {
+        templateUrl: '/article-detail/',
+        activetab: 'article',
+        article_name: function (params) {return params.article_name}
       }).
       when('/lokasi-wisata', {
         templateUrl: '/travel-destination-list/',
-        controller: 'TravelDestinationsCtrl',
         activetab: 'travel-destination'
       }).
       when('/lokasi-wisata/:travel_destination_name', {
         templateUrl: '/travel-destination-detail/',
-        controller: 'TravelDestinationsCtrl',
         activetab: 'travel-destination',
         travel_destination_name: function (params) {return params.travel_destination_name}
       }).

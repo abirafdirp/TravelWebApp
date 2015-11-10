@@ -36,10 +36,25 @@ kompresServices.factory('TravelDestinations', ['$resource',
   function($resource) {
     return {
       list : $resource('/api/traveldestinations/?format=json', {}, {
-      query: {method: 'GET', isArray: false}
+      query: {method: 'GET'}
       }),
       detail : $resource('/api/traveldestinations/?name=:travel_destination_name', {
         travel_destination_name:'@travel_destination_name'
+      }, {
+      query: {method: 'GET'}
+      })
+    }
+  }
+]);
+
+kompresServices.factory('Articles', ['$resource',
+  function($resource) {
+    return {
+      list : $resource('/api/articles/?format=json', {}, {
+      query: {method: 'GET'}
+      }),
+      detail : $resource('/api/articles/?name=:article_name', {
+        article_name:'@article_name'
       }, {
       query: {method: 'GET'}
       })
