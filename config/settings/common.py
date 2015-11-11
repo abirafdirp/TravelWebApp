@@ -49,6 +49,7 @@ THIRD_PARTY_APPS = (
 
     'django_extensions',
     'ckeditor',  # WYSIWYG editor
+    'rest_auth',
 )
 
 # Apps specific for this project go here.

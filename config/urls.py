@@ -73,6 +73,7 @@ if settings.DEBUG:
 urlpatterns += [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/docs/', include('rest_framework_swagger.urls')),
+    url(r'^rest-auth/', include('rest_auth.urls')),
 ]
 
 
@@ -219,6 +220,8 @@ urlpatterns += format_suffix_patterns([
 urlpatterns += [
     url(r'^home/$', TemplateView.as_view(template_name='pages/home.html'),
         name="home"),
+    url(r'^report/$', TemplateView.as_view(template_name='tourism/report.html'),
+        name="report"),
     url(r'^article-list/$', TemplateView.as_view(template_name='article/article_list.html'),
         name="article-list"),
     url(r'^article-detail/$', TemplateView.as_view(template_name='article/article_detail.html'),

@@ -44,6 +44,8 @@ redis>=2.10.0
 djangorestframework==3.2.4
 markdown==2.6.2
 django-filter==0.11.0
+django-rest-swagger==0.3.4
+django-rest-auth==0.5.0
 
 # mysql
 wheel==0.26.0
@@ -58,6 +60,6 @@ django-fluent-comments==1.0.5
 
 django-ckeditor==5.0.2
 
-django-rest-swagger==0.3.4
-
 django-grappelli==2.7.2
+
+

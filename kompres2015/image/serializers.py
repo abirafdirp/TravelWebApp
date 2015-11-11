@@ -18,10 +18,11 @@ class ImageSerializer(serializers.HyperlinkedModelSerializer):
 class ReportImageSerializer(serializers.HyperlinkedModelSerializer):
     report = serializers.HyperlinkedRelatedField(view_name='report-detail',
                                                  queryset=Report.objects.all())
+    user = serializers.ReadOnlyField(source='user.username')
 
     class Meta:
         model = ReportImage
-        fields = ('id', 'name', 'report', 'image', 'tag')
+        fields = ('id', 'name', 'report', 'image', 'tag', 'user')
 
 
 class TravelDestinationMainImageSerializer(serializers.HyperlinkedModelSerializer):

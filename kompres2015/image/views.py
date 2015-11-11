@@ -22,7 +22,10 @@ class ReportImageViewSet(CreateListViewSet):
     queryset = ReportImage.objects.all()
     filter_fields = ('tag', 'name')
     serializer_class = ReportImageSerializer
-    permission_classes = permissions.IsAuthenticatedOrReadOnly
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 
 class ImageViewSet(viewsets.ReadOnlyModelViewSet):

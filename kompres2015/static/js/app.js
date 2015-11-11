@@ -44,6 +44,10 @@ kompresApp.config(['$routeProvider', '$locationProvider',
         activetab: 'travel-destination',
         travel_destination_name: function (params) {return params.travel_destination_name}
       }).
+      when('/komplain', {
+        templateUrl: '/report/',
+        activetab: 'message-us'
+      }).
       otherwise({
         redirectTo: '/'
       });
