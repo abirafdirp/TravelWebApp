@@ -58,7 +58,7 @@ angular.module('angularDjangoRegistrationAuthApp', [
           }],
         }
       })
-      .when('/logout', {
+      .when('/akun/logout', {
         templateUrl: '/partials/logout/',
         resolve: {
           authenticated: ['djangoAuth', function(djangoAuth){
@@ -106,7 +106,7 @@ angular.module('angularDjangoRegistrationAuthApp', [
       $LocationProvider.html5Mode(true);
   }])
   .run(function(djangoAuth){
-    djangoAuth.initialize('//127.0.0.1:8000/rest-auth', false);
+    djangoAuth.initialize('//127.0.0.1:8000/rest-auth', true);
   });
 
 var kompresApp = angular.module('kompres', [
