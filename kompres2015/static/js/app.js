@@ -1,65 +1,3 @@
-var kompresApp = angular.module('kompres', [
-  'ngRoute',
-  'kompresControllers',
-  'ui.bootstrap',
-  'kompresServices',
-  'hateoas',
-  'angularDjangoRegistrationAuthApp'
-]);
-
-// hateoas enabler
-kompresApp.config(function (HateoasInterceptorProvider) {
-    HateoasInterceptorProvider.transformAllResponses();
-});
-
-// differentiate angular and django template language
-kompresApp.config(function($interpolateProvider) {
-    $interpolateProvider.startSymbol('{$');
-    $interpolateProvider.endSymbol('$}');
-});
-
-kompresApp.config(['$routeProvider', '$locationProvider',
-  function($routeProvider, $locationProvider) {
-    $routeProvider.
-      when('/', {
-        templateUrl: '/partials/home/',
-        activetab: 'home'
-      }).
-      when('/artikel', {
-        templateUrl: '/partials/article-list/',
-        activetab: 'article'
-      }).
-      when('/artikel/:artikel_name', {
-        templateUrl: '/partials/article-detail/',
-        activetab: 'article',
-        article_name: function (params) {return params.article_name}
-      }).
-      when('/lokasi-wisata', {
-        templateUrl: '/partials/travel-destination-list/',
-        activetab: 'travel-destination'
-      }).
-      when('/lokasi-wisata/:travel_destination_name', {
-        templateUrl: '/partials/travel-destination-detail/',
-        activetab: 'travel-destination',
-        travel_destination_name: function (params) {return params.travel_destination_name}
-      }).
-      when('/komplain', {
-        templateUrl: '/partials/report/',
-        activetab: 'message-us'
-      }).
-      otherwise({
-        redirectTo: '/'
-      });
-      $locationProvider.html5Mode(true);
-  }
-]);
-
-kompresApp.config(['$httpProvider',
-  function($httpProvider) {
-    $httpProvider.defaults.xsrfCookieName = 'csrftoken';
-    $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
-  }]);
-
 'use strict';
 
 angular.module('angularDjangoRegistrationAuthApp', [
@@ -68,7 +6,8 @@ angular.module('angularDjangoRegistrationAuthApp', [
   'ngSanitize',
   'ngRoute',
 ])
-  .config(function ($routeProvider) {
+  .config(['$routeProvider', '$locationProvider',
+    function ($routeProvider, $LocationProvider) {
     $routeProvider
       .when('/akun', {
         templateUrl: '/partials/account/',
@@ -87,7 +26,7 @@ angular.module('angularDjangoRegistrationAuthApp', [
           }],
         }
       })
-      .when('/akun/resetpassword', {
+      .when('/akun/reset-password', {
         templateUrl: '/partials/passwordreset/',
         resolve: {
           authenticated: ['djangoAuth', function(djangoAuth){
@@ -164,8 +103,71 @@ angular.module('angularDjangoRegistrationAuthApp', [
       .otherwise({
         redirectTo: '/'
       });
-  })
+      $LocationProvider.html5Mode(true);
+  }])
   .run(function(djangoAuth){
     djangoAuth.initialize('//127.0.0.1:8000/rest-auth', false);
   });
+
+var kompresApp = angular.module('kompres', [
+  'ngRoute',
+  'kompresControllers',
+  'ui.bootstrap',
+  'kompresServices',
+  'hateoas',
+  'angularDjangoRegistrationAuthApp'
+]);
+
+// hateoas enabler
+kompresApp.config(function (HateoasInterceptorProvider) {
+    HateoasInterceptorProvider.transformAllResponses();
+});
+
+// differentiate angular and django template language
+kompresApp.config(function($interpolateProvider) {
+    $interpolateProvider.startSymbol('{$');
+    $interpolateProvider.endSymbol('$}');
+});
+
+kompresApp.config(['$routeProvider', '$locationProvider',
+  function($routeProvider, $locationProvider) {
+    $routeProvider.
+      when('/', {
+        templateUrl: '/partials/home/',
+        activetab: 'home'
+      }).
+      when('/artikel', {
+        templateUrl: '/partials/article-list/',
+        activetab: 'article'
+      }).
+      when('/artikel/:artikel_name', {
+        templateUrl: '/partials/article-detail/',
+        activetab: 'article',
+        article_name: function (params) {return params.article_name}
+      }).
+      when('/lokasi-wisata', {
+        templateUrl: '/partials/travel-destination-list/',
+        activetab: 'travel-destination'
+      }).
+      when('/lokasi-wisata/:travel_destination_name', {
+        templateUrl: '/partials/travel-destination-detail/',
+        activetab: 'travel-destination',
+        travel_destination_name: function (params) {return params.travel_destination_name}
+      }).
+      when('/komplain', {
+        templateUrl: '/partials/report/',
+        activetab: 'message-us'
+      }).
+      otherwise({
+        redirectTo: '/'
+      });
+      $locationProvider.html5Mode(true);
+  }
+]);
+
+kompresApp.config(['$httpProvider',
+  function($httpProvider) {
+    $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+    $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+  }]);
 

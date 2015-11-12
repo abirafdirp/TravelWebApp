@@ -33,6 +33,8 @@ from kompres2015.image.views import ArticleMainImageViewSet
 from kompres2015.pages.views import HomePageViewSet
 from kompres2015.pages.views import FeaturedTravelDestinationViewSet
 
+from kompres2015.authentication.views import FacebookLogin
+
 from kompres2015.article.views import ArticleViewSet
 
 
@@ -74,6 +76,8 @@ urlpatterns += [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/docs/', include('rest_framework_swagger.urls')),
     url(r'^rest-auth/', include('rest_auth.urls')),
+    url(r'^rest-auth/facebook/$', FacebookLogin.as_view(), name='fb_login'),
+    url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
 ]
 
 
@@ -234,31 +238,31 @@ urlpatterns += [
 
 # angular-django-registration-auth partial views
 urlpatterns += [
-     url(r'^partials/account$', TemplateView.as_view(template_name='partials/auth/main.html'),
+     url(r'^partials/account/$', TemplateView.as_view(template_name='partials/auth/main.html'),
         name="account-partial"),
-    url(r'^partials/register$', TemplateView.as_view(template_name='partials/auth/register.html'),
+    url(r'^partials/register/$', TemplateView.as_view(template_name='partials/auth/register.html'),
         name="register-partial"),
-    url(r'^partials/register$', TemplateView.as_view(template_name='partials/auth/register.html'),
+    url(r'^partials/register/$', TemplateView.as_view(template_name='partials/auth/register.html'),
         name="register-partial"),
-    url(r'^partials/passwordreset$', TemplateView.as_view(template_name='partials/auth/passwordreset.html'),
+    url(r'^partials/passwordreset/$', TemplateView.as_view(template_name='partials/auth/passwordreset.html'),
         name="passwordreset-partial"),
-    url(r'^partials/passwordresetconfirm$', TemplateView.as_view(template_name='partials/auth/passwordresetconfirm.html'),
+    url(r'^partials/passwordresetconfirm/$', TemplateView.as_view(template_name='partials/auth/passwordresetconfirm.html'),
         name="passwordresetconfirm-partial"),
-    url(r'^partials/login$', TemplateView.as_view(template_name='partials/auth/login.html'),
+    url(r'^partials/login/$', TemplateView.as_view(template_name='partials/auth/login.html'),
         name="login-partial"),
-    url(r'^partials/verifyemail$', TemplateView.as_view(template_name='partials/auth/verifyemail.html'),
+    url(r'^partials/verifyemail/$', TemplateView.as_view(template_name='partials/auth/verifyemail.html'),
         name="verifyemail-partial"),
-    url(r'^partials/logout$', TemplateView.as_view(template_name='partials/auth/logout.html'),
+    url(r'^partials/logout/$', TemplateView.as_view(template_name='partials/auth/logout.html'),
         name="logout-partial"),
-    url(r'^partials/userprofile$', TemplateView.as_view(template_name='partials/auth/userprofile.html'),
+    url(r'^partials/userprofile/$', TemplateView.as_view(template_name='partials/auth/userprofile.html'),
         name="userprofile-partial"),
-    url(r'^partials/passwordchange$', TemplateView.as_view(template_name='partials/auth/passwordchange.html'),
+    url(r'^partials/passwordchange/$', TemplateView.as_view(template_name='partials/auth/passwordchange.html'),
         name="passwordchange-partial"),
-    url(r'^partials/passwordchange$', TemplateView.as_view(template_name='partials/auth/passwordchange.html'),
+    url(r'^partials/passwordchange/$', TemplateView.as_view(template_name='partials/auth/passwordchange.html'),
         name="passwordchange-partial"),
-    url(r'^partials/restricted$', TemplateView.as_view(template_name='partials/auth/restricted.html'),
+    url(r'^partials/restricted/$', TemplateView.as_view(template_name='partials/auth/restricted.html'),
         name="restricted-partial"),
-    url(r'^partials/authrequired$', TemplateView.as_view(template_name='partials/auth/authrequired.html'),
+    url(r'^partials/authrequired/$', TemplateView.as_view(template_name='partials/auth/authrequired.html'),
         name="authrequired-partial"),
 ]
 

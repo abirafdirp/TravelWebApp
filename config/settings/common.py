@@ -40,12 +40,12 @@ THIRD_PARTY_APPS = (
     # registration including API
     'rest_framework',
     'rest_framework.authtoken',
-    'rest_auth',
     'allauth',
     'allauth.account',
     'rest_auth.registration',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
+    'rest_auth',
 
     # DRF auto generated docs
     'rest_framework_swagger',
@@ -231,16 +231,31 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
-# Some really nice defaults
-ACCOUNT_AUTHENTICATION_METHOD = 'username'
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+# # Some really nice defaults
+# ACCOUNT_AUTHENTICATION_METHOD = 'username'
+# ACCOUNT_EMAIL_REQUIRED = True
+# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+#
+# # Custom user app defaults
+# # Select the correct user model
+# LOGIN_REDIRECT_URL = 'users:redirect'
+# LOGIN_URL = 'account_login'
 
-# Custom user app defaults
-# Select the correct user model
 AUTH_USER_MODEL = 'users.User'
-LOGIN_REDIRECT_URL = 'users:redirect'
-LOGIN_URL = 'account_login'
+ACCOUNT_AUTHENTICATION_METHOD = ('username',)
+ACCOUNT_EMAIL_VERIFICATION = ('mandatory',)
+ACCOUNT_SIGNUP_PASSWORD_VERIFICATION = True
+ACCOUNT_UNIQUE_EMAIL = True
+EMAIL_CONFIRMATION_SIGNUP = True
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_URL = '/'
+ACCOUNT_LOGOUT_ON_GET = False
+ACCOUNT_LOGOUT_REDIRECT_URL = '/'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'abiraf.bot@gmail.com'
+EMAIL_HOST_PASSWORD = 'Razor321'
+EMAIL_PORT = 587
 
 # SLUGLIFIER
 AUTOSLUG_SLUGIFY_FUNCTION = 'slugify.slugify'
@@ -310,7 +325,12 @@ COMMENTS_APP = 'fluent_comments'
 #CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
 
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
     'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',),
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.AllowAny',),
     'PAGE_SIZE': 10,
 }
+
+# django-allauth

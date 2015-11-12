@@ -1,16 +1,16 @@
 <h4>Routes</h4>
     <p>
-        <a ng-hide="authenticated" href="#/login" class="btn btn-primary">Login</a>
-        <a ng-hide="authenticated" href="#/passwordReset" class="btn btn-primary">Send Password Reset</a>
+        <a ng-hide="authenticated" href="akun/login" class="btn btn-primary">Login</a>
+        <a ng-hide="authenticated" href="akun/reset-password" class="btn btn-primary">Send Password Reset</a>
         <a ng-hide="authenticated" ng-click="goConfirmReset()" class="btn btn-primary">Confirm Password Reset</a>
     </p>
     <p>
-        <a ng-show="authenticated" href="#/logout" class="btn btn-primary">Logout</a>
-        <a ng-hide="authenticated" ng-href="#/register" class="btn btn-primary">Register</a>
+        <a ng-show="authenticated" href="akun/logout" class="btn btn-primary">Logout</a>
+        <a ng-hide="authenticated" ng-href="akun/registrasi" class="btn btn-primary">Register</a>
         <a ng-click="goVerify()" class="btn btn-primary">Verify Email</a>
-        <a ng-show="authenticated" href="#/passwordChange" class="btn btn-primary">Change Password</a>
-        <a ng-show="authenticated" href="#/userProfile" class="btn btn-primary">Profile</a>
-        <a href="#/authRequired" class="btn btn-primary">Restricted Page</a>
+        <a ng-show="authenticated" href="akun/ubah-password" class="btn btn-primary">Change Password</a>
+        <a ng-show="authenticated" href="akun/profil" class="btn btn-primary">Profile</a>
+        <a href="harus-login" class="btn btn-primary">Restricted Page</a>
     </p>
 <hr/>
 <h4>Kitchen Sink Demo</h4>
@@ -27,13 +27,13 @@
     <button ng-show="authenticated" ng-click="updateProfile()" class="btn btn-primary">Update Profile</button>
   </div>
 
-  <p><textarea style="width:90%;height:200px;">{{response}}</textarea></p>
+  <p><textarea style="width:90%;height:200px;">{$response$}</textarea></p>
 
 </div>
 
 <hr/>
 <h4>ngInclude Demo - Login</h4>
-<div ng-if="show_login" ng-include="'views/login.html'"></div>
+<div ng-if="show_login" ng-include="'partials/login/'"></div>
 <div ng-if="!show_login" class="alert alert-info">You have logged in.</div>
 
 
