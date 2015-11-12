@@ -36,10 +36,18 @@ DJANGO_APPS = (
 )
 THIRD_PARTY_APPS = (
     'crispy_forms',  # Form layouts
-    'allauth',  # registration
-    'allauth.account',  # registration
-    'allauth.socialaccount',  # registration
+
+    # registration including API
     'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+
+    # DRF auto generated docs
     'rest_framework_swagger',
 
     'fluent_comments',  # comments
@@ -49,7 +57,6 @@ THIRD_PARTY_APPS = (
 
     'django_extensions',
     'ckeditor',  # WYSIWYG editor
-    'rest_auth',
 )
 
 # Apps specific for this project go here.
