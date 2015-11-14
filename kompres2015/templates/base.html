@@ -1,5 +1,5 @@
 {% load staticfiles i18n %}<!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="kompres">
 	<head>
 		<title>Title</title>
 		<meta charset="UTF-8">
@@ -10,73 +10,122 @@
 		<!-- Angular-material CSS -->
         <link rel="stylesheet" href="{% static 'css/angular-material.min.css' %}">
 
+        <link rel="stylesheet" href="{% static 'css/project.css' %}">
+
 
         <!-- Main CSS -->
         <base href="/">
 	</head>
 
-	<body ng-app="kompres">
-        <div layout="column" layout-fill>
-          <md-toolbar ng-controller="NavCtrl">
-            <div class="md-toolbar-tools">
-              <span>My App's Title</span>
-              <!-- fill up the space between left and right area -->
-              <span flex></span>
-              <md-button>
-                Right Bar Button
-              </md-button>
-            </div>
-          </md-toolbar>
-          <md-content>
-            <!-- angular-django-registration-auth -->
-            <div ng-controller="MasterCtrl">
-                <main ng-view></main>
-            </div>
-          </md-content>
-        </div>
+	<body ng-controller="MasterCtrl">
+		<div ng-controller="NavCtrl">
+			<div ng-hide="$route.current.activetab == 'travel-destination'" layout="column" layout-fill>
 
-        <!-- angular v1.4.2 -->
+				<md-toolbar class="md-primary">
+					<div class="md-toolbar-tools">
+						<span>My App's Title</span>
+
+						<!-- fill up the space between left and right area -->
+						<span flex></span>
+
+						<md-menu>
+							<md-button md-menu-origin ng-click="$mdOpenMenu()">log in</md-button>
+								<md-menu-content width="2">
+									<md-menu-item>
+											<md-button>Help</md-button>
+									</md-menu-item>
+									<md-menu-item>
+											<md-button>About</md-button>
+									</md-menu-item>
+								</md-menu-content>
+						</md-menu>
+
+						<md-menu>
+							<md-button md-menu-origin ng-click="$mdOpenMenu()">sign up</md-button>
+								<md-menu-content width="2">
+									<md-menu-item>
+											<md-button>Help</md-button>
+									</md-menu-item>
+									<md-menu-item>
+											<md-button>About</md-button>
+									</md-menu-item>
+								</md-menu-content>
+						</md-menu>
+
+					</div>
+				</md-toolbar>
+
+				<md-content>
+					<main ng-view></main>
+				</md-content>
+
+			</div>
+
+		<div ng-hide="$route.current.activetab != 'travel-destination'">
+			<header md-page-header>
+					<div md-header-picture style="background-image:url(http://cdn.wallwuzz.com/uploads/katy-perry-wallpaper-10wallpaper-people-photography-album-desktop-beauty-wallwuzz-hd-wallpaper-20555.jpg)"></div>
+					<md-toolbar scroll>
+						<div class="md-toolbar-tools">
+							<md-button class="md-tools" aria-label="Go Back"><i class="ion-android-arrow-back"></i></md-button>
+							<h2 md-header-title flex>Katy Perry</h2>
+							<md-button class="md-tools" aria-label="Edit Contact"><i class="ion-android-create"></i></md-button>
+							<md-button class="md-tools" aria-label="More"><i class="ion-android-more-vertical"></i></md-button>
+						</div>
+					</md-toolbar>
+				 <div class="main-fab"><md-button aria-label="Float Action Button" class="md-fab md-accent"><i class="ion-android-star"></i></md-button></div>
+			 </header>
+			<br /><br />
+			<section id="page-section">
+				<md-content>
+					<main ng-view></main>
+				</md-content>
+			</section>
+		</div>
+
+		<!-- angular v1.4.2 -->
 		<script src="{% static 'js/angular.js' %}"></script>
-        <script src="{% static 'js/angular-route.js' %}"></script>
-        <script src="{% static 'js/angular-resource.js' %}"></script>
-        <!-- my stuff -->
-        <script src="{% static 'js/app.js' %}"></script>
+		<script src="{% static 'js/angular-route.js' %}"></script>
+		<script src="{% static 'js/angular-resource.js' %}"></script>
+		<!-- my stuff -->
+		<script src="{% static 'js/app.js' %}"></script>
 		<script src="{% static 'js/controllers.js' %}"></script>
-        <script src="{% static 'js/services.js' %}"></script>
-        <!-- angular-hateoas -->
-        <script src="{% static 'js/angular-hateoas.js' %}"></script>
-        <!-- angular-material dependencies -->
-        <script src="{% static 'js/angular-animate.min.js' %}"></script>
-        <script src="{% static 'js/angular-aria.min.js' %}"></script>
-        <script src="{% static 'js/angular-material.min.js' %}"></script>
+		<script src="{% static 'js/directives.js' %}"></script>
+		<script src="{% static 'js/services.js' %}"></script>
+		<!-- angular-hateoas -->
+		<script src="{% static 'js/angular-hateoas.js' %}"></script>
+		<!-- angular-material dependencies -->
+		<script src="{% static 'js/angular-animate.min.js' %}"></script>
+		<script src="{% static 'js/angular-aria.min.js' %}"></script>
+		<script src="{% static 'js/angular-material.min.js' %}"></script>
 
-        <!--[if lt IE 9]>
-        <script src="bower_components/es5-shim/es5-shim.js"></script>
-        <script src="bower_components/json3/lib/json3.min.js"></script>
-        <![endif]-->
+		<!--[if lt IE 9]>
+		<script src="bower_components/es5-shim/es5-shim.js"></script>
+		<script src="bower_components/json3/lib/json3.min.js"></script>
+		<![endif]-->
 
-        <!-- angular-django-registration-auth dependencies -->
-        <script src="{% static 'js/jquery.min.js' %}"></script>
-        <script src="{% static 'js/bootstrap.min.js' %}"></script>
-        <script src="{% static 'js/angular-cookies.min.js' %}"></script>
-        <script src="{% static 'js/angular-sanitize.min.js' %}"></script>
+		<!-- angular-django-registration-auth dependencies -->
+		<script src="{% static 'js/jquery.min.js' %}"></script>
+		<script src="{% static 'js/bootstrap.min.js' %}"></script>
+		<script src="{% static 'js/angular-cookies.min.js' %}"></script>
+		<script src="{% static 'js/angular-sanitize.min.js' %}"></script>
 
-        <!-- angular-django-registration auth -->
-        <script src="{% static 'js/controllers/main.js' %}"></script>
-        <script src="{% static 'js/controllers/register.js' %}"></script>
-        <script src="{% static 'js/controllers/passwordreset.js' %}"></script>
-        <script src="{% static 'js/controllers/passwordresetconfirm.js' %}"></script>
-        <script src="{% static 'js/controllers/login.js' %}"></script>
-        <script src="{% static 'js/controllers/verifyemail.js' %}"></script>
-        <script src="{% static 'js/controllers/logout.js' %}"></script>
-        <script src="{% static 'js/controllers/userprofile.js' %}"></script>
-        <script src="{% static 'js/controllers/passwordchange.js' %}"></script>
-        <script src="{% static 'js/services/djangoAuth.js' %}"></script>
-        <script src="{% static 'js/services/validate.js' %}"></script>
-        <script src="{% static 'js/controllers/master.js' %}"></script>
-        <script src="{% static 'js/controllers/restricted.js' %}"></script>
-        <script src="{% static 'js/controllers/authrequired.js' %}"></script>
+		<!-- angular-django-registration auth -->
+		<script src="{% static 'js/controllers/main.js' %}"></script>
+		<script src="{% static 'js/controllers/register.js' %}"></script>
+		<script src="{% static 'js/controllers/passwordreset.js' %}"></script>
+		<script src="{% static 'js/controllers/passwordresetconfirm.js' %}"></script>
+		<script src="{% static 'js/controllers/login.js' %}"></script>
+		<script src="{% static 'js/controllers/verifyemail.js' %}"></script>
+		<script src="{% static 'js/controllers/logout.js' %}"></script>
+		<script src="{% static 'js/controllers/userprofile.js' %}"></script>
+		<script src="{% static 'js/controllers/passwordchange.js' %}"></script>
+		<script src="{% static 'js/services/djangoAuth.js' %}"></script>
+		<script src="{% static 'js/services/validate.js' %}"></script>
+		<script src="{% static 'js/controllers/master.js' %}"></script>
+		<script src="{% static 'js/controllers/restricted.js' %}"></script>
+		<script src="{% static 'js/controllers/authrequired.js' %}"></script>
 
+		</div>
 	</body>
 
 </html>

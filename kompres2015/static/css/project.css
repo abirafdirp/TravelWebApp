@@ -1,38 +1,55 @@
-/* These styles are generated from project.scss. */
-
-.alert-debug {
-  color: black;
-  background-color: white;
-  border-color: #d6e9c6;
+[md-header-picture] {
+    position: relative;
+    width:100%;
+    height:0; /* Simple trick to keep a 16:9 ratio on your background image (height=0;padding-bottom=56.25%) */
+    padding-bottom: 56.25%;
+    overflow:hidden;
+    background-size:160%; /* You can override this value if your picture has a weird ratio */
+    background-position:50% 50%;
 }
 
-.alert-error {
-  color: #b94a48;
-  background-color: #f2dede;
-  border-color: #eed3d7;
+[scroll] {
+  position:fixed;
+  top:0;
 }
 
-/* This is a fix for the bootstrap4 alpha release */
-@media (max-width: 47.9em) {
-  .navbar-nav .nav-item {
-    float: none;
-    width: 100%;
-    display: inline-block;
-  }
+/* I made a simple scale animation on float action button during scroll */
 
-  .navbar-nav .nav-item + .nav-item {
-    margin-left: 0;
-  }
-
-  .nav.navbar-nav.pull-right {
-    float: none !important;
-  }
+.main-fab {
+  position:absolute;
+  left: calc(100% - 70px);
+  z-index: 20;
+  transform:scale(1,1);
+  transition: transform .1s ease-out;
 }
 
-/* Display django-debug-toolbar.
-   See https://github.com/django-debug-toolbar/django-debug-toolbar/issues/742
-   and https://github.com/pydanny/cookiecutter-django/issues/317
-*/
-[hidden][style="display: block;"] {
-  display: block !important;
+.main-fab.hide {
+  transform:scale(0,0);
+  transition: transform .1s ease-out;
+}
+
+/* Lines of code below are just here to get a better aspect but optionnal */
+section {
+  height: 1600px;
+}
+
+i {
+  font-size:24px;
+}
+
+.md-tools {
+  width: 40px;
+}
+
+.muted {
+color: #bbb;
+font-size: inherit;
+font-weight: 700;
+text-align: left;
+}
+
+.md-tile-left {
+  margin-right:0!important;
+  padding-left:24px;
+  color: rgb(63,81,181);
 }

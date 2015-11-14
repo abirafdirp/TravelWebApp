@@ -184,5 +184,5 @@ kompresApp
 .config(function($mdThemingProvider) {
   $mdThemingProvider.theme('default')
     .primaryPalette('red')
-    .accentPalette('grey');
+    .accentPalette('pink');
 });
