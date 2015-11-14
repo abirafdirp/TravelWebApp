@@ -16,13 +16,23 @@
 	</head>
 
 	<body ng-app="kompres">
-
-        <!-- visual navigation -->
-        <div ng-controller="NavCtrl">
-        <!-- angular-django-registration-auth -->
-        <div ng-controller="MasterCtrl">
-            <main ng-view></main>
-        </div>
+        <div layout="column" layout-fill>
+          <md-toolbar ng-controller="NavCtrl">
+            <div class="md-toolbar-tools">
+              <span>My App's Title</span>
+              <!-- fill up the space between left and right area -->
+              <span flex></span>
+              <md-button>
+                Right Bar Button
+              </md-button>
+            </div>
+          </md-toolbar>
+          <md-content>
+            <!-- angular-django-registration-auth -->
+            <div ng-controller="MasterCtrl">
+                <main ng-view></main>
+            </div>
+          </md-content>
         </div>
 
         <!-- angular v1.4.2 -->

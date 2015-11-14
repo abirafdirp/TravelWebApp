@@ -122,7 +122,9 @@ var kompresApp = angular.module('kompres', [
   'kompresControllers',
   'kompresServices',
   'hateoas',
-  'angularDjangoRegistrationAuthApp'
+  'angularDjangoRegistrationAuthApp',
+  'ngAnimate',
+  'ngMaterial',
 ]);
 
 // hateoas enabler
@@ -178,3 +180,9 @@ kompresApp.config(['$httpProvider',
     $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
   }]);
 
+kompresApp
+.config(function($mdThemingProvider) {
+  $mdThemingProvider.theme('default')
+    .primaryPalette('red')
+    .accentPalette('grey');
+});
