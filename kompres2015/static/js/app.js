@@ -58,6 +58,14 @@ angular.module('angularDjangoRegistrationAuthApp', [
           }],
         }
       })
+      .when('/rest-auth/registration/account-confirm-email/:emailVerificationToken', {
+        templateUrl: '/partials/verifyemail/',
+        resolve: {
+          authenticated: ['djangoAuth', function(djangoAuth){
+            return djangoAuth.authenticationStatus();
+          }],
+        }
+      })
       .when('/akun/logout', {
         templateUrl: '/partials/logout/',
         resolve: {
@@ -112,7 +120,6 @@ angular.module('angularDjangoRegistrationAuthApp', [
 var kompresApp = angular.module('kompres', [
   'ngRoute',
   'kompresControllers',
-  'ui.bootstrap',
   'kompresServices',
   'hateoas',
   'angularDjangoRegistrationAuthApp'

@@ -43,9 +43,9 @@ THIRD_PARTY_APPS = (
     'rest_auth',
     'allauth',
     'allauth.account',
-    'rest_auth.registration',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
+    'rest_auth.registration',
 
     # DRF auto generated docs
     'rest_framework_swagger',
@@ -103,10 +103,6 @@ DEBUG = env.bool("DJANGO_DEBUG", False)
 FIXTURE_DIRS = (
     str(APPS_DIR.path('fixtures')),
 )
-
-# EMAIL CONFIGURATION
-# ------------------------------------------------------------------------------
-EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
 
 # MANAGER CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -241,17 +237,10 @@ AUTHENTICATION_BACKENDS = (
 # LOGIN_REDIRECT_URL = 'users:redirect'
 # LOGIN_URL = 'account_login'
 
-REST_SESSION_LOGIN = False
 AUTH_USER_MODEL = 'users.User'
-ACCOUNT_AUTHENTICATION_METHOD = ('username',)
-ACCOUNT_EMAIL_VERIFICATION = ('mandatory',)
-ACCOUNT_SIGNUP_PASSWORD_VERIFICATION = True
-ACCOUNT_UNIQUE_EMAIL = True
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'abiraf.bot@gmail.com'
-EMAIL_HOST_PASSWORD = 'Razor321'
-EMAIL_PORT = 587
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
 
 # SLUGLIFIER
