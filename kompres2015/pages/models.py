@@ -7,6 +7,7 @@ from kompres2015.tourism.models import TravelDestination
 
 class HomePage(TimeStampedModel):
     video = models.TextField()
+    image = models.ImageField()
 
     def __str__(self):
         return 'Halaman depan'

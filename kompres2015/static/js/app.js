@@ -18,7 +18,7 @@ angular.module('angularDjangoRegistrationAuthApp', [
           }],
         }
       })
-      .when('/akun/registrasi', {
+      .when('/akun/daftar', {
         templateUrl: '/partials/register/',
         resolve: {
           authenticated: ['djangoAuth', function(djangoAuth){
@@ -42,7 +42,7 @@ angular.module('angularDjangoRegistrationAuthApp', [
           }],
         }
       })
-      .when('/akun/login', {
+      .when('/akun/masuk', {
         templateUrl: '/partials/login/',
         resolve: {
           authenticated: ['djangoAuth', function(djangoAuth){
@@ -66,7 +66,7 @@ angular.module('angularDjangoRegistrationAuthApp', [
           }],
         }
       })
-      .when('/akun/logout', {
+      .when('/akun/keluar', {
         templateUrl: '/partials/logout/',
         resolve: {
           authenticated: ['djangoAuth', function(djangoAuth){

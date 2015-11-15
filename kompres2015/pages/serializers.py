@@ -10,7 +10,7 @@ class HomePageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = HomePage
-        fields = ('id', 'video', 'featureds')
+        fields = ('id', 'video', 'featureds', 'image')
 
 
 class FeaturedTravelDestinationSerializer(serializers.ModelSerializer):

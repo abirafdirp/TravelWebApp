@@ -25,27 +25,31 @@
 	<body ng-controller="MasterCtrl">
 
 		<div ng-controller="NavCtrl">
-			<div ng-hide="$route.current.activetab == 'travel-destination'" layout="column" layout-fill>
-				<div layout="row" layout-align="center start">
-						<div>
-								<md-button class="main-nav left green-btn" href="/lokasi-wisata">Lokasi Wisata</md-button>
-								<md-button class="main-nav middle yellow-btn">Artikel</md-button>
-								<md-button class="main-nav middle blue-btn">Peta</md-button>
-								<md-button class="main-nav right light-blue-btn">Info dan Kontak</md-button>
-						</div>
-						<div flex>
-								<md-button class="login-nav green-btn" href="/akun/logout" ng-show="authenticated == true">
-									Log Out
-								</md-button>
+			<div layout="row" layout-fill>
+				<span flex layout="row" layout-align="center start">
+					<md-button class="main-nav left green-btn" href="/">Visit Indonesia</md-button>
+					<md-button class="main-nav middle purple-btn" href="/lokasi-wisata">Lokasi Wisata</md-button>
+					<md-button class="main-nav middle blue-btn">Artikel</md-button>
+					<md-button class="main-nav middle yellow-btn">Peta</md-button>
+					<md-button class="main-nav right light-blue-btn">Info dan Kontak</md-button>
+				</span>
+				<span flex layout="row" layout-align="center center">
+					<span ng-if="authenticated == true" class="user-nav">
+						<a href="/akun/keluar">
+							Keluar
+						</a>
+					</span>
 
-								<md-button class="user-nav left green-btn" href="/akun/login" ng-show="authenticated == false">
-									Log In
-								</md-button>
-								<md-button class="user-nav right light-blue-btn" href="/akun/registrasi" ng-show="authenticated == false">
-									Sign Up
-								</md-button>
-						</div>
-				</div>
+					<span ng-if="authenticated == false" class="user-nav">
+						<a href="/akun/masuk">
+							Masuk
+						</a>
+
+						<a href="/akun/daftar">
+							Daftar
+						</a>
+					</span>
+				</span>
 
 
 
