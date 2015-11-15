@@ -1,3 +1,60 @@
-.btn-login {
-    background-color: red;
+.md-button.md-cornered {
+    border-radius: 0;
+}
+.main-nav {
+    font-size: 16px;
+    margin: 20px 0;
+    padding: 3px 15px 3px 15px;
+    color: rgb(49, 46, 46);
+    background-color: rgba(224, 224, 224, 0.96);
+    text-transform: none;
+    font-weight: 800;
+    min-width:100px;
+}
+.user-nav {
+    font-size: 16px;
+    margin: 20px 0;
+    padding: 3px 15px 3px 15px;
+    color: rgb(49, 46, 46);
+    background-color: rgba(224, 224, 224, 0.96);
+    text-transform: none;
+    font-weight: 500;
+    min-width:100px;
+}
+.green-btn {
+    background-color: rgba(132, 147, 36, 0.96);
+    color: rgba(40,40,40,0.96);
+}
+.yellow-btn {
+    background-color: rgba(255, 179, 15, 0.96);
+    color: rgba(80,80,80,0.96);
+}
+.blue-btn {
+    background-color: rgba(1, 41, 59, 0.96);
+    color: rgba(200,200,200,0.96);
+}
+.light-blue-btn {
+    background-color: rgba(67, 127, 151, 0.96);
+    color: rgba(240,240,240,0.96);
+}
+.md-button.left.green-btn {
+    border-radius: 10px 0 0 10px;
+}
+.md-button.middle.blue-btn {
+    border-radius: 0;
+    background-color: rgba(1, 41, 59, 0.96);
+    color: rgba(200,200,200,0.96);
+}
+.md-button.middle.yellow-btn {
+    border-radius: 0;
+    background-color: rgba(255, 179, 15, 0.96);
+    color: rgba(60,60,60,0.96);
+}
+.md-button.right.light-blue-btn {
+    border-radius: 0 10px 10px 0;
+}
+.md-button:not([disabled]):hover {
+    background-color: rgba(253,21,27,0.96);
+    color: rgba(200,200,200,0.96);
+    transition: 0.3s;
 }

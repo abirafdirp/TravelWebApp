@@ -6,11 +6,13 @@
 		<meta name=description content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+        <!-- Angular-material CSS -->
+        <link rel="stylesheet" href="{% static 'css/angular-material.min.css' %}">
+
         <link rel="stylesheet" href="{% static 'css/auth.css' %}">
 				<link rel="stylesheet" href="{% static 'css/project.css' %}">
 				<link rel="stylesheet" href="{% static 'css/sticky-header.css' %}">
-				<!-- Angular-material CSS -->
-        <link rel="stylesheet" href="{% static 'css/angular-material.min.css' %}">
+
 
 
 
@@ -21,62 +23,37 @@
 	</head>
 
 	<body ng-controller="MasterCtrl">
+
 		<div ng-controller="NavCtrl">
 			<div ng-hide="$route.current.activetab == 'travel-destination'" layout="column" layout-fill>
-
-
-				<div layout="row" md-theme="navbar-theme">
-
-						<div flex>
-							<a href="/">
-								<h2><span>Visit Indonesia</span></h2>
-							</a>
+				<div layout="row" layout-align="center start">
+						<div>
+								<md-button class="main-nav left green-btn" href="/lokasi-wisata">Lokasi Wisata</md-button>
+								<md-button class="main-nav middle yellow-btn">Artikel</md-button>
+								<md-button class="main-nav middle blue-btn">Peta</md-button>
+								<md-button class="main-nav right light-blue-btn">Info dan Kontak</md-button>
 						</div>
-
 						<div flex>
-						<md-button href="/lokasi-wisata" class="md-accent">Lokasi Wisata</md-button>
-						<md-button class="md-warn md-raised md-hue-2">Artikel</md-button>
-						<md-button class="md-primary">Info dan Kontak</md-button>
-							</div>
+								<md-button class="login-nav green-btn" href="/akun/logout" ng-show="authenticated == true">
+									Log Out
+								</md-button>
 
-						<span flex></span>
-						<md-button class="md-raised md-accent" aria-label="Learn More" href="/akun/login" ng-show="authenticated == false">
-							Log In
-						</md-button>
-						<md-button class="md-raised md-warn" aria-label="Learn More" href="/akun/logout" ng-show="authenticated == true">
-							Log Out
-						</md-button>
-						<md-button class="md-raised md-warn" aria-label="Learn More" href="/akun/registrasi" ng-show="authenticated == false">
-							Sign Up
-						</md-button>
+								<md-button class="user-nav left green-btn" href="/akun/login" ng-show="authenticated == false">
+									Log In
+								</md-button>
+								<md-button class="user-nav right light-blue-btn" href="/akun/registrasi" ng-show="authenticated == false">
+									Sign Up
+								</md-button>
+						</div>
 				</div>
 
-				<md-content>
+
+
+				<md-content layout="row">
 					<main ng-view></main>
 				</md-content>
 
 			</div>
-
-		<div ng-hide="$route.current.activetab != 'travel-destination'">
-			<header md-page-header>
-					<div md-header-picture style="background-image:url(http://cdn.wallwuzz.com/uploads/katy-perry-wallpaper-10wallpaper-people-photography-album-desktop-beauty-wallwuzz-hd-wallpaper-20555.jpg)"></div>
-					<md-toolbar scroll>
-						<div class="md-toolbar-tools">
-							<md-button class="md-tools" aria-label="Go Back"><i class="ion-android-arrow-back"></i></md-button>
-							<h2 md-header-title flex>Katy Perry</h2>
-							<md-button class="md-tools" aria-label="Edit Contact"><i class="ion-android-create"></i></md-button>
-							<md-button class="md-tools" aria-label="More"><i class="ion-android-more-vertical"></i></md-button>
-						</div>
-					</md-toolbar>
-				 <div class="main-fab"><md-button aria-label="Float Action Button" class="md-fab md-accent"><i class="ion-android-star"></i></md-button></div>
-			 </header>
-			<br /><br />
-			<section id="page-section">
-				<md-content>
-					<main ng-view></main>
-				</md-content>
-			</section>
-		</div>
 
 		<!-- angular v1.4.2 -->
 		<script src="{% static 'js/angular.js' %}"></script>
