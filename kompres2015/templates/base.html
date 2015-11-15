@@ -7,10 +7,13 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <link rel="stylesheet" href="{% static 'css/auth.css' %}">
-		<!-- Angular-material CSS -->
+				<link rel="stylesheet" href="{% static 'css/project.css' %}">
+				<link rel="stylesheet" href="{% static 'css/sticky-header.css' %}">
+				<!-- Angular-material CSS -->
         <link rel="stylesheet" href="{% static 'css/angular-material.min.css' %}">
 
-        <link rel="stylesheet" href="{% static 'css/project.css' %}">
+
+
 
 
         <!-- Main CSS -->
@@ -21,39 +24,31 @@
 		<div ng-controller="NavCtrl">
 			<div ng-hide="$route.current.activetab == 'travel-destination'" layout="column" layout-fill>
 
-				<md-toolbar class="md-primary">
-					<div class="md-toolbar-tools">
-						<span>My App's Title</span>
 
-						<!-- fill up the space between left and right area -->
+				<div layout="row" md-theme="navbar-theme">
+
+						<div flex>
+							<a href="/">
+								<h2><span>Visit Indonesia</span></h2>
+							</a>
+						</div>
+
+						<div flex></div>
+						<md-button href="/lokasi-wisata" class="md-accent">Lokasi Wisata</md-button>
+						<md-button class="md-warn md-raised md-hue-2">Artikel</md-button>
+						<md-button class="md-primary">Info dan Kontak</md-button>
+
 						<span flex></span>
-
-						<md-menu>
-							<md-button md-menu-origin ng-click="$mdOpenMenu()">log in</md-button>
-								<md-menu-content width="2">
-									<md-menu-item>
-											<md-button>Help</md-button>
-									</md-menu-item>
-									<md-menu-item>
-											<md-button>About</md-button>
-									</md-menu-item>
-								</md-menu-content>
-						</md-menu>
-
-						<md-menu>
-							<md-button md-menu-origin ng-click="$mdOpenMenu()">sign up</md-button>
-								<md-menu-content width="2">
-									<md-menu-item>
-											<md-button>Help</md-button>
-									</md-menu-item>
-									<md-menu-item>
-											<md-button>About</md-button>
-									</md-menu-item>
-								</md-menu-content>
-						</md-menu>
-
-					</div>
-				</md-toolbar>
+						<md-button class="md-raised md-accent" aria-label="Learn More" href="/akun/login" ng-show="authenticated == false">
+							Log In
+						</md-button>
+						<md-button class="md-raised md-warn" aria-label="Learn More" href="/akun/logout" ng-show="authenticated == true">
+							Log Out
+						</md-button>
+						<md-button class="md-raised md-warn" aria-label="Learn More" href="/akun/registrasi" ng-show="authenticated == false">
+							Sign Up
+						</md-button>
+				</div>
 
 				<md-content>
 					<main ng-view></main>
