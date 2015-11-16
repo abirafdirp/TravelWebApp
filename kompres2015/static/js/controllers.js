@@ -3,6 +3,7 @@ var kompresControllers = angular.module('kompresControllers', []);
 kompresControllers.controller('NavCtrl', ['$scope', '$route',
   function($scope, $route) {
     $scope.$route = $route;
+    $scope.login_opened = false;
   }
 ]);
 

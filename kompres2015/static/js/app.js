@@ -125,6 +125,7 @@ var kompresApp = angular.module('kompres', [
   'angularDjangoRegistrationAuthApp',
   'ngAnimate',
   'ngMaterial',
+  'offClick',
 ]);
 
 // hateoas enabler
