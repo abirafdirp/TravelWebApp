@@ -2,18 +2,21 @@
 <div id="login_view" ng-controller="LoginCtrl">
   <form role="form" ng-submit="login(loginForm)" name="loginForm" novalidate class="login"  layout="column" layout-align="center center">
     <md-input-container class="md-block">
-      <label for="id_username">Username</label>
+      <label for="id_username">username</label>
       <input name="username" id="id_username" type="text" ng-model="model.username" placeholder="Username" class="form-control" required />
     </md-input-container>
     <md-button class="md-warn" ng-repeat="error in errors.username">{$error$}</md-button>
     <md-input-container class="md-block">
-      <label for="id_password">Password</label>
+      <label for="id_password">password</label>
       <input name="password" id="id_password" type="password" ng-model="model.password" placeholder="Password" class="form-control" required />
     </md-input-container>
     <md-button class="md-warn" ng-repeat="error in errors.password">{$error$}</md-button>
     <md-button class="md-warn" ng-repeat="error in errors.non_field_errors">{$error$}</md-button>
     <md-button class="md-warn" ng-if="error">{$error$}</md-button>
     <md-button type="submit" class="md-raised md-primary">masuk</md-button>
+		<md-dialog-actions>
+		<div ng-if="close == true">{$close()$}</div>
+			</md-dialog-actions>
   </form>
 
 

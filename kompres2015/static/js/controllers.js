@@ -1,11 +1,27 @@
 var kompresControllers = angular.module('kompresControllers', []);
 
-kompresControllers.controller('NavCtrl', ['$scope', '$route',
-  function($scope, $route) {
+kompresControllers.controller('NavCtrl', ['$scope', '$route', '$mdDialog',
+  function($scope, $route, $mdDialog) {
     $scope.$route = $route;
     $scope.login_opened = false;
+
+    $scope.showLogin = function(ev) {
+    $mdDialog.show({
+      controller: DialogController,
+      templateUrl: '/partials/login/',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:true
+    })
+  };
   }
 ]);
+
+function DialogController($scope, $mdDialog) {
+  $scope.close = function() {
+    $mdDialog.cancel();
+  };
+}
 
 kompresControllers.controller('HomePageCtrl', ['$scope', 'HomePage',
   function($scope, HomePage) {
