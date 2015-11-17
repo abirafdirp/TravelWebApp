@@ -27,6 +27,25 @@ kompresControllers.controller('NavCtrl', ['$scope', '$route', '$mdDialog',
         };
       }
     };
+
+    $scope.showRegister = function(ev) {
+      $mdDialog.show({
+        controller: DialogController,
+        templateUrl: '/partials/register/',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+        scope: $scope,
+        preserveScope: true
+      });
+      function DialogController($scope, $mdDialog, $timeout) {
+        $scope.closeDialog = function() {
+          $timeout(function(){
+            $mdDialog.hide();}, 500);
+
+        };
+      }
+    };
   }
 ]);
 

@@ -100,7 +100,9 @@ body {
 }
 
 .md-dialog-content-login {
-    min-width:350px;
-    min-height:290px;
-    margin-top: 30px;
+    transition: 0.3s;
+}
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
 }

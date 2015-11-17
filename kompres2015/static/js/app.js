@@ -34,7 +34,7 @@ angular.module('angularDjangoRegistrationAuthApp', [
           }],
         }
       })
-      .when('/akun/konfirmasi-reset-password/:firstToken/:passwordResetToken', {
+      .when('/akun/konfirmasi-reset-password/:firstToken/:passwordResetToken/', {
         templateUrl: '/partials/passwordresetconfirm/',
         resolve: {
           authenticated: ['djangoAuth', function(djangoAuth){

@@ -10,7 +10,7 @@ angular.module('angularDjangoRegistrationAuthApp')
         'API_URL': '/rest-auth',
         // Set use_session to true to use Django sessions to store security token.
         // Set use_session to false to store the security token locally and transmit it as a custom header.
-        'use_session': true,
+        'use_session': false,
         /* END OF CUSTOMIZATION */
         'authenticated': null,
         'authPromise': null,

@@ -1,5 +1,5 @@
 <md-dialog aria-label="masuk">
-	<md-dialog-content class="md-dialog-content-login" ng-controller="LoginCtrl">
+	<md-dialog-content class="md-dialog-content-login" ng-controller="LoginCtrl" ng-cloak>
 		<form role="form" ng-submit="login(loginForm)" name="loginForm" novalidate class="login" layout="column" layout-align="center center" ng-show="tab == 'login'">
 
 			<div class="md-dialog-content" layout="column" layout-align="center center">
@@ -18,13 +18,15 @@
 						<div ng-message="required" ng-repeat="error in errors.password">{$error$}</div>
 					</div>
 				</md-input-container>
-				<md-button class="md-warn" ng-repeat="error in errors.non_field_errors">{$error$}</md-button>
-				<md-button class="md-warn" ng-if="error">{$error$}</md-button>
-				<span ng-show="submit_clicked">
-					<md-progress-circular md-mode="indeterminate" style="margin: 0;"></md-progress-circular>
+				<div ng-show="errors" class="animated fadeIn">
+					<p ng-repeat="error in errors.non_field_errors">{$error$}</p>
+					<p ng-if="error">{$error$}</p>
+				</div>
+				<span ng-show="show_loading && !errors.non_field_errors && loginForm.password.$error.required == null && loginForm.username.$error.required == null">
+					<md-progress-circular md-mode="indeterminate"></md-progress-circular>
 				</span>
-				<md-button ng-show="submit_clicked == false" type="submit" class="md-raised md-primary" ng-click="submit_clicked = true">masuk</md-button>
-				<a href="javascript:void(0)" ng-click="setTab('reset-password')">lupa password</a>
+				<md-button ng-show="show_loading == false || errors" type="submit" class="md-raised md-primary">masuk</md-button>
+				<md-button class="md-raised md-accent" ng-click="setTab('reset-password')">lupa password</md-button>
 			</div>
 			<div ng-if="authenticated">{$ closeDialog() $}</div>
 		</form>
@@ -42,16 +44,16 @@
 				</md-input-container>
 				<md-button class="md-warn" ng-repeat="error in errors.non_field_errors">{$error$}</md-button>
 				<md-button class="md-warn" ng-if="error">{$error$}</md-button>
-				<span ng-show="reset_clicked">
+				<md-button ng-show="reset_clicked == false" type="submit" class="md-raised md-primary" ng-click="reset_clicked = true">reset password</md-button>
+				<span ng-show="reset_clicked && !complete">
 					<md-progress-circular md-mode="indeterminate" style="margin: 0;"></md-progress-circular>
 				</span>
-				<md-button ng-show="submit_clicked == false" type="submit" class="md-raised md-primary">reset password</md-button>
 				<div ng-if="complete == true">
-					<div class="alert alert-success">You should receive an email shortly with instructions on how to reset your account password.</div>
+					<p>Cek email anda untuk instruksi reset password anda!</p>
 				</div>
+				<md-button class="md-raised md-accent" ng-click="setTab('login')">login</md-button>
 
 			</div>
-			<div ng-if="complete">{$ closeDialog() $}</div>
 		</form>
 	</md-dialog-content>
 

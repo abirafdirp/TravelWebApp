@@ -9,6 +9,7 @@
 	<!-- Angular-material CSS -->
 	<link rel="stylesheet" href="{% static 'css/angular-material.min.css' %}">
 
+	<link rel="stylesheet" href="{% static 'css/animate.css' %}">
 	<link rel="stylesheet" href="{% static 'css/auth.css' %}">
 	<link rel="stylesheet" href="{% static 'css/project.css' %}">
 	<link rel="stylesheet" href="{% static 'css/sticky-header.css' %}">
@@ -37,9 +38,9 @@
 		<div flex layout="row" layout-align="center center">
 
 			<div ng-show="authenticated" class="user-nav">
-				<a href="javascript:void(0)" ng-click="logout_clicked = true">
+				<md-button class="md-accent md-raised" ng-click="logout_clicked = true">
 					Keluar
-				</a>
+				</md-button>
 						<span ng-if="logout_clicked == true">
 							<div ng-controller="LogoutCtrl">
 								{$ reset_logout_clicked() $}
@@ -49,15 +50,15 @@
 
 			<div ng-hide="authenticated" class="user-nav" layout="row" layout-align="center center">
 				<div off-click="login_opened = false">
-					<md-button class="md-primary md-raised" ng-click="showLogin($event)" flex-sm="100" flex-md="100" flex-gt-md="auto">
+					<md-button class="md-primary md-raised" ng-click="showLogin($event)">
 						masuk
 					</md-button>
 				</div>
 
 				<div>
-					<a href="/akun/daftar">
+					<md-button class="md-accent md-raised" ng-click="showRegister($event)">
 						Daftar
-					</a>
+					</md-button>
 				</div>
 			</div>
 
