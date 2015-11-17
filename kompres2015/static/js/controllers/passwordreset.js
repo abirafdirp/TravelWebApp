@@ -4,6 +4,7 @@ angular.module('angularDjangoRegistrationAuthApp')
   .controller('PasswordresetCtrl', function ($scope, djangoAuth, Validate) {
     $scope.model = {'email':''};
   	$scope.complete = false;
+    $scope.reset_clicked = false;
     $scope.resetPassword = function(formData){
       $scope.errors = [];
       Validate.form_validation(formData,$scope.errors);

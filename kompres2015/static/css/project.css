@@ -98,3 +98,9 @@ img.bg {
 body {
     padding-top: 0;
 }
+
+.md-dialog-content-login {
+    min-width:350px;
+    min-height:290px;
+    margin-top: 30px;
+}

@@ -3,25 +3,32 @@ var kompresControllers = angular.module('kompresControllers', []);
 kompresControllers.controller('NavCtrl', ['$scope', '$route', '$mdDialog',
   function($scope, $route, $mdDialog) {
     $scope.$route = $route;
-    $scope.login_opened = false;
+    $scope.logout_clicked = false;
+
+    $scope.reset_logout_clicked = function() {
+      $scope.logout_clicked = false;
+    };
 
     $scope.showLogin = function(ev) {
-    $mdDialog.show({
-      controller: DialogController,
-      templateUrl: '/partials/login/',
-      parent: angular.element(document.body),
-      targetEvent: ev,
-      clickOutsideToClose:true
-    })
-  };
+      $mdDialog.show({
+        controller: DialogController,
+        templateUrl: '/partials/login/',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+        scope: $scope,
+        preserveScope: true
+      });
+      function DialogController($scope, $mdDialog, $timeout) {
+        $scope.closeDialog = function() {
+          $timeout(function(){
+            $mdDialog.hide();}, 500);
+
+        };
+      }
+    };
   }
 ]);
-
-function DialogController($scope, $mdDialog) {
-  $scope.close = function() {
-    $mdDialog.cancel();
-  };
-}
 
 kompresControllers.controller('HomePageCtrl', ['$scope', 'HomePage',
   function($scope, HomePage) {
