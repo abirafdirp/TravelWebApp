@@ -8,7 +8,6 @@ kompresControllers.controller('NavCtrl', ['$scope', '$route', '$mdDialog',
     $scope.reset_logout_clicked = function() {
       $scope.logout_clicked = false;
     };
-
     $scope.showLogin = function(ev) {
       $mdDialog.show({
         controller: DialogController,
@@ -16,18 +15,24 @@ kompresControllers.controller('NavCtrl', ['$scope', '$route', '$mdDialog',
         parent: angular.element(document.body),
         targetEvent: ev,
         clickOutsideToClose:true,
-        scope: $scope,
-        preserveScope: true
       });
       function DialogController($scope, $mdDialog, $timeout) {
-        $scope.closeDialog = function() {
+        $scope.authenticated = false;
+        $scope.closeDialogDelayed = function() {
           $timeout(function(){
-            $mdDialog.hide();}, 500);
-
+            $mdDialog.hide();}, 350);
         };
+        $scope.closeDialog = function() {
+            $mdDialog.hide();
+        };
+        $scope.$on('djangoAuth.logged_in', function() {
+          $scope.authenticated = true;
+        });
+        $scope.$on('djangoAuth.logged_out', function() {
+          $scope.authenticated = false;
+        });
       }
     };
-
     $scope.showRegister = function(ev) {
       $mdDialog.show({
         controller: DialogController,
@@ -35,16 +40,55 @@ kompresControllers.controller('NavCtrl', ['$scope', '$route', '$mdDialog',
         parent: angular.element(document.body),
         targetEvent: ev,
         clickOutsideToClose:true,
-        scope: $scope,
-        preserveScope: true
       });
       function DialogController($scope, $mdDialog, $timeout) {
-        $scope.closeDialog = function() {
+        $scope.closeDialogDelayed = function() {
           $timeout(function(){
-            $mdDialog.hide();}, 500);
-
+            $mdDialog.hide();}, 350);
         };
+        $scope.closeDialog = function() {
+            $mdDialog.hide();
+        };
+        $scope.$on('djangoAuth.logged_in', function() {
+          $scope.authenticated = true;
+        });
+        $scope.$on('djangoAuth.logged_out', function() {
+          $scope.authenticated = false;
+        });
       }
+    };
+    $scope.showProfile = function(ev) {
+      $mdDialog.show({
+        controller: DialogController,
+        templateUrl: '/partials/userprofile/',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+      });
+      function DialogController($scope, $mdDialog, $timeout) {
+        $scope.closeDialogDelayed = function() {
+          $timeout(function(){
+            $mdDialog.hide();}, 350);
+        };
+        $scope.closeDialog = function() {
+            $mdDialog.hide();
+        };
+        $scope.$on('djangoAuth.logged_in', function() {
+          $scope.authenticated = true;
+        });
+        $scope.$on('djangoAuth.logged_out', function() {
+          $scope.authenticated = false;
+        });
+      }
+    };
+  }
+]);
+
+kompresControllers.controller('LoginNavCtrl', ['$scope',
+  function($scope) {
+    $scope.tab = 'Login';
+    $scope.setTab = function(name){
+      $scope.tab = name;
     };
   }
 ]);

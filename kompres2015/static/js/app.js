@@ -127,6 +127,7 @@ var kompresApp = angular.module('kompres', [
   'ngMaterial',
   'offClick',
   'ngMessages',
+  'ngMdIcons',
 ]);
 
 // hateoas enabler

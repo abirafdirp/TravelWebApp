@@ -1,4 +1,13 @@
 <md-dialog aria-label="daftar">
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<h2>Registrasi</h2>
+			<span flex></span>
+			<md-button class="md-icon-button" ng-click="closeDialog()">
+				<ng-md-icon icon="close" aria-label="close dialog"></ng-md-icon>
+			</md-button>
+		</div>
+	</md-toolbar>
 	<md-dialog-content class="md-dialog-content-register" id="register_view" ng-controller="RegisterCtrl">
 		<form role="form" ng-if="authenticated != true" name="registerForm" ng-submit="register(registerForm)" novalidate>
 
@@ -27,22 +36,22 @@
 				</md-input-container>
 				<md-input-container class="md-block">
 					<label for="id_email">Email</label>
-                <input name="email" id="id_email" class="form-control" type="email" ng-model="model.email" placeholder="Email" required />
+					<input name="email" id="id_email" class="form-control" type="email" ng-model="model.email" placeholder="Email" required />
 					<div ng-messages="registerForm.email.$error">
 						<div ng-message="required" ng-repeat="error in errors.email">{$error$}</div>
 						<div ng-message="email" ng-repeat="error in errors.email">{$error$}</div>
 					</div>
 				</md-input-container>
 				<div ng-show="errors" class="animated fadeIn">
-					<p ng-repeat="error in errors.non_field_errors">{$error$}</p>
-					<p ng-repeat="error in errors.__all__">{$error$}</p>
-					<p ng-repeat="error in errors.username">{$error$}</p>
-					<p ng-repeat="error in errors.email">{$error$}</p>
+					<p class="md-body-1" ng-repeat="error in errors.non_field_errors">{$error$}</p>
+					<p class="md-body-1" ng-repeat="error in errors.__all__">{$error$}</p>
+					<p class="md-body-1" ng-repeat="error in errors.username">{$error$}</p>
+					<p class="md-body-1" ng-repeat="error in errors.email">{$error$}</p>
 				</div>
 				<div ng-if="complete == true">
-						<p>Cek email untuk aktivasi akun anda!</p>
+						<p class="md-body-1">Cek email untuk aktivasi akun anda!</p>
 				</div>
-				<span ng-show="show_loading && !errors.non_field_errors && registerForm.password.$error.required == null && registerForm.username.$error.required == null">
+				<span ng-show="show_loading && !complete && errors.length == 0">
 					<md-progress-circular md-mode="indeterminate"></md-progress-circular>
 				</span>
 				<md-button class="md-raised md-accent" type="submit">daftar</md-button>

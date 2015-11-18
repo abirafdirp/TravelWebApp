@@ -21,5 +21,8 @@ angular.module('angularDjangoRegistrationAuthApp')
         	$scope.errors = data;
         });
       }
+      else {
+        $scope.show_loading = false;
+      }
     }
   });

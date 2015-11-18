@@ -5,11 +5,6 @@ angular.module('angularDjangoRegistrationAuthApp')
     $scope.model = {'username':'','password':''};
     $scope.complete = false;
     $scope.show_loading = false;
-    $scope.tab = 'login';
-    $scope.setTab = function(name){
-      $scope.tab = name;
-    };
-
 
     $scope.login = function(formData){
       $scope.errors = [];
@@ -26,6 +21,9 @@ angular.module('angularDjangoRegistrationAuthApp')
             $scope.show_loading = false;
             $scope.errors = data;
           });
+      }
+      else {
+        $scope.show_loading = false;
       }
     }
   });
