@@ -107,7 +107,14 @@ body {
   display: none !important;
 }
 
-md-toolbar .a {
+md-toolbar a:focus {
+    outline:0;
+}
+
+md-toolbar a.md-button {
+    margin: 0 0 0 0;
+}
+
+.lowercase {
     text-transform: none;
-    text-decoration: none;
 }

@@ -9,7 +9,7 @@
 		</div>
 	</md-toolbar>
 	<md-dialog-content class="md-dialog-content-login">
-		<form role="form" ng-submit="login(loginForm)" ng-cloak ng-controller="LoginCtrl" name="loginForm" novalidate class="login" layout="column" layout-align="center center" ng-show="tab == 'Login'">
+		<form role="form" ng-submit="login(loginForm)" ng-cloak ng-controller="LoginCtrl" name="loginForm" novalidate class="login" layout="column" layout-align="center center" ng-show="tab == 'Masuk'">
 
 			<div class="md-dialog-content" layout="column" layout-align="center center">
 
@@ -56,7 +56,7 @@
 				<div ng-show="errors" class="animated fadeIn">
 					<p class="md-body-1" ng-repeat="error in errors.non_field_errors">{$error$}</p>
 					<p class="md-body-1" ng-repeat="error in errors.__all__">{$error$}</p>
-					<p class="md-body-1" ng-repeat="error in errors.email">{$error$}</p>
+					<p ng-show="errors.email != 'This field is required.'" class="md-body-1" ng-repeat="error in errors.email">{$error$}</p>
 				</div>
 				<span ng-show="show_loading && errors.length == 0 && !complete">
 					<md-progress-circular md-mode="indeterminate" style="margin: 0;"></md-progress-circular>
@@ -65,7 +65,7 @@
 					<p class="md-body-1">Cek email anda untuk instruksi reset password anda!</p>
 				</div>
 				<md-button ng-show="show_loading == false" type="submit" class="md-raised md-primary">reset password</md-button>
-				<md-button class="md-raised md-accent" ng-click="setTab('Login')">login</md-button>
+				<md-button class="md-raised md-accent" ng-click="setTab('Masuk')">login</md-button>
 
 			</div>
 		</form>

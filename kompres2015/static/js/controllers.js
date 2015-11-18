@@ -4,6 +4,10 @@ kompresControllers.controller('NavCtrl', ['$scope', '$route', '$mdDialog',
   function($scope, $route, $mdDialog) {
     $scope.$route = $route;
     $scope.logout_clicked = false;
+    $scope.traveldestination_icon = 'terrain';
+    $scope.article_icon = 'my_library_books';
+    $scope.map_icon = 'directions';
+    $scope.info_icon = 'info';
 
     $scope.reset_logout_clicked = function() {
       $scope.logout_clicked = false;
@@ -87,7 +91,7 @@ kompresControllers.controller('NavCtrl', ['$scope', '$route', '$mdDialog',
 
 kompresControllers.controller('LoginNavCtrl', ['$scope',
   function($scope) {
-    $scope.tab = 'Login';
+    $scope.tab = 'Masuk';
     $scope.setTab = function(name){
       $scope.tab = name;
     };

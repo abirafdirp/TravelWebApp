@@ -16,10 +16,6 @@
 	<link rel="stylesheet" href="{% static 'css/sticky-header.css' %}">
 
 
-
-
-
-
 	<!-- Main CSS -->
 	<base href="/">
 </head>
@@ -29,37 +25,48 @@
 <div ng-controller="NavCtrl" layout="column">
 	<div layout="row" layout-fill>
 
-		<md-toolbar class="md-primary md-hue-2">
+		<md-toolbar class="md-primary">
 			<div class="md-toolbar-tools">
-				<h2>
-					<span>Travel Indonesia</span>
-				</h2>
+				<md-button href="/" aria-label="home">
+						<img src="/static/images/flag-mini.png">
+				</md-button>
 				<span flex></span>
-				<md-button class="main-nav left green-btn" href="/">Visit Indonesia</md-button>
-				<md-button class="main-nav middle purple-btn" href="/lokasi-wisata">Lokasi Wisata</md-button>
-				<md-button class="main-nav middle blue-btn" href="/artikel">Artikel</md-button>
-				<md-button class="main-nav middle yellow-btn">Peta</md-button>
-				<md-button class="main-nav right light-blue-btn">Info dan Kontak</md-button>
+				<md-button href="/lokasi-wisata" ng-mouseleave="traveldestination_icon = 'terrain'" ng-mouseenter="traveldestination_icon = 'satellite'" >
+					<md-tooltip md-direction="down"><span class="md-body-2">lokasi wisata</span></md-tooltip>
+					<ng-md-icon icon="{$traveldestination_icon$}" style="fill: #FFF1D0" aria-label="article"></ng-md-icon>
+				</md-button>
+				<md-button href="/artikel" ng-mouseleave="article_icon = 'my_library_books'" ng-mouseenter="article_icon = 'format_align_left'">
+					<md-tooltip md-direction="down"><span class="md-body-2">artikel</span></md-tooltip>
+					<ng-md-icon icon="{$article_icon$}" style="fill: #C8D5B9" aria-label="article"></ng-md-icon>
+				</md-button>
+				<md-button href="/peta" ng-mouseleave="map_icon = 'directions'" ng-mouseenter="map_icon = 'navigation'">
+					<md-tooltip md-direction="down"><span class="md-body-2">peta</span></md-tooltip>
+					<ng-md-icon icon="{$map_icon$}" style="fill: #8FC0A9" aria-label="article"></ng-md-icon>
+				</md-button>
+				<md-button href="/info" ng-mouseleave="info_icon = 'info'" ng-mouseenter="info_icon = 'info_outline'">
+					<md-tooltip md-direction="down"><span class="md-body-2">info dan kontak</span></md-tooltip>
+					<ng-md-icon icon="{$info_icon$}" aria-label="article"></ng-md-icon>
+				</md-button>
 
 				<span flex></span>
 
-				<a href="javascript:void(0)" ng-show="authenticated" class="md-body-2" ng-click="showProfile($event)" style="margin-right: 8px">
-					<ng-md-icon icon="account_box" aria-label="user"></ng-md-icon> profil
-				</a>
-				<a href="javascript:void(0)" ng-show="authenticated" class="md-body-2" ng-click="logout_clicked = true">
-					<ng-md-icon icon="logout" aria-label="user" size="26"></ng-md-icon> keluar
-				</a>
+				<md-button href="javascript:void(0)" ng-show="authenticated" ng-click="showProfile($event)" class="lowercase">
+						<ng-md-icon icon="account_box" aria-label="user"></ng-md-icon> <span hide-sm>Profil</span>
+				</md-button>
+				<md-button href="javascript:void(0)" ng-show="authenticated" ng-click="logout_clicked = true" class="lowercase">
+					<ng-md-icon icon="logout" aria-label="user"></ng-md-icon> <span hide-sm>Keluar</span>
+				</md-button>
 					<span ng-if="logout_clicked == true">
 						<span ng-controller="LogoutCtrl">
 							{$ reset_logout_clicked() $}
 						</span>
 					</span>
-				<a href="javascript:void(0)" ng-hide="authenticated" class="md-body-2" ng-click="showLogin($event)" style="margin-right: 8px">
+				<md-button href="javascript:void(0)" ng-hide="authenticated" ng-click="showLogin($event)" class="lowercase">
 					<ng-md-icon icon="login" aria-label="user"></ng-md-icon> masuk
-				</a>
-				<a href="javascript:void(0)" ng-hide="authenticated" class="md-body-2" ng-click="showRegister($event)">
-					<ng-md-icon icon="account_box" aria-label="user" size="26"></ng-md-icon> daftar
-				</a>
+				</md-button>
+				<md-button href="javascript:void(0)" ng-hide="authenticated" ng-click="showRegister($event)" class="lowercase">
+					<ng-md-icon icon="account_box" aria-label="user"></ng-md-icon> daftar
+				</md-button>
 			</div>
 		</md-toolbar>
 
@@ -116,6 +123,8 @@
 	<script src="{% static 'js/controllers/restricted.js' %}"></script>
 	<script src="{% static 'js/controllers/authrequired.js' %}"></script>
 
+	<!-- 3rd party libs -->
+	<script src="{% static 'js/svg-morpheus.js' %}"></script>
 </div>
 </body>
 

@@ -266,7 +266,7 @@ kompresApp
                         customBackground);
 
   $mdThemingProvider.theme('default')
-    .primaryPalette('red')
+    .primaryPalette('teal')
     .accentPalette('grey')
     .warnPalette('grey');
 });
