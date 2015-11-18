@@ -11,7 +11,7 @@ from kompres2015.util.models import TimeStampedModel
 class Image(TimeStampedModel):
     name = models.TextField()
     image = models.ImageField()
-    tag = models.TextField(null=True)
+    tag = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.name

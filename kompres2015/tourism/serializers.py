@@ -13,6 +13,19 @@ class TravelDestinationSerializer(serializers.HyperlinkedModelSerializer):
     visits = serializers.HyperlinkedRelatedField(view_name='visit-detail',
                                                  read_only=True, many=True)
 
+    def __init__(self, *args, **kwargs):
+        # Instantiate the superclass normally
+        super(TravelDestinationSerializer, self).__init__(*args, **kwargs)
+
+        fields = self.context['request'].query_params.get('fields')
+        if fields:
+            fields = fields.split(',')
+            # Drop any fields that are not specified in the `fields` argument.
+            allowed = set(fields)
+            existing = set(self.fields.keys())
+            for field_name in existing - allowed:
+                self.fields.pop(field_name)
+
     class Meta:
         model = TravelDestination
         fields = ('id', 'name', 'district', 'full_description', 'tagline', 'what_to_do',

@@ -73,6 +73,7 @@ kompresControllers.controller('NavCtrl', ['$scope', '$route', '$mdDialog',
         $scope.closeDialog = function() {
             $mdDialog.hide();
         };
+        $scope.authenticated = true;
         $scope.$on('djangoAuth.logged_in', function() {
           $scope.authenticated = true;
         });

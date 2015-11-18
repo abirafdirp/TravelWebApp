@@ -5,6 +5,7 @@ from kompres2015.image.models import Image
 from kompres2015.image.models import TravelDestinationMainImage
 from kompres2015.image.models import TravelDestinationWhatToDoImage
 from kompres2015.image.models import TravelDestinationGalleryImage
+from kompres2015.image.models import ArticleMainImage
 
 
 class ReportImageAdmin(admin.ModelAdmin):
@@ -27,9 +28,13 @@ class TravelDestinationGalleryImageAdmin(admin.ModelAdmin):
     pass
 
 
+class ArticleMainImageAdmin(admin.ModelAdmin):
+    pass
+
 admin.site.register(Image, ImageAdmin)
 admin.site.register(ReportImage, ReportImageAdmin)
 admin.site.register(TravelDestinationMainImage, TravelDestinationMainImageAdmin)
 admin.site.register(TravelDestinationWhatToDoImage, TravelDestinationWhatToDoImageAdmin)
 admin.site.register(TravelDestinationGalleryImage, TravelDestinationGalleryImageAdmin)
+admin.site.register(ArticleMainImage, ArticleMainImageAdmin)
 
