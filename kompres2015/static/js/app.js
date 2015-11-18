@@ -265,8 +265,8 @@ kompresApp
         .definePalette('customBackground',
                         customBackground);
 
-  $mdThemingProvider.theme('navbar-theme')
-    .primaryPalette('customPrimary')
-    .accentPalette('customAccent')
-    .warnPalette('customWarn');
+  $mdThemingProvider.theme('default')
+    .primaryPalette('red')
+    .accentPalette('grey')
+    .warnPalette('grey');
 });

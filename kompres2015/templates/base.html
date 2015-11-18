@@ -29,42 +29,38 @@
 <div ng-controller="NavCtrl" layout="column">
 	<div layout="row" layout-fill>
 
-		<md-toolbar>
-
-			<span flex layout="row" layout-align="center start">
+		<md-toolbar class="md-primary md-hue-2">
+			<div class="md-toolbar-tools">
+				<h2>
+					<span>Travel Indonesia</span>
+				</h2>
+				<span flex></span>
 				<md-button class="main-nav left green-btn" href="/">Visit Indonesia</md-button>
 				<md-button class="main-nav middle purple-btn" href="/lokasi-wisata">Lokasi Wisata</md-button>
 				<md-button class="main-nav middle blue-btn" href="/artikel">Artikel</md-button>
 				<md-button class="main-nav middle yellow-btn">Peta</md-button>
 				<md-button class="main-nav right light-blue-btn">Info dan Kontak</md-button>
-			</span>
 
-			<span flex layout="row" layout-align="center center">
+				<span flex></span>
 
-				<span ng-show="authenticated">
-					<md-button class="md-accent md-raised" ng-click="showProfile($event)">
-						Profil
-					</md-button>
-					<md-button class="md-accent md-raised" ng-click="logout_clicked = true">
-						Keluar
-					</md-button>
-						<span ng-if="logout_clicked == true">
-							<span ng-controller="LogoutCtrl">
-								{$ reset_logout_clicked() $}
-							</span>
+				<a href="javascript:void(0)" ng-show="authenticated" class="md-body-2" ng-click="showProfile($event)" style="margin-right: 8px">
+					<ng-md-icon icon="account_box" aria-label="user"></ng-md-icon> profil
+				</a>
+				<a href="javascript:void(0)" ng-show="authenticated" class="md-body-2" ng-click="logout_clicked = true">
+					<ng-md-icon icon="logout" aria-label="user" size="26"></ng-md-icon> keluar
+				</a>
+					<span ng-if="logout_clicked == true">
+						<span ng-controller="LogoutCtrl">
+							{$ reset_logout_clicked() $}
 						</span>
-				</span>
-
-				<span ng-hide="authenticated" class="user-nav" layout="row" layout-align="center center">
-					<md-button class="md-primary md-raised" ng-click="showLogin($event)">
-						masuk
-					</md-button>
-					<md-button class="md-accent md-raised" ng-click="showRegister($event)">
-						Daftar
-					</md-button>
-				</span>
-
-			</span>
+					</span>
+				<a href="javascript:void(0)" ng-hide="authenticated" class="md-body-2" ng-click="showLogin($event)" style="margin-right: 8px">
+					<ng-md-icon icon="login" aria-label="user"></ng-md-icon> masuk
+				</a>
+				<a href="javascript:void(0)" ng-hide="authenticated" class="md-body-2" ng-click="showRegister($event)">
+					<ng-md-icon icon="account_box" aria-label="user" size="26"></ng-md-icon> daftar
+				</a>
+			</div>
 		</md-toolbar>
 
 	</div>

@@ -106,3 +106,8 @@ body {
 [ng\:cloak], [ng-cloak], .ng-cloak {
   display: none !important;
 }
+
+md-toolbar .a {
+    text-transform: none;
+    text-decoration: none;
+}
