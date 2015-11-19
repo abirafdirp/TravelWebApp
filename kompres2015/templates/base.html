@@ -50,10 +50,10 @@
 
 				<span flex></span>
 
-				<md-button href="javascript:void(0)" ng-show="authenticated" ng-click="showProfile($event)" class="lowercase">
+				<md-button ng-show="authenticated" ng-click="showProfile($event)" class="lowercase">
 						<ng-md-icon icon="account_box" aria-label="user"></ng-md-icon> <span hide-sm>Profil</span>
 				</md-button>
-				<md-button href="javascript:void(0)" ng-show="authenticated" ng-click="logout_clicked = true" class="lowercase">
+				<md-button ng-show="authenticated" ng-click="logout_clicked = true" class="lowercase">
 					<ng-md-icon icon="logout" aria-label="user"></ng-md-icon> <span hide-sm>Keluar</span>
 				</md-button>
 					<span ng-if="logout_clicked == true">
@@ -61,10 +61,10 @@
 							{$ reset_logout_clicked() $}
 						</span>
 					</span>
-				<md-button href="javascript:void(0)" ng-hide="authenticated" ng-click="showLogin($event)" class="lowercase">
+				<md-button ng-hide="authenticated" ng-click="showLogin($event)" class="lowercase">
 					<ng-md-icon icon="login" aria-label="user"></ng-md-icon> Masuk
 				</md-button>
-				<md-button href="javascript:void(0)" ng-hide="authenticated" ng-click="showRegister($event)" class="lowercase">
+				<md-button ng-hide="authenticated" ng-click="showRegister($event)" class="lowercase">
 					<ng-md-icon icon="account_box" aria-label="user"></ng-md-icon> Daftar
 				</md-button>
 			</div>

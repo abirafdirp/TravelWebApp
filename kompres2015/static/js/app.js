@@ -121,6 +121,7 @@ var kompresApp = angular.module('kompres', [
   'ngRoute',
   'kompresControllers',
   'kompresServices',
+  'ngResource',
   'hateoas',
   'angularDjangoRegistrationAuthApp',
   'ngAnimate',
@@ -131,7 +132,7 @@ var kompresApp = angular.module('kompres', [
 ]);
 
 // hateoas enabler
-kompresApp.config(function (HateoasInterceptorProvider, HateoasInterfaceProvider) {
+kompresApp.config(function (HateoasInterceptorProvider) {
     HateoasInterceptorProvider.transformAllResponses();
 });
 

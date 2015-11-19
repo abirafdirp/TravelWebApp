@@ -137,19 +137,23 @@ kompresControllers.controller('TravelDestinationsCtrl', ['$scope', '$route', '$r
   }
 ]);
 
-kompresControllers.controller('ArticlesCtrl', ['$scope', '$route', '$routeParams', 'Articles',
-  function($scope, $route, $routeParams, Articles) {
+kompresControllers.controller('ArticlesCtrl', ['$scope', '$route', '$routeParams', 'Articles', 'HateoasInterface',
+  function($scope, $route, $routeParams, Articles, HateoasInterface) {
     $scope.$route = $route;
     $scope.params = $routeParams;
-    $scope.article_name = $scope.params.article_name;
-    $scope.article_name = $scope.article_name.replace(/-/g,' ');
 
-    if (typeof $scope.article_name == 'undefined'){
+    if (typeof $scope.params.article_name == 'undefined'){
       $scope.articles = Articles.list.query();
     }
     else {
+      $scope.article_name = $scope.params.article_name.replace(/-/g,' ');
       $scope.article = Articles.detail.query({article_name:$scope.article_name});
-      $scope.main_image = $scope.article.resource('main_image').get();
+      $scope.article.$promise.then(function() {
+        //console.log($scope.article.results[0].main_image);
+        var article = new HateoasInterface($scope.article.results[0]);
+        console.log(article.resource("main_image"));
+        //$scope.article.results[0].resource('main_image').get();
+      });
     }
   }
 ]);
