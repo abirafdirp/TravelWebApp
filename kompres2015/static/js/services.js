@@ -105,7 +105,7 @@ kompresServices.factory('Images', ['$resource',
 kompresServices.factory('ArticleMainImages', ['$resource',
   function($resource){
     return $resource('/api/articlemainimages/?format=json', {}, {
-      query: {method:'GET'}
+      query: {method:'GET', isArray: true}
     })
   }
 ]);

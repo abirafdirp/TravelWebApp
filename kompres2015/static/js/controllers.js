@@ -137,10 +137,11 @@ kompresControllers.controller('TravelDestinationsCtrl', ['$scope', '$route', '$r
   }
 ]);
 
-kompresControllers.controller('ArticlesCtrl', ['$scope', '$route', '$routeParams', '$resource', 'Articles', 'HateoasInterface',
-  function($scope, $route, $routeParams, $resource,  Articles) {
+kompresControllers.controller('ArticlesCtrl', ['$scope', '$route', '$routeParams', '$resource', '$q', 'Articles',
+  function($scope, $route, $routeParams, $resource, $q, Articles) {
     $scope.$route = $route;
     $scope.params = $routeParams;
+    $scope.currentURL = null;
 
     if (typeof $scope.params.article_name == 'undefined'){
       $scope.articles = Articles.list.query();
@@ -149,7 +150,7 @@ kompresControllers.controller('ArticlesCtrl', ['$scope', '$route', '$routeParams
       $scope.article_name = $scope.params.article_name.replace(/-/g,' ');
       $scope.article = Articles.detail.query({article_name:$scope.article_name});
       $scope.article.$promise.then(function() {
-        console.log($scope.article.results[0].main_image+'?format=json');
+        console.log($scope.article.results[0]);
         var url = $scope.article.results[0].main_image+'?format=json';
         $scope.main_image = $resource(url).get();
       });

@@ -118,3 +118,7 @@ md-toolbar a.md-button {
 .lowercase {
     text-transform: none;
 }
+
+.navbar {
+    position: fixed;
+}
