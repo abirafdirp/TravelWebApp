@@ -122,19 +122,19 @@ var kompresApp = angular.module('kompres', [
   'kompresControllers',
   'kompresServices',
   'ngResource',
-  'hateoas',
   'angularDjangoRegistrationAuthApp',
   'ngAnimate',
   'ngMaterial',
   'offClick',
   'ngMessages',
   'ngMdIcons',
+  'hateoas',
 ]);
 
 // hateoas enabler
 kompresApp.config(function (HateoasInterceptorProvider) {
     HateoasInterceptorProvider.transformAllResponses();
-});
+})
 
 // differentiate angular and django template language
 kompresApp.config(function($interpolateProvider) {
