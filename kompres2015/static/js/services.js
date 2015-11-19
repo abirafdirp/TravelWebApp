@@ -53,7 +53,7 @@ kompresServices.factory('Articles', ['$resource',
       list : $resource('/api/articles/?format=json&fields=title,author,category,short_description,main_image', {}, {
       query: {method: 'GET'}
       }),
-      detail : $resource('/api/articles/?name=:article_name', {
+      detail : $resource('/api/articles/?title=:article_name', {
         article_name:'@article_name'
       }, {
       query: {method: 'GET'}

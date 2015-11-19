@@ -142,12 +142,14 @@ kompresControllers.controller('ArticlesCtrl', ['$scope', '$route', '$routeParams
     $scope.$route = $route;
     $scope.params = $routeParams;
     $scope.article_name = $scope.params.article_name;
+    $scope.article_name = $scope.article_name.replace(/-/g,' ');
 
-    if (!$scope.article_name){
+    if (typeof $scope.article_name == 'undefined'){
       $scope.articles = Articles.list.query();
     }
     else {
-      $scope.article = Articles.detail.query({article_name:$scope.article_name})
+      $scope.article = Articles.detail.query({article_name:$scope.article_name});
+      $scope.main_image = $scope.article.resource('main_image').get();
     }
   }
 ]);
