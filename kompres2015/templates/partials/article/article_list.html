@@ -1,18 +1,21 @@
 
-<md-content ng-cloak class="md-padding article-list animated fadeIn" ng-controller="ArticleListCtrl" layout="row">
-	<div ng-repeat="article in articles.results" ng-controller="ArticleRepeatCtrl" flex="20">
+<md-content ng-cloak class="md-padding article-list animated fadeIn" ng-controller="ArticleListCtrl">
+	<div layout="row">
+		<span flex="20"></span>
+	<div ng-repeat="article in articles.results" ng-controller="ArticleRepeatCtrl" flex="50">
 		<a ng-href="/artikel/{$ slugify(article.title) $}">
-		<md-card>
-			<img ng-src="{$main_image.image$}" class="md-card-image" alt="Washed Out">
-			<md-card-content>
-				<h2 class="md-title">{$$}</h2>
-				<p>
-					The titles of Washed Out's breakthrough song and the first single from Paracosm share the
-					two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
-				</p>
-			</md-card-content>
-		</md-card>
+			<md-card>
+				<img ng-src="{$main_image.image$}" class="md-card-image" alt="Washed Out">
+				<md-card-content>
+					<h2 class="md-title">{$$}</h2>
+					<p>
+						The titles of Washed Out's breakthrough song and the first single from Paracosm share the
+						two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
+					</p>
+				</md-card-content>
+			</md-card>
 		</a>
 		<br/>
+	</div>
 	</div>
 </md-content>

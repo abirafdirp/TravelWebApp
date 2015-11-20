@@ -32,47 +32,47 @@
 				</md-button>
 				<span flex></span>
 				<md-button href="/lokasi-wisata" ng-mouseleave="traveldestination_icon = 'terrain'" ng-mouseenter="traveldestination_icon = 'satellite'" >
-					<md-tooltip md-direction="down"><span class="md-body-2">lokasi wisata</span></md-tooltip>
+					<md-tooltip md-direction="down" class="tooltip"><span class="md-body-2">lokasi wisata</span></md-tooltip>
 					<ng-md-icon icon="{$traveldestination_icon$}" aria-label="article"></ng-md-icon>
 				</md-button>
 				<md-button href="/artikel" ng-mouseleave="article_icon = 'my_library_books'" ng-mouseenter="article_icon = 'format_align_left'">
-					<md-tooltip md-direction="down"><span class="md-body-2">artikel</span></md-tooltip>
+					<md-tooltip md-direction="down" class="tooltip"><span class="md-body-2">artikel</span></md-tooltip>
 					<ng-md-icon icon="{$article_icon$}" aria-label="article"></ng-md-icon>
 				</md-button>
 				<md-button href="/peta" ng-mouseleave="map_icon = 'directions'" ng-mouseenter="map_icon = 'navigation'">
-					<md-tooltip md-direction="down"><span class="md-body-2">peta</span></md-tooltip>
+					<md-tooltip md-direction="down" class="tooltip"><span class="md-body-2">peta</span></md-tooltip>
 					<ng-md-icon icon="{$map_icon$}" aria-label="article"></ng-md-icon>
 				</md-button>
 				<md-button href="/info" ng-mouseleave="info_icon = 'info'" ng-mouseenter="info_icon = 'info_outline'">
-					<md-tooltip md-direction="down"><span class="md-body-2">info dan kontak</span></md-tooltip>
+					<md-tooltip md-direction="down" class="tooltip"><span class="md-body-2">info dan kontak</span></md-tooltip>
 					<ng-md-icon icon="{$info_icon$}" aria-label="article"></ng-md-icon>
 				</md-button>
 
 				<span flex></span>
 
-				<md-button ng-show="authenticated" ng-click="showProfile($event)" class="lowercase">
-						<ng-md-icon icon="account_box" aria-label="user"></ng-md-icon> <span hide-sm>Profil</span>
+				<md-button ng-show="authenticated" ng-click="showProfile($event)" class="lowercase user-nav">
+						<ng-md-icon icon="account_box" size="22" aria-label="user"></ng-md-icon> <span hide-sm>Profil</span>
 				</md-button>
-				<md-button ng-show="authenticated" ng-click="logout_clicked = true" class="lowercase">
-					<ng-md-icon icon="logout" aria-label="user"></ng-md-icon> <span hide-sm>Keluar</span>
+				<md-button ng-show="authenticated" ng-click="logout_clicked = true" class="lowercase user-nav">
+					<ng-md-icon icon="logout" size="22" aria-label="user"></ng-md-icon> <span hide-sm>Keluar</span>
 				</md-button>
 					<span ng-if="logout_clicked == true">
 						<span ng-controller="LogoutCtrl">
 							{$ reset_logout_clicked() $}
 						</span>
 					</span>
-				<md-button ng-hide="authenticated" ng-click="showLogin($event)" class="lowercase">
-					<ng-md-icon icon="login" aria-label="user"></ng-md-icon> Masuk
+				<md-button ng-hide="authenticated" ng-click="showLogin($event)" class="lowercase user-nav">
+					<ng-md-icon icon="login" size="22" aria-label="user"></ng-md-icon> Masuk
 				</md-button>
-				<md-button ng-hide="authenticated" ng-click="showRegister($event)" class="lowercase">
-					<ng-md-icon icon="account_box" aria-label="user"></ng-md-icon> Daftar
+				<md-button ng-hide="authenticated" ng-click="showRegister($event)" class="lowercase user-nav`">
+					<ng-md-icon icon="account_box" size="22" aria-label="user"></ng-md-icon> Daftar
 				</md-button>
 			</div>
 		</md-toolbar>
 
 	</div>
 
-	<md-content>
+	<md-content layout-margin>
 		<main ng-view></main>
 	</md-content>
 

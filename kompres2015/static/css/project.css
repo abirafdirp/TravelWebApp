@@ -115,6 +115,14 @@ md-toolbar a.md-button {
     margin: 0 0 0 0;
 }
 
+.user-nav{
+    margin: 0 0 0 0;
+}
+
+.tooltip{
+    margin-top: 10px;
+}
+
 .lowercase {
     text-transform: none;
 }
@@ -125,4 +133,8 @@ md-toolbar a.md-button {
 
 .article-list {
     margin-top: 100px;
+}
+
+md-button {
+    vertical-align: middle;
 }
