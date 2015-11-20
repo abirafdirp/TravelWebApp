@@ -137,24 +137,39 @@ kompresControllers.controller('TravelDestinationsCtrl', ['$scope', '$route', '$r
   }
 ]);
 
-kompresControllers.controller('ArticlesCtrl', ['$scope', '$route', '$routeParams', '$resource', '$q', 'Articles',
-  function($scope, $route, $routeParams, $resource, $q, Articles) {
+kompresControllers.controller('ArticleListCtrl', ['$scope', '$route', '$routeParams', '$resource', 'Articles',
+  function($scope, $route, $routeParams, $resource, Articles) {
     $scope.$route = $route;
     $scope.params = $routeParams;
-    $scope.currentURL = null;
 
-    if (typeof $scope.params.article_name == 'undefined'){
-      $scope.articles = Articles.list.query();
-    }
-    else {
-      $scope.article_name = $scope.params.article_name.replace(/-/g,' ');
-      $scope.article = Articles.detail.query({article_name:$scope.article_name});
-      $scope.article.$promise.then(function() {
-        console.log($scope.article.results[0]);
-        var url = $scope.article.results[0].main_image+'?format=json';
-        $scope.main_image = $resource(url).get();
-      });
-    }
+    $scope.articles = Articles.list.query();
+  }
+]);
+
+kompresControllers.controller('ArticleDetailCtrl', ['$scope', '$route', '$routeParams', '$resource', 'Articles',
+  function($scope, $route, $routeParams, $resource, Articles) {
+    $scope.$route = $route;
+    $scope.params = $routeParams;
+    $scope.article_name = $scope.params.article_name.replace(/-/g,' ');
+    $scope.article = Articles.detail.query({article_name:$scope.article_name});
+    $scope.article.$promise.then(function() {
+      var url = $scope.article.results[0].main_image+'?format=json';
+      $scope.main_image = $resource(url).get();
+    });
+  }
+]);
+
+kompresControllers.controller('ArticleRepeatCtrl', ['$scope', '$resource', '$exceptionHandler',
+  function($scope, $resource, $exceptionHandler) {
+    var init = function() {
+      if (typeof $scope.article === "undefined") {
+        $exceptionHandler("The ArticleRepeatController must be initialized with a article in scope");
+      }
+      $scope.articleInRepeat = $scope.article;
+      $scope.main_image = $resource($scope.articleInRepeat.main_image).get();
+    };
+
+    init();
   }
 ]);
 

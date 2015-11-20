@@ -128,8 +128,6 @@ var kompresApp = angular.module('kompres', [
   'offClick',
   'ngMessages',
   'ngMdIcons',
-  'hateoasDrfService',
-  'traverson',
 ]);
 
 // differentiate angular and django template language
@@ -185,4 +183,10 @@ kompresApp.config(function($mdThemingProvider) {
     .primaryPalette('teal')
     .accentPalette('grey')
     .warnPalette('grey');
+});
+
+kompresApp.run(function($rootScope) {
+  $rootScope.slugify = function (name) {
+    return name.replace(/ /g,'-').toLowerCase()
+  }
 });

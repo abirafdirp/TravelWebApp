@@ -1,8 +1,9 @@
 
-<md-content class="md-padding" ng-controller="ArticlesCtrl">
-	<div ng-repeat="article in articles.results">
+<md-content ng-cloak class="md-padding article-list animated fadeIn" ng-controller="ArticleListCtrl" layout="row">
+	<div ng-repeat="article in articles.results" ng-controller="ArticleRepeatCtrl" flex="20">
+		<a ng-href="/artikel/{$ slugify(article.title) $}">
 		<md-card>
-			<img ng-src="{$ $}" class="md-card-image" alt="Washed Out">
+			<img ng-src="{$main_image.image$}" class="md-card-image" alt="Washed Out">
 			<md-card-content>
 				<h2 class="md-title">{$$}</h2>
 				<p>
@@ -10,11 +11,8 @@
 					two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
 				</p>
 			</md-card-content>
-			<md-card-actions layout="row" layout-align="end center">
-				<md-button>Action 1</md-button>
-				<md-button>Action 2</md-button>
-			</md-card-actions>
 		</md-card>
+		</a>
 		<br/>
 	</div>
 </md-content>
