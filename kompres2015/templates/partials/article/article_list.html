@@ -1,21 +1,44 @@
 
 <md-content ng-cloak class="md-padding article-list animated fadeIn" ng-controller="ArticleListCtrl">
-	<div layout="row">
-		<span flex="20"></span>
-	<div ng-repeat="article in articles.results" ng-controller="ArticleRepeatCtrl" flex="50">
-		<a ng-href="/artikel/{$ slugify(article.title) $}">
-			<md-card>
-				<img ng-src="{$main_image.image$}" class="md-card-image" alt="Washed Out">
-				<md-card-content>
-					<h2 class="md-title">{$$}</h2>
-					<p>
-						The titles of Washed Out's breakthrough song and the first single from Paracosm share the
-						two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
-					</p>
-				</md-card-content>
-			</md-card>
-		</a>
-		<br/>
+
+	<div layout="row" layout-no-wrap>
+		<div flex="20" flex-sm="0" layout-padding layout="row" layout-sm="column">
+			<form class="form-wrapper cf">
+				<input type="text" placeholder="Search here..." required>
+				<button type="submit">Search</button>
+			</form>
+    </md-input-container>
+		</div>
+
+		<div layout="row" layout-wrap flex="80" flex-sm="100">
+			<div ng-repeat="article in articles.results | filter: search" ng-controller="ArticleRepeatCtrl" flex="33" flex-sm="100" flex-md="50">
+
+				<md-card>
+					<a ng-href="/artikel/{$ slugify(article.title) $}">
+						<span class="md-title article-list-title">{$ article.title $}</span>
+						<div class="article-image"><img ng-src="{$main_image.image$}" class="md-card-image" alt="Washed Out"></div>
+
+					</a>
+					<md-card-content>
+						<span class="md-body-2" layout="row" layout-wrap>
+							<span flex="100" flex-gt-lg="70">
+								<ng-md-icon icon="access_time" size="20" aria-label="tanggal"></ng-md-icon>
+								{$ article.created_date | date:'d  MMMM  yyyy' $}
+							</span>
+							<span flex="100" flex-gt-lg="30">
+								<ng-md-icon icon="sort" size="20" aria-label="tanggal"></ng-md-icon>
+								<a href="/"> {$ article.category $}</a>
+							</span>
+						</span>
+						<p class="md-body-1">
+							{$ article_short_description $}
+						</p>
+					</md-card-content>
+				</md-card>
+				<br/>
+			</div>
+		</div>
+
 	</div>
-	</div>
+
 </md-content>

@@ -166,6 +166,12 @@ kompresControllers.controller('ArticleRepeatCtrl', ['$scope', '$resource', '$exc
         $exceptionHandler("The ArticleRepeatController must be initialized with a article in scope");
       }
       $scope.articleInRepeat = $scope.article;
+      if($scope.article.short_description.length > 90){
+        $scope.article_short_description = $scope.article.short_description.substring(0,90) + ' ...';
+      }
+      else{
+        $scope.article_short_description = $scope.article.short_description;
+      }
       $scope.main_image = $resource($scope.articleInRepeat.main_image).get();
     };
 

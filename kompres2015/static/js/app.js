@@ -128,6 +128,7 @@ var kompresApp = angular.module('kompres', [
   'offClick',
   'ngMessages',
   'ngMdIcons',
+  'ngLocale',
 ]);
 
 // differentiate angular and django template language

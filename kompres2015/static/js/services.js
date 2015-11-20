@@ -50,7 +50,7 @@ kompresServices.factory('TravelDestinations', ['$resource',
 kompresServices.factory('Articles', ['$resource',
   function($resource) {
     return {
-      list : $resource('/api/articles/?format=json&fields=title,author,category,short_description,main_image', {}, {
+      list : $resource('/api/articles/?format=json&fields=title,author,category,short_description,main_image,created_date', {}, {
       query: {method: 'GET'}
       }),
       detail : $resource('/api/articles/?title=:article_name', {
