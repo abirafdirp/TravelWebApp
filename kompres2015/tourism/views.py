@@ -12,6 +12,7 @@ from kompres2015.tourism.serializers import TravelDestinationContentSerializer
 
 from kompres2015.util.views import CreateListViewSet
 
+
 class TravelDestinationViewSet(viewsets.ReadOnlyModelViewSet):
     filter_fields = ('name',)
     serializer_class = TravelDestinationSerializer

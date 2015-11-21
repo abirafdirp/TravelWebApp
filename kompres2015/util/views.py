@@ -29,5 +29,5 @@ def api_root(request, format=None):
         'travel destination gallery images': reverse('travel-destination-gallery-image-list', request=request, format=format),
         'page': reverse('page-list', request=request, format=format),
         'articles': reverse('article-list', request=request, format=None),
-        'travel destination contents': reverse('travel-destination-list', request=request, format=None),
+        'travel destination contents': reverse('travel-destination-content-list', request=request, format=None),
     })
