@@ -129,6 +129,7 @@ var kompresApp = angular.module('kompres', [
   'ngMessages',
   'ngMdIcons',
   'ngLocale',
+  'ngSanitize',
 ]);
 
 // differentiate angular and django template language
@@ -187,10 +188,10 @@ kompresApp.config(function($mdThemingProvider) {
 });
 
 kompresApp.config(function($mdThemingProvider) {
-  $mdThemingProvider.theme('categories')
-    .primaryPalette('blue')
-    .accentPalette('grey')
-    .warnPalette('blue-grey');
+  $mdThemingProvider.theme('article')
+    .primaryPalette('blue-grey')
+    .accentPalette('teal')
+    .warnPalette('red');
 });
 
 kompresApp.run(function($rootScope) {

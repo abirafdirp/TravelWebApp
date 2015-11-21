@@ -1,12 +1,18 @@
 <div ng-controller="PageCtrl" hide-sm hide-md>
-	<div class="article-list-image-container">
-		<img id="article-list-image" ng-src="{$ page.results[0].article_list_image $}">
-	</div>
-
-	<div layout="column" class="article-list-heading" layout-align="center center">
+	<div class="faux-image-container">
+		<img id="faux-image" ng-src="{$ page.results[0].article_list_image $}">
 		<h3 class="md-display-1 article-title" flex>{$ page.results[0].article_list_tagline $}</h3>
 	</div>
 </div>
+
+<div ng-class="{'search-area': search == true, 'search-not-activated': search == false}">
+</div>
+
+<a ng-class="{'search-btn-disabled': search == true, 'search-btn material-teal': search == false}" ng-click="search = true" flex flex-offset="5">
+	<ng-md-icon icon="search" aria-label="article" style="fill: white"></ng-md-icon>
+</a>
+
+<div hide-gt-md style="margin-top: 70px;"></div>
 
 <div layout="column" flex="100" layout-align="center center" ng-show="show_loading == true">
 	<md-progress-circular md-mode="indeterminate"></md-progress-circular>
@@ -15,20 +21,7 @@
 
 <md-content ng-cloak class="md-padding article-list animated fadeIn" ng-controller="ArticleListCtrl" ng-show="show_loading == false">
 	<div layout="row" layout-no-wrap>
-		<div flex="25" hide-sm hide-md layout-padding layout="column" layout-sm="column" id="article-left-nav">
-			<!--<md-content id="category-search-box">-->
-			<!--<div layout="left center">-->
-
-			<!--<ng-md-icon icon="search" size="22" aria-label="user"></ng-md-icon>-->
-			<!--<md-input-container md-no-float flex="grow">-->
-			<!--<input ng-model="search" type="text" placeholder=" Cari artikel">-->
-			<!--</md-input-container>-->
-
-
-
-
-			<!--</div>-->
-			<!--</md-content>-->
+		<div flex="20" hide-sm hide-md layout-padding layout="column" layout-sm="column" id="article-left-nav">
 			<md-toolbar class="md-primary">
 				<div class="md-toolbar-tools">
 					<h2 class="md-flex md-display-2">KATEGORI</h2>
@@ -59,7 +52,7 @@
 			</md-toolbar>
 		</div>
 
-		<div layout="row" layout-wrap flex="75" flex-sm="100" flex-md="100">
+		<div layout="row" layout-wrap flex="80" flex-sm="100" flex-md="100">
 			<div ng-repeat="article in articles.results | filter: search" ng-controller="ArticleRepeatCtrl" flex="33" flex-sm="100" flex-md="50">
 
 				<md-card id="posts">
@@ -70,13 +63,13 @@
 					</a>
 					<md-card-content>
 						<span class="md-body-2" layout="row" layout-wrap>
-							<span flex="100" flex-gt-lg="70">
+							<span flex="100" flex-gt-lg="60">
 								<ng-md-icon icon="access_time" size="20" aria-label="tanggal"></ng-md-icon>
 								{$ article.created_date | date:'d  MMMM  yyyy' $}
 							</span>
-							<span flex="100" flex-gt-lg="30">
+							<span flex="100" flex-gt-lg="40">
 								<ng-md-icon icon="sort" size="20" aria-label="tanggal"></ng-md-icon>
-								<a href="/"> {$ article.category $}</a>
+								<a href="/artikel/?search=info"> {$ article.category $}</a>
 							</span>
 						</span>
 						<p class="md-body-1">

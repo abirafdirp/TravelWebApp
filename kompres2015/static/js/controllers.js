@@ -167,7 +167,7 @@ kompresControllers.controller('ArticleListCtrl', ['$scope', '$route', '$routePar
     $scope.articles = Articles.list.query();
     $scope.articles.$promise.then(function() {
       $timeout(function(){
-        console.log($scope.show_loading = false);
+        $scope.show_loading = false;
       });
     })
   }
@@ -193,8 +193,8 @@ kompresControllers.controller('ArticleRepeatCtrl', ['$scope', '$resource', '$exc
         $exceptionHandler("The ArticleRepeatController must be initialized with a article in scope");
       }
       $scope.articleInRepeat = $scope.article;
-      if($scope.article.short_description.length > 90){
-        $scope.article_short_description = $scope.article.short_description.substring(0,90) + ' ...';
+      if($scope.article.short_description.length > 180){
+        $scope.article_short_description = $scope.article.short_description.substring(0,180) + ' ...';
       }
       else{
         $scope.article_short_description = $scope.article.short_description;
