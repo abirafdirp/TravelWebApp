@@ -278,11 +278,11 @@ md-button {
     padding: 7px 12px 7px 12px;
 }
 
-md-card{
+#posts{
     position: relative;
 }
 
-md-card:hover{
+#posts:hover{
     -webkit-box-shadow: 0px 0px 17px 4px rgba(179,179,179,1);
     -moz-box-shadow: 0px 0px 17px 4px rgba(179,179,179,1);
     box-shadow: 0px 0px 17px 4px rgba(179,179,179,1);
@@ -297,4 +297,12 @@ a {
     min-height: 120px;
     max-height: 120px;
     overflow: hidden;
+}
+
+#article-left-nav {
+    -webkit-box-shadow: 0px 0px 22px -5px rgba(179,179,179,1);
+-moz-box-shadow: 0px 0px 22px -5px rgba(179,179,179,1);
+box-shadow: 0px 0px 22px -5px rgba(179,179,179,1);
+    padding: 0;
+    margin: 8px;
 }

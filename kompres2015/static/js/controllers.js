@@ -137,10 +137,12 @@ kompresControllers.controller('TravelDestinationsCtrl', ['$scope', '$route', '$r
   }
 ]);
 
-kompresControllers.controller('ArticleListCtrl', ['$scope', '$route', '$routeParams', '$resource', 'Articles',
-  function($scope, $route, $routeParams, $resource, Articles) {
+kompresControllers.controller('ArticleListCtrl', ['$scope', '$route', '$routeParams', '$resource', 'Articles', 'PostCategory',
+  function($scope, $route, $routeParams, $resource, Articles, PostCategory) {
     $scope.$route = $route;
     $scope.params = $routeParams;
+    $scope.categories = PostCategory.getCategories();
+    $scope.search = $scope.params.search;
 
     $scope.articles = Articles.list.query();
   }
@@ -159,8 +161,8 @@ kompresControllers.controller('ArticleDetailCtrl', ['$scope', '$route', '$routeP
   }
 ]);
 
-kompresControllers.controller('ArticleRepeatCtrl', ['$scope', '$resource', '$exceptionHandler',
-  function($scope, $resource, $exceptionHandler) {
+kompresControllers.controller('ArticleRepeatCtrl', ['$scope', '$resource', '$exceptionHandler', 'PostCategory',
+  function($scope, $resource, $exceptionHandler, PostCategory) {
     var init = function() {
       if (typeof $scope.article === "undefined") {
         $exceptionHandler("The ArticleRepeatController must be initialized with a article in scope");
@@ -172,6 +174,7 @@ kompresControllers.controller('ArticleRepeatCtrl', ['$scope', '$resource', '$exc
       else{
         $scope.article_short_description = $scope.article.short_description;
       }
+      PostCategory.addCategory($scope.article.category);
       $scope.main_image = $resource($scope.articleInRepeat.main_image).get();
     };
 

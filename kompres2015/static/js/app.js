@@ -182,12 +182,20 @@ kompresApp.config(['$httpProvider',
 kompresApp.config(function($mdThemingProvider) {
   $mdThemingProvider.theme('default')
     .primaryPalette('teal')
-    .accentPalette('grey')
-    .warnPalette('grey');
+    .accentPalette('red')
+    .warnPalette('blue-grey');
 });
 
 kompresApp.run(function($rootScope) {
   $rootScope.slugify = function (name) {
     return name.replace(/ /g,'-').toLowerCase()
-  }
+  };
+  $rootScope.arrayContains = function(a, obj) {
+    for (var i = 0; i < a.length; i++) {
+      if (a[i] === obj) {
+        return true;
+      }
+    }
+    return false;
+  };
 });

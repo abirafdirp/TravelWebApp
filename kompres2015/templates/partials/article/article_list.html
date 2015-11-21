@@ -2,18 +2,46 @@
 <md-content ng-cloak class="md-padding article-list animated fadeIn" ng-controller="ArticleListCtrl">
 
 	<div layout="row" layout-no-wrap>
-		<div flex="20" flex-sm="0" layout-padding layout="row" layout-sm="column">
-			<form class="form-wrapper cf">
-				<input type="text" placeholder="Search here..." required>
-				<button type="submit">Search</button>
-			</form>
-    </md-input-container>
+		<div flex="25" hide-sm hide-md layout-padding layout="column" layout-sm="column" id="article-left-nav">
+			<md-toolbar class="md-accent">
+				<div class="md-toolbar-tools">
+					<h2 class="md-flex">Artikel</h2>
+				</div>
+			</md-toolbar>
+			<md-content>
+				<md-list>
+					<md-list-item class="md-2-line">
+						<div class="md-list-item-text">
+							<md-input-container class="md-icon-float md-block0" md-no-float>
+								<input ng-model="search" type="text" placeholder="cari">
+							</md-input-container>
+						</div>
+						<md-divider></md-divider>
+					</md-list-item>
+				</md-list>
+				</md-content>
+			<md-toolbar class="md-warn">
+				<div class="md-toolbar-tools">
+					<h2 class="md-flex">Kategori</h2>
+				</div>
+			</md-toolbar>
+			<md-content>
+				<md-list>
+					<md-list-item class="md-2-line">
+						<div class="md-list-item-text">
+								<a href="/artikel"> semua </a>
+								<div ng-repeat="category in categories"><a href="/artikel/?search={$category$}"> {$ category $} </a></div>
+						</div>
+						<md-divider></md-divider>
+					</md-list-item>
+				</md-list>
+				</md-content>
 		</div>
 
-		<div layout="row" layout-wrap flex="80" flex-sm="100">
+		<div layout="row" layout-wrap flex="75" flex-sm="100" flex-md="100">
 			<div ng-repeat="article in articles.results | filter: search" ng-controller="ArticleRepeatCtrl" flex="33" flex-sm="100" flex-md="50">
 
-				<md-card>
+				<md-card id="posts">
 					<a ng-href="/artikel/{$ slugify(article.title) $}">
 						<span class="md-title article-list-title">{$ article.title $}</span>
 						<div class="article-image"><img ng-src="{$main_image.image$}" class="md-card-image" alt="Washed Out"></div>

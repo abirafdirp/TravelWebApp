@@ -1,5 +1,19 @@
 var kompresServices = angular.module('kompresServices', ['ngResource']);
 
+kompresServices.service('PostCategory', ['$rootScope',
+  function($rootScope) {
+    this.categories = [];
+    this.addCategory = function(category) {
+      if (!$rootScope.arrayContains(this.categories, category)){
+        this.categories.push(String(category));
+      }
+    };
+    this.getCategories = function(){
+      return this.categories;
+    }
+  }
+]);
+
 kompresServices.factory('HomePage', ['$resource',
   function($resource){
     return $resource('/api/homepages/?format=json', {}, {
