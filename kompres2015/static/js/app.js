@@ -183,7 +183,14 @@ kompresApp.config(function($mdThemingProvider) {
   $mdThemingProvider.theme('default')
     .primaryPalette('teal')
     .accentPalette('red')
-    .warnPalette('deep-orange');
+    .warnPalette('pink');
+});
+
+kompresApp.config(function($mdThemingProvider) {
+  $mdThemingProvider.theme('categories')
+    .primaryPalette('blue')
+    .accentPalette('grey')
+    .warnPalette('blue-grey');
 });
 
 kompresApp.run(function($rootScope) {

@@ -30,7 +30,7 @@ from kompres2015.image.views import TravelDestinationWhatToDoImageViewSet
 from kompres2015.image.views import TravelDestinationGalleryImageViewSet
 from kompres2015.image.views import ArticleMainImageViewSet
 
-from kompres2015.pages.views import HomePageViewSet
+from kompres2015.pages.views import PageViewSet
 from kompres2015.pages.views import FeaturedTravelDestinationViewSet
 
 from kompres2015.authentication.views import FacebookLogin
@@ -167,10 +167,10 @@ travel_destination_gallery_image_list = TravelDestinationGalleryImageViewSet.as_
 travel_destination_gallery_image_detail = TravelDestinationGalleryImageViewSet.as_view({
     'get': 'retrieve',
 })
-home_page_list = HomePageViewSet.as_view({
+page_list = PageViewSet.as_view({
     'get': 'list',
 })
-home_page_detail = HomePageViewSet.as_view({
+page_detail = PageViewSet.as_view({
     'get': 'retrieve',
 })
 featured_travel_destination_list = FeaturedTravelDestinationViewSet.as_view({
@@ -215,8 +215,8 @@ urlpatterns += format_suffix_patterns([
     url(r'^api/traveldestinationwhattodoimages/(?P<pk>[0-9]+)/$', travel_destination_what_to_do_image_detail, name='travel-destination-what-to-do-image-detail'),
     url(r'^api/traveldestinationgalleryimages/$', travel_destination_gallery_image_list, name='travel-destination-gallery-image-list'),
     url(r'^api/traveldestinationgalleryimages/(?P<pk>[0-9]+)/$', travel_destination_gallery_image_detail, name='travel-destination-gallery-image-detail'),
-    url(r'^api/homepages/$', home_page_list, name='home-page-list'),
-    url(r'^api/homepages/(?P<pk>[0-9]+)/$', home_page_detail, name='home-page-detail'),
+    url(r'^api/pages/$', page_list, name='page-list'),
+    url(r'^api/pages/(?P<pk>[0-9]+)/$', page_detail, name='page-detail'),
     url(r'^api/featuredtraveldestinations/$', featured_travel_destination_list, name='featured-travel-destination-list'),
     url(r'^api/featuredtraveldestinations/(?P<pk>[0-9]+)/$', featured_travel_destination_detail, name='featured-travel-destination-detail'),
     url(r'^api/articles/$', article_list, name='article-list'),

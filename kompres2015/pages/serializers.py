@@ -1,16 +1,16 @@
 from rest_framework import serializers
 
 from kompres2015.pages.models import FeaturedTravelDestination
-from kompres2015.pages.models import HomePage
+from kompres2015.pages.models import Page
 
 
-class HomePageSerializer(serializers.ModelSerializer):
+class PageSerializer(serializers.ModelSerializer):
     featureds = serializers.HyperlinkedRelatedField(view_name='featured-travel-destination-detail',
                                                     read_only=True, many=True)
 
     class Meta:
-        model = HomePage
-        fields = ('id', 'video', 'featureds', 'image')
+        model = Page
+        fields = ('id', 'video', 'featureds', 'image', 'article_list_image', 'article_list_tagline')
 
 
 class FeaturedTravelDestinationSerializer(serializers.ModelSerializer):

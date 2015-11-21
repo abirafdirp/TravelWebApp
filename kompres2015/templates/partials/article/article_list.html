@@ -1,37 +1,65 @@
-
-<md-content ng-cloak class="md-padding article-list animated fadeIn" ng-controller="ArticleListCtrl">
-
-	<div flex="25" hide-sm hide-md layout="column" id="article-left-nav">
-		<md-toolbar class="md-accent">
-			<div class="md-toolbar-tools">
-				<h3 class="md-flex">Artikel</h3>
-			</div>
-		</md-toolbar>
-		<md-content>
-			<md-list>
-				<md-list-item class="md-2-line">
-					<div class="md-list-item-text">
-						<md-input-container class="md-icon-float md-block0" md-no-float>
-							<input ng-model="search" type="text" placeholder="cari">
-						</md-input-container>
-					</div>
-					<md-divider></md-divider>
-				</md-list-item>
-			</md-list>
-		</md-content>
-
-		<md-toolbar ng-repeat="category in categories" class="md-warn">
-			<a href="/artikel/?search={$category$}">
-				<div class="md-toolbar-tools">
-					<h2 class="md-flex"> {$ category $}</h2>
-				</div>
-
-			</a>
-		</md-toolbar>
+<div ng-controller="PageCtrl" hide-sm hide-md>
+	<div class="article-list-image-container">
+		<img id="article-list-image" ng-src="{$ page.results[0].article_list_image $}">
 	</div>
 
-	<div flex="75">
-		<div layout="row" layout-wrap>
+	<div layout="column" class="article-list-heading" layout-align="center center">
+		<h3 class="md-display-1 article-title" flex>{$ page.results[0].article_list_tagline $}</h3>
+	</div>
+</div>
+
+<div layout="column" flex="100" layout-align="center center" ng-show="show_loading == true">
+	<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>
+
+
+<md-content ng-cloak class="md-padding article-list animated fadeIn" ng-controller="ArticleListCtrl" ng-show="show_loading == false">
+	<div layout="row" layout-no-wrap>
+		<div flex="25" hide-sm hide-md layout-padding layout="column" layout-sm="column" id="article-left-nav">
+			<!--<md-content id="category-search-box">-->
+			<!--<div layout="left center">-->
+
+			<!--<ng-md-icon icon="search" size="22" aria-label="user"></ng-md-icon>-->
+			<!--<md-input-container md-no-float flex="grow">-->
+			<!--<input ng-model="search" type="text" placeholder=" Cari artikel">-->
+			<!--</md-input-container>-->
+
+
+
+
+			<!--</div>-->
+			<!--</md-content>-->
+			<md-toolbar class="md-primary">
+				<div class="md-toolbar-tools">
+					<h2 class="md-flex md-display-2">KATEGORI</h2>
+				</div>
+			</md-toolbar>
+			<md-toolbar id="posts-categories" class="md-accent" ng-mouseleave="all_category_icon = 'keyboard_arrow_right'" ng-mouseenter="all_category_icon = 'keyboard_tab'">
+				<a href="/artikel">
+					<div class="md-toolbar-tools">
+						<h2 class="md-flex">semua</h2>
+						<span flex></span>
+						<md-button class="md-icon-button" aria-label="Favorite">
+							<ng-md-icon icon="{$all_category_icon$}" size="22" aria-label="user"></ng-md-icon>
+						</md-button>
+					</div>
+				</a>
+			</md-toolbar>
+			<md-toolbar ng-repeat="category in categories" id="posts-categories" class="{$ setColor($index) $}" ng-mouseleave="category_icon = 'keyboard_arrow_right'" ng-mouseenter="category_icon = 'keyboard_tab'">
+				<a href="/artikel/?search={$category$}">
+					<div class="md-toolbar-tools">
+						<h2 class="md-flex">{$ category $}</h2>
+						<span flex></span>
+						<md-button class="md-icon-button" aria-label="Favorite">
+							<ng-md-icon icon="{$category_icon$}" size="22" aria-label="user"></ng-md-icon>
+						</md-button>
+					</div>
+				</a>
+
+			</md-toolbar>
+		</div>
+
+		<div layout="row" layout-wrap flex="75" flex-sm="100" flex-md="100">
 			<div ng-repeat="article in articles.results | filter: search" ng-controller="ArticleRepeatCtrl" flex="33" flex-sm="100" flex-md="50">
 
 				<md-card id="posts">
@@ -59,7 +87,7 @@
 				<br/>
 			</div>
 		</div>
-	</div>
 
+	</div>
 
 </md-content>

@@ -155,3 +155,11 @@ kompresServices.factory('FeaturedTravelDestinations', ['$resource',
     })
   }
 ]);
+
+kompresServices.factory('Page', ['$resource',
+  function($resource){
+    return $resource('/api/pages/?format=json', {}, {
+      query: {method:'GET'}
+    })
+  }
+]);

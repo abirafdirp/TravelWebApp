@@ -15,7 +15,7 @@ from kompres2015.region.models import Province
 
 from kompres2015.users.models import User
 
-from kompres2015.pages.models import HomePage
+from kompres2015.pages.models import Page
 
 
 def cleardb():

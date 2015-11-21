@@ -137,14 +137,39 @@ kompresControllers.controller('TravelDestinationsCtrl', ['$scope', '$route', '$r
   }
 ]);
 
-kompresControllers.controller('ArticleListCtrl', ['$scope', '$route', '$routeParams', '$resource', 'Articles', 'PostCategory',
-  function($scope, $route, $routeParams, $resource, Articles, PostCategory) {
+kompresControllers.controller('ArticleListCtrl', ['$scope', '$route', '$routeParams', '$resource', '$timeout', 'Articles', 'PostCategory',
+  function($scope, $route, $routeParams, $resource, $timeout, Articles, PostCategory) {
     $scope.$route = $route;
     $scope.params = $routeParams;
+    $scope.show_loading = true;
     $scope.categories = PostCategory.getCategories();
     $scope.search = $scope.params.search;
+    $scope.color = 'md-warn';
+
+    $scope.category_icon = 'keyboard_arrow_right';
+    $scope.all_category_icon = 'keyboard_arrow_right';
+
+    $scope.setColor = function (index){
+      if (index == 0){
+        return 'material-blue';
+      }
+      else if(index == 1) {
+        return 'material-indigo';
+      }
+      else if(index == 2){
+        return 'material-blue-grey'
+      }
+      else {
+        return 'material-deep-purple';
+      }
+    };
 
     $scope.articles = Articles.list.query();
+    $scope.articles.$promise.then(function() {
+      $timeout(function(){
+        console.log($scope.show_loading = false);
+      });
+    })
   }
 ]);
 
@@ -236,8 +261,8 @@ kompresControllers.controller('TravelDestinationWhatToDoImagesCtrl', ['$scope', 
   }
 ]);
 
-kompresControllers.controller('FeaturedTravelDestinationCtrl', ['$scope', 'FeaturedTravelDestinations',
-  function($scope, FeaturedTravelDestinations) {
-    $scope.featured_travel_destinations = FeaturedTravelDestinations.query();
+kompresControllers.controller('PageCtrl', ['$scope', 'Page',
+  function($scope, Page) {
+    $scope.page = Page.query();
   }
 ]);

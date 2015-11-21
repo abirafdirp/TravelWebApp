@@ -1,15 +1,15 @@
 from rest_framework import viewsets
 
-from kompres2015.pages.models import HomePage
+from kompres2015.pages.models import Page
 from kompres2015.pages.models import FeaturedTravelDestination
 
-from kompres2015.pages.serializers import HomePageSerializer
+from kompres2015.pages.serializers import PageSerializer
 from kompres2015.pages.serializers import FeaturedTravelDestinationSerializer
 
 
-class HomePageViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = HomePage.objects.all()
-    serializer_class = HomePageSerializer
+class PageViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Page.objects.all()
+    serializer_class = PageSerializer
 
 
 class FeaturedTravelDestinationViewSet(viewsets.ReadOnlyModelViewSet):

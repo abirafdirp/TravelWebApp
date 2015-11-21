@@ -26,7 +26,7 @@
 <div ng-controller="NavCtrl" layout="column">
 	<div layout="row" layout-fill>
 
-		<md-toolbar class="md-primary navbar">
+		<md-toolbar class="md-primary navbar" ng-cloak>
 			<div class="md-toolbar-tools">
 				<md-button href="/" aria-label="home">
 						<img src="/static/images/flag-mini.png">
@@ -73,8 +73,8 @@
 
 	</div>
 
-	<md-content layout-margin>
-		<main ng-view></main>
+	<md-content layout-fill>
+		<main ng-view ng-cloak></main>
 	</md-content>
 
 	<!-- angular v1.4.2 -->
