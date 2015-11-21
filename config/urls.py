@@ -20,6 +20,7 @@ from kompres2015.util.views import api_root
 from kompres2015.tourism.views import TravelDestinationViewSet
 from kompres2015.tourism.views import VisitViewSet
 from kompres2015.tourism.views import ReportViewSet
+from kompres2015.tourism.views import TravelDestinationContentViewSet
 
 from kompres2015.users.views import UserViewSet
 
@@ -185,6 +186,12 @@ article_list = ArticleViewSet.as_view({
 article_detail = ArticleViewSet.as_view({
     'get': 'retrieve',
 })
+travel_destination_content_list = TravelDestinationContentViewSet.as_view({
+    'get': 'list',
+})
+travel_destination_content_detail = TravelDestinationContentViewSet.as_view({
+    'get': 'retrieve',
+})
 
 
 urlpatterns += format_suffix_patterns([
@@ -221,6 +228,8 @@ urlpatterns += format_suffix_patterns([
     url(r'^api/featuredtraveldestinations/(?P<pk>[0-9]+)/$', featured_travel_destination_detail, name='featured-travel-destination-detail'),
     url(r'^api/articles/$', article_list, name='article-list'),
     url(r'^api/articles/(?P<pk>[0-9]+)/$', article_detail, name='article-detail'),
+    url(r'^api/traveldestinationcontents/$', travel_destination_content_list, name='travel-destination-content-list'),
+    url(r'^api/traveldestinationcontents/(?P<pk>[0-9]+)/$', travel_destination_content_detail, name='travel-destination-content-detail'),
 ])
 
 

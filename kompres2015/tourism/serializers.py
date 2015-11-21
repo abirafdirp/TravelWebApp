@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from kompres2015.tourism.models import TravelDestination
+from kompres2015.tourism.models import TravelDestinationContent
 from kompres2015.tourism.models import Visit
 from kompres2015.tourism.models import Report
 
@@ -12,6 +13,8 @@ class TravelDestinationSerializer(serializers.HyperlinkedModelSerializer):
                                                    read_only=True)
     visits = serializers.HyperlinkedRelatedField(view_name='visit-detail',
                                                  read_only=True, many=True)
+    contents = serializers.HyperlinkedRelatedField(view_name='travel-destination-content-detail',
+                                                   read_only=True, many=True)
 
     def __init__(self, *args, **kwargs):
         # Instantiate the superclass normally
@@ -28,9 +31,8 @@ class TravelDestinationSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = TravelDestination
-        fields = ('id', 'name', 'district', 'full_description', 'tagline', 'what_to_do',
-                  'transport_method', 'where_to_stay', 'important_info_contact',
-                  'visits')
+        fields = ('id', 'name', 'district', 'full_description', 'tagline',
+                  'visits', 'contents')
 
 
 class VisitSerializer(serializers.HyperlinkedModelSerializer):
@@ -48,4 +50,13 @@ class ReportSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Report
         fields = ('id', 'category', 'report', 'user')
+
+
+class TravelDestinationContentSerializer(serializers.HyperlinkedModelSerializer):
+    travel_destination = serializers.HyperlinkedRelatedField(view_name='travel-destination-detail',
+                                                             read_only=True)
+
+    class Meta:
+        model = TravelDestinationContent
+        fields = ('id', 'name', 'content', 'travel_destination')
 

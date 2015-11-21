@@ -7,6 +7,10 @@ from kompres2015.region.models import District
 from kompres2015.users.models import User
 
 
+class Transportation(TimeStampedModel):
+    name = models.CharField(max_length=40)
+
+
 class TravelDestination(TimeStampedModel):
     name = models.CharField(max_length=30, unique=True)
     district = models.ForeignKey(District, verbose_name='Kabupaten',
@@ -16,16 +20,21 @@ class TravelDestination(TimeStampedModel):
                                      blank=True, null=True)
     tagline = models.CharField(verbose_name='Deskripsi Singkat/Tagline',
                                max_length=100, blank=True, null=True)
-    what_to_do = RichTextField(verbose_name='Aktivitas yang bisa dilakukan',
-                               blank=True, null=True)
-    transport_method = RichTextField(verbose_name='Metode Transport',
-                                     blank=True, null=True)
-    where_to_stay = RichTextField(verbose_name='Akomodasi', blank=True, null=True)
-    important_info_contact = RichTextField(verbose_name='Info dan kontak penting',
-                                           blank=True, null=True)
 
     class Meta:
         verbose_name = 'Lokasi Wisata'
+
+    def __str__(self):
+        return self.name
+
+
+class TravelDestinationContent(TimeStampedModel):
+    name = models.CharField(max_length=30)
+    content = RichTextField()
+    travel_destination = models.ForeignKey(TravelDestination, related_name='contents')
+
+    class Meta:
+        verbose_name = 'Konten Lokasi Wisata'
 
     def __str__(self):
         return self.name

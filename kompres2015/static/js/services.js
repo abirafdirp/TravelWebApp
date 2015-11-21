@@ -14,14 +14,6 @@ kompresServices.service('PostCategory', ['$rootScope',
   }
 ]);
 
-kompresServices.factory('HomePage', ['$resource',
-  function($resource){
-    return $resource('/api/homepages/?format=json', {}, {
-      query: {method:'GET'}
-    })
-  }
-]);
-
 kompresServices.factory('Regions', ['$resource',
   function($resource){
     return $resource('/api/regions/?format=json', {}, {
@@ -53,6 +45,21 @@ kompresServices.factory('TravelDestinations', ['$resource',
       query: {method: 'GET'}
       }),
       detail : $resource('/api/traveldestinations/?name=:travel_destination_name', {
+        travel_destination_name:'@travel_destination_name'
+      }, {
+      query: {method: 'GET'}
+      })
+    }
+  }
+]);
+
+kompresServices.factory('TravelDestinationsContents', ['$resource',
+  function($resource) {
+    return {
+      list : $resource('/api/traveldestinationcontents/?format=json', {}, {
+      query: {method: 'GET'}
+      }),
+      detail : $resource('/api/traveldestinationcontents/?name=:travel_destination_name', {
         travel_destination_name:'@travel_destination_name'
       }, {
       query: {method: 'GET'}

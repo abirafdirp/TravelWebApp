@@ -3,10 +3,12 @@ from rest_framework import viewsets
 from kompres2015.tourism.models import TravelDestination
 from kompres2015.tourism.models import Visit
 from kompres2015.tourism.models import Report
+from kompres2015.tourism.models import TravelDestinationContent
 
 from kompres2015.tourism.serializers import TravelDestinationSerializer
 from kompres2015.tourism.serializers import VisitSerializer
 from kompres2015.tourism.serializers import ReportSerializer
+from kompres2015.tourism.serializers import TravelDestinationContentSerializer
 
 from kompres2015.util.views import CreateListViewSet
 
@@ -57,6 +59,21 @@ class ReportViewSet(CreateListViewSet):
 
         if username is not None:
             queryset = queryset.filter(user__username=username)
+            return queryset
+
+        return queryset
+
+
+class TravelDestinationContentViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = TravelDestinationContentSerializer
+    filter_fields = ('name', )
+
+    def get_queryset(self):
+        queryset = TravelDestinationContent.objects.all()
+        travel_destination = self.request.query_params.get('travel_destination', None)
+
+        if travel_destination is not None:
+            queryset = queryset.filter(travel_destination__name=travel_destination)
             return queryset
 
         return queryset

@@ -10,7 +10,7 @@ class PageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Page
-        fields = ('id', 'video', 'featureds', 'image', 'article_list_image', 'article_list_tagline')
+        fields = ('id', 'video', 'featureds', 'travel_destination_list_image', 'article_list_image', 'article_list_tagline')
 
 
 class FeaturedTravelDestinationSerializer(serializers.ModelSerializer):

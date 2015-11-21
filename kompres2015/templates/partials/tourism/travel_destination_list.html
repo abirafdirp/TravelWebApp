@@ -1,5 +1,91 @@
-<div ng-controller="TravelDestinationsCtrl" layout="row">
-  <md-content flex layout-padding>
-    askngnaskilgnlkanslkg
-  </md-content>
+<div ng-controller="TravelDestinationListCtrl">
+	<div ng-controller="SearchCtrl">
+		<div ng-controller="PageCtrl" hide-sm hide-md>
+			<div class="faux-image-container">
+				<input ng-show="search_opened" class="search-input" ng-model="$parent.search" flex="grow" flex-offset="5" autofocus>
+				<img id="faux-image" ng-src="{$ page.results[0].travel_destination_list_image $}">
+			</div>
+		</div>
+
+		<div>
+			<div ng-class="{'search-area': search_opened == true, 'search-not-activated': search_opened == false}">
+			</div>
+
+			<a class="search-btn material-teal" ng-click="search_opened = !search_opened; change_search_icon(); clearSearch()" flex flex-offset="5">
+				<ng-md-icon icon="{$search_icon$}" aria-label="article"></ng-md-icon>
+			</a>
+		</div>
+		<div hide-gt-md style="margin-top: 70px;"></div>
+
+		<div layout="column" flex="100" layout-align="center center" ng-show="show_loading == true">
+			<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+		</div>
+
+
+		<md-content ng-cloak class="md-padding article-list animated fadeIn" ng-show="show_loading == false">
+			<div layout="row" layout-no-wrap>
+				<div flex="20" hide-sm hide-md layout-padding layout="column" layout-sm="column" id="article-left-nav">
+					<md-toolbar class="md-primary">
+						<div class="md-toolbar-tools">
+							<h2 class="md-flex md-display-2">KATEGORI</h2>
+						</div>
+					</md-toolbar>
+					<md-toolbar id="posts-categories" class="md-accent" ng-mouseleave="all_category_icon = 'keyboard_arrow_right'" ng-mouseenter="all_category_icon = 'keyboard_tab'">
+						<a href="/artikel">
+							<div class="md-toolbar-tools">
+								<h2 class="md-flex">semua</h2>
+								<span flex></span>
+								<md-button class="md-icon-button" aria-label="Favorite">
+									<ng-md-icon icon="{$all_category_icon$}" size="22" aria-label="user"></ng-md-icon>
+								</md-button>
+							</div>
+						</a>
+					</md-toolbar>
+					<md-toolbar ng-repeat="category in categories" id="posts-categories" class="{$ setColor($index) $}" ng-mouseleave="category_icon = 'keyboard_arrow_right'" ng-mouseenter="category_icon = 'keyboard_tab'">
+						<a href="/artikel/?search={$category$}">
+							<div class="md-toolbar-tools">
+								<h2 class="md-flex">{$ category $}</h2>
+								<span flex></span>
+								<md-button class="md-icon-button" aria-label="Favorite">
+									<ng-md-icon icon="{$category_icon$}" size="22" aria-label="user"></ng-md-icon>
+								</md-button>
+							</div>
+						</a>
+
+					</md-toolbar>
+				</div>
+
+				<div layout="row" layout-wrap flex="80" flex-sm="100" flex-md="100">
+					<div ng-repeat="travel_destination in travel_destinations.results | filter: search" ng-controller="TravelDestinationRepeatCtrl" flex="33" flex-sm="100" flex-md="50">
+
+						<md-card id="posts">
+							<a ng-href="/artikel/{$ slugify(travel_destination.name) $}">
+								<span class="md-title article-list-title">{$ travel_destination.title $}</span>
+								<div class="article-image"><img ng-src="{$main_image.image$}" class="md-card-image" alt="Washed Out"></div>
+
+							</a>
+							<md-card-content>
+						<span class="md-body-2" layout="row" layout-wrap>
+							<span flex="100" flex-gt-lg="60">
+								<ng-md-icon icon="access_time" size="20" aria-label="tanggal"></ng-md-icon>
+								{$ travel_destination.created_date | date:'d  MMMM  yyyy' $}
+							</span>
+							<span flex="100" flex-gt-lg="40">
+								<ng-md-icon icon="sort" size="20" aria-label="tanggal"></ng-md-icon>
+								<a href="/artikel/?search=info"> {$ travel_destination.district $}</a>
+							</span>
+						</span>
+								<p class="md-body-1">
+									{$ travel_destination_short_description $}
+								</p>
+							</md-card-content>
+						</md-card>
+						<br/>
+					</div>
+				</div>
+
+			</div>
+
+		</md-content>
+	</div>
 </div>

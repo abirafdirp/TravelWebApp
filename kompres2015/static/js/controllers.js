@@ -122,18 +122,50 @@ kompresControllers.controller('DistrictsCtrl', ['$scope', 'Districts',
   }
 ]);
 
-kompresControllers.controller('TravelDestinationsCtrl', ['$scope', '$route', '$routeParams', 'TravelDestinations',
-  function($scope, $route, $routeParams, TravelDestinations) {
+
+kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', '$routeParams','$timeout', 'TravelDestinations',
+  function($scope, $route, $routeParams,$timeout, TravelDestinations) {
     $scope.$route = $route;
     $scope.params = $routeParams;
     $scope.travel_destination_name = $scope.params.travel_destination_name;
+    $scope.search = $scope.params.search;
 
-    if (!$scope.travel_destination_name){
-      $scope.travel_destinations = TravelDestinations.list.query();
-    }
-    else {
-      $scope.travel_destination = TravelDestinations.detail.query({travel_destination_name:$scope.travel_destination_name})
-    }
+    $scope.travel_destinations = TravelDestinations.list.query();
+  }
+]);
+
+kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route', '$routeParams', 'TravelDestinations', 'TravelDestinationContents',
+  function($scope, $route, $routeParams, TravelDestinations, TravelDestinationContents) {
+    $scope.$route = $route;
+    $scope.params = $routeParams;
+    $scope.travel_destination_name = $scope.params.travel_destination_name.replace(/-/g,' ');
+
+    $scope.travel_destination = TravelDestinations.detail.query({travel_destination_name:$scope.travel_destination_name})
+    $scope.travel_destination.$promise.then(function() {
+      var url = $scope.travel_destination.results[0].district+'?format=json';
+      $scope.district = $resource(url).get();
+    });
+    $scope.travel_destination_contents = TravelDestinationContents.detail.query({travel_destination_name:$scope.travel_destination_name});
+  }
+]);
+
+kompresControllers.controller('TravelDestinationRepeatCtrl', ['$scope', '$resource', '$exceptionHandler',
+  function($scope, $resource, $exceptionHandler) {
+    var init = function() {
+      if (typeof $scope.travel_destination === "undefined") {
+        $exceptionHandler("The TravelDestinationRepeatController must be initialized with a travel_destination in scope");
+      }
+      $scope.TravelDestinationInRepeat = $scope.travel_destination;
+      if($scope.travel_destination.full_description.length > 180){
+        $scope.travel_destination_short_description = $scope.travel_destination.full_description.substring(0,180) + ' ...';
+      }
+      else{
+        $scope.travel_destination_short_description = $scope.travel_destination.full_description;
+      }
+      $scope.district = $resource($scope.travel_destination.district).get();
+    };
+
+    init();
   }
 ]);
 
@@ -266,3 +298,28 @@ kompresControllers.controller('PageCtrl', ['$scope', 'Page',
     $scope.page = Page.query();
   }
 ]);
+
+kompresControllers.controller('SearchCtrl', ['$scope',
+  function($scope) {
+    $scope.search_icon = 'search';
+    $scope.search_opened = false;
+
+    $scope.clearSearch = function() {
+      if($scope.search != null){
+        $scope.search = '';
+      }
+    };
+
+    $scope.change_search_icon = function() {
+      $scope.search_icon_toggle = !$scope.search_icon_toggle;
+      if ($scope.search_icon_toggle){
+        $scope.search_icon = 'close';
+      }
+      else{
+        $scope.search_icon = 'search';
+      }
+    }
+  }
+]);
+
+

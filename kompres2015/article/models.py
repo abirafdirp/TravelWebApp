@@ -19,6 +19,7 @@ class Article(TimeStampedModel):
     short_description = models.TextField(verbose_name="deskripsi singkat")
     author = models.TextField(verbose_name='penulis')
     main_image = models.ForeignKey(ArticleMainImage)
+    date = models.DateField()
 
     def __str__(self):
         return self.title
