@@ -119,17 +119,17 @@ kompresControllers.controller('DistrictsCtrl', ['$scope', 'Districts',
 ]);
 
 
-kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', '$routeParams', '$resource', 'TravelDestinations','District', 'Province', 'Region',
-  function($scope, $route, $routeParams, $resource, TravelDestinations, District, Province, Region) {
+kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', '$routeParams', '$resource', 'TravelDestinations', 'Districts', 'Provinces', 'Regions',
+  function($scope, $route, $routeParams, $resource, TravelDestinations, Districts, Provinces, Regions) {
     $scope.$route = $route;
     $scope.params = $routeParams;
     $scope.show_loading = true;
     $scope.travel_destination_name = $scope.params.travel_destination_name;
     $scope.search = $scope.params.search;
 
-    $scope.districts = District.list.query();
-    $scope.provinces = Province.list.query();
-    $scope.regions = Region.list.query();
+    $scope.districts = Districts.query();
+    $scope.provinces = Provinces.query();
+    $scope.regions = Regions.query();
 
     $scope.category_icon = 'keyboard_arrow_right';
     $scope.all_category_icon = 'keyboard_arrow_right';

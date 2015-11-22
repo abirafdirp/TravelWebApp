@@ -181,7 +181,7 @@ a {
 }
 .material-teal{
     background-color: rgb(0,150,136) !important;
-    color: white;
+    color: white !important;
 }
 
 .material-blue{
@@ -324,7 +324,7 @@ a {
 
 .search-input-district {
     position: absolute;
-    top: 230px;
+    top: 220px;
     z-index: 2;
     border-color:#cccccc;
     border-style:solid;

@@ -46,9 +46,18 @@ kompresServices.service('TravelDestinationSearch', [
     this.search_icon = 'search';
     this.search_opened = false;
 
+    this.clearDistrictSearch = function() {
+      if(this.district_search != null){
+        this.district_search = '';
+      }
+    };
+
+    this.setDistrictSearch = function(search) {
+      this.district_search = search;
+    };
+
     this.clearSearch = function() {
       if(this.search != null){
-        console.log('fak');
         this.search = '';
       }
     };

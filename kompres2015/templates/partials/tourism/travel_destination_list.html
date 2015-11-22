@@ -8,17 +8,8 @@
 	<div ng-controller="SearchCtrl" ng-show="show_loading == false" class="animated fadeIn">
 		<div ng-controller="PageCtrl" hide-sm hide-md>
 			<div class="faux-image-container">
-				<input ng-show="!search_opened" class="search-input" ng-model="$parent.TravelDestinationSearch.search" flex="grow"
+				<input ng-show="search_opened" class="search-input" ng-model="$parent.TravelDestinationSearch.search" flex="grow"
 							 flex-offset="5" autofocus spellcheck="false">
-				<md-input-container ng-show="!search_opened" class="search-input-district" ng-model="$parent.TravelDestinationSearch.search"
-							 flex="15" flex-offset="15" autofocus spellcheck="false">
-          <label>State</label>
-          <md-select ng-model="user.state">
-            <md-option ng-repeat="state in states" value="{{state.abbrev}}">
-              {{state.abbrev}}
-            </md-option>
-          </md-select>
-        </md-input-container>
 				<img id="faux-image" ng-src="{$ page.results[0].travel_destination_list_image $}">
 			</div>
 		</div>
@@ -27,7 +18,9 @@
 			<div ng-class="{'search-area': search_opened == true, 'search-not-activated': search_opened == false}">
 			</div>
 
-			<a class="search-btn material-teal" ng-click="search_opened = !search_opened; TravelDestinationSearch.change_search_icon(); TravelDestinationSearch.clearSearch()" flex flex-offset="5">
+			<a class="search-btn material-teal"
+				 ng-click="search_opened = !search_opened; TravelDestinationSearch.change_search_icon(); TravelDestinationSearch.clearSearch(); TravelDestinationSearch.clearDistrictSearch()"
+				 flex flex-offset="5">
 				<ng-md-icon icon="{$TravelDestinationSearch.search_icon$}" aria-label="article"></ng-md-icon>
 			</a>
 		</div>
@@ -39,7 +32,7 @@
 				<div flex="20" hide-sm hide-md layout-padding layout="column" layout-sm="column" id="article-left-nav">
 					<md-toolbar class="md-primary">
 						<div class="md-toolbar-tools">
-							<h2 class="md-flex md-display-2">KATEGORI</h2>
+							<h2 class="md-flex md-display-2">{$district_search$}</h2>
 						</div>
 					</md-toolbar>
 					<md-toolbar id="posts-categories" class="md-accent" ng-mouseleave="all_category_icon = 'keyboard_arrow_right'" ng-mouseenter="all_category_icon = 'keyboard_tab'">
@@ -68,7 +61,7 @@
 				</div>
 
 				<div layout="row" layout-wrap flex="80" flex-sm="100" flex-md="100">
-					<div ng-repeat="travel_destination in travel_destinations.results | filter: TravelDestinationSearch.search" ng-controller="TravelDestinationRepeatCtrl" flex="33" flex-sm="100" flex-md="50">
+					<div ng-repeat="travel_destination in travel_destinations.results | filter: TravelDestinationSearch.search | filter: TravelDestinationSearch.district_search" ng-controller="TravelDestinationRepeatCtrl" flex="33" flex-sm="100" flex-md="50">
 
 						<md-card id="posts">
 							<a ng-href="/lokasi-wisata/{$ slugify(travel_destination.name) $}">
