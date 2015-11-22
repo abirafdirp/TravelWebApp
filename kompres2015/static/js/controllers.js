@@ -275,21 +275,9 @@ kompresControllers.controller('ArticleMainImages', ['$scope', 'ArticleMainImages
   }
 ]);
 
-kompresControllers.controller('TravelDestinationMainImagesCtrl', ['$scope', 'TravelDestinationMainImages',
-  function($scope, TravelDestinationMainImages) {
-    $scope.travel_destination_main_images = TravelDestinationMainImages.query();
-  }
-]);
-
-kompresControllers.controller('TravelDestinationWhatToDoImagesCtrl', ['$scope', 'TravelDestinationWhatToDoImages',
-  function($scope, TravelDestinationWhatToDoImages) {
-    $scope.travel_destination_what_to_do_images = TravelDestinationWhatToDoImages.query();
-  }
-]);
-
-kompresControllers.controller('TravelDestinationWhatToDoImagesCtrl', ['$scope', 'TravelDestinationWhatToDoImages',
-  function($scope, TravelDestinationWhatToDoImages) {
-    $scope.travel_destination_what_to_do_images = TravelDestinationWhatToDoImages.query();
+kompresControllers.controller('TravelDestinationImagesCtrl', ['$scope', 'TravelDestinationImages',
+  function($scope, TravelDestinationImages) {
+    $scope.travel_destination_images = TravelDestinationImages.query();
   }
 ]);
 

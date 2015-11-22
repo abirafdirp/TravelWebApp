@@ -26,10 +26,8 @@ from kompres2015.users.views import UserViewSet
 
 from kompres2015.image.views import ReportImageViewSet
 from kompres2015.image.views import ImageViewSet
-from kompres2015.image.views import TravelDestinationMainImageViewSet
-from kompres2015.image.views import TravelDestinationWhatToDoImageViewSet
-from kompres2015.image.views import TravelDestinationGalleryImageViewSet
-from kompres2015.image.views import ArticleMainImageViewSet
+from kompres2015.image.views import TravelDestinationImageViewSet
+from kompres2015.image.views import ArticleImageViewSet
 
 from kompres2015.pages.views import PageViewSet
 from kompres2015.pages.views import FeaturedTravelDestinationViewSet
@@ -144,28 +142,16 @@ image_list = ImageViewSet.as_view({
 image_detail = ImageViewSet.as_view({
     'get': 'retrieve',
 })
-article_main_image_list = ArticleMainImageViewSet.as_view({
+article_image_list = ArticleImageViewSet.as_view({
     'get': 'list',
 })
-article_main_image_detail = ArticleMainImageViewSet.as_view({
+article_image_detail = ArticleImageViewSet.as_view({
     'get': 'retrieve',
 })
-travel_destination_main_image_list = TravelDestinationMainImageViewSet.as_view({
+travel_destination_image_list = TravelDestinationImageViewSet.as_view({
     'get': 'list',
 })
-travel_destination_main_image_detail = TravelDestinationMainImageViewSet.as_view({
-    'get': 'retrieve',
-})
-travel_destination_what_to_do_image_list = TravelDestinationWhatToDoImageViewSet.as_view({
-    'get': 'list',
-})
-travel_destination_what_to_do_image_detail = TravelDestinationWhatToDoImageViewSet.as_view({
-    'get': 'retrieve',
-})
-travel_destination_gallery_image_list = TravelDestinationGalleryImageViewSet.as_view({
-    'get': 'list',
-})
-travel_destination_gallery_image_detail = TravelDestinationGalleryImageViewSet.as_view({
+travel_destination_image_detail = TravelDestinationImageViewSet.as_view({
     'get': 'retrieve',
 })
 page_list = PageViewSet.as_view({
@@ -214,14 +200,10 @@ urlpatterns += format_suffix_patterns([
     url(r'^api/reportimages/(?P<pk>[0-9]+)/$', report_image_detail, name='report-image-detail'),
     url(r'^api/images/$', image_list, name='image-list'),
     url(r'^api/images/(?P<pk>[0-9]+)/$', image_detail, name='image-detail'),
-    url(r'^api/articlemainimages/$', article_main_image_list, name='article-main-image-list'),
-    url(r'^api/articlemainimages/(?P<pk>[0-9]+)/$', article_main_image_detail, name='article-main-image-detail'),
-    url(r'^api/traveldestinationmainimages/$', travel_destination_main_image_list, name='travel-destination-main-image-list'),
-    url(r'^api/traveldestinationmainimages/(?P<pk>[0-9]+)/$', travel_destination_main_image_detail, name='travel-destination-main-image-detail'),
-    url(r'^api/traveldestinationwhattodoimages/$', travel_destination_what_to_do_image_list, name='travel-destination-what-to-do-image-list'),
-    url(r'^api/traveldestinationwhattodoimages/(?P<pk>[0-9]+)/$', travel_destination_what_to_do_image_detail, name='travel-destination-what-to-do-image-detail'),
-    url(r'^api/traveldestinationgalleryimages/$', travel_destination_gallery_image_list, name='travel-destination-gallery-image-list'),
-    url(r'^api/traveldestinationgalleryimages/(?P<pk>[0-9]+)/$', travel_destination_gallery_image_detail, name='travel-destination-gallery-image-detail'),
+    url(r'^api/articleimages/$', article_image_list, name='article-image-list'),
+    url(r'^api/articleimages/(?P<pk>[0-9]+)/$', article_image_detail, name='article-image-detail'),
+    url(r'^api/traveldestinationimages/$', travel_destination_image_list, name='travel-destination-image-list'),
+    url(r'^api/traveldestinationimages/(?P<pk>[0-9]+)/$', travel_destination_image_detail, name='travel-destination-image-detail'),
     url(r'^api/pages/$', page_list, name='page-list'),
     url(r'^api/pages/(?P<pk>[0-9]+)/$', page_detail, name='page-detail'),
     url(r'^api/featuredtraveldestinations/$', featured_travel_destination_list, name='featured-travel-destination-list'),

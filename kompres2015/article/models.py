@@ -3,8 +3,6 @@ from ckeditor.fields import RichTextField
 
 from kompres2015.util.models import TimeStampedModel
 
-from kompres2015.image.models import ArticleMainImage
-
 
 class Article(TimeStampedModel):
     CATEGORY_CHOICES = (
@@ -18,7 +16,6 @@ class Article(TimeStampedModel):
     category = models.CharField(max_length=30, choices=CATEGORY_CHOICES)
     short_description = models.TextField(verbose_name="deskripsi singkat")
     author = models.TextField(verbose_name='penulis')
-    main_image = models.ForeignKey(ArticleMainImage)
     date = models.DateField()
 
     def __str__(self):

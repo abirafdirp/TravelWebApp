@@ -123,33 +123,17 @@ kompresServices.factory('Images', ['$resource',
   }
 ]);
 
-kompresServices.factory('ArticleMainImages', ['$resource',
+kompresServices.factory('ArticleImages', ['$resource',
   function($resource){
-    return $resource('/api/articlemainimages/?format=json', {}, {
+    return $resource('/api/articleimages/?format=json', {}, {
       query: {method:'GET', isArray: true}
     })
   }
 ]);
 
-kompresServices.factory('TravelDestinationMainImages', ['$resource',
+kompresServices.factory('TravelDestinationImages', ['$resource',
   function($resource){
-    return $resource('/api/traveldestinationmainimages/?format=json', {}, {
-      query: {method:'GET'}
-    })
-  }
-]);
-
-kompresServices.factory('TravelDestinationWhatToDoImages', ['$resource',
-  function($resource){
-    return $resource('/api/traveldestinationwhattodoimages/?format=json', {}, {
-      query: {method:'GET'}
-    })
-  }
-]);
-
-kompresServices.factory('TravelDestinationGalleryImages', ['$resource',
-  function($resource){
-    return $resource('/api/traveldestinationgalleryimages/?format=json', {}, {
+    return $resource('/api/traveldestinationimages/?format=json', {}, {
       query: {method:'GET'}
     })
   }

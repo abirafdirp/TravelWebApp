@@ -2,10 +2,8 @@ from django.contrib import admin
 
 from kompres2015.image.models import ReportImage
 from kompres2015.image.models import Image
-from kompres2015.image.models import TravelDestinationMainImage
-from kompres2015.image.models import TravelDestinationWhatToDoImage
-from kompres2015.image.models import TravelDestinationGalleryImage
-from kompres2015.image.models import ArticleMainImage
+from kompres2015.image.models import TravelDestinationImage
+from kompres2015.image.models import ArticleImage
 
 
 class ReportImageAdmin(admin.ModelAdmin):
@@ -16,25 +14,15 @@ class ImageAdmin(admin.ModelAdmin):
     pass
 
 
-class TravelDestinationMainImageAdmin(admin.ModelAdmin):
+class TravelDestinationImageAdmin(admin.ModelAdmin):
     pass
 
 
-class TravelDestinationWhatToDoImageAdmin(admin.ModelAdmin):
-    pass
-
-
-class TravelDestinationGalleryImageAdmin(admin.ModelAdmin):
-    pass
-
-
-class ArticleMainImageAdmin(admin.ModelAdmin):
+class ArticleImageAdmin(admin.ModelAdmin):
     pass
 
 admin.site.register(Image, ImageAdmin)
 admin.site.register(ReportImage, ReportImageAdmin)
-admin.site.register(TravelDestinationMainImage, TravelDestinationMainImageAdmin)
-admin.site.register(TravelDestinationWhatToDoImage, TravelDestinationWhatToDoImageAdmin)
-admin.site.register(TravelDestinationGalleryImage, TravelDestinationGalleryImageAdmin)
-admin.site.register(ArticleMainImage, ArticleMainImageAdmin)
+admin.site.register(TravelDestinationImage, TravelDestinationImageAdmin)
+admin.site.register(ArticleImage, ArticleImageAdmin)
 
