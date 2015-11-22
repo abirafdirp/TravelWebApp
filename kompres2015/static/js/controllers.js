@@ -1,13 +1,15 @@
 var kompresControllers = angular.module('kompresControllers', []);
 
-kompresControllers.controller('NavCtrl', ['$scope', '$route', '$mdDialog',
-  function($scope, $route, $mdDialog) {
+kompresControllers.controller('NavCtrl', ['$scope', '$route', '$mdDialog', 'ArticleSearch', 'TravelDestinationSearch',
+  function($scope, $route, $mdDialog, ArticleSearch, TravelDestinationSearch) {
     $scope.$route = $route;
     $scope.logout_clicked = false;
     $scope.traveldestination_icon = 'terrain';
     $scope.article_icon = 'my_library_books';
     $scope.map_icon = 'directions';
     $scope.info_icon = 'info';
+    $scope.ArticleSearch = ArticleSearch;
+    $scope.TravelDestinationSearch = TravelDestinationSearch;
 
     $scope.reset_logout_clicked = function() {
       $scope.logout_clicked = false;
@@ -117,16 +119,31 @@ kompresControllers.controller('DistrictsCtrl', ['$scope', 'Districts',
 ]);
 
 
-kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', '$routeParams','$timeout', 'TravelDestinations',
-  function($scope, $route, $routeParams,$timeout, TravelDestinations) {
+kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', '$routeParams', '$resource', 'TravelDestinations','District', 'Province', 'Region',
+  function($scope, $route, $routeParams, $resource, TravelDestinations, District, Province, Region) {
     $scope.$route = $route;
     $scope.params = $routeParams;
+    $scope.show_loading = true;
     $scope.travel_destination_name = $scope.params.travel_destination_name;
     $scope.search = $scope.params.search;
 
+    $scope.districts = District.list.query();
+    $scope.provinces = Province.list.query();
+    $scope.regions = Region.list.query();
+
+    $scope.category_icon = 'keyboard_arrow_right';
+    $scope.all_category_icon = 'keyboard_arrow_right';
+
     $scope.travel_destinations = TravelDestinations.list.query();
     $scope.travel_destinations.$promise.then(function(){
-      $scope.thumbnail = $scope.travel_destinations;
+      angular.forEach($scope.travel_destinations.results, function(item){
+        item['district_name'] = $resource(item.district).get(function(){
+          item['province'] = $resource(item.district_name.province).get(function(){
+            item['region'] = $resource(item.province.region).get();
+          })
+        });
+      });
+      $scope.show_loading = false;
     });
   }
 ]);
@@ -160,14 +177,15 @@ kompresControllers.controller('TravelDestinationRepeatCtrl', ['$scope', '$resour
         $scope.travel_destination_short_description = $scope.travel_destination.short_description;
       }
       $scope.district = $resource($scope.travel_destination.district).get();
+      $scope.thumbnail = $resource($scope.travel_destination.thumbnail).get();
     };
 
     init();
   }
 ]);
 
-kompresControllers.controller('ArticleListCtrl', ['$scope', '$route', '$routeParams', '$resource', '$timeout', 'Articles', 'PostCategory',
-  function($scope, $route, $routeParams, $resource, $timeout, Articles, PostCategory) {
+kompresControllers.controller('ArticleListCtrl', ['$scope', '$route', '$routeParams', '$resource', '$timeout', '$filter', 'Articles', 'PostCategory',
+  function($scope, $route, $routeParams, $resource, $timeout, $filter, Articles, PostCategory) {
     $scope.$route = $route;
     $scope.params = $routeParams;
     $scope.show_loading = true;
@@ -195,10 +213,11 @@ kompresControllers.controller('ArticleListCtrl', ['$scope', '$route', '$routePar
 
     $scope.articles = Articles.list.query();
     $scope.articles.$promise.then(function() {
-      $timeout(function(){
+        angular.forEach($scope.articles.results, function(item){
+          item.date = $filter('date')(item.date, 'd  MMMM  yyyy');
+        });
         $scope.show_loading = false;
-      });
-    })
+    });
   }
 ]);
 
@@ -210,8 +229,7 @@ kompresControllers.controller('ArticleDetailCtrl', ['$scope', '$route', '$routeP
     $scope.article_name = $scope.params.article_name.replace(/-/g,' ');
     $scope.article = Articles.detail.query({article_name:$scope.article_name});
     $scope.article.$promise.then(function() {
-      var url = 'api/articleimages/?format=json&type=main&article=' + $scope.article.title;
-      $scope.main_images = $resource(url).get(function(){
+      $scope.main_image = $resource($scope.article.results[0].main_image+'?format=json').get(function() {
         $scope.show_loading = false;
       });
     });
@@ -219,12 +237,13 @@ kompresControllers.controller('ArticleDetailCtrl', ['$scope', '$route', '$routeP
 ]);
 
 kompresControllers.controller('ArticleRepeatCtrl', ['$scope', '$resource', '$exceptionHandler', 'PostCategory',
-  function($scope, $resource, $exceptionHandler, PostCategory) {
+  function($scope, $resource, $exceptionHandler,  PostCategory) {
     var init = function() {
       if (typeof $scope.article === "undefined") {
         $exceptionHandler("The ArticleRepeatController must be initialized with a article in scope");
       }
       $scope.articleInRepeat = $scope.article;
+      $scope.show_loading = true;
       if($scope.article.short_description.length > 180){
         $scope.article_short_description = $scope.article.short_description.substring(0,180) + ' ...';
       }
@@ -232,12 +251,10 @@ kompresControllers.controller('ArticleRepeatCtrl', ['$scope', '$resource', '$exc
         $scope.article_short_description = $scope.article.short_description;
       }
       PostCategory.addCategory($scope.article.category);
-      var url = 'api/articleimages/?format=json&type=thumbnail&article=' + $scope.article.title;
-      $scope.thumbnail = $resource(url).get(function(){
-        $scope.thumbnail = $scope.thumbnail.results[0];
+      $scope.thumbnail = $resource($scope.article.thumbnail).get(function() {
+        $scope.show_loading = false;
       });
     };
-
     init();
   }
 ]);
@@ -290,26 +307,10 @@ kompresControllers.controller('PageCtrl', ['$scope', 'Page',
   }
 ]);
 
-kompresControllers.controller('SearchCtrl', ['$scope',
-  function($scope) {
-    $scope.search_icon = 'search';
-    $scope.search_opened = false;
-
-    $scope.clearSearch = function() {
-      if($scope.search != null){
-        $scope.search = '';
-      }
-    };
-
-    $scope.change_search_icon = function() {
-      $scope.search_icon_toggle = !$scope.search_icon_toggle;
-      if ($scope.search_icon_toggle){
-        $scope.search_icon = 'close';
-      }
-      else{
-        $scope.search_icon = 'search';
-      }
-    }
+kompresControllers.controller('SearchCtrl', ['$scope', 'ArticleSearch', 'TravelDestinationSearch',
+  function($scope, ArticleSearch, TravelDestinationSearch) {
+    $scope.ArticleSearch = ArticleSearch;
+    $scope.TravelDestinationSearch = TravelDestinationSearch;
   }
 ]);
 

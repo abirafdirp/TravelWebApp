@@ -1,6 +1,8 @@
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 
+from kompres2015.image.models import ArticleImage
+
 from kompres2015.util.models import TimeStampedModel
 
 
@@ -17,6 +19,8 @@ class Article(TimeStampedModel):
     short_description = models.TextField(verbose_name="deskripsi singkat")
     author = models.TextField(verbose_name='penulis')
     date = models.DateField()
+    thumbnail = models.ForeignKey(ArticleImage, related_name='article_thumbnail')
+    main_image = models.ForeignKey(ArticleImage, related_name='article_main_image')
 
     def __str__(self):
         return self.title

@@ -14,6 +14,61 @@ kompresServices.service('PostCategory', ['$rootScope',
   }
 ]);
 
+kompresServices.service('ArticleSearch', [
+  function() {
+    this.search_icon = 'search';
+    this.search_opened = false;
+
+    this.clearSearch = function() {
+      if(this.search != null){
+        this.search = '';
+      }
+    };
+
+    this.setSearch = function(search) {
+      this.search = search;
+    };
+
+    this.change_search_icon = function() {
+      this.search_icon_toggle = !this.search_icon_toggle;
+      if (this.search_icon_toggle){
+        this.search_icon = 'close';
+      }
+      else{
+        this.search_icon = 'search';
+      }
+    }
+  }
+]);
+
+kompresServices.service('TravelDestinationSearch', [
+  function() {
+    this.search_icon = 'search';
+    this.search_opened = false;
+
+    this.clearSearch = function() {
+      if(this.search != null){
+        console.log('fak');
+        this.search = '';
+      }
+    };
+
+    this.setSearch = function(search) {
+      this.search = search;
+    };
+
+    this.change_search_icon = function() {
+      this.search_icon_toggle = !this.search_icon_toggle;
+      if (this.search_icon_toggle){
+        this.search_icon = 'close';
+      }
+      else{
+        this.search_icon = 'search';
+      }
+    }
+  }
+]);
+
 kompresServices.factory('Regions', ['$resource',
   function($resource){
     return $resource('/api/regions/?format=json', {}, {
@@ -41,7 +96,7 @@ kompresServices.factory('Districts', ['$resource',
 kompresServices.factory('TravelDestinations', ['$resource',
   function($resource) {
     return {
-      list : $resource('/api/traveldestinations/?format=json&fields=name,district,short_description,type', {}, {
+      list : $resource('/api/traveldestinations/?format=json&fields=name,district,short_description,type,thumbnail', {}, {
       query: {method: 'GET'}
       }),
       detail : $resource('/api/traveldestinations/?name=:travel_destination_name', {
@@ -71,7 +126,7 @@ kompresServices.factory('TravelDestinationsContents', ['$resource',
 kompresServices.factory('Articles', ['$resource',
   function($resource) {
     return {
-      list : $resource('/api/articles/?format=json&fields=title,author,category,short_description,date,images', {}, {
+      list : $resource('/api/articles/?format=json&fields=title,author,category,short_description,date,thumbnail', {}, {
       query: {method: 'GET'}
       }),
       detail : $resource('/api/articles/?title=:article_name', {

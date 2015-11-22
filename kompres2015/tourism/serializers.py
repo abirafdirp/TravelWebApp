@@ -15,6 +15,10 @@ class TravelDestinationSerializer(serializers.HyperlinkedModelSerializer):
                                                  read_only=True, many=True)
     contents = serializers.HyperlinkedRelatedField(view_name='travel-destination-content-detail',
                                                    read_only=True, many=True)
+    images = serializers.HyperlinkedRelatedField(view_name='travel-destination-image-detail',
+                                                 read_only=True, many=True)
+    thumbnail = serializers.HyperlinkedRelatedField(view_name='travel-destination-image-detail',
+                                                    read_only=True)
 
     def __init__(self, *args, **kwargs):
         # Instantiate the superclass normally
@@ -37,7 +41,7 @@ class TravelDestinationSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = TravelDestination
         fields = ('id', 'name', 'district', 'full_description', 'short_description',
-                  'visits', 'contents', 'type')
+                  'visits', 'contents', 'type', 'images', 'thumbnail')
 
 
 class VisitSerializer(serializers.HyperlinkedModelSerializer):

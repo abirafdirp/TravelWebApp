@@ -7,6 +7,7 @@ from kompres2015.region.models import District
 from kompres2015.users.models import User
 
 
+
 class Transportation(TimeStampedModel):
     name = models.CharField(max_length=40)
 
@@ -24,6 +25,7 @@ class TravelDestination(TimeStampedModel):
     district = models.ForeignKey(District, verbose_name='Kabupaten',
                                  related_name='travel_destinations',
                                  blank=True, null=True)
+    thumbnail = models.ForeignKey('image.TravelDestinationImage', blank=True, null=True)
     full_description = RichTextField(verbose_name='Deskripsi lengkap',
                                      blank=True, null=True)
     short_description = models.TextField(verbose_name='Deskripsi Singkat',
