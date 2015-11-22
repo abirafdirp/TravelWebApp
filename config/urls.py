@@ -81,6 +81,8 @@ urlpatterns += [
     url(r'^akun/konfirmasi-reset-password/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})$',
         TemplateView.as_view(template_name='base.html'), name='password_reset_confirm'),
 
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+
 ]
 
 

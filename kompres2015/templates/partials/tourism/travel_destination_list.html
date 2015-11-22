@@ -41,18 +41,18 @@
 							</div>
 						</a>
 					</md-toolbar>
-					<md-toolbar ng-repeat="category in categories" id="posts-categories" class="{$ setColor($index) $}" ng-mouseleave="category_icon = 'keyboard_arrow_right'" ng-mouseenter="category_icon = 'keyboard_tab'">
-						<a href="/artikel/?search={$category$}">
-							<div class="md-toolbar-tools">
-								<h2 class="md-flex">{$ category $}</h2>
-								<span flex></span>
-								<md-button class="md-icon-button" aria-label="Favorite">
-									<ng-md-icon icon="{$category_icon$}" size="22" aria-label="user"></ng-md-icon>
-								</md-button>
-							</div>
-						</a>
-
-					</md-toolbar>
+{#					<md-toolbar ng-repeat="category in categories" id="posts-categories" class="{$ setColor($index) $}" ng-mouseleave="category_icon = 'keyboard_arrow_right'" ng-mouseenter="category_icon = 'keyboard_tab'">#}
+{#						<a href="/artikel/?search={$category$}">#}
+{#							<div class="md-toolbar-tools">#}
+{#								<h2 class="md-flex">{$ category $}</h2>#}
+{#								<span flex></span>#}
+{#								<md-button class="md-icon-button" aria-label="Favorite">#}
+{#									<ng-md-icon icon="{$category_icon$}" size="22" aria-label="user"></ng-md-icon>#}
+{#								</md-button>#}
+{#							</div>#}
+{#						</a>#}
+{##}
+{#					</md-toolbar>#}
 				</div>
 
 				<div layout="row" layout-wrap flex="80" flex-sm="100" flex-md="100">

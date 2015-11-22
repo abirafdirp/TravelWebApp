@@ -1,5 +1,5 @@
 from django.db import models
-from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 
 from kompres2015.util.models import TimeStampedModel
 
@@ -12,7 +12,7 @@ class Article(TimeStampedModel):
         ('promosi', 'promosi'),
     )
     title = models.CharField(verbose_name='judul', unique=True, max_length=60)
-    article = RichTextField(verbose_name='isi artikel')
+    article = RichTextUploadingField(verbose_name='isi artikel')
     category = models.CharField(max_length=30, choices=CATEGORY_CHOICES)
     short_description = models.TextField(verbose_name="deskripsi singkat")
     author = models.TextField(verbose_name='penulis')

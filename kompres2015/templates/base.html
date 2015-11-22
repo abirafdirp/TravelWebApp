@@ -28,28 +28,30 @@
 
 		<md-toolbar class="md-primary navbar" ng-cloak>
 			<div class="md-toolbar-tools">
-				<md-button href="/" aria-label="home">
-						<img src="/static/images/flag-mini.png">
-				</md-button>
-				<span flex></span>
-				<md-button href="/lokasi-wisata" ng-mouseleave="traveldestination_icon = 'terrain'" ng-mouseenter="traveldestination_icon = 'satellite'" >
-					<md-tooltip md-direction="down" class="tooltip"><span class="md-body-2">lokasi wisata</span></md-tooltip>
-					<ng-md-icon icon="{$traveldestination_icon$}" aria-label="article"></ng-md-icon>
-				</md-button>
-				<md-button href="/artikel" ng-mouseleave="article_icon = 'my_library_books'" ng-mouseenter="article_icon = 'format_align_left'">
-					<md-tooltip md-direction="down" class="tooltip"><span class="md-body-2">artikel</span></md-tooltip>
-					<ng-md-icon icon="{$article_icon$}" aria-label="article"></ng-md-icon>
-				</md-button>
-				<md-button href="/peta" ng-mouseleave="map_icon = 'directions'" ng-mouseenter="map_icon = 'navigation'">
-					<md-tooltip md-direction="down" class="tooltip"><span class="md-body-2">peta</span></md-tooltip>
-					<ng-md-icon icon="{$map_icon$}" aria-label="article"></ng-md-icon>
-				</md-button>
-				<md-button href="/info" ng-mouseleave="info_icon = 'info'" ng-mouseenter="info_icon = 'info_outline'">
-					<md-tooltip md-direction="down" class="tooltip"><span class="md-body-2">info dan kontak</span></md-tooltip>
-					<ng-md-icon icon="{$info_icon$}" aria-label="article"></ng-md-icon>
-				</md-button>
-
-				<span flex></span>
+				<span flex="20">
+					<md-button href="/" aria-label="home">
+							<img src="/static/images/flag-mini.png">
+					</md-button>
+				</span>
+				<span flex="60" layout-align="center center" layout="row" flex-md="50">
+					<md-button href="/lokasi-wisata" ng-mouseleave="traveldestination_icon = 'terrain'" ng-mouseenter="traveldestination_icon = 'satellite'" >
+						<md-tooltip md-direction="down" class="tooltip"><span class="md-body-2">lokasi wisata</span></md-tooltip>
+						<ng-md-icon icon="{$traveldestination_icon$}" aria-label="article"></ng-md-icon>
+					</md-button>
+					<md-button href="/artikel" ng-mouseleave="article_icon = 'my_library_books'" ng-mouseenter="article_icon = 'format_align_left'">
+						<md-tooltip md-direction="down" class="tooltip"><span class="md-body-2">artikel</span></md-tooltip>
+						<ng-md-icon icon="{$article_icon$}" aria-label="article"></ng-md-icon>
+					</md-button>
+					<md-button href="/peta" ng-mouseleave="map_icon = 'directions'" ng-mouseenter="map_icon = 'navigation'">
+						<md-tooltip md-direction="down" class="tooltip"><span class="md-body-2">peta</span></md-tooltip>
+						<ng-md-icon icon="{$map_icon$}" aria-label="article"></ng-md-icon>
+					</md-button>
+					<md-button href="/info" ng-mouseleave="info_icon = 'info'" ng-mouseenter="info_icon = 'info_outline'">
+						<md-tooltip md-direction="down" class="tooltip"><span class="md-body-2">info dan kontak</span></md-tooltip>
+						<ng-md-icon icon="{$info_icon$}" aria-label="article"></ng-md-icon>
+					</md-button>
+				</span>
+				<span flex layout-align="right center">
 
 				<md-button ng-show="authenticated" ng-click="showProfile($event)" class="lowercase user-nav">
 						<ng-md-icon icon="account_box" size="22" aria-label="user"></ng-md-icon> <span hide-sm>Profil</span>
@@ -68,6 +70,7 @@
 				<md-button ng-hide="authenticated" ng-click="showRegister($event)" class="lowercase user-nav`">
 					<ng-md-icon icon="account_box" size="22" aria-label="user"></ng-md-icon> Daftar
 				</md-button>
+					</span>
 			</div>
 		</md-toolbar>
 

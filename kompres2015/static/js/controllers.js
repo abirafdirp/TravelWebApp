@@ -98,12 +98,6 @@ kompresControllers.controller('LoginNavCtrl', ['$scope',
   }
 ]);
 
-kompresControllers.controller('HomePageCtrl', ['$scope', 'HomePage',
-  function($scope, HomePage) {
-    $scope.homepage = HomePage.query();
-  }
-]);
-
 kompresControllers.controller('RegionsCtrl', ['$scope', 'Regions',
   function($scope, Regions) {
     $scope.regions = Regions.query();
@@ -131,6 +125,9 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
     $scope.search = $scope.params.search;
 
     $scope.travel_destinations = TravelDestinations.list.query();
+    $scope.travel_destinations.$promise.then(function(){
+      $scope.thumbnail = $scope.travel_destinations;
+    });
   }
 ]);
 
@@ -156,11 +153,11 @@ kompresControllers.controller('TravelDestinationRepeatCtrl', ['$scope', '$resour
         $exceptionHandler("The TravelDestinationRepeatController must be initialized with a travel_destination in scope");
       }
       $scope.TravelDestinationInRepeat = $scope.travel_destination;
-      if($scope.travel_destination.full_description.length > 180){
-        $scope.travel_destination_short_description = $scope.travel_destination.full_description.substring(0,180) + ' ...';
+      if($scope.travel_destination.short_description.length > 180){
+        $scope.travel_destination_short_description = $scope.travel_destination.short_description.substring(0,180) + ' ...';
       }
       else{
-        $scope.travel_destination_short_description = $scope.travel_destination.full_description;
+        $scope.travel_destination_short_description = $scope.travel_destination.short_description;
       }
       $scope.district = $resource($scope.travel_destination.district).get();
     };
@@ -209,11 +206,14 @@ kompresControllers.controller('ArticleDetailCtrl', ['$scope', '$route', '$routeP
   function($scope, $route, $routeParams, $resource, Articles) {
     $scope.$route = $route;
     $scope.params = $routeParams;
+    $scope.show_loading = true;
     $scope.article_name = $scope.params.article_name.replace(/-/g,' ');
     $scope.article = Articles.detail.query({article_name:$scope.article_name});
     $scope.article.$promise.then(function() {
-      var url = $scope.article.results[0].main_image+'?format=json';
-      $scope.main_image = $resource(url).get();
+      var url = 'api/articleimages/?format=json&type=main&article=' + $scope.article.title;
+      $scope.main_images = $resource(url).get(function(){
+        $scope.show_loading = false;
+      });
     });
   }
 ]);
@@ -232,7 +232,10 @@ kompresControllers.controller('ArticleRepeatCtrl', ['$scope', '$resource', '$exc
         $scope.article_short_description = $scope.article.short_description;
       }
       PostCategory.addCategory($scope.article.category);
-      $scope.main_image = $resource($scope.articleInRepeat.main_image).get();
+      var url = 'api/articleimages/?format=json&type=thumbnail&article=' + $scope.article.title;
+      $scope.thumbnail = $resource(url).get(function(){
+        $scope.thumbnail = $scope.thumbnail.results[0];
+      });
     };
 
     init();

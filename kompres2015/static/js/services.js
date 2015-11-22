@@ -41,7 +41,7 @@ kompresServices.factory('Districts', ['$resource',
 kompresServices.factory('TravelDestinations', ['$resource',
   function($resource) {
     return {
-      list : $resource('/api/traveldestinations/?format=json', {}, {
+      list : $resource('/api/traveldestinations/?format=json&fields=name,district,short_description,type', {}, {
       query: {method: 'GET'}
       }),
       detail : $resource('/api/traveldestinations/?name=:travel_destination_name', {
@@ -71,7 +71,7 @@ kompresServices.factory('TravelDestinationsContents', ['$resource',
 kompresServices.factory('Articles', ['$resource',
   function($resource) {
     return {
-      list : $resource('/api/articles/?format=json&fields=title,author,category,short_description,main_image,created_date', {}, {
+      list : $resource('/api/articles/?format=json&fields=title,author,category,short_description,date,images', {}, {
       query: {method: 'GET'}
       }),
       detail : $resource('/api/articles/?title=:article_name', {

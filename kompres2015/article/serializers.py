@@ -4,8 +4,8 @@ from kompres2015.article.models import Article
 
 
 class ArticleSerializer(serializers.HyperlinkedModelSerializer):
-    main_image = serializers.HyperlinkedRelatedField(view_name='article-main-image-detail',
-                                                     read_only=True)
+    images = serializers.HyperlinkedRelatedField(view_name='article-image-detail',
+                                                 read_only=True, many=True)
 
     def __init__(self, *args, **kwargs):
         # Instantiate the superclass normally
@@ -27,5 +27,5 @@ class ArticleSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Article
-        fields = ('id', 'title', 'category', 'author', 'article', 'main_image',
+        fields = ('id', 'title', 'category', 'author', 'article', 'images',
                   'short_description', 'date')

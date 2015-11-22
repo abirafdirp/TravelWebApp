@@ -57,6 +57,7 @@ THIRD_PARTY_APPS = (
 
     'django_extensions',
     'ckeditor',  # WYSIWYG editor
+    'ckeditor_uploader',
 )
 
 # Apps specific for this project go here.
@@ -309,6 +310,8 @@ COMMENTS_APP = 'fluent_comments'
 
 # django-ckeditor
 #CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_IMAGE_BACKEND = 'Pillow'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (

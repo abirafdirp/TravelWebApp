@@ -12,14 +12,22 @@ class Transportation(TimeStampedModel):
 
 
 class TravelDestination(TimeStampedModel):
+    TYPE_CHOICES = (
+        ('Museum', 'Museum'),
+        ('Wisata', 'Wisata'),
+        ('Belanja', 'Belanja'),
+        ('Point of Interest', 'Point of Interest'),
+    )
+
     name = models.CharField(max_length=30, unique=True)
+    type = models.CharField(choices=TYPE_CHOICES, max_length=30)
     district = models.ForeignKey(District, verbose_name='Kabupaten',
                                  related_name='travel_destinations',
                                  blank=True, null=True)
     full_description = RichTextField(verbose_name='Deskripsi lengkap',
                                      blank=True, null=True)
-    tagline = models.CharField(verbose_name='Deskripsi Singkat/Tagline',
-                               max_length=100, blank=True, null=True)
+    short_description = models.TextField(verbose_name='Deskripsi Singkat',
+                               blank=True, null=True)
 
     class Meta:
         verbose_name = 'Lokasi Wisata'

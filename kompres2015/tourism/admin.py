@@ -27,7 +27,7 @@ class TravelDestinationAdmin(ForeignKeyAutocompleteAdmin):
        'district': ('name',),
     }
 
-    fields = ('name', 'district', 'full_description', 'tagline',)
+    fields = ('name', 'district', 'full_description', 'short_description', 'type')
 
     inlines = [
         TravelDestinationContentInline,

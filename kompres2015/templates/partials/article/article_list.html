@@ -1,5 +1,10 @@
 <div ng-controller="ArticleListCtrl">
-	<div ng-controller="SearchCtrl">
+
+	<div ng-show="show_loading == true" class="loading">
+		<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+	</div>
+
+	<div ng-show="show_loading == false" ng-controller="SearchCtrl">
 		<div ng-controller="PageCtrl" hide-sm hide-md>
 			<div class="faux-image-container">
 				<input ng-show="search_opened" class="search-input" ng-model="$parent.search" flex="grow" flex-offset="5" autofocus>
@@ -17,10 +22,6 @@
 			</a>
 		</div>
 		<div hide-gt-md style="margin-top: 70px;"></div>
-
-		<div layout="column" flex="100" layout-align="center center" ng-show="show_loading == true">
-			<md-progress-circular md-mode="indeterminate"></md-progress-circular>
-		</div>
 
 
 		<md-content ng-cloak class="md-padding article-list animated fadeIn" ng-show="show_loading == false">
@@ -62,14 +63,14 @@
 						<md-card id="posts">
 							<a ng-href="/artikel/{$ slugify(article.title) $}">
 								<span class="md-title article-list-title">{$ article.title $}</span>
-								<div class="article-image"><img ng-src="{$main_image.image$}" class="md-card-image" alt="Washed Out"></div>
+								<div class="article-image"><img ng-src="{$thumbnail.image$}" class="md-card-image" alt="Washed Out"></div>
 
 							</a>
 							<md-card-content>
 						<span class="md-body-2" layout="row" layout-wrap>
 							<span flex="100" flex-gt-lg="60">
 								<ng-md-icon icon="access_time" size="20" aria-label="tanggal"></ng-md-icon>
-								{$ article.created_date | date:'d  MMMM  yyyy' $}
+								{$ article.date | date:'d  MMMM  yyyy' $}
 							</span>
 							<span flex="100" flex-gt-lg="40">
 								<ng-md-icon icon="sort" size="20" aria-label="tanggal"></ng-md-icon>
