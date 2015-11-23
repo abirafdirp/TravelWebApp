@@ -122,7 +122,7 @@ md-toolbar a.md-button {
 }
 
 .article-list {
-    margin-top: 5px;
+    margin-top: 0;
 }
 
 md-button {
@@ -135,6 +135,7 @@ md-button {
     background-color: rgba(50,50,50,0.8);
     color: white;
     padding: 7px 12px 7px 12px;
+    z-index: 1;
 }
 
 #posts{
@@ -203,7 +204,7 @@ a {
 }
 
 .faux-image-container {
-    height: 310px;
+    height: 230px;
     overflow: hidden;
     -webkit-box-shadow: 0px 0px 17px 4px rgba(179,179,179,1);
     -moz-box-shadow: 0px 0px 17px 4px rgba(179,179,179,1);
@@ -264,7 +265,7 @@ a {
 }
 .search-area {
     position: absolute;
-    height: 250px;
+    height: 170px;
     width: 100%;
     top: 60px;
     background-color: rgb(0,150,136);
@@ -277,7 +278,7 @@ a {
 
 .search-not-activated {
     position: absolute;
-    height: 255px;
+    height: 170px;
     width: 100%;
     top: 60px;
     background-color: rgba(0,0,0,0);
@@ -304,7 +305,7 @@ a {
 
 .search-input {
     position: absolute;
-    top: 140px;
+    top: 95px;
     z-index: 2;
     border-color:#cccccc;
     border-style:solid;
@@ -349,4 +350,28 @@ a {
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+}
+
+#posts a{
+    outline: 0;
+}
+
+#travel-destination-search {
+    -webkit-box-shadow: 0px 0px 3px 1px rgba(212,212,212,1);
+-moz-box-shadow: 0px 0px 3px 1px rgba(212,212,212,1);
+box-shadow: 0px 0px 3px 1px rgba(212,212,212,1);
+}
+
+.dest-search-icon {
+    padding-top: 4px;
+    padding-left: 0;
+    padding-right: 5px;
+}
+
+.dest-search-row {
+    padding-right: 20px;
+}
+
+.dest-search-no-margin {
+    margin: 10px 0 10px 0;
 }

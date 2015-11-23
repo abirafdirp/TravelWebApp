@@ -30,43 +30,45 @@
 		<md-content ng-cloak class="md-padding article-list animated fadeIn" ng-show="show_loading == false">
 			<div layout="row" layout-no-wrap>
 				<div flex="20" hide-sm hide-md layout-padding layout="column" layout-sm="column" id="article-left-nav">
-					<md-toolbar class="md-primary">
-						<div class="md-toolbar-tools">
-							<h2 class="md-flex md-display-2">{$district_search$}</h2>
-						</div>
-					</md-toolbar>
-					<md-toolbar id="posts-categories" class="md-accent" ng-mouseleave="all_category_icon = 'keyboard_arrow_right'" ng-mouseenter="all_category_icon = 'keyboard_tab'">
-						<a href="/artikel">
-							<div class="md-toolbar-tools">
-								<h2 class="md-flex">semua</h2>
-								<span flex></span>
-								<md-button class="md-icon-button" aria-label="Favorite">
-									<ng-md-icon icon="{$all_category_icon$}" size="22" aria-label="user"></ng-md-icon>
-								</md-button>
-							</div>
-						</a>
-					</md-toolbar>
-					<md-toolbar ng-repeat="category in categories" id="posts-categories" class="{$ setColor($index) $}" ng-mouseleave="category_icon = 'keyboard_arrow_right'" ng-mouseenter="category_icon = 'keyboard_tab'">
-						<a href="javascript:void(0)" ng-click="TravelDestinationSearch.setSearch(category)">
-							<div class="md-toolbar-tools">
-								<h2 class="md-flex">{$ category $}</h2>
-								<span flex></span>
-								<md-button class="md-icon-button" aria-label="Favorite">
-									<ng-md-icon icon="{$category_icon$}" size="22" aria-label="user"></ng-md-icon>
-								</md-button>
-							</div>
-						</a>
-
-				</md-toolbar>
+					<md-content layout-padding id="travel-destination-search">
+						<span layout="row" layout-align="left center" class="dest-search-row">
+							<ng-md-icon icon="sort" class="dest-search-icon dest-search-no-margin" style="fill: teal"></ng-md-icon>
+							<md-input-container class="dest-search-no-margin">
+								<label>kategori</label>
+								<input ng-model="user.name" type="text">
+							</md-input-container>
+						</span>
+						<span layout="row" layout-align="left center" class="dest-search-row">
+							<ng-md-icon icon="place" class="dest-search-icon dest-search-no-margin" style="fill: teal"></ng-md-icon>
+							<md-input-container class="dest-search-no-margin">
+								<label>kabupaten</label>
+								<input ng-model="user.name" type="text">
+							</md-input-container>
+						</span>
+						<span layout="row" layout-align="left center" class="dest-search-row">
+							<ng-md-icon icon="place" class="dest-search-icon dest-search-no-margin" style="fill: teal"></ng-md-icon>
+							<md-input-container class="dest-search-no-margin">
+								<label>provinsi</label>
+								<input ng-model="user.name" type="text">
+							</md-input-container>
+						</span>
+						<span layout="row" layout-align="left center" class="dest-search-row">
+							<ng-md-icon icon="panorama" class="dest-search-icon dest-search-no-margin" style="fill: teal"></ng-md-icon>
+							<md-input-container class="dest-search-no-margin">
+								<label>wilayah</label>
+								<input ng-model="user.name" type="text">
+							</md-input-container>
+						</span>
+					</md-content>
 				</div>
 
 				<div layout="row" layout-wrap flex="80" flex-sm="100" flex-md="100">
-					<div ng-repeat="travel_destination in travel_destinations.results | filter: TravelDestinationSearch.search | filter: TravelDestinationSearch.district_search" ng-controller="TravelDestinationRepeatCtrl" flex="33" flex-sm="100" flex-md="50">
+					<div ng-cloak ng-repeat="travel_destination in travel_destinations.results | filter: TravelDestinationSearch.search | filter: TravelDestinationSearch.district_search" ng-controller="TravelDestinationRepeatCtrl" flex="33" flex-sm="100" flex-md="50">
 
 						<md-card id="posts">
 							<a ng-href="/lokasi-wisata/{$ slugify(travel_destination.name) $}">
 								<span class="md-title article-list-title">{$ travel_destination.name $}</span>
-								<div class="article-image"><img ng-src="{$thumbnail.image$}" class="md-card-image" alt="Washed Out"></div>
+								<div class="article-image"><img ng-show="thumbnail.image != null" ng-src="{$thumbnail.image$}" class="md-card-image animated fadeIn" alt="Washed Out"></div>
 
 							</a>
 							<md-card-content>
@@ -75,9 +77,9 @@
 								<ng-md-icon icon="access_time" size="20" aria-label="tanggal"></ng-md-icon>
 								<span ng-if="travel_destination.region.name != null" class="animated fadeIn">{$ travel_destination.region.name $}</span>
 							</span>
-							<span flex="100" flex-gt-lg="40">
+							<span flex="100" flex-gt-lg="40" ng-show="district.name != null" class="animated fadeIn">
 								<ng-md-icon icon="place" size="20" aria-label="tempat"></ng-md-icon>
-								<a href="javascript:void(0)" ng-click="TravelDestinationSearch.setSearch(district.name)" class="animated fadeIn">
+								<a href="javascript:void(0)" ng-click="TravelDestinationSearch.setSearch(district.name)">
 									{$ district.name $}
 								</a>
 							</span>

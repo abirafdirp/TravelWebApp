@@ -29,6 +29,16 @@ kompresServices.service('ArticleSearch', [
       this.search = search;
     };
 
+    this.clearCategorySearch = function() {
+      if(this.category_search != null){
+        this.category_search = '';
+      }
+    };
+
+    this.setCategorySearch = function(search) {
+      this.category_search = search;
+    };
+
     this.change_search_icon = function() {
       this.search_icon_toggle = !this.search_icon_toggle;
       if (this.search_icon_toggle){
@@ -37,6 +47,11 @@ kompresServices.service('ArticleSearch', [
       else{
         this.search_icon = 'search';
       }
+    };
+
+    this.clearAllSearch = function() {
+      this.search = '';
+      this.category_search = '';
     }
   }
 ]);
