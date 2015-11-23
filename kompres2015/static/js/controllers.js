@@ -119,13 +119,14 @@ kompresControllers.controller('DistrictsCtrl', ['$scope', 'Districts',
 ]);
 
 
-kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', '$routeParams', '$resource', 'TravelDestinations', 'Districts', 'Provinces', 'Regions',
-  function($scope, $route, $routeParams, $resource, TravelDestinations, Districts, Provinces, Regions) {
+kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', '$routeParams', '$resource', '$rootScope', 'TravelDestinations', 'Districts', 'Provinces', 'Regions',
+  function($scope, $route, $routeParams, $resource, $rootScope, TravelDestinations, Districts, Provinces, Regions) {
     $scope.$route = $route;
     $scope.params = $routeParams;
     $scope.show_loading = true;
     $scope.travel_destination_name = $scope.params.travel_destination_name;
     $scope.search = $scope.params.search;
+    $scope.categories = [];
 
     $scope.districts = Districts.query();
     $scope.provinces = Provinces.query();
@@ -137,6 +138,9 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
     $scope.travel_destinations = TravelDestinations.list.query();
     $scope.travel_destinations.$promise.then(function(){
       angular.forEach($scope.travel_destinations.results, function(item){
+        if ($rootScope.arrayContains($scope.categories, item.type) == false){
+          $scope.categories.push(String(item.type));
+        }
         item['district_name'] = $resource(item.district).get(function(){
           item['province'] = $resource(item.district_name.province).get(function(){
             item['region'] = $resource(item.province.region).get();
@@ -307,10 +311,17 @@ kompresControllers.controller('PageCtrl', ['$scope', 'Page',
   }
 ]);
 
-kompresControllers.controller('SearchCtrl', ['$scope', 'ArticleSearch', 'TravelDestinationSearch',
-  function($scope, ArticleSearch, TravelDestinationSearch) {
+kompresControllers.controller('SearchCtrl', ['$scope', 'ArticleSearch', '$timeout', 'TravelDestinationSearch',
+  function($scope, ArticleSearch, $timeout, TravelDestinationSearch) {
     $scope.ArticleSearch = ArticleSearch;
     $scope.TravelDestinationSearch = TravelDestinationSearch;
+    $scope.search_opened = false;
+
+    $scope.toggleSearch = function (){
+      $timeout(function() {
+        $scope.search_opened = !$scope.search_opened;
+      });
+    }
   }
 ]);
 

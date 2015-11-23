@@ -60,6 +60,26 @@ kompresServices.service('TravelDestinationSearch', [
   function() {
     this.search_icon = 'search';
     this.search_opened = false;
+    this.category_search = '';
+    this.district_search = '';
+    this.province_search = '';
+    this.region_search = '';
+
+    this.clearCategorySearch = function() {
+      if(this.category_search != null){
+        this.category_search = '';
+      }
+    };
+
+    this.setCategorySearch = function(search) {
+      this.category_search = search;
+    };
+
+    this.clearSearch = function() {
+      if(this.search != null){
+        this.search = '';
+      }
+    };
 
     this.clearDistrictSearch = function() {
       if(this.district_search != null){
