@@ -19,51 +19,76 @@
 			</div>
 
 			<a class="search-btn material-teal"
-				 ng-click="search_opened = !search_opened; TravelDestinationSearch.change_search_icon(); TravelDestinationSearch.clearSearch(); TravelDestinationSearch.clearDistrictSearch()"
+				 ng-click="toggleSearch(); TravelDestinationSearch.change_search_icon(); TravelDestinationSearch.clearAllSearch()"
 				 flex flex-offset="5">
 				<ng-md-icon icon="{$TravelDestinationSearch.search_icon$}" aria-label="article"></ng-md-icon>
 			</a>
 		</div>
 		<div hide-gt-md style="margin-top: 70px;"></div>
 
-
-		<md-content ng-cloak class="md-padding article-list animated fadeIn" ng-show="show_loading == false">
+		<md-content ng-cloak class="md-padding animated fadeIn" ng-show="show_loading == false">
 			<div layout="row" layout-no-wrap>
-				<div flex="20" hide-sm hide-md layout-padding layout="column" layout-sm="column" id="article-left-nav">
-					<md-content layout-padding id="travel-destination-search">
-						<span layout="row" layout-align="left center" class="dest-search-row">
-							<ng-md-icon icon="sort" class="dest-search-icon dest-search-no-margin" style="fill: teal"></ng-md-icon>
-							<md-input-container class="dest-search-no-margin">
-								<label>kategori</label>
-								<input ng-model="user.name" type="text">
-							</md-input-container>
-						</span>
-						<span layout="row" layout-align="left center" class="dest-search-row">
-							<ng-md-icon icon="place" class="dest-search-icon dest-search-no-margin" style="fill: teal"></ng-md-icon>
-							<md-input-container class="dest-search-no-margin">
-								<label>kabupaten</label>
-								<input ng-model="user.name" type="text">
-							</md-input-container>
-						</span>
-						<span layout="row" layout-align="left center" class="dest-search-row">
-							<ng-md-icon icon="place" class="dest-search-icon dest-search-no-margin" style="fill: teal"></ng-md-icon>
-							<md-input-container class="dest-search-no-margin">
-								<label>provinsi</label>
-								<input ng-model="user.name" type="text">
-							</md-input-container>
-						</span>
-						<span layout="row" layout-align="left center" class="dest-search-row">
-							<ng-md-icon icon="panorama" class="dest-search-icon dest-search-no-margin" style="fill: teal"></ng-md-icon>
-							<md-input-container class="dest-search-no-margin">
-								<label>wilayah</label>
-								<input ng-model="user.name" type="text">
-							</md-input-container>
-						</span>
+				<div flex="20" hide-sm hide-md layout-padding layout="column" layout-sm="column">
+					<md-content layout-padding ng-show="search_opened">
+						<md-autocomplete
+										md-search-text="TravelDestinationSearch.category_search"
+										md-items="category in $parent.categories | filter:TravelDestinationSearch.category_search | orderBy: 'category'"
+										md-item-text="category"
+										md-min-length="0"
+										placeholder="Kategori"
+										class="animated fadeIn">
+							<md-item-template>
+								<span class="animated fadeIn" md-highlight-text="TravelDestinationSearch.category_search" md-highlight-flags="^i">{$category$}</span>
+							</md-item-template>
+							<md-not-found>
+							</md-not-found>
+						</md-autocomplete>
+						<md-autocomplete
+										md-search-text="TravelDestinationSearch.district_search"
+										md-items="district in $parent.districts.results | filter:TravelDestinationSearch.district_search | orderBy: 'name'"
+										md-item-text="district.name"
+										md-min-length="0"
+										placeholder="kabupaten"
+										class="animated fadeIn">
+							<md-item-template>
+								<span class="animated fadeIn" md-highlight-text="TravelDestinationSearch.district_search" md-highlight-flags="^i">{$district.name$}</span>
+							</md-item-template>
+							<md-not-found>
+							</md-not-found>
+						</md-autocomplete>
+						<md-autocomplete
+										md-search-text="TravelDestinationSearch.province_search"
+										md-items="province in $parent.provinces.results | filter:TravelDestinationSearch.province_search | orderBy: 'name'"
+										md-item-text="province.name"
+										md-min-length="0"
+										placeholder="provinsi"
+										class="animated fadeIn">
+							<md-item-template>
+								<span class="animated fadeIn" md-highlight-text="TravelDestinationSearch.province_search" md-highlight-flags="^i">{$province.name$}</span>
+							</md-item-template>
+							<md-not-found>
+							</md-not-found>
+						</md-autocomplete>
+						<md-autocomplete
+										md-search-text="TravelDestinationSearch.region_search"
+										md-items="region in $parent.regions.results | filter:TravelDestinationSearch.region_search | orderBy: 'name'"
+										md-item-text="region.name"
+										md-min-length="0"
+										placeholder="wilayah"
+										class="animated fadeIn">
+							<md-item-template>
+								<span class="animated fadeIn" md-highlight-text="TravelDestinationSearch.region_search" md-highlight-flags="^i">{$region.name$}</span>
+							</md-item-template>
+							<md-not-found>
+							</md-not-found>
+						</md-autocomplete>
 					</md-content>
 				</div>
 
 				<div layout="row" layout-wrap flex="80" flex-sm="100" flex-md="100">
-					<div ng-cloak ng-repeat="travel_destination in travel_destinations.results | filter: TravelDestinationSearch.search | filter: TravelDestinationSearch.district_search" ng-controller="TravelDestinationRepeatCtrl" flex="33" flex-sm="100" flex-md="50">
+					<div ng-cloak ng-repeat="travel_destination in travel_destinations.results | filter: TravelDestinationSearch.search | filter: TravelDestinationSearch.district_search
+					| filter: TravelDestinationSearch.category_search | filter: TravelDestinationSearch.province_search | filter: TravelDestinationSearch.region_search"
+							 ng-controller="TravelDestinationRepeatCtrl" flex="33" flex-sm="100" flex-md="50">
 
 						<md-card id="posts">
 							<a ng-href="/lokasi-wisata/{$ slugify(travel_destination.name) $}">
