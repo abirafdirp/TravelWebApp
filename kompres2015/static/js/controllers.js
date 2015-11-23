@@ -316,11 +316,16 @@ kompresControllers.controller('SearchCtrl', ['$scope', 'ArticleSearch', '$timeou
     $scope.ArticleSearch = ArticleSearch;
     $scope.TravelDestinationSearch = TravelDestinationSearch;
     $scope.search_opened = false;
+    $scope.search_icon = 'search';
 
     $scope.toggleSearch = function (){
-      $timeout(function() {
         $scope.search_opened = !$scope.search_opened;
-      });
+        if ($scope.search_opened){
+          $scope.search_icon = 'close';
+        }
+        else {
+          $scope.search_icon = 'search';
+        }
     }
   }
 ]);

@@ -17,8 +17,8 @@
 			<div ng-class="{'search-area': search_opened == true, 'search-not-activated': search_opened == false}">
 			</div>
 
-			<a class="search-btn material-teal" ng-click="search_opened = !search_opened; ArticleSearch.change_search_icon(); ArticleSearch.clearSearch()" flex flex-offset="5">
-				<ng-md-icon icon="{$ArticleSearch.search_icon$}" aria-label="article"></ng-md-icon>
+			<a class="search-btn material-teal" ng-click="toggleSearch(); ArticleSearch.clearAllSearch()" flex flex-offset="5">
+				<ng-md-icon icon="{$search_icon$}" aria-label="article"></ng-md-icon>
 			</a>
 		</div>
 		<div hide-gt-md style="margin-top: 70px;"></div>

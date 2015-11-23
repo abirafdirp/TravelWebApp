@@ -17,11 +17,11 @@ kompresServices.service('PostCategory', ['$rootScope',
 kompresServices.service('ArticleSearch', [
   function() {
     this.search_icon = 'search';
-    this.search_opened = false;
 
     this.clearSearch = function() {
       if(this.search != null){
         this.search = '';
+        this.search_icon = 'close';
       }
     };
 
@@ -39,27 +39,15 @@ kompresServices.service('ArticleSearch', [
       this.category_search = search;
     };
 
-    this.change_search_icon = function() {
-      this.search_icon_toggle = !this.search_icon_toggle;
-      if (this.search_icon_toggle){
-        this.search_icon = 'close';
-      }
-      else{
-        this.search_icon = 'search';
-      }
-    };
-
     this.clearAllSearch = function() {
       this.search = '';
       this.category_search = '';
-    }
+    };
   }
 ]);
 
 kompresServices.service('TravelDestinationSearch', [
   function() {
-    this.search_icon = 'search';
-    this.search_opened = false;
     this.category_search = '';
     this.district_search = '';
     this.province_search = '';
@@ -73,12 +61,6 @@ kompresServices.service('TravelDestinationSearch', [
 
     this.setCategorySearch = function(search) {
       this.category_search = search;
-    };
-
-    this.clearSearch = function() {
-      if(this.search != null){
-        this.search = '';
-      }
     };
 
     this.clearDistrictSearch = function() {
@@ -101,15 +83,13 @@ kompresServices.service('TravelDestinationSearch', [
       this.search = search;
     };
 
-    this.change_search_icon = function() {
-      this.search_icon_toggle = !this.search_icon_toggle;
-      if (this.search_icon_toggle){
-        this.search_icon = 'close';
-      }
-      else{
-        this.search_icon = 'search';
-      }
-    }
+    this.clearAllSearch = function() {
+      this.search = '';
+      this.category_search = '';
+      this.district_search = '';
+      this.province_search = '';
+      this.region_search = '';
+    };
   }
 ]);
 
