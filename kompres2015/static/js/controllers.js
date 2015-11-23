@@ -326,7 +326,7 @@ kompresControllers.controller('SearchCtrl', ['$scope', 'ArticleSearch', '$timeou
         else {
           $scope.search_icon = 'search';
         }
-    }
+    };
   }
 ]);
 

@@ -28,28 +28,28 @@
 			<div layout="row" layout-no-wrap>
 				<div flex="20" hide-sm hide-md layout-padding layout="column" layout-sm="column" id="article-left-nav">
 					<md-toolbar class="md-primary">
-						<div class="md-toolbar-tools">
-							<h2 class="md-flex md-display-2">KATEGORI</h2>
+						<div class="md-toolbar-tools" layout-align="center center">
+							<h2 class="md-display-2">KATEGORI</h2>
 						</div>
 					</md-toolbar>
-					<md-toolbar id="posts-categories" class="md-accent" ng-mouseleave="all_category_icon = 'keyboard_arrow_right'" ng-mouseenter="all_category_icon = 'keyboard_tab'">
+					<md-toolbar id="posts-categories" class="md-accent">
 						<a href="javascript:void(0)" ng-click="ArticleSearch.clearCategorySearch()">
 							<div class="md-toolbar-tools">
 								<h2 class="md-flex">semua</h2>
 								<span flex></span>
 								<md-button class="md-icon-button" aria-label="Favorite">
-									<ng-md-icon icon="{$all_category_icon$}" size="22" aria-label="user"></ng-md-icon>
+									<ng-md-icon icon="{$ArticleSearch.getCategoryIcon('')$}" size="22" aria-label="user"></ng-md-icon>
 								</md-button>
 							</div>
 						</a>
 					</md-toolbar>
-					<md-toolbar ng-repeat="category in categories" id="posts-categories" class="{$ setColor($index) $}" ng-mouseleave="category_icon = 'keyboard_arrow_right'" ng-mouseenter="category_icon = 'keyboard_tab'">
+					<md-toolbar ng-repeat="category in categories" id="posts-categories" class="{$ setColor($index) $}">
 						<a href="javascript:void(0)" ng-click="ArticleSearch.setCategorySearch(category)">
 							<div class="md-toolbar-tools">
 								<h2 class="md-flex">{$ category $}</h2>
 								<span flex></span>
 								<md-button class="md-icon-button" aria-label="Favorite">
-									<ng-md-icon icon="{$category_icon$}" size="22" aria-label="user"></ng-md-icon>
+									<ng-md-icon icon="{$ArticleSearch.getCategoryIcon(category)$}" size="22" aria-label="user"></ng-md-icon>
 								</md-button>
 							</div>
 						</a>

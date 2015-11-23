@@ -29,14 +29,16 @@
 		<md-content ng-cloak class="md-padding animated fadeIn" ng-show="show_loading == false">
 			<div layout="row" layout-no-wrap>
 				<div flex="20" hide-sm hide-md layout-padding layout="column" layout-sm="column">
-					<md-content layout-padding ng-show="search_opened">
+					<md-content ng-show="search_opened" id="dest-search-box">
+						<span class="md-headline animated fadeIn" id="dest-search-box-title">cari</span>
 						<md-autocomplete
 										md-search-text="TravelDestinationSearch.category_search"
 										md-items="category in $parent.categories | filter:TravelDestinationSearch.category_search | orderBy: 'category'"
 										md-item-text="category"
 										md-min-length="0"
 										placeholder="Kategori"
-										class="animated fadeIn">
+										md-floating-label="kategori"
+										class="animated fadeIn dest-search-row category-search">
 							<md-item-template>
 								<span class="animated fadeIn" md-highlight-text="TravelDestinationSearch.category_search" md-highlight-flags="^i">{$category$}</span>
 							</md-item-template>
@@ -49,7 +51,8 @@
 										md-item-text="district.name"
 										md-min-length="0"
 										placeholder="kabupaten"
-										class="animated fadeIn">
+										md-floating-label="kabupaten"
+										class="animated fadeIn dest-search-row district-search">
 							<md-item-template>
 								<span class="animated fadeIn" md-highlight-text="TravelDestinationSearch.district_search" md-highlight-flags="^i">{$district.name$}</span>
 							</md-item-template>
@@ -61,8 +64,9 @@
 										md-items="province in $parent.provinces.results | filter:TravelDestinationSearch.province_search | orderBy: 'name'"
 										md-item-text="province.name"
 										md-min-length="0"
+										md-floating-label="provinsi"
 										placeholder="provinsi"
-										class="animated fadeIn">
+										class="animated fadeIn dest-search-row province-search">
 							<md-item-template>
 								<span class="animated fadeIn" md-highlight-text="TravelDestinationSearch.province_search" md-highlight-flags="^i">{$province.name$}</span>
 							</md-item-template>
@@ -74,8 +78,9 @@
 										md-items="region in $parent.regions.results | filter:TravelDestinationSearch.region_search | orderBy: 'name'"
 										md-item-text="region.name"
 										md-min-length="0"
+										md-floating-label="wilayah"
 										placeholder="wilayah"
-										class="animated fadeIn">
+										class="animated fadeIn dest-search-row region-search">
 							<md-item-template>
 								<span class="animated fadeIn" md-highlight-text="TravelDestinationSearch.region_search" md-highlight-flags="^i">{$region.name$}</span>
 							</md-item-template>

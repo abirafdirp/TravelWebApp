@@ -17,6 +17,7 @@ kompresServices.service('PostCategory', ['$rootScope',
 kompresServices.service('ArticleSearch', [
   function() {
     this.search_icon = 'search';
+    this.category_search = '';
 
     this.clearSearch = function() {
       if(this.search != null){
@@ -43,6 +44,17 @@ kompresServices.service('ArticleSearch', [
       this.search = '';
       this.category_search = '';
     };
+
+
+    this.getCategoryIcon = function (category) {
+      if (this.category_search == category){
+        return 'keyboard_tab';
+      }
+      else {
+        return 'keyboard_arrow_right';
+      }
+    };
+
   }
 ]);
 

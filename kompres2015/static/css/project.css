@@ -375,3 +375,53 @@ box-shadow: 0px 0px 3px 1px rgba(212,212,212,1);
 .dest-search-no-margin {
     margin: 10px 0 10px 0;
 }
+
+md-autocomplete[md-floating-label] md-input-container{
+    padding-bottom: 3px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.category-search {
+    border-right: 2px solid teal;
+}
+
+.district-search {
+    border-right: 2px solid rgba(255, 179, 15, 0.96);
+}
+
+.province-search {
+    border-right: 2px solid #3F51B5;
+}
+.region-search {
+    border-right: 2px solid #E91E63;
+}
+
+#dest-search-box {
+    padding-top: 30px;
+}
+
+#dest-search-box-title{
+    margin-left: 4px;
+    padding-left: 1px;
+    padding-right: 30px;
+    border-bottom: 6px solid teal;
+    position: relative;
+    top: -25px;
+    padding-bottom: 3px;
+}
+
+.border-bot {
+    border-bottom: 2px solid;
+}
+
+.article-category-select {
+    margin: 0 0 0 0;
+    padding-top: 15px;
+    padding-bottom: 0px;
+    padding-left: 8px;
+}
+
+.border-right {
+    border-right: 3px solid grey;
+}
