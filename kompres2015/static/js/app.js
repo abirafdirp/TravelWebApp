@@ -130,6 +130,7 @@ var kompresApp = angular.module('kompres', [
   'ngMdIcons',
   'ngLocale',
   'ngSanitize',
+  'angular-carousel',
 ]);
 
 // differentiate angular and django template language

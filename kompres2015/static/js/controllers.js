@@ -152,8 +152,8 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
   }
 ]);
 
-kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route', '$routeParams', 'TravelDestinations', 'TravelDestinationContents',
-  function($scope, $route, $routeParams, TravelDestinations, TravelDestinationContents) {
+kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route', '$routeParams', 'TravelDestinations', '$resource', '$timeout',
+  function($scope, $route, $routeParams, TravelDestinations, $resource, $timeout) {
     $scope.$route = $route;
     $scope.params = $routeParams;
     $scope.travel_destination_name = $scope.params.travel_destination_name.replace(/-/g,' ');
@@ -162,8 +162,21 @@ kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route'
     $scope.travel_destination.$promise.then(function() {
       var url = $scope.travel_destination.results[0].district+'?format=json';
       $scope.district = $resource(url).get();
+
+      $scope.travel_destination_contents = [];
+      angular.forEach($scope.travel_destination.results[0].contents, function(content){
+        $scope.travel_destination_contents.push(content);
+      });
+
+      $scope.main_images = [];
+      angular.forEach($scope.travel_destination.results[0].images, function (image){
+        $resource(image+'?format=json').get(function(image){
+          if (image.type == 'main'){
+            $scope.main_images.push(image);
+          }
+        });
+      });
     });
-    $scope.travel_destination_contents = TravelDestinationContents.detail.query({travel_destination_name:$scope.travel_destination_name});
   }
 ]);
 

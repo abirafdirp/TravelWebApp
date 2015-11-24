@@ -1,3 +1,9 @@
-<div ng-controller="TravelDestinationsCtrl">
-{$ travel_destination $}
+<div ng-controller="TravelDestinationDetailCtrl">
+  <div style="position: fixed;top: 300px;">
+    <ul rn-carousel class="image">
+      <li ng-repeat="image in main_images">
+        <div class="layer">{$ image.image $}</div>
+      </li>
+    </ul>
+  </div>
 </div>

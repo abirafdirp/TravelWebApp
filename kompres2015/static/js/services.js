@@ -105,6 +105,21 @@ kompresServices.service('TravelDestinationSearch', [
   }
 ]);
 
+kompresServices.factory('TravelDestinationContents', ['$resource',
+  function($resource) {
+    return {
+      list : $resource('/api/traveldestinationcontents/?format=json', {}, {
+      query: {method: 'GET'}
+      }),
+      detail : $resource('/api/traveldestinationcontents/?travel_destination=:travel_destination_name', {
+        travel_destination_name:'@travel_destination_name'
+      }, {
+      query: {method: 'GET'}
+      })
+    }
+  }
+]);
+
 kompresServices.factory('Regions', ['$resource',
   function($resource){
     return $resource('/api/regions/?format=json', {}, {
