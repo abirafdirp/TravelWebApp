@@ -14,7 +14,6 @@
 	<link rel="stylesheet" href="{% static 'css/auth.css' %}">
 	<link rel="stylesheet" href="{% static 'css/project.css' %}">
 	<link rel="stylesheet" href="{% static 'css/angular-material-icons.css' %}">
-	<link rel="stylesheet" href="{% static 'css/angular-carousel.min.css' %}"
 
 
 	<!-- Main CSS -->
@@ -80,6 +79,8 @@
 		<main ng-view ng-cloak></main>
 	</md-content>
 
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+
 	<!-- angular v1.4.2 -->
 	<script src="{% static 'js/angular.js' %}"></script>
 	<script src="{% static 'js/angular-route.js' %}"></script>
@@ -96,7 +97,6 @@
 	<!-- 3rd party angular libs -->
 	<script src="{% static 'js/clickoutside.directive.js'%}"></script>
 	<script src="{% static 'js/angular-material-icons.min.js'%}"></script>
-	<script src="{% static 'js/angular-carousel.min.js'%}"></script>
 
 	<!--[if lt IE 9]>
 		<script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -104,7 +104,6 @@
 		<![endif]-->
 
 	<!-- angular-django-registration-auth dependencies -->
-	<script src="{% static 'js/jquery.min.js' %}"></script>
 	<script src="{% static 'js/angular-cookies.min.js' %}"></script>
 	<script src="{% static 'js/angular-sanitize.min.js' %}"></script>
 
@@ -133,6 +132,7 @@
 
 	<!-- 3rd party libs -->
 	<script src="{% static 'js/svg-morpheus.js' %}"></script>
+	<script src="{% static 'js/tweenmax.min.js' %}"></script>
 
 </div>
 </body>

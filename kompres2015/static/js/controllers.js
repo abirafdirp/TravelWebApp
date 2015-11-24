@@ -152,8 +152,8 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
   }
 ]);
 
-kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route', '$routeParams', 'TravelDestinations', '$resource', '$timeout',
-  function($scope, $route, $routeParams, TravelDestinations, $resource, $timeout) {
+kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route', '$routeParams', 'TravelDestinations', '$resource', '$interval', '$timeout',
+  function($scope, $route, $routeParams, TravelDestinations, $resource, $interval ,$timeout) {
     $scope.$route = $route;
     $scope.params = $routeParams;
     $scope.travel_destination_name = $scope.params.travel_destination_name.replace(/-/g,' ');
@@ -168,14 +168,44 @@ kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route'
         $scope.travel_destination_contents.push(content);
       });
 
+      $scope.images_length = $scope.travel_destination.results[0].images.length;
       $scope.main_images = [];
-      angular.forEach($scope.travel_destination.results[0].images, function (image){
+      angular.forEach($scope.travel_destination.results[0].images, function (image, index){
         $resource(image+'?format=json').get(function(image){
           if (image.type == 'main'){
             $scope.main_images.push(image);
           }
         });
+        if (index == $scope.images_length - 1){
+          console.log($scope.main_images);
+          $interval(function(){
+            $scope.prevSlide();
+          },5000,3);
+        }
       });
+
+      $scope.direction = 'left';
+      $scope.currentIndex = 0;
+
+      $scope.setCurrentSlideIndex = function (index) {
+        $scope.direction = (index > $scope.currentIndex) ? 'left' : 'right';
+        $scope.currentIndex = index;
+      };
+
+      $scope.isCurrentSlideIndex = function (index) {
+        return $scope.currentIndex === index;
+      };
+
+      $scope.prevSlide = function () {
+        $scope.direction = 'left';
+        $scope.currentIndex = ($scope.currentIndex < $scope.main_images.length - 1) ? ++$scope.currentIndex : 0;
+      };
+
+      $scope.nextSlide = function () {
+        $scope.direction = 'right';
+        $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.main_images.length - 1;
+      };
+
     });
   }
 ]);
