@@ -1,8 +1,53 @@
 <div ng-controller="TravelDestinationDetailCtrl">
-  <div class="slider">
-    <img ng-repeat="image in main_images" class="slide slide-animation nonDraggableImage faux-image"
-         ng-swipe-right="nextSlide()" ng-swipe-left="prevSlide()"
-         ng-hide="!isCurrentSlideIndex($index)" ng-src="{$ image.image $}">
-  </div>
-
+	<div layout="column" layout-fill ng-repeat="travel_destination in travel_destination.results">
+		<div layout="row">
+			<h2 ng-repeat="image in main_images" class="tagline md-display-1" flex="60"
+					ng-hide="!isCurrentSlideIndex($index)">{$image.tag$}</h2>
+		</div>
+		<div class="slider">
+			<img ng-repeat="image in main_images" class="slide slide-animation nonDraggableImage faux-image"
+					 ng-swipe-right="nextSlide()" ng-swipe-left="prevSlide()"
+					 ng-hide="!isCurrentSlideIndex($index)" ng-src="{$ image.image $}">
+		</div>
+		<md-toolbar md-theme="destination">
+			<div class="md-toolbar-tools">
+				<span flex="5"></span>
+				<h2>{$ travel_destination.name $}</h2>
+			</div>
+		</md-toolbar>
+		<div layout="row">
+			<div flex="5"></div>
+			<md-tabs flex>
+				<md-tab label="{$travel_destination.name$}">
+						<div ng-bind-html="travel_destination.full_description"></div>
+				</md-tab>
+				<md-tab label="safsfas">
+					<md-tab-body>
+						<p>
+							Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+							totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+							dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit,
+							sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+						</p>
+					</md-tab-body>
+				</md-tab>
+			</md-tabs>
+			<div flex="25" layout="column">
+				<span class="dest-side"></span>
+					<span flex="grow">
+						<ng-md-icon icon="place" size="20" aria-label="tanggal"></ng-md-icon>
+						<span>{$district.name $}</span>
+					</span>
+				{#					<span flex="grow">#}
+				{#						<span flex="5"></span>#}
+				{#					 <ng-md-icon icon="account_circle" size="20" aria-label="author"></ng-md-icon>#}
+				{#						<span>{$article.author $}</span>#}
+				{#					</span>#}
+				{#					<span flex="grow">#}
+				{#						<ng-md-icon icon="sort" size="20" aria-label="tanggal"></ng-md-icon>#}
+				{#						<a href="/artikel/?search=info"> {$ article.category $}</a>#}
+				{#						</span>#}
+			</div>
+		</div>
+	</div>
 </div>

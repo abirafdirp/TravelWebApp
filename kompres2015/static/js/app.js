@@ -229,6 +229,13 @@ kompresApp.config(function($mdThemingProvider) {
     .warnPalette('red');
 });
 
+kompresApp.config(function($mdThemingProvider) {
+  $mdThemingProvider.theme('destination')
+    .primaryPalette('red')
+    .accentPalette('blue')
+    .warnPalette('red');
+});
+
 kompresApp.run(function($rootScope) {
   $rootScope.slugify = function (name) {
     return name.replace(/ /g,'-').toLowerCase()
