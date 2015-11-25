@@ -1,20 +1,8 @@
 <div ng-controller="TravelDestinationDetailCtrl">
-  <div class="faux-image-container">
+  <div class="slider">
     <img ng-repeat="image in main_images" class="slide slide-animation nonDraggableImage faux-image"
          ng-swipe-right="nextSlide()" ng-swipe-left="prevSlide()"
          ng-hide="!isCurrentSlideIndex($index)" ng-src="{$ image.image $}">
-
-    <nav class="nav">
-      <div class="wrapper">
-        <ul class="dots">
-          <li class="dot" ng-repeat="image in main_images">
-            <a href="#" ng-class="{'active':isCurrentSlideIndex($index)}"
-               ng-click="setCurrentSlideIndex($index);">{$image.name$}</a></li>
-        </ul>
-      </div>
-    </nav>
   </div>
-
-
 
 </div>

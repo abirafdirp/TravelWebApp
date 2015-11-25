@@ -177,7 +177,6 @@ kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route'
           }
         });
         if (index == $scope.images_length - 1){
-          console.log($scope.main_images);
           $interval(function(){
             $scope.prevSlide();
           },5000,3);
