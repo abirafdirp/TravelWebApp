@@ -203,17 +203,21 @@ kompresApp.config(['$routeProvider', '$locationProvider',
         templateUrl: '/partials/report/',
         activetab: 'message-us'
       }).
-      when('/peta', {
-        templateUrl: '/partials/map/',
-        activetab: 'map',
-        resolve: {
-          travel_destinations: function(TravelDestinations){
-            return TravelDestinations.list.query(function(response){
-              return response;
-            })
+        when('/peta', {
+          templateUrl: '/partials/map/',
+          activetab: 'map',
+          controller: 'MapCtrl',
+          resolve: {
+            "travel_destinations": function(TravelDestinations, $resource, Marker){
+              return TravelDestinations.list.query(function(response){
+                angular.forEach(response.results, function(item){
+                  item['thumbnail_image'] = $resource(item.thumbnail).get();
+                  Marker.addMarker(item);
+                });
+              });
+            }
           }
-        },
-      }).
+        }).
       otherwise({
         redirectTo: '/'
       });
@@ -248,7 +252,7 @@ kompresApp.config(function($mdThemingProvider) {
     .warnPalette('red');
 });
 
-kompresApp.run(function($rootScope, ArticleSearch, TravelDestinationSearch) {
+kompresApp.run(function($rootScope, ArticleSearch, TravelDestinationSearch, Marker) {
   $rootScope.slugify = function (name) {
     return name.replace(/ /g,'-').toLowerCase()
   };
@@ -263,6 +267,7 @@ kompresApp.run(function($rootScope, ArticleSearch, TravelDestinationSearch) {
   $rootScope.$on("$locationChangeStart", function(event, next) {
     ArticleSearch.clearAllSearch();
     TravelDestinationSearch.clearAllSearch();
+    Marker.clearMarkers();
   });
 });
 

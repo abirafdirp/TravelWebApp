@@ -1,9 +1,9 @@
-<div ng-controller="TravelDestinationListCtrl">
-  <div ng-controller="MapCtrl">
+
+
     <div>
       <ui-gmap-google-map center="map.center"
                           zoom="map.zoom" bounds="map.bounds">
-        <ui-gmap-markers models="travel_destinations.results" coords="'self'" icon="'icon'" click="onClick">
+        <ui-gmap-markers models="markers" coords="'self'" icon="'icon'" click="onClick">
           <ui-gmap-windows show="show">
             <div ng-non-bindable>
 
@@ -15,12 +15,11 @@
 
 
 
-
             </div>
           </ui-gmap-windows>
         </ui-gmap-markers>
 
       </ui-gmap-google-map>
     </div>
-  </div>
-</div>
+
+    {$ markers$}

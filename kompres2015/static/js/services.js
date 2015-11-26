@@ -18,10 +18,13 @@ kompresServices.service('Marker', [
   function() {
     this.markers = [];
 
-    function Marker(id, latitude, longitude) {
+    function Marker(id, latitude, longitude, name, short_description, thumbnail_image) {
       this.id = id;
       this.latitude = latitude;
       this.longitude = longitude;
+      this.name = name;
+      this.short_description = short_description;
+      this.thumbnail_image = thumbnail_image;
     }
 
     this.getMarkers = function(){
@@ -29,8 +32,12 @@ kompresServices.service('Marker', [
     };
 
     this.addMarker = function(obj){
-      this.markers.push(new Marker(obj.id, obj.latitude, obj.longitude));
+      this.markers.push(new Marker(obj.id, obj.latitude, obj.longitude, obj.thumbnail_image, obj.short_description, obj.name));
     };
+
+    this.clearMarkers = function() {
+      this.markers = [];
+    }
   }
 ]);
 

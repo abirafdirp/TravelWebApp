@@ -401,8 +401,8 @@ kompresControllers.controller('SearchCtrl', ['$scope', 'ArticleSearch', '$timeou
   }
 ]);
 
-kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$timeout', '$resource',
-  function($scope, TravelDestinations, $timeout, $resource) {
+kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$timeout', '$resource', '$route', 'travel_destinations', 'Marker',
+  function($scope, TravelDestinations, $timeout, $resource, $route, travel_destinations, Marker) {
     $scope.map = {
       "center": {
         "latitude": -4.6111678,
@@ -411,13 +411,8 @@ kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$time
       "zoom": 5
     };
 
-    function Marker(id, latitude, longitude) {
-      this.id = id;
-      this.latitude = latitude;
-      this.longitude = longitude;
-    }
-
-    $scope.markers = [];
+    $scope.markers = Marker.getMarkers();
+    $scope.travel_destinations = travel_destinations;
 
     //$scope.travel_destinations = TravelDestinations.list.query(function(){
     //  angular.forEach($scope.travel_destinations.results, function(item){
@@ -425,9 +420,7 @@ kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$time
     //    $scope.markers.push(new Marker(item.id, item.latitude, item.longitude));
     //  });
     //});
-    travel_destinations.then(function(data){
-      $scope.travel_destinations = data;
-    })
+
 
   }
 ]);
