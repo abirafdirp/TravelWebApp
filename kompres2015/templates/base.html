@@ -77,7 +77,6 @@
 
 	<main ng-view ng-cloak></main>
 
-	<script src="{% static 'js/jquery.min.js' %}"></script>
 
 	<!-- angular v1.4.2 -->
 	<script src="{% static 'js/angular.js' %}"></script>
@@ -88,13 +87,19 @@
 
 	<!-- localization -->
 	<script src="{% static 'js/locales/angular-locale_id-id.js' %}"></script>
+
 	<!-- angular-material dependencies -->
 	<script src="{% static 'js/angular-animate.min.js' %}"></script>
 	<script src="{% static 'js/angular-aria.min.js' %}"></script>
 	<script src="{% static 'js/angular-material.min.js' %}"></script>
+
 	<!-- 3rd party angular libs -->
 	<script src="{% static 'js/clickoutside.directive.js'%}"></script>
 	<script src="{% static 'js/angular-material-icons.min.js'%}"></script>
+	<!-- angular google maps -->
+	<script src="{% static 'js/angular-simple-logger.min.js'%}"></script>
+	<script src="{% static 'js/lodash.min.js'%}"></script>
+	<script src="{% static 'js/angular-google-maps.min.js'%}"></script>
 
 	<!--[if lt IE 9]>
 		<script src="bower_components/es5-shim/es5-shim.js"></script>

@@ -1,8 +1,8 @@
 <div ng-controller="TravelDestinationDetailCtrl">
 	<div layout="column" layout-fill ng-repeat="travel_destination in travel_destination.results">
 		<div layout="row">
-			<h2 ng-repeat="image in main_images" class="tagline md-display-1" flex="60"
-					ng-hide="!isCurrentSlideIndex($index)">{$image.tag$}</h2>
+			<h2 ng-repeat="image in main_images" class="tagline md-display-1 animated fadeIn" flex="60"
+					ng-if="isCurrentSlideIndex($index)">{$image.tag$}</h2>
 		</div>
 		<div class="slider">
 			<img ng-repeat="image in main_images" class="slide slide-animation nonDraggableImage faux-image"
@@ -17,36 +17,40 @@
 		</md-toolbar>
 		<div layout="row">
 			<div flex="5"></div>
-			<md-tabs flex>
+			<md-tabs flex md-dynamic-height>
 				<md-tab label="{$travel_destination.name$}">
-						<div ng-bind-html="travel_destination.full_description"></div>
+					<div ng-bind-html="travel_destination.full_description | trustAsHtml"></div>
 				</md-tab>
-				<md-tab label="safsfas">
+				<md-tab ng-repeat="travel_destination_content in travel_destination_contents">
+					<md-tab-label>
+						{$travel_destination_content.name$}
+					</md-tab-label>
 					<md-tab-body>
-						<p>
-							Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-							totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-							dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit,
-							sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
-						</p>
+						<div ng-bind-html="travel_destination_content.content | trustAsHtml"></div>
 					</md-tab-body>
 				</md-tab>
+				<md-tab label="galeri">
+					<div class='md-padding'>
+							<div layout="row" layout-wrap>
+								<div ng-repeat="image in gallery_images" flex="33" layout="row" style="margin-top: 10px">
+									<a ng-click="showImage(image.image)" class="pointer">
+										<img ng-src="{$image.image$}" class="gallery-thumbnail" flex>
+									</a>
+									<span flex="10"></span>
+								</div>
+							</div>
+					</div>
+				</md-tab>
 			</md-tabs>
-			<div flex="25" layout="column">
+			<div flex="5"></div>
+			<div flex="20" layout="column">
 				<span class="dest-side"></span>
 					<span flex="grow">
 						<ng-md-icon icon="place" size="20" aria-label="tanggal"></ng-md-icon>
-						<span>{$district.name $}</span>
+						<a ng-href="/lokasi-wisata?search={$district.name$}" class="animated fadeIn" ng-if="district.name"><span>{$district.name $}</span></a>,
+						<a ng-href="/lokasi-wisata?search={$province.name$}" class="animated fadeIn" ng-if="province.name"><span>{$province.name $}</span></a>
+						<a ng-href="/lokasi-wisata?search={$region.name$}" class="animated fadeIn" ng-if="region.name"><span>{$region.name $}</span></a>
 					</span>
-				{#					<span flex="grow">#}
-				{#						<span flex="5"></span>#}
-				{#					 <ng-md-icon icon="account_circle" size="20" aria-label="author"></ng-md-icon>#}
-				{#						<span>{$article.author $}</span>#}
-				{#					</span>#}
-				{#					<span flex="grow">#}
-				{#						<ng-md-icon icon="sort" size="20" aria-label="tanggal"></ng-md-icon>#}
-				{#						<a href="/artikel/?search=info"> {$ article.category $}</a>#}
-				{#						</span>#}
 			</div>
 		</div>
 	</div>

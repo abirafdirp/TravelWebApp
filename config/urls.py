@@ -231,6 +231,8 @@ urlpatterns += [
         name="travel-destination-list-partial"),
     url(r'^partials/travel-destination-detail/$', TemplateView.as_view(template_name='partials/tourism/travel_destination_detail.html'),
         name="travel-destination-detail-partial"),
+    url(r'^partials/map/$', TemplateView.as_view(template_name='partials/map/map.html'),
+        name="map"),
 ]
 
 # angular-django-registration-auth partial views

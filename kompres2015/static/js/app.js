@@ -165,6 +165,7 @@ var kompresApp = angular.module('kompres', [
   'ngMdIcons',
   'ngLocale',
   'ngSanitize',
+    'uiGmapgoogle-maps',
 ]);
 
 // differentiate angular and django template language
@@ -202,6 +203,10 @@ kompresApp.config(['$routeProvider', '$locationProvider',
         templateUrl: '/partials/report/',
         activetab: 'message-us'
       }).
+      when('/peta', {
+        templateUrl: '/partials/map/',
+        activetab: 'map'
+      }).
       otherwise({
         redirectTo: '/'
       });
@@ -236,7 +241,7 @@ kompresApp.config(function($mdThemingProvider) {
     .warnPalette('red');
 });
 
-kompresApp.run(function($rootScope) {
+kompresApp.run(function($rootScope, ArticleSearch, TravelDestinationSearch) {
   $rootScope.slugify = function (name) {
     return name.replace(/ /g,'-').toLowerCase()
   };
@@ -248,4 +253,18 @@ kompresApp.run(function($rootScope) {
     }
     return false;
   };
+  $rootScope.$on("$locationChangeStart", function(event, next) {
+    ArticleSearch.clearAllSearch();
+    TravelDestinationSearch.clearAllSearch();
+  });
+});
+
+kompresApp.filter('trustAsHtml', function($sce) { return $sce.trustAsHtml; });
+
+kompresApp.config(function(uiGmapGoogleMapApiProvider) {
+    uiGmapGoogleMapApiProvider.configure({
+        key: 'AIzaSyC72PSYYQFRLF_8cXUVu-Mu4xXFvwQoKZw',
+        v: '3.20', //defaults to latest 3.X anyhow
+        libraries: 'weather,geometry,visualization'
+    });
 });

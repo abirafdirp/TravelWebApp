@@ -88,6 +88,24 @@ kompresControllers.controller('NavCtrl', ['$scope', '$route', '$mdDialog', 'Arti
         });
       }
     };
+
+    $scope.showImage = function(image) {
+        $mdDialog.show({
+          locals: {image:image},
+          template:
+          '<md-dialog aria-label="galeri" class="resize-container">' +
+          '     <img ng-src="{$ image $}" class="resize">' +
+          '</md-dialog>',
+          parent: angular.element(document.body),
+          clickOutsideToClose:true,
+          controller: function DialogController($scope, $mdDialog, image) {
+            $scope.image = image;
+            $scope.closeDialog = function() {
+              $mdDialog.hide();
+            }
+          }
+        });
+      };
   }
 ]);
 
@@ -152,28 +170,37 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
   }
 ]);
 
-kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route', '$routeParams', 'TravelDestinations', '$resource', '$interval', '$timeout',
-  function($scope, $route, $routeParams, TravelDestinations, $resource, $interval ,$timeout) {
+kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route', '$routeParams', 'TravelDestinations', '$resource', '$interval', '$mdDialog', 'TravelDestinationSearch',
+  function($scope, $route, $routeParams, TravelDestinations, $resource, $interval , TravelDestinationSearch) {
     $scope.$route = $route;
     $scope.params = $routeParams;
     $scope.travel_destination_name = $scope.params.travel_destination_name.replace(/-/g,' ');
+    $scope.TravelDestinationSearch = TravelDestinationSearch;
 
     $scope.travel_destination = TravelDestinations.detail.query({travel_destination_name:$scope.travel_destination_name})
     $scope.travel_destination.$promise.then(function() {
       var url = $scope.travel_destination.results[0].district+'?format=json';
-      $scope.district = $resource(url).get();
+      $scope.district = $resource(url).get(function(){
+        $scope.province = $resource($scope.district.province).get(function(){
+          $scope.region = $resource($scope.province.region).get();
+        });
+      });
 
       $scope.travel_destination_contents = [];
       angular.forEach($scope.travel_destination.results[0].contents, function(content){
-        $scope.travel_destination_contents.push(content);
+        $scope.travel_destination_contents.push($resource(content+'?format=json').get());
       });
 
       $scope.images_length = $scope.travel_destination.results[0].images.length;
       $scope.main_images = [];
+      $scope.gallery_images = [];
       angular.forEach($scope.travel_destination.results[0].images, function (image, index){
         $resource(image+'?format=json').get(function(image){
           if (image.type == 'main'){
             $scope.main_images.push(image);
+          }
+          if (image.type == 'gallery'){
+            $scope.gallery_images.push(image);
           }
         });
         if (index == $scope.images_length - 1){
@@ -372,4 +399,9 @@ kompresControllers.controller('SearchCtrl', ['$scope', 'ArticleSearch', '$timeou
   }
 ]);
 
+kompresControllers.controller('MapCtrl', ['$scope',
+  function($scope) {
+    $scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
+  }
+]);
 
