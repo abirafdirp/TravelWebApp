@@ -137,8 +137,8 @@ kompresControllers.controller('DistrictsCtrl', ['$scope', 'Districts',
 ]);
 
 
-kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', '$routeParams', '$resource', '$rootScope', 'TravelDestinations', 'Districts', 'Provinces', 'Regions',
-  function($scope, $route, $routeParams, $resource, $rootScope, TravelDestinations, Districts, Provinces, Regions) {
+kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', '$routeParams', '$resource', '$rootScope', 'TravelDestinations', 'Districts', 'Provinces', 'Regions', 'Marker',
+  function($scope, $route, $routeParams, $resource, $rootScope, TravelDestinations, Districts, Provinces, Regions, Marker) {
     $scope.$route = $route;
     $scope.params = $routeParams;
     $scope.show_loading = true;
@@ -156,6 +156,8 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
     $scope.travel_destinations = TravelDestinations.list.query();
     $scope.travel_destinations.$promise.then(function(){
       angular.forEach($scope.travel_destinations.results, function(item){
+        Marker.addMarker(item);
+
         if ($rootScope.arrayContains($scope.categories, item.type) == false){
           $scope.categories.push(String(item.type));
         }
@@ -399,9 +401,34 @@ kompresControllers.controller('SearchCtrl', ['$scope', 'ArticleSearch', '$timeou
   }
 ]);
 
-kompresControllers.controller('MapCtrl', ['$scope',
-  function($scope) {
-    $scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
+kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$timeout', '$resource',
+  function($scope, TravelDestinations, $timeout, $resource) {
+    $scope.map = {
+      "center": {
+        "latitude": -4.6111678,
+        "longitude": 118.6796369
+      },
+      "zoom": 5
+    };
+
+    function Marker(id, latitude, longitude) {
+      this.id = id;
+      this.latitude = latitude;
+      this.longitude = longitude;
+    }
+
+    $scope.markers = [];
+
+    //$scope.travel_destinations = TravelDestinations.list.query(function(){
+    //  angular.forEach($scope.travel_destinations.results, function(item){
+    //    item['thumbnail_image'] = $resource(item.thumbnail).get();
+    //    $scope.markers.push(new Marker(item.id, item.latitude, item.longitude));
+    //  });
+    //});
+    travel_destinations.then(function(data){
+      $scope.travel_destinations = data;
+    })
+
   }
 ]);
 

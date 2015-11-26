@@ -7,7 +7,6 @@ from kompres2015.region.models import District
 from kompres2015.users.models import User
 
 
-
 class Transportation(TimeStampedModel):
     name = models.CharField(max_length=40)
 
@@ -22,6 +21,8 @@ class TravelDestination(TimeStampedModel):
 
     name = models.CharField(max_length=30, unique=True)
     type = models.CharField(choices=TYPE_CHOICES, max_length=30)
+    latitude = models.FloatField(blank=True, null=True)
+    longitude = models.FloatField(blank=True, null=True)
     district = models.ForeignKey(District, verbose_name='Kabupaten',
                                  related_name='travel_destinations',
                                  blank=True, null=True)

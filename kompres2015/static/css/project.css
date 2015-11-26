@@ -447,7 +447,7 @@ md-autocomplete[md-floating-label] md-input-container{
 
 .angular-google-map-container {
     top: 60px;
-    height: 500px;
+    height: 600px;
 }
 
 .parent {
@@ -477,6 +477,18 @@ md-autocomplete[md-floating-label] md-input-container{
 .gallery-thumbnail {
     max-width:100%;
     max-height:100%;
+}
+
+.map-info-container {
+    width: 300px;
+}
+
+.map-info-img{
+    display: block;
+    max-width:300px;
+    max-height:180px;
+    width: auto;
+    height: auto;
 }
 
 .card img {

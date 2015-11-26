@@ -1,3 +1,26 @@
-<div ng-controller="MapCtrl">
-<ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+<div ng-controller="TravelDestinationListCtrl">
+  <div ng-controller="MapCtrl">
+    <div>
+      <ui-gmap-google-map center="map.center"
+                          zoom="map.zoom" bounds="map.bounds">
+        <ui-gmap-markers models="travel_destinations.results" coords="'self'" icon="'icon'" click="onClick">
+          <ui-gmap-windows show="show">
+            <div ng-non-bindable>
+
+              <div layout="row" layout-align="center center" class="map-info-container" layout-fill>
+                <img class="map-info-img" src="{$thumbnail_image.image$}" flex>
+                <a href="/lokasi-wisata/{$slugify(name)$}">{$slugify(name)$}</a>
+                <p flex class="md-body-2">{$short_description$}</div>
+              </div>
+
+
+
+
+            </div>
+          </ui-gmap-windows>
+        </ui-gmap-markers>
+
+      </ui-gmap-google-map>
+    </div>
+  </div>
 </div>

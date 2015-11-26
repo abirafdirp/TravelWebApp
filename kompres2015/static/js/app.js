@@ -205,7 +205,14 @@ kompresApp.config(['$routeProvider', '$locationProvider',
       }).
       when('/peta', {
         templateUrl: '/partials/map/',
-        activetab: 'map'
+        activetab: 'map',
+        resolve: {
+          travel_destinations: function(TravelDestinations){
+            return TravelDestinations.list.query(function(response){
+              return response;
+            })
+          }
+        },
       }).
       otherwise({
         redirectTo: '/'

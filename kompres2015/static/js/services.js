@@ -14,6 +14,26 @@ kompresServices.service('PostCategory', ['$rootScope',
   }
 ]);
 
+kompresServices.service('Marker', [
+  function() {
+    this.markers = [];
+
+    function Marker(id, latitude, longitude) {
+      this.id = id;
+      this.latitude = latitude;
+      this.longitude = longitude;
+    }
+
+    this.getMarkers = function(){
+      return this.markers;
+    };
+
+    this.addMarker = function(obj){
+      this.markers.push(new Marker(obj.id, obj.latitude, obj.longitude));
+    };
+  }
+]);
+
 kompresServices.service('ArticleSearch', [
   function() {
     this.search_icon = 'search';
@@ -157,7 +177,7 @@ kompresServices.factory('Districts', ['$resource',
 kompresServices.factory('TravelDestinations', ['$resource',
   function($resource) {
     return {
-      list : $resource('/api/traveldestinations/?format=json&fields=name,district,short_description,type,thumbnail', {}, {
+      list : $resource('/api/traveldestinations/?format=json&fields=id,latitude,longitude,name,district,short_description,type,thumbnail', {}, {
       query: {method: 'GET'}
       }),
       detail : $resource('/api/traveldestinations/?name=:travel_destination_name', {
