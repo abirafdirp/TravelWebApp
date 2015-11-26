@@ -411,17 +411,12 @@ kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$time
       "zoom": 5
     };
 
+    $scope.slugify = function (name) {
+      return name.replace(/ /g,'-').toLowerCase()
+    };
+
     $scope.markers = Marker.getMarkers();
     $scope.travel_destinations = travel_destinations;
-
-    //$scope.travel_destinations = TravelDestinations.list.query(function(){
-    //  angular.forEach($scope.travel_destinations.results, function(item){
-    //    item['thumbnail_image'] = $resource(item.thumbnail).get();
-    //    $scope.markers.push(new Marker(item.id, item.latitude, item.longitude));
-    //  });
-    //});
-
-
   }
 ]);
 

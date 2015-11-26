@@ -6,20 +6,14 @@
         <ui-gmap-markers models="markers" coords="'self'" icon="'icon'" click="onClick">
           <ui-gmap-windows show="show">
             <div ng-non-bindable>
-
               <div layout="row" layout-align="center center" class="map-info-container" layout-fill>
                 <img class="map-info-img" src="{$thumbnail_image.image$}" flex>
-                <a href="/lokasi-wisata/{$slugify(name)$}">{$slugify(name)$}</a>
+                <a href="/lokasi-wisata/{$name_slugified$}">{$name$}</a>
                 <p flex class="md-body-2">{$short_description$}</div>
               </div>
-
-
-
             </div>
           </ui-gmap-windows>
         </ui-gmap-markers>
 
       </ui-gmap-google-map>
     </div>
-
-    {$ markers$}

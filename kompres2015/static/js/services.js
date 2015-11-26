@@ -14,17 +14,18 @@ kompresServices.service('PostCategory', ['$rootScope',
   }
 ]);
 
-kompresServices.service('Marker', [
-  function() {
+kompresServices.service('Marker', ['$resource', '$rootScope',
+  function($resource, $rootScope) {
     this.markers = [];
 
-    function Marker(id, latitude, longitude, name, short_description, thumbnail_image) {
+    function Marker(id, latitude, longitude, thumbnail_image, short_description, name) {
       this.id = id;
       this.latitude = latitude;
       this.longitude = longitude;
       this.name = name;
       this.short_description = short_description;
       this.thumbnail_image = thumbnail_image;
+      this.name_slugified = $rootScope.slugify(name);
     }
 
     this.getMarkers = function(){
