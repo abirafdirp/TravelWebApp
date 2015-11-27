@@ -401,8 +401,8 @@ kompresControllers.controller('SearchCtrl', ['$scope', 'ArticleSearch', '$timeou
   }
 ]);
 
-kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$timeout', '$resource', '$route', 'travel_destinations', 'Marker',
-  function($scope, TravelDestinations, $timeout, $resource, $route, travel_destinations, Marker) {
+kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$routeParams', '$resource', '$route', 'travel_destinations', 'Marker',
+  function($scope, TravelDestinations, $routeParams, $resource, $route, travel_destinations, Marker) {
     $scope.map = {
       "center": {
         "latitude": -4.6111678,
@@ -411,9 +411,16 @@ kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$time
       "zoom": 5
     };
 
-    $scope.slugify = function (name) {
-      return name.replace(/ /g,'-').toLowerCase()
-    };
+    $scope.params = $routeParams;
+    $scope.ltd = $scope.params.ltd;
+    $scope.lng = $scope.params.lng;
+    if (($scope.ltd) && ($scope.lng)){
+      $scope.map.center.latitude = $scope.ltd;
+      $scope.map.center.longitude = $scope.lng;
+      $scope.map.zoom = 14;
+    }
+
+
 
     $scope.markers = Marker.getMarkers();
     $scope.travel_destinations = travel_destinations;

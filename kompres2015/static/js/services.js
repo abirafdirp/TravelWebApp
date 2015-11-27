@@ -18,7 +18,7 @@ kompresServices.service('Marker', ['$resource', '$rootScope',
   function($resource, $rootScope) {
     this.markers = [];
 
-    function Marker(id, latitude, longitude, thumbnail_image, short_description, name) {
+    function Marker(id, latitude, longitude, thumbnail_image, short_description, name, type) {
       this.id = id;
       this.latitude = latitude;
       this.longitude = longitude;
@@ -26,6 +26,12 @@ kompresServices.service('Marker', ['$resource', '$rootScope',
       this.short_description = short_description;
       this.thumbnail_image = thumbnail_image;
       this.name_slugified = $rootScope.slugify(name);
+      if (type.toLowerCase() == 'wisata'){
+        this.icon = 'https://maps.gstatic.com/mapfiles/ms2/micons/blue-dot.png'
+      }
+      else {
+        this.icon = 'https://maps.gstatic.com/mapfiles/ms2/micons/green-dot.png'
+      }
     }
 
     this.getMarkers = function(){
@@ -33,7 +39,7 @@ kompresServices.service('Marker', ['$resource', '$rootScope',
     };
 
     this.addMarker = function(obj){
-      this.markers.push(new Marker(obj.id, obj.latitude, obj.longitude, obj.thumbnail_image, obj.short_description, obj.name));
+      this.markers.push(new Marker(obj.id, obj.latitude, obj.longitude, obj.thumbnail_image, obj.short_description, obj.name, obj.type));
     };
 
     this.clearMarkers = function() {
