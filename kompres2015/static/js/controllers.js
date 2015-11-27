@@ -207,31 +207,19 @@ kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route'
         });
         if (index == $scope.images_length - 1){
           $interval(function(){
-            $scope.prevSlide();
-          },7000,6);
+            $scope.nextSlide();
+          },5400,12);
         }
       });
 
-      $scope.direction = 'left';
       $scope.currentIndex = 0;
-
-      $scope.setCurrentSlideIndex = function (index) {
-        $scope.direction = (index > $scope.currentIndex) ? 'left' : 'right';
-        $scope.currentIndex = index;
-      };
 
       $scope.isCurrentSlideIndex = function (index) {
         return $scope.currentIndex === index;
       };
 
-      $scope.prevSlide = function () {
-        $scope.direction = 'left';
-        $scope.currentIndex = ($scope.currentIndex < $scope.main_images.length - 1) ? ++$scope.currentIndex : 0;
-      };
-
       $scope.nextSlide = function () {
-        $scope.direction = 'right';
-        $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.main_images.length - 1;
+        $scope.currentIndex = ($scope.currentIndex < $scope.main_images.length - 1) ? ++$scope.currentIndex : 0;
       };
 
     });
@@ -382,12 +370,19 @@ kompresControllers.controller('PageCtrl', ['$scope', 'Page',
   }
 ]);
 
-kompresControllers.controller('SearchCtrl', ['$scope', 'ArticleSearch', '$timeout', 'TravelDestinationSearch',
-  function($scope, ArticleSearch, $timeout, TravelDestinationSearch) {
+kompresControllers.controller('SearchCtrl', ['$scope', 'ArticleSearch', '$timeout', 'TravelDestinationSearch', '$routeParams',
+  function($scope, ArticleSearch, $timeout, TravelDestinationSearch, $routeParams) {
     $scope.ArticleSearch = ArticleSearch;
     $scope.TravelDestinationSearch = TravelDestinationSearch;
     $scope.search_opened = false;
     $scope.search_icon = 'search';
+
+    $scope.params = $routeParams;
+
+    if ($scope.params.kategori){
+      TravelDestinationSearch.setCategorySearch($scope.params.kategori);
+    }
+
 
     $scope.toggleSearch = function (){
         $scope.search_opened = !$scope.search_opened;
@@ -401,8 +396,8 @@ kompresControllers.controller('SearchCtrl', ['$scope', 'ArticleSearch', '$timeou
   }
 ]);
 
-kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$routeParams', '$resource', '$route', 'travel_destinations', 'Marker',
-  function($scope, TravelDestinations, $routeParams, $resource, $route, travel_destinations, Marker) {
+kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$routeParams', '$resource', '$route', 'travel_destinations', 'Marker', '$location',
+  function($scope, TravelDestinations, $routeParams, $resource, $route, travel_destinations, Marker, $location) {
     $scope.map = {
       "center": {
         "latitude": -4.6111678,
@@ -419,6 +414,12 @@ kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$rout
       $scope.map.center.longitude = $scope.lng;
       $scope.map.zoom = 14;
     }
+
+    $scope.searchFunc = function(destination){
+      $scope.map.center.latitude = destination.latitude;
+      $scope.map.center.longitude = destination.longitude;
+      $scope.map.zoom = 14;
+    };
 
 
 

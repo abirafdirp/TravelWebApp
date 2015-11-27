@@ -23,13 +23,26 @@ kompresServices.service('Marker', ['$resource', '$rootScope',
       this.latitude = latitude;
       this.longitude = longitude;
       this.name = name;
+      this.type = type;
       this.short_description = short_description;
       this.thumbnail_image = thumbnail_image;
       this.name_slugified = $rootScope.slugify(name);
       if (type.toLowerCase() == 'wisata'){
         this.icon = 'https://maps.gstatic.com/mapfiles/ms2/micons/blue-dot.png'
       }
-      else {
+      if (type.toLowerCase() == 'belanja'){
+        this.icon = 'https://maps.gstatic.com/mapfiles/ms2/micons/shopping.png'
+      }
+      if (type.toLowerCase() == 'aktifitas'){
+        this.icon = 'https://maps.gstatic.com/mapfiles/ms2/micons/cycling.png'
+      }
+      if (type.toLowerCase() == 'museum'){
+        this.icon = 'https://maps.gstatic.com/mapfiles/ms2/micons/purple-dot.png'
+      }
+      if (type.toLowerCase() == 'point of interest'){
+        this.icon = 'https://maps.gstatic.com/mapfiles/ms2/micons/POI.png'
+      }
+      if (type.toLowerCase() == 'lokasi historis') {
         this.icon = 'https://maps.gstatic.com/mapfiles/ms2/micons/green-dot.png'
       }
     }

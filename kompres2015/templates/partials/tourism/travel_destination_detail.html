@@ -1,13 +1,15 @@
 <div ng-controller="TravelDestinationDetailCtrl">
 	<div layout="column" layout-fill ng-repeat="travel_destination in travel_destination.results">
 		<div layout="row">
-			<h2 ng-repeat="image in main_images" class="tagline md-display-1 animated fadeIn" flex="60"
+			<h2 ng-repeat="image in main_images" class="tagline md-display-1" flex="60"
 					ng-if="isCurrentSlideIndex($index)">{$image.tag$}</h2>
 		</div>
 		<div class="slider">
-			<img ng-repeat="image in main_images" class="slide slide-animation nonDraggableImage faux-image"
-					 ng-swipe-right="nextSlide()" ng-swipe-left="prevSlide()"
-					 ng-hide="!isCurrentSlideIndex($index)" ng-src="{$ image.image $}">
+			<ul rn-carousel class="image" rn-carousel-auto-slide="5">
+				<li ng-repeat="image in main_images">
+					<img class="layer faux-image" ng-src="{$ image.image $}">
+				</li>
+			</ul>
 		</div>
 		<md-toolbar md-theme="destination">
 			<div class="md-toolbar-tools">
@@ -50,6 +52,10 @@
 						<a ng-href="/lokasi-wisata?search={$district.name$}" class="animated fadeIn" ng-if="district.name"><span>{$district.name $}</span></a>,
 						<a ng-href="/lokasi-wisata?search={$province.name$}" class="animated fadeIn" ng-if="province.name"><span>{$province.name $}</span></a>
 						<a ng-href="/lokasi-wisata?search={$region.name$}" class="animated fadeIn" ng-if="region.name"><span>{$region.name $}</span></a>
+					</span>
+					<span flex="grow">
+						<ng-md-icon icon="place" size="20" aria-label="tanggal"></ng-md-icon>
+						<a ng-href="/peta?ltd={$travel_destination.latitude$}&lng={$travel_destination.longitude$}" class="animated fadeIn"><span>lihat di peta</span></a>
 					</span>
 			</div>
 		</div>

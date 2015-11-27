@@ -1,38 +1,65 @@
 
 
-<div layout="row" layout-margin>
+<div>
 	<ui-gmap-google-map center="map.center"
-											zoom="map.zoom" bounds="map.bounds" flex>
+											zoom="map.zoom" bounds="map.bounds">
 		<ui-gmap-markers models="markers" coords="'self'" icon="'icon'" click="onClick">
 			<ui-gmap-windows show="show">
 				<div ng-non-bindable>
-					<div layout="row" layout-align="center center" class="map-info-container" layout-fill>
+					<div layout="column" layout-align="center center" class="map-info-container">
 						<img class="map-info-img" src="{$thumbnail_image.image$}" flex>
-						<a href="/lokasi-wisata/{$name_slugified$}">{$name$}</a>
-						<p flex class="md-body-2">{$short_description$}</div>
+						<span><h2 class="md-heading"> <a href="/lokasi-wisata/{$name_slugified$}">{$name$} </a></h2></span>
+						<p flex class="md-body-2">{$short_description$}</p>
 				</div>
+          </div>
 			</ui-gmap-windows>
 		</ui-gmap-markers>
 
 	</ui-gmap-google-map>
-	<div flex="5"></div>
-	<div flex="20" style="position: relative; top: 70px;">
-		<md-content>
-			<md-autocomplete
-							md-search-text="search"
-							md-items="travel_destination in travel_destinations.results"
-							md-item-text="travel_destination.name"
-							md-min-length="0"
-							placeholder="lokasi wisata"
-							md-floating-label="lokasi wisata"
-							class="animated fadeIn">
-				<md-item-template>
-					<span class="animated fadeIn" md-highlight-text="search" md-highlight-flags="^i">{$travel_destination.name$}</span>
-				</md-item-template>
-				<md-not-found>
-				</md-not-found>
-			</md-autocomplete>
-		</md-content>
-	</div>
-	<div flex="5"></div>
 </div>
+
+<div class="map-search">
+	<md-content layout="row" layout-align="left center">
+		<ng-md-icon icon="search" aria-label="search" flex="5"></ng-md-icon>
+		<md-autocomplete flex
+										 md-search-text="search"
+										 md-items="travel_destination in travel_destinations.results"
+										 md-item-text="travel_destination.name"
+										 md-selected-item-change="searchFunc(travel_destination)"
+										 md-min-length="0"
+										 placeholder="lokasi wisata"
+										 md-floating-label="lokasi wisata"
+										 class="animated fadeIn">
+			<md-item-template>
+				<span class="animated fadeIn" md-highlight-text="search" md-highlight-flags="^i">{$travel_destination.name$}</span>
+			</md-item-template>
+			<md-not-found>
+			</md-not-found>
+		</md-autocomplete>
+	</md-content>
+</div>
+
+<div class="legend">
+	<md-content layout="column">
+		<div layout="row" layout-align="left center">
+			<img src="https://maps.gstatic.com/mapfiles/ms2/micons/blue-dot.png"> WISATA
+		</div>
+		<div layout="row">
+			<img src="https://maps.gstatic.com/mapfiles/ms2/micons/shopping.png"> BELANJA
+		</div>
+		<div layout="row">
+			<img src="https://maps.gstatic.com/mapfiles/ms2/micons/cycling.png"> AKTIFITAS
+		</div>
+		<div layout="row">
+			<img src="https://maps.gstatic.com/mapfiles/ms2/micons/purple-dot.png"> MUSEUM
+		</div>
+		<div layout="row">
+			<img src="https://maps.gstatic.com/mapfiles/ms2/micons/POI.png"> POINT OF INTEREST
+		</div>
+		<div layout="row">
+			<img src="https://maps.gstatic.com/mapfiles/ms2/micons/green-dot.png"> LOKASI HISTORIS
+		</div>
+
+	</md-content>
+</div>
+

@@ -446,8 +446,45 @@ md-autocomplete[md-floating-label] md-input-container{
 }
 
 .angular-google-map-container {
-    top: 70px;
-    height: 550px;
+    width: 100%;
+    height: 93.5%;
+    position: absolute;
+    top: 63px;
+    left: 0;
+}
+
+.legend {
+    position: absolute;
+    top: 50%;
+    z-index: 2000;
+    left: 1%;
+    width: 11%;
+}
+
+.legend md-content{
+    padding: 10px 10px 10px 10px;
+    background-color: rgba(30,30,30,0.7);
+}
+
+.legend md-content div {
+    padding: 15px 0 5px 0;
+    color: white;
+}
+
+.map-search {
+    position: absolute;
+    z-index: 2;
+    top: 80px;
+    left: 33%;
+    -webkit-box-shadow: 0px 0px 3px 1px rgba(212,212,212,1);
+    -moz-box-shadow: 0px 0px 3px 1px rgba(212,212,212,1);
+    box-shadow: 0px 0px 3px 1px rgba(212,212,212,1);
+    width: 33%;
+}
+
+.map-search md-content {
+    padding: 10px 10px 5px 10px;
+    background-color: rgba(255,255,255,0.93);
 }
 
 .parent {
@@ -497,90 +534,22 @@ md-autocomplete[md-floating-label] md-input-container{
     display: inline-block;
 }
 
-/*---------------------------------------------------------
-copy pasted from https://github.com/simpulton/angular-photo-slider
----------------------------------------------------------*/
+ul[rn-carousel] > li {
+  position: relative;
+  margin-left: -100%;
+}
 
+ul[rn-carousel] > li:first-child {
+  margin-left: 0;
+}
+
+ul[rn-carousel] img {
+  max-width: 100%;
+}
 .slider {
     width: 100%;
     height: 600px;
     overflow: hidden;
     position: relative;
     background: #e6e6e6;
-}
-
-.slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-}
-
-.nav {
-    text-align: center;
-    display: block;
-    position: absolute;
-    z-index: 1002;
-    left: 0;
-    bottom: -4px;
-    right: 0;
-    height: 48px;
-    overflow: hidden;
-}
-
-.nonDraggableImage{
-    -webkit-user-drag: none;
-    overflow: hidden;
-}
-
-.nav .wrapper {
-    margin: 0 auto;
-    width: 100%;
-    padding: 1em 0 .8em;
-    overflow: hidden;
-}
-
-.nav ul {
-    margin: 0;
-    width: 100%;
-}
-
-.nav .dot, .nav .dot a {
-    display: inline-block;
-    zoom: 1;
-}
-
-.dots .dot {
-    position: relative;
-    margin: 0 8px;
-    width: 12px;
-    height: 12px;
-}
-
-.dots .dot a {
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 6px;
-    height: 6px;
-    text-indent: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    background: #FFF;
-    border: 1px solid transparent;
-    outline: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%;
-    -webkit-transition: background-color 0.25s, border-color 0.25s;
-    -moz-transition: background-color 0.25s, border-color 0.25s;
-    transition: background-color 0.25s, border-color 0.25s;
-}
-
-.dots .dot a.active {
-    border-color: #FFF;
-    background-color: transparent;
 }

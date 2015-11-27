@@ -17,6 +17,8 @@ class TravelDestination(TimeStampedModel):
         ('Wisata', 'Wisata'),
         ('Belanja', 'Belanja'),
         ('Point of Interest', 'Point of Interest'),
+        ('Aktifitas', 'Aktifitas'),
+        ('Lokasi Historis', 'Lokasi Historis'),
     )
 
     name = models.CharField(max_length=30, unique=True)
