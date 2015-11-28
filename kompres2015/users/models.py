@@ -7,6 +7,8 @@ from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
+from annoying.fields import AutoOneToOneField
+
 
 @python_2_unicode_compatible
 class User(AbstractUser):
@@ -24,6 +26,6 @@ class User(AbstractUser):
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User)
+    user = AutoOneToOneField(User, related_name='userprofile', primary_key=True)
 
     district = models.ForeignKey('region.District', blank=True, null=True)

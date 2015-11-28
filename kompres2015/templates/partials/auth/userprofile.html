@@ -17,27 +17,49 @@
 						<div class="md-dialog-content" layout="column" layout-align="center center">
 
 							<md-input-container class="md-block">
-								<label for="id_first_name">First Name</label>
-								<input name="first_name" id="id_first_name" class="form-control" type="text" ng-model="model.first_name" placeholder="First Name" />
+								<label for="id_first_name">Nama</label>
+								<input name="first_name" id="id_first_name" class="form-control" type="text" ng-model="model.first_name" placeholder="Nama" />
 								<div ng-messages="userProfileForm.first_name.$error">
 									<div ng-message="required" ng-repeat="error in errors.first_name">{$error$}</div>
 								</div>
 							</md-input-container>
-							<md-input-container class="md-block">
-								<label for="id_last_name">Last Name</label>
-								<input name="last_name" id="id_last_name" class="form-control" type="text" ng-model="model.last_name" placeholder="Last Name" />
-								<div ng-messages="userProfileForm.last_name.$error">
-									<div ng-message="required" ng-repeat="error in errors.last_name">{$error$}</div>
-								</div>
-							</md-input-container>
-							{#							<md-input-container class="md-block">#}
-							{#								<label for="id_email">Email</label>#}
-							{#								<input name="email" id="id_email" class="form-control" type="email" ng-model="model.email" placeholder="Email" required />#}
-							{#								<div ng-messages="userProfileForm.email.$error">#}
-							{#									<div ng-message="required" ng-repeat="error in errors.email">{$error$}</div>#}
-							{#									<div ng-message="email" ng-repeat="error in errors.email">{$error$}</div>#}
-							{#								</div>#}
-							{#							</md-input-container>#}
+							<!--<md-input-container class="md-block">-->
+								<!--<label for="id_last_name">Last Name</label>-->
+								<!--<input name="last_name" id="id_last_name" class="form-control" type="text" ng-model="model.last_name" placeholder="Last Name" />-->
+								<!--<div ng-messages="userProfileForm.last_name.$error">-->
+									<!--<div ng-message="required" ng-repeat="error in errors.last_name">{$error$}</div>-->
+								<!--</div>-->
+							<!--</md-input-container>-->
+							<!--<md-input-container class="md-block">-->
+								<!--<label for="id_district">Kabupaten</label>-->
+								<!--<input name="district" id="id_district" class="form-control" type="text" ng-model="model.district_name" placeholder="Kabupaten" />-->
+								<!--<div ng-messages="userProfileForm.district.$error">-->
+									<!--<div ng-message="required" ng-repeat="error in errors.district">{$error$}</div>-->
+								<!--</div>-->
+							<!--</md-input-container>-->
+							<md-autocomplete flex
+										 md-search-text="district_search"
+										 md-items="district in districts.results | filter:district_search | orderBy: 'name'"
+										 md-item-text="district.name"
+										 md-selected-item-change="hyperlinkedIt(district)"
+										 md-min-length="0"
+										 placeholder="kabupaten"
+										 md-floating-label="kabupaten"
+										 class="animated fadeIn">
+								<md-item-template>
+									<span class="animated fadeIn" md-highlight-text="district_search" md-highlight-flags="^i">{$district.name$}</span>
+								</md-item-template>
+								<md-not-found>
+								</md-not-found>
+							</md-autocomplete>
+							<!--{#							<md-input-container class="md-block">#}-->
+							<!--{#								<label for="id_email">Email</label>#}-->
+							<!--{#								<input name="email" id="id_email" class="form-control" type="email" ng-model="model.email" placeholder="Email" required />#}-->
+							<!--{#								<div ng-messages="userProfileForm.email.$error">#}-->
+							<!--{#									<div ng-message="required" ng-repeat="error in errors.email">{$error$}</div>#}-->
+							<!--{#									<div ng-message="email" ng-repeat="error in errors.email">{$error$}</div>#}-->
+							<!--{#								</div>#}-->
+							<!--{#							</md-input-container>#}-->
 							<div ng-show="errors" class="animated fadeIn">
 								<p class="md-body-1" ng-repeat="error in errors.non_field_errors">{$error$}</p>
 								<p class="md-body-1" ng-if="error">{$error$}</p>
