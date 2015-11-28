@@ -2,7 +2,12 @@ from django.db import models
 from kompres2015.util.models import TimeStampedModel
 
 
-class Region(TimeStampedModel):
+class Location(TimeStampedModel):
+    latitude = models.FloatField(blank=True,null=True)
+    longitude = models.FloatField(blank=True, null=True)
+
+
+class Region(Location):
     name = models.CharField(max_length=40, unique=True)
 
     class Meta:
@@ -12,7 +17,7 @@ class Region(TimeStampedModel):
         return self.name
 
 
-class Province(TimeStampedModel):
+class Province(Location):
     name = models.CharField(max_length=40, unique=True)
     region = models.ForeignKey(Region, related_name='provinces')
 
@@ -23,7 +28,7 @@ class Province(TimeStampedModel):
         return self.name
 
 
-class District(TimeStampedModel):
+class District(Location):
     name = models.CharField(max_length=40, unique=True)
     province = models.ForeignKey(Province, related_name='districts')
 

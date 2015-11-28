@@ -26,7 +26,7 @@ class UserRestSerializer(UserDetailsSerializer):
         instance = super(UserRestSerializer, self).update(instance, validated_data)
 
         # get and update user profile
-        profile = instance
+        profile = instance.userprofile
         if profile_data and district:
             profile.district = district
             profile.save()
