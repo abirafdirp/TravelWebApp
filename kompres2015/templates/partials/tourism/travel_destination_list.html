@@ -104,8 +104,10 @@
 							<md-card-content>
 						<span class="md-body-2" layout="row" layout-wrap>
 							<span flex="100" flex-gt-lg="60">
-								<ng-md-icon icon="access_time" size="20" aria-label="tanggal"></ng-md-icon>
-								<span ng-if="travel_destination.region.name != null" class="animated fadeIn">{$ travel_destination.region.name $}</span>
+								<ng-md-icon icon="sort" size="20" aria-label="tanggal"></ng-md-icon>
+								<a href="javascript:void(0)" ng-click="TravelDestinationSearch.setSearch(travel_destination.type)">
+									<span class="animated fadeIn">{$ travel_destination.type $}</span>
+								</a>
 							</span>
 							<span flex="100" flex-gt-lg="40" ng-show="district.name != null" class="animated fadeIn">
 								<ng-md-icon icon="place" size="20" aria-label="tempat"></ng-md-icon>

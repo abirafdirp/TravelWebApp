@@ -1,5 +1,7 @@
-
-
+<div ng-show="show_loading" class="loading">
+		<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+	</div>
+<div ng-show="!show_loading">
 <div>
 	<ui-gmap-google-map center="map.center"
 											zoom="map.zoom" bounds="map.bounds">
@@ -23,7 +25,7 @@
 		<ng-md-icon icon="search" aria-label="search" flex="5"></ng-md-icon>
 		<md-autocomplete flex
 										 md-search-text="search"
-										 md-items="travel_destination in travel_destinations.results"
+										 md-items="travel_destination in travel_destinations.results | filter:search | orderBy: 'name'"
 										 md-item-text="travel_destination.name"
 										 md-selected-item-change="searchFunc(travel_destination)"
 										 md-min-length="0"
@@ -62,4 +64,5 @@
 
 	</md-content>
 </div>
+	</div>
 

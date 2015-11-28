@@ -21,3 +21,9 @@ class User(AbstractUser):
 
     def get_absolute_url(self):
         return reverse('users:detail', kwargs={'username': self.username})
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
+
+    district = models.ForeignKey('region.District', blank=True, null=True)

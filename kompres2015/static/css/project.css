@@ -483,7 +483,7 @@ md-autocomplete[md-floating-label] md-input-container{
 }
 
 .map-search md-content {
-    padding: 10px 10px 5px 10px;
+    padding: 10px 20px 15px 10px;
     background-color: rgba(255,255,255,0.93);
 }
 

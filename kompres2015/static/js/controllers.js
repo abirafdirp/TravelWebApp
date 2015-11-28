@@ -178,19 +178,25 @@ kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route'
     $scope.params = $routeParams;
     $scope.travel_destination_name = $scope.params.travel_destination_name.replace(/-/g,' ');
     $scope.TravelDestinationSearch = TravelDestinationSearch;
+    $scope.show_loading = true;
 
     $scope.travel_destination = TravelDestinations.detail.query({travel_destination_name:$scope.travel_destination_name})
     $scope.travel_destination.$promise.then(function() {
       var url = $scope.travel_destination.results[0].district+'?format=json';
       $scope.district = $resource(url).get(function(){
         $scope.province = $resource($scope.district.province).get(function(){
-          $scope.region = $resource($scope.province.region).get();
+          $scope.region = $resource($scope.province.region).get(function(){
+            //showloading
+          });
         });
       });
 
       $scope.travel_destination_contents = [];
-      angular.forEach($scope.travel_destination.results[0].contents, function(content){
+      angular.forEach($scope.travel_destination.results[0].contents, function(content, index){
         $scope.travel_destination_contents.push($resource(content+'?format=json').get());
+        if (index == $scope.travel_destination.results.length - 1){
+          $scope.show_loading = false;
+        }
       });
 
       $scope.images_length = $scope.travel_destination.results[0].images.length;
@@ -396,8 +402,8 @@ kompresControllers.controller('SearchCtrl', ['$scope', 'ArticleSearch', '$timeou
   }
 ]);
 
-kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$routeParams', '$resource', '$route', 'travel_destinations', 'Marker', '$location',
-  function($scope, TravelDestinations, $routeParams, $resource, $route, travel_destinations, Marker, $location) {
+kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$routeParams', '$resource', '$route', 'travel_destinations', 'Marker', 'uiGmapGoogleMapApi',
+  function($scope, TravelDestinations, $routeParams, $resource, $route, travel_destinations, Marker, uiGmapGoogleMapApi) {
     $scope.map = {
       "center": {
         "latitude": -4.6111678,
@@ -405,6 +411,13 @@ kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$rout
       },
       "zoom": 5
     };
+
+    $scope.show_loading = true;
+    uiGmapGoogleMapApi.then(function() {
+      $scope.show_loading = false;
+    });
+
+    $scope.search = '';
 
     $scope.params = $routeParams;
     $scope.ltd = $scope.params.ltd;
@@ -420,8 +433,6 @@ kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$rout
       $scope.map.center.longitude = destination.longitude;
       $scope.map.zoom = 14;
     };
-
-
 
     $scope.markers = Marker.getMarkers();
     $scope.travel_destinations = travel_destinations;
