@@ -231,6 +231,7 @@ kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route'
         function DialogController($scope, $mdDialog, $timeout, Districts, $http, Reports) {
           $scope.authenticated = false;
           $scope.districts = Districts.query();
+          $scope.categories = ['keamanan', 'kebersihan', 'kenyamanan', 'lainnya'];
           $scope.closeDialogDelayed = function() {
             $timeout(function(){
               $mdDialog.hide();}, 350);

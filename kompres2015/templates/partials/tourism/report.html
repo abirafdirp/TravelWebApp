@@ -9,7 +9,22 @@
 		</div>
 	</md-toolbar>
 	<md-dialog-content class="md-dialog-content-register" id="register_view" ng-controller="RegisterCtrl">
-		<form class="form-inline">
+		<form role="form" name="reportForm" ng-submit="save()" novalidate>
+		<md-input-container>
+			<label>Kategori</label>
+			<md-select ng-model="categories">
+				<md-option ng-repeat="category in categories" value="{$category$}">
+					{$category$}
+				</md-option>
+			</md-select>
+		</md-input-container>
+		<md-input-container class="md-block" md-no-autogrow>
+			<label for="id_report">Isi Komplain</label>
+			<textarea name="report" id="id_report" class="form-control" type="text" ng-model="newReport.report" placeholder="Isi Komplain"></textarea>
+			<div ng-messages="reportForm.report.$error">
+				<div ng-message="required" ng-repeat="error in errors.report">{$error$}</div>
+			</div>
+		</md-input-container>
         <div class="form-group block-level">
             <input type="text" class="form-control" ng-model="newReport.category" placeholder="Kategori">
         </div>
