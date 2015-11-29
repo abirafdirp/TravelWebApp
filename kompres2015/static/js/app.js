@@ -114,7 +114,7 @@ angular.module('angularDjangoRegistrationAuthApp', [
       $LocationProvider.html5Mode(true);
   }])
   .run(function(djangoAuth){
-    djangoAuth.initialize('//127.0.0.1:8000/rest-auth', true);
+    djangoAuth.initialize('//127.0.0.1:8000/rest-auth', false);
   });
 
 var kompresApp = angular.module('kompres', [
@@ -235,6 +235,17 @@ kompresApp.run(function($rootScope, ArticleSearch, TravelDestinationSearch, Mark
     TravelDestinationSearch.clearAllSearch();
     Marker.clearMarkers();
   });
+  // http://stackoverflow.com/a/27943/3390639
+  // using haversine formula
+  $rootScope.distance = function(lat1, lon1, lat2, lon2) {
+    var p = 0.017453292519943295;    // Math.PI / 180
+    var c = Math.cos;
+    var a = 0.5 - c((lat2 - lat1) * p)/2 +
+        c(lat1 * p) * c(lat2 * p) *
+        (1 - c((lon2 - lon1) * p))/2;
+
+    return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
+  }
 });
 
 kompresApp.filter('trustAsHtml', function($sce) { return $sce.trustAsHtml; });

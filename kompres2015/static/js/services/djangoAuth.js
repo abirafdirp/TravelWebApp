@@ -138,7 +138,9 @@ angular.module('angularDjangoRegistrationAuthApp')
                 'method': "PATCH",
                 'url': "/user/",
                 'data':data
-            }); 
+            }).then(function(){
+                $rootScope.$broadcast("djangoAuth.profile_updated");
+            });
         },
         'verify': function(key){
             return this.request({

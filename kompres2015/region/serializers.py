@@ -11,7 +11,7 @@ class DistrictSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = District
-        fields = ('id', 'name', 'province', 'region')
+        fields = ('id', 'name', 'province', 'region', 'latitude', 'longitude')
 
 
 class ProvinceSerializer(serializers.HyperlinkedModelSerializer):
@@ -20,7 +20,7 @@ class ProvinceSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Province
-        fields = ('id', 'name', 'districts', 'region')
+        fields = ('id', 'name', 'districts', 'region', 'latitude', 'longitude')
 
 
 class RegionSerializer(serializers.HyperlinkedModelSerializer):
@@ -29,6 +29,6 @@ class RegionSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Region
-        fields = ('id', 'name', 'provinces')
+        fields = ('id', 'name', 'provinces', 'latitude', 'longitude')
 
 

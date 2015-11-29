@@ -13,8 +13,9 @@ angular.module('angularDjangoRegistrationAuthApp')
       djangoAuth.profile().then(function(data){
         $scope.model = data;
         $scope.model.district_name = $resource(data.district+'?format=json').get(function(){
-          $scope.model.district_name = $scope.model.district_name.name;
-          $scope.district_search = $scope.model.district_name;
+          if ($scope.model.district_name.name){
+            $scope.district_search = $scope.model.district_name.name;
+          }
         });
       });
       $scope.updateProfile = function(formData, model){

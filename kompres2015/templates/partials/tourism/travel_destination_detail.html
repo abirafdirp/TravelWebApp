@@ -36,7 +36,7 @@
 						<div ng-bind-html="travel_destination_content.content | trustAsHtml"></div>
 					</md-tab-body>
 				</md-tab>
-				<md-tab label="galeri">
+				<md-tab label="galeri" ng-if="gallery_images.length > 0 ">
 					<div class='md-padding'>
 							<div layout="row" layout-wrap>
 								<div ng-repeat="image in gallery_images" flex="33" layout="row" style="margin-top: 10px">

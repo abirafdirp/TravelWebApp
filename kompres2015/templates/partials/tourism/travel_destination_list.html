@@ -88,11 +88,16 @@
 							</md-not-found>
 						</md-autocomplete>
 					</md-content>
+					<md-content ng-show="!search_opened" id="dest-search-box">
+						{$ user $}
+
+					</md-content>
 				</div>
 
 				<div layout="row" layout-wrap flex="80" flex-sm="100" flex-md="100">
 					<div ng-cloak ng-repeat="travel_destination in travel_destinations.results | filter: TravelDestinationSearch.search | filter: TravelDestinationSearch.district_search
-					| filter: TravelDestinationSearch.category_search | filter: TravelDestinationSearch.province_search | filter: TravelDestinationSearch.region_search | filter: search"
+					| filter: TravelDestinationSearch.category_search | filter: TravelDestinationSearch.province_search | filter: TravelDestinationSearch.region_search | filter: search
+					| orderBy: 'distance'"
 							 ng-controller="TravelDestinationRepeatCtrl" flex="33" flex-sm="100" flex-md="50">
 
 						<md-card id="posts">
@@ -117,7 +122,7 @@
 							</span>
 						</span>
 								<p class="md-body-1">
-									{$ travel_destination_short_description $}
+									{$ travel_destination.distance $}
 								</p>
 							</md-card-content>
 						</md-card>

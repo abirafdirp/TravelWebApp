@@ -29,7 +29,7 @@ kompresControllers.controller('NavCtrl', ['$scope', '$route', '$mdDialog', 'Arti
             $mdDialog.hide();}, 350);
         };
         $scope.closeDialog = function() {
-            $mdDialog.hide();
+          $mdDialog.hide();
         };
         $scope.$on('djangoAuth.logged_in', function() {
           $scope.authenticated = true;
@@ -53,7 +53,7 @@ kompresControllers.controller('NavCtrl', ['$scope', '$route', '$mdDialog', 'Arti
             $mdDialog.hide();}, 350);
         };
         $scope.closeDialog = function() {
-            $mdDialog.hide();
+          $mdDialog.hide();
         };
         $scope.$on('djangoAuth.logged_in', function() {
           $scope.authenticated = true;
@@ -77,7 +77,7 @@ kompresControllers.controller('NavCtrl', ['$scope', '$route', '$mdDialog', 'Arti
             $mdDialog.hide();}, 350);
         };
         $scope.closeDialog = function() {
-            $mdDialog.hide();
+          $mdDialog.hide();
         };
         $scope.authenticated = true;
         $scope.$on('djangoAuth.logged_in', function() {
@@ -90,22 +90,22 @@ kompresControllers.controller('NavCtrl', ['$scope', '$route', '$mdDialog', 'Arti
     };
 
     $scope.showImage = function(image) {
-        $mdDialog.show({
-          locals: {image:image},
-          template:
-          '<md-dialog aria-label="galeri" class="resize-container">' +
-          '     <img ng-src="{$ image $}" class="resize">' +
-          '</md-dialog>',
-          parent: angular.element(document.body),
-          clickOutsideToClose:true,
-          controller: function DialogController($scope, $mdDialog, image) {
-            $scope.image = image;
-            $scope.closeDialog = function() {
-              $mdDialog.hide();
-            }
+      $mdDialog.show({
+        locals: {image:image},
+        template:
+        '<md-dialog aria-label="galeri" class="resize-container">' +
+        '     <img ng-src="{$ image $}" class="resize">' +
+        '</md-dialog>',
+        parent: angular.element(document.body),
+        clickOutsideToClose:true,
+        controller: function DialogController($scope, $mdDialog, image) {
+          $scope.image = image;
+          $scope.closeDialog = function() {
+            $mdDialog.hide();
           }
-        });
-      };
+        }
+      });
+    };
   }
 ]);
 
@@ -137,14 +137,28 @@ kompresControllers.controller('DistrictsCtrl', ['$scope', 'Districts',
 ]);
 
 
-kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', '$routeParams', '$resource', '$rootScope', 'TravelDestinations', 'Districts', 'Provinces', 'Regions', 'Marker',
-  function($scope, $route, $routeParams, $resource, $rootScope, TravelDestinations, Districts, Provinces, Regions, Marker) {
+kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', '$routeParams', '$resource', '$rootScope', 'TravelDestinations', 'Districts',
+  'Provinces', 'Regions', 'Marker', 'djangoAuth',
+  function($scope, $route, $routeParams, $resource, $rootScope, TravelDestinations, Districts, Provinces, Regions, Marker, djangoAuth) {
     $scope.$route = $route;
     $scope.params = $routeParams;
     $scope.show_loading = true;
     $scope.travel_destination_name = $scope.params.travel_destination_name;
     $scope.search = $scope.params.search;
     $scope.categories = [];
+
+    $scope.$on('djangoAuth.profile_updated', function() {
+      djangoAuth.profile().then(function(data){
+        $scope.user = data;
+        $resource($scope.user.district+'?format=json').get(function(data) {
+          $scope.user.district = data;
+          angular.forEach($scope.travel_destinations.results, function(item){
+            console.log(item);
+            item['distance'] = $rootScope.distance($scope.user.district.latitude, $scope.user.district.longitude, item.district_resolved.latitude, item.district_resolved.longitude);
+          });
+        });
+      });
+    });
 
     $scope.districts = Districts.query();
     $scope.provinces = Provinces.query();
@@ -155,16 +169,22 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
 
     $scope.travel_destinations = TravelDestinations.list.query();
     $scope.travel_destinations.$promise.then(function(){
-      angular.forEach($scope.travel_destinations.results, function(item){
-        Marker.addMarker(item);
-
-        if ($rootScope.arrayContains($scope.categories, item.type) == false){
-          $scope.categories.push(String(item.type));
-        }
-        item['district_name'] = $resource(item.district).get(function(){
-          item['province'] = $resource(item.district_name.province).get(function(){
-            item['region'] = $resource(item.province.region).get();
-          })
+      $scope.user = djangoAuth.profile().then(function(data){
+        $scope.user = data;
+        $resource($scope.user.district+'?format=json').get(function(data){
+          $scope.user.district = data;
+          angular.forEach($scope.travel_destinations.results, function(item){
+            Marker.addMarker(item);
+            if ($rootScope.arrayContains($scope.categories, item.type) == false){
+              $scope.categories.push(String(item.type));
+            }
+            item['district_resolved'] = $resource(item.district).get(function(){
+              item['distance'] = $rootScope.distance($scope.user.district.latitude, $scope.user.district.longitude, item.district_resolved.latitude, item.district_resolved.longitude);
+              item['province'] = $resource(item.district_resolved.province).get(function(){
+                item['region'] = $resource(item.province.region).get();
+              });
+            });
+          });
         });
       });
       $scope.show_loading = false;
@@ -232,8 +252,8 @@ kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route'
   }
 ]);
 
-kompresControllers.controller('TravelDestinationRepeatCtrl', ['$scope', '$resource', '$exceptionHandler',
-  function($scope, $resource, $exceptionHandler) {
+kompresControllers.controller('TravelDestinationRepeatCtrl', ['$scope', '$resource', '$exceptionHandler', 'djangoAuth', '$rootScope',
+  function($scope, $resource, $exceptionHandler, djangoAuth, $rootScope) {
     var init = function() {
       if (typeof $scope.travel_destination === "undefined") {
         $exceptionHandler("The TravelDestinationRepeatController must be initialized with a travel_destination in scope");
@@ -282,10 +302,10 @@ kompresControllers.controller('ArticleListCtrl', ['$scope', '$route', '$routePar
 
     $scope.articles = Articles.list.query();
     $scope.articles.$promise.then(function() {
-        angular.forEach($scope.articles.results, function(item){
-          item.date = $filter('date')(item.date, 'd  MMMM  yyyy');
-        });
-        $scope.show_loading = false;
+      angular.forEach($scope.articles.results, function(item){
+        item.date = $filter('date')(item.date, 'd  MMMM  yyyy');
+      });
+      $scope.show_loading = false;
     });
   }
 ]);
@@ -391,13 +411,13 @@ kompresControllers.controller('SearchCtrl', ['$scope', 'ArticleSearch', '$timeou
 
 
     $scope.toggleSearch = function (){
-        $scope.search_opened = !$scope.search_opened;
-        if ($scope.search_opened){
-          $scope.search_icon = 'close';
-        }
-        else {
-          $scope.search_icon = 'search';
-        }
+      $scope.search_opened = !$scope.search_opened;
+      if ($scope.search_opened){
+        $scope.search_icon = 'close';
+      }
+      else {
+        $scope.search_icon = 'search';
+      }
     };
   }
 ]);
