@@ -13,7 +13,7 @@ angular.module('angularDjangoRegistrationAuthApp')
         djangoAuth.register($scope.model.username,$scope.model.password1,$scope.model.password2,$scope.model.email)
         .then(function(data){
         	// success case
-            $scope.show_loading = false;
+          $scope.show_loading = false;
         	$scope.complete = true;
         },function(data){
         	// error case

@@ -228,22 +228,53 @@ kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route'
           targetEvent: ev,
           clickOutsideToClose:true,
         });
-        function DialogController($scope, $mdDialog, $timeout, Districts, $http, Reports, TravelDestinations) {
+        function DialogController($scope, $mdDialog, $timeout, Districts, $http, Reports, TravelDestinations, $rootScope) {
           $scope.authenticated = false;
           $scope.districts = Districts.query();
-          $scope.travel_destinations = TravelDestinations.list.query();
+          $scope.travel_destination_names = [];
+          $scope.complete = false;
+          $scope.show_loading = false;
+          $scope.travel_destinations = TravelDestinations.list.query(function(){
+            angular.forEach($scope.travel_destinations.results, function(item){
+              $scope.travel_destination_names.push(item.name.toLowerCase());
+              item['name_lowercased']= item.name.toLowerCase();
+            })
+          });
           $scope.travel_destination_search = '';
           $scope.categories = ['keamanan', 'kebersihan', 'kenyamanan', 'lainnya'];
           $scope.closeDialog = function() {
             $mdDialog.hide();
           };
+          $scope.searchSelectedChange = function(destination){
+            $scope.newReport.travel_destination = '/api/traveldestinations/' + destination.id + '/';
+          };
+          $scope.searchTextChange = function(destination_name){
+            if (destination_name){
+              destination_name = destination_name.toLowerCase();
+            }
+            if($rootScope.arrayContains($scope.travel_destination_names, destination_name)){
+              angular.forEach($scope.travel_destinations.results, function(item){
+                if (item.name_lowercased == destination_name){
+                  $scope.newReport.travel_destination = '/api/traveldestinations/' + item.id + '/';
+                }
+              });
+            }
+            else{
+              $scope.newReport.travel_destination = '';
+            }
+          };
+          $scope.errors = [];
           $scope.newReport = new Reports();
-          return $scope.save = function() {
+          $scope.save = function() {
+            $scope.show_loading = true;
             return $scope.newReport.$save().then(function(result) {
-              //return $scope.posts.push(result);
-            }).then(function() {
-              //return $scope.newPost = new Post();
-            });
+              $scope.complete = true;
+              $scope.show_loading = false;
+            },
+            function(data){
+              $scope.errors = data.data;
+              $scope.show_loading = false;
+            })
           };
         }
       };
@@ -470,7 +501,6 @@ kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$rout
         $scope.travel_destination_names.push(item.name.toLowerCase());
         item['name_lowercased'] = item.name.toLowerCase();
       });
-      console.log($scope.travel_destination_names);
     });
 
     $scope.search = '';
@@ -491,7 +521,9 @@ kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$rout
     };
 
     $scope.searchTextChange = function(search){
-      search = search.toLowerCase();
+      if (search) {
+        search = search.toLowerCase();
+      }
       if ($rootScope.arrayContains($scope.travel_destination_names, search)){
         angular.forEach($scope.travel_destinations.results, function(item){
           if (item.name_lowercased == search){
@@ -500,6 +532,9 @@ kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$rout
             $scope.map.zoom = 14;
           }
         });
+      }
+      else{
+        search = '';
       }
     };
 
