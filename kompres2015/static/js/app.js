@@ -125,7 +125,6 @@ var kompresApp = angular.module('kompres', [
   'angularDjangoRegistrationAuthApp',
   'ngAnimate',
   'ngMaterial',
-  'offClick',
   'ngMessages',
   'ngMdIcons',
   'ngLocale',
