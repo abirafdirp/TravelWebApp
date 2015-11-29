@@ -228,14 +228,12 @@ kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route'
           targetEvent: ev,
           clickOutsideToClose:true,
         });
-        function DialogController($scope, $mdDialog, $timeout, Districts, $http, Reports) {
+        function DialogController($scope, $mdDialog, $timeout, Districts, $http, Reports, TravelDestinations) {
           $scope.authenticated = false;
           $scope.districts = Districts.query();
+          $scope.travel_destinations = TravelDestinations.list.query();
+          $scope.
           $scope.categories = ['keamanan', 'kebersihan', 'kenyamanan', 'lainnya'];
-          $scope.closeDialogDelayed = function() {
-            $timeout(function(){
-              $mdDialog.hide();}, 350);
-          };
           $scope.closeDialog = function() {
             $mdDialog.hide();
           };

@@ -8,36 +8,48 @@
 			</md-button>
 		</div>
 	</md-toolbar>
-	<md-dialog-content class="md-dialog-content-register" id="register_view" ng-controller="RegisterCtrl">
-		<form role="form" name="reportForm" ng-submit="save()" novalidate>
-		<md-input-container>
-			<label>Kategori</label>
-			<md-select ng-model="categories">
-				<md-option ng-repeat="category in categories" value="{$category$}">
-					{$category$}
-				</md-option>
-			</md-select>
-		</md-input-container>
-		<md-input-container class="md-block" md-no-autogrow>
-			<label for="id_report">Isi Komplain</label>
-			<textarea name="report" id="id_report" class="form-control" type="text" ng-model="newReport.report" placeholder="Isi Komplain"></textarea>
-			<div ng-messages="reportForm.report.$error">
-				<div ng-message="required" ng-repeat="error in errors.report">{$error$}</div>
-			</div>
-		</md-input-container>
-        <div class="form-group block-level">
-            <input type="text" class="form-control" ng-model="newReport.category" placeholder="Kategori">
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-control" ng-model="newReport.report" placeholder="Isi Komplain">
-        </div>
-			<div class="form-group">
-            <input type="text" class="form-control" ng-model="newReport.travel_destination" placeholder="Lokasi Wisata">
-        </div>
-        <div class="form-group">
-            <button class="btn btn-default" ng-click="save()">Add Post</button>
-        </div>
-    </form>
+	<md-dialog-content id="report_view" ng-controller="RegisterCtrl">
+		<div class="md-dialog-content" layout="column" layout-align="center center">
+			<form role="form" name="reportForm" ng-submit="save()" novalidate layout="column" layout-align="left center">
+				<md-input-container>
+					<label for="id_travel_destination">Lokasi Wisata</label>
+					<input name="travel_destination" id="id_travel_destination" type="text" ng-model="newReport.travel_destination" placeholder="Lokasi Wisata" required/>
+					<div ng-messages="reportForm.travel_destination.$error">
+						<div ng-message="required" ng-repeat="error in errors.travel_destination">{$error$}</div>
+					</div>
+				</md-input-container>
+				<md-autocomplete
+										md-search-text="TravelDestinationSearch.province_search"
+										md-items="province in $parent.provinces.results | filter:TravelDestinationSearch.province_search | orderBy: 'name'"
+										md-item-text="province.name"
+										md-min-length="0"
+										md-floating-label="provinsi"
+										placeholder="provinsi"
+										class="animated fadeIn dest-search-row province-search">
+							<md-item-template>
+								<span class="animated fadeIn" md-highlight-text="TravelDestinationSearch.province_search" md-highlight-flags="^i">{$province.name$}</span>
+							</md-item-template>
+							<md-not-found>
+							</md-not-found>
+						</md-autocomplete>
+				<md-input-container>
+					<label>Kategori</label>
+					<md-select ng-model="newReport.category">
+						<md-option ng-repeat="category in categories" value="{$category$}">
+							{$category$}
+						</md-option>
+					</md-select>
+				</md-input-container>
+				<md-input-container>
+					<label for="id_report">Isi Komplain</label>
+					<textarea name="report" id="id_report" class="form-control" type="text" ng-model="newReport.report" placeholder="Isi Komplain"></textarea>
+					<div ng-messages="reportForm.report.$error">
+						<div ng-message="required" ng-repeat="error in errors.report">{$error$}</div>
+					</div>
+				</md-input-container>
+				<md-button class="md-raised md-accent" ng-click="save()">Laporkan</md-button>
+			</form>
+		</div>
 	</md-dialog-content>
 
 </md-dialog>
