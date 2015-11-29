@@ -232,7 +232,7 @@ kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route'
           $scope.authenticated = false;
           $scope.districts = Districts.query();
           $scope.travel_destinations = TravelDestinations.list.query();
-          $scope.
+          $scope.travel_destination_search = '';
           $scope.categories = ['keamanan', 'kebersihan', 'kenyamanan', 'lainnya'];
           $scope.closeDialog = function() {
             $mdDialog.hide();
@@ -451,8 +451,9 @@ kompresControllers.controller('SearchCtrl', ['$scope', 'ArticleSearch', '$timeou
   }
 ]);
 
-kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$routeParams', '$resource', '$route', 'travel_destinations', 'Marker', 'uiGmapGoogleMapApi',
-  function($scope, TravelDestinations, $routeParams, $resource, $route, travel_destinations, Marker, uiGmapGoogleMapApi) {
+kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$routeParams', '$resource', '$route',
+  'travel_destinations', 'Marker', 'uiGmapGoogleMapApi', '$rootScope',
+  function($scope, TravelDestinations, $routeParams, $resource, $route, travel_destinations, Marker, uiGmapGoogleMapApi, $rootScope) {
     $scope.map = {
       "center": {
         "latitude": -4.6111678,
@@ -464,6 +465,12 @@ kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$rout
     $scope.show_loading = true;
     uiGmapGoogleMapApi.then(function() {
       $scope.show_loading = false;
+      $scope.travel_destination_names = [];
+      angular.forEach($scope.travel_destinations.results, function (item) {
+        $scope.travel_destination_names.push(item.name.toLowerCase());
+        item['name_lowercased'] = item.name.toLowerCase();
+      });
+      console.log($scope.travel_destination_names);
     });
 
     $scope.search = '';
@@ -477,14 +484,28 @@ kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$rout
       $scope.map.zoom = 14;
     }
 
-    $scope.searchFunc = function(destination){
+    $scope.searchSelectedChange = function(destination){
       $scope.map.center.latitude = destination.latitude;
       $scope.map.center.longitude = destination.longitude;
       $scope.map.zoom = 14;
     };
 
+    $scope.searchTextChange = function(search){
+      search = search.toLowerCase();
+      if ($rootScope.arrayContains($scope.travel_destination_names, search)){
+        angular.forEach($scope.travel_destinations.results, function(item){
+          if (item.name_lowercased == search){
+            $scope.map.center.latitude = item.latitude;
+            $scope.map.center.longitude = item.longitude;
+            $scope.map.zoom = 14;
+          }
+        });
+      }
+    };
+
     $scope.markers = Marker.getMarkers();
     $scope.travel_destinations = travel_destinations;
+
   }
 ]);
 

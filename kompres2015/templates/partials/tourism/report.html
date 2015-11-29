@@ -11,23 +11,16 @@
 	<md-dialog-content id="report_view" ng-controller="RegisterCtrl">
 		<div class="md-dialog-content" layout="column" layout-align="center center">
 			<form role="form" name="reportForm" ng-submit="save()" novalidate layout="column" layout-align="left center">
-				<md-input-container>
-					<label for="id_travel_destination">Lokasi Wisata</label>
-					<input name="travel_destination" id="id_travel_destination" type="text" ng-model="newReport.travel_destination" placeholder="Lokasi Wisata" required/>
-					<div ng-messages="reportForm.travel_destination.$error">
-						<div ng-message="required" ng-repeat="error in errors.travel_destination">{$error$}</div>
-					</div>
-				</md-input-container>
 				<md-autocomplete
-										md-search-text="TravelDestinationSearch.province_search"
-										md-items="province in $parent.provinces.results | filter:TravelDestinationSearch.province_search | orderBy: 'name'"
-										md-item-text="province.name"
+										md-search-text="travel_destination_search"
+										md-items="travel_destination in travel_destinations.results | filter: travel_destination_search | orderBy: 'name'"
+										md-item-text="travel_destination.name"
 										md-min-length="0"
-										md-floating-label="provinsi"
-										placeholder="provinsi"
-										class="animated fadeIn dest-search-row province-search">
+										md-floating-label="Lokasi Wisata"
+										placeholder="Lokasi Wisata"
+										class="animated fadeIn">
 							<md-item-template>
-								<span class="animated fadeIn" md-highlight-text="TravelDestinationSearch.province_search" md-highlight-flags="^i">{$province.name$}</span>
+								<span class="animated fadeIn" md-highlight-text="travel_destination_search" md-highlight-flags="^i">{$travel_destination.name$}</span>
 							</md-item-template>
 							<md-not-found>
 							</md-not-found>
