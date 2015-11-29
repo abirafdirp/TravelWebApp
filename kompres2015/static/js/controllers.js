@@ -138,8 +138,8 @@ kompresControllers.controller('DistrictsCtrl', ['$scope', 'Districts',
 
 
 kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', '$routeParams', '$resource', '$rootScope', 'TravelDestinations', 'Districts',
-  'Provinces', 'Regions', 'Marker', 'djangoAuth',
-  function($scope, $route, $routeParams, $resource, $rootScope, TravelDestinations, Districts, Provinces, Regions, Marker, djangoAuth) {
+  'Provinces', 'Regions', 'Marker', 'djangoAuth', '$mdDialog',
+  function($scope, $route, $routeParams, $resource, $rootScope, TravelDestinations, Districts, Provinces, Regions, Marker, djangoAuth, $mdDialog) {
     $scope.$route = $route;
     $scope.params = $routeParams;
     $scope.show_loading = true;
@@ -189,6 +189,32 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
       });
       $scope.show_loading = false;
     });
+
+    $scope.showReport = function(ev) {
+      $mdDialog.show({
+        controller: DialogController,
+        templateUrl: '/partials/report/',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+      });
+      function DialogController($scope, $mdDialog, $timeout) {
+        $scope.authenticated = false;
+        $scope.closeDialogDelayed = function() {
+          $timeout(function(){
+            $mdDialog.hide();}, 350);
+        };
+        $scope.closeDialog = function() {
+          $mdDialog.hide();
+        };
+        $scope.$on('djangoAuth.logged_in', function() {
+          $scope.authenticated = true;
+        });
+        $scope.$on('djangoAuth.logged_out', function() {
+          $scope.authenticated = false;
+        });
+      }
+    };
   }
 ]);
 

@@ -54,11 +54,15 @@ class VisitSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class ReportSerializer(serializers.HyperlinkedModelSerializer):
-    # image = Base64ImageField(max_length=None, use_url=True,)
+    travel_destination = serializers.HyperlinkedRelatedField(view_name='travel-destination-detail',
+                                                             queryset=TravelDestination.objects.all())
+    images = serializers.HyperlinkedRelatedField(view_name='report-image-detail',
+                                                 many=True, read_only=True)
 
     class Meta:
         model = Report
-        fields = ('id', 'category', 'report', 'user')
+        fields = ('id', 'category', 'report', 'travel_destination', 'user', 'images',)
+        read_only_fields = ('user',)
 
 
 class TravelDestinationContentSerializer(serializers.HyperlinkedModelSerializer):

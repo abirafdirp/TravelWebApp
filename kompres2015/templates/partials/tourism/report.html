@@ -3,3 +3,71 @@
 
 </div>
 </div>
+
+<md-dialog aria-label="komplain">
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<h2>komplain</h2>
+			<span flex></span>
+			<md-button class="md-icon-button" ng-click="closeDialog()">
+				<ng-md-icon icon="close" aria-label="close dialog"></ng-md-icon>
+			</md-button>
+		</div>
+	</md-toolbar>
+	<md-dialog-content class="md-dialog-content-register" id="register_view" ng-controller="RegisterCtrl">
+		<form role="form" ng-if="authenticated != true" name="registerForm" ng-submit="register(registerForm)" novalidate>
+
+			<div class="md-dialog-content" layout="column" layout-align="center center">
+
+				<md-input-container class="md-block">
+					<label for="id_username">Username</label>
+					<input name="username" id="id_username" class="form-control" type="text" ng-model="model.username" placeholder="Username" required auto-focus/>
+					<div ng-messages="registerForm.username.$error">
+						<div ng-message="required" ng-repeat="error in errors.username">{$error$}</div>
+					</div>
+				</md-input-container>
+				<md-input-container class="md-block">
+					<label for="id_password">Password</label>
+					<input name="password1" id="id_password1" class="form-control" type="password" ng-model="model.password1" placeholder="Password" required />
+					<div ng-messages="registerForm.password1.$error">
+						<div ng-message="required" ng-repeat="error in errors.password1">{$error$}</div>
+					</div>
+				</md-input-container>
+				<md-input-container class="md-block">
+					<label for="id_password">Repeat Password</label>
+					<input name="password" id="id_password2" class="form-control" type="password" ng-model="model.password2" placeholder="Repeat Password" required />
+					<div ng-messages="registerForm.password.$error">
+						<div ng-message="required" ng-repeat="error in errors.password">{$error$}</div>
+					</div>
+				</md-input-container>
+				<md-input-container class="md-block">
+					<label for="id_email">Email</label>
+					<input name="email" id="id_email" class="form-control" type="email" ng-model="model.email" placeholder="Email" required />
+					<div ng-messages="registerForm.email.$error">
+						<div ng-message="required" ng-repeat="error in errors.email">{$error$}</div>
+						<div ng-message="email" ng-repeat="error in errors.email">{$error$}</div>
+					</div>
+				</md-input-container>
+				<div ng-show="errors" class="animated fadeIn">
+					<p class="md-body-1" ng-repeat="error in errors.non_field_errors">{$error$}</p>
+					<p class="md-body-1" ng-repeat="error in errors.__all__">{$error$}</p>
+					<div ng-if="errors.username != 'This field is required.'">
+						<p class="md-body-1" ng-repeat="error in errors.username">{$error$}</p>
+					</div>
+					<div ng-if="errors.email != 'This field is required.'">
+						<p class="md-body-1" ng-repeat="error in errors.email">{$error$}</p>
+					</div>
+				</div>
+				<div ng-if="complete == true">
+						<p class="md-body-1">Cek email untuk aktivasi akun anda!</p>
+				</div>
+				<span ng-show="show_loading && !complete && errors.length == 0">
+					<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+				</span>
+				<md-button class="md-raised md-primary" type="submit">daftar</md-button>
+			</div>
+		</form>
+	</md-dialog-content>
+
+</md-dialog>
+

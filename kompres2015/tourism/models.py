@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import formats
 
 from ckeditor.fields import RichTextField
 
@@ -82,8 +83,5 @@ class Report(TimeStampedModel):
         verbose_name = 'Komplain pengunjung'
 
     def __str__(self):
-        return self.user.name + ' ' + self.travel_destination.name
-
-
-
-
+        return self.user.username + ' - ' + self.travel_destination.name + ' - ' \
+               + formats.date_format(self.created_date, "SHORT_DATETIME_FORMAT")

@@ -6,9 +6,10 @@ from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
 
-class CreateListViewSet(mixins.CreateModelMixin,
-                                mixins.ListModelMixin,
-                                viewsets.GenericViewSet):
+class CreateListRetrieveViewSet(mixins.CreateModelMixin,
+                        mixins.ListModelMixin,
+                        viewsets.GenericViewSet,
+                        mixins.RetrieveModelMixin):
     pass
 
 

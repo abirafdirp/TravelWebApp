@@ -11,10 +11,10 @@ from kompres2015.image.serializers import ImageSerializer
 from kompres2015.image.serializers import TravelDestinationImageSerializer
 from kompres2015.image.serializers import ArticleImageSerializer
 
-from kompres2015.util.views import CreateListViewSet
+from kompres2015.util.views import CreateListRetrieveViewSet
 
 
-class ReportImageViewSet(CreateListViewSet):
+class ReportImageViewSet(CreateListRetrieveViewSet):
     queryset = ReportImage.objects.all()
     filter_fields = ('tag', 'name')
     serializer_class = ReportImageSerializer

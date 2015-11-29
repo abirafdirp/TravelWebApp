@@ -1,4 +1,5 @@
 from rest_framework import viewsets
+from rest_framework import permissions
 
 from kompres2015.tourism.models import TravelDestination
 from kompres2015.tourism.models import Visit
@@ -10,7 +11,7 @@ from kompres2015.tourism.serializers import VisitSerializer
 from kompres2015.tourism.serializers import ReportSerializer
 from kompres2015.tourism.serializers import TravelDestinationContentSerializer
 
-from kompres2015.util.views import CreateListViewSet
+from kompres2015.util.views import CreateListRetrieveViewSet
 
 
 class TravelDestinationViewSet(viewsets.ReadOnlyModelViewSet):
@@ -50,9 +51,10 @@ class VisitViewSet(viewsets.ReadOnlyModelViewSet):
         return queryset
 
 
-class ReportViewSet(CreateListViewSet):
+class ReportViewSet(CreateListRetrieveViewSet):
     serializer_class = ReportSerializer
     filter_fields = ('report', )
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def get_queryset(self):
         queryset = Report.objects.all()
@@ -63,6 +65,9 @@ class ReportViewSet(CreateListViewSet):
             return queryset
 
         return queryset
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 
 class TravelDestinationContentViewSet(viewsets.ReadOnlyModelViewSet):
