@@ -455,6 +455,10 @@ md-autocomplete[md-floating-label] md-input-container{
     margin-top: 64px;
 }
 
+.dest-side-row {
+    margin-bottom: 10px;
+}
+
 .angular-google-map-container {
     width: 100%;
     height: 93.5%;

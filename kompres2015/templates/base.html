@@ -18,19 +18,18 @@
 
 
 	<!-- Main CSS -->
-	<base href="/">
+	<meta name="google-site-verification" content="3XIlrF3EbwJMvjzEbh6NV3dXCiG5vcyeH0Y_HKwIoBs" />
 </head>
 
 <body ng-controller="MasterCtrl">
 
-<div ng-controller="NavCtrl" layout="column">
-	<div layout="row" layout-fill>
+<div ng-controller="NavCtrl" layout="column" layout-fill>
 
-		<md-toolbar class="md-primary navbar" ng-cloak>
-			<div class="md-toolbar-tools">
+	<md-toolbar class="md-primary navbar" ng-cloak>
+		<div class="md-toolbar-tools">
 				<span flex="20">
 					<md-button href="/" aria-label="home">
-							<img src="/static/images/flag-mini.png">
+						<img src="/static/images/flag-mini.png">
 					</md-button>
 				</span>
 				<span flex="60" layout-align="center center" layout="row" flex-md="50">
@@ -54,7 +53,7 @@
 				<span flex layout-align="right center">
 
 				<md-button ng-show="authenticated" ng-click="showProfile($event)" class="lowercase user-nav">
-						<ng-md-icon icon="account_box" size="22" aria-label="user"></ng-md-icon> <span hide-sm>Profil</span>
+					<ng-md-icon icon="account_box" size="22" aria-label="user"></ng-md-icon> <span hide-sm>Profil</span>
 				</md-button>
 				<md-button ng-show="authenticated" ng-click="logout_clicked = true" class="lowercase user-nav">
 					<ng-md-icon icon="logout" size="22" aria-label="user"></ng-md-icon> <span hide-sm>Keluar</span>
@@ -71,12 +70,17 @@
 					<ng-md-icon icon="account_box" size="22" aria-label="user"></ng-md-icon> Daftar
 				</md-button>
 					</span>
-			</div>
-		</md-toolbar>
+		</div>
+	</md-toolbar>
 
-	</div>
 
-	<main ng-view ng-cloak></main>
+	<main ng-view ng-cloak flex></main>
+
+	<footer>
+		<div layout="row" layout-align="center center">
+			<h2>My Awesome Footer</h2>
+		</div>
+	</footer>
 
 
 	<!-- angular v1.4.2 -->
@@ -105,9 +109,9 @@
 	<script src="{% static 'js/angular-google-maps.min.js'%}"></script>
 
 	<!--[if lt IE 9]>
-		<script src="bower_components/es5-shim/es5-shim.js"></script>
-		<script src="bower_components/json3/lib/json3.min.js"></script>
-		<![endif]-->
+	<script src="bower_components/es5-shim/es5-shim.js"></script>
+	<script src="bower_components/json3/lib/json3.min.js"></script>
+	<![endif]-->
 
 	<!-- angular-django-registration-auth dependencies -->
 	<script src="{% static 'js/angular-cookies.min.js' %}"></script>

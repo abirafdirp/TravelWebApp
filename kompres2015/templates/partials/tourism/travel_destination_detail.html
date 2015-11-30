@@ -50,20 +50,24 @@
 				</md-tab>
 			</md-tabs>
 			<div flex="5"></div>
-			<div flex="20">
-				<span class="dest-side" layout="column"></span>
-					<div>
+			<div flex="25" class="dest-side" layout="column">
+					<div class="dest-side-row">
 						<ng-md-icon icon="place" size="20" aria-label="tanggal"></ng-md-icon>
 						<a ng-href="/lokasi-wisata?search={$district.name$}" class="animated fadeIn" ng-if="district.name"><span>{$district.name $}</span></a>,
 						<a ng-href="/lokasi-wisata?search={$province.name$}" class="animated fadeIn" ng-if="province.name"><span>{$province.name $}</span></a>
 						<a ng-href="/lokasi-wisata?search={$region.name$}" class="animated fadeIn" ng-if="region.name"><span>{$region.name $}</span></a>
 					</div>
-					<div ng-if="travel_destination.latitude && travel_destination.longitude">
+					<div ng-if="travel_destination.latitude && travel_destination.longitude" class="dest-side-row">
 						<ng-md-icon icon="directions" size="20" aria-label="tanggal"></ng-md-icon>
 						<a ng-href="/peta?ltd={$travel_destination.latitude$}&lng={$travel_destination.longitude$}" class="animated fadeIn"><span>lihat di peta</span></a>
 					</div>
-					<div ng-if="travel_destination.latitude && travel_destination.longitude" ng-controller="ReportCtrl">
-						<md-button class="md-raised" ng-click="showReport(travel_destination)">komplain</md-button>
+					<div ng-if="travel_destination.latitude && travel_destination.longitude" ng-controller="ReportCtrl" class="dest-side-row">
+						<md-button class="md-raised" ng-click="showReport(travel_destination)" ng-disabled="!authenticated">
+							<md-tooltip md-direction="down">
+								Refresh
+							</md-tooltip>
+							komplain
+						</md-button>
 					</div>
 			</div>
 		</div>
