@@ -266,6 +266,11 @@ a {
     z-index: 0;
 }
 
+.upload-thumb{
+    max-width: 100px;
+    margin: 5px 5px 5px 5px;
+}
+
 .content {
     margin-top: 80px;
 }

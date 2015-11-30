@@ -193,15 +193,16 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
   }
 ]);
 
-kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route', '$routeParams', 'TravelDestinations', '$resource', '$interval', '$mdDialog', 'TravelDestinationSearch',
-  function($scope, $route, $routeParams, TravelDestinations, $resource, $interval, $mdDialog, TravelDestinationSearch) {
+kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route', '$routeParams', 'TravelDestinations', '$resource', '$interval', '$mdDialog',
+  'TravelDestinationSearch', 'Upload',
+  function($scope, $route, $routeParams, TravelDestinations, $resource, $interval, $mdDialog, TravelDestinationSearch, Upload) {
     $scope.$route = $route;
     $scope.params = $routeParams;
     $scope.travel_destination_name = $scope.params.travel_destination_name.replace(/-/g,' ');
     $scope.TravelDestinationSearch = TravelDestinationSearch;
     $scope.show_loading = true;
 
-    $scope.travel_destination = TravelDestinations.detail.query({travel_destination_name:$scope.travel_destination_name})
+    $scope.travel_destination = TravelDestinations.detail.query({travel_destination_name:$scope.travel_destination_name});
     $scope.travel_destination.$promise.then(function() {
       var url = $scope.travel_destination.results[0].district+'?format=json';
       $scope.district = $resource(url).get(function(){
@@ -211,73 +212,6 @@ kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route'
           });
         });
       });
-
-      $scope.travel_destination_contents = [];
-      angular.forEach($scope.travel_destination.results[0].contents, function(content, index){
-        $scope.travel_destination_contents.push($resource(content+'?format=json').get());
-        if (index == $scope.travel_destination.results.length - 1){
-          $scope.show_loading = false;
-        }
-      });
-
-      $scope.showReport = function(ev) {
-        $mdDialog.show({
-          controller: DialogController,
-          templateUrl: '/partials/report/',
-          parent: angular.element(document.body),
-          targetEvent: ev,
-          clickOutsideToClose:true,
-        });
-        function DialogController($scope, $mdDialog, $timeout, Districts, $http, Reports, TravelDestinations, $rootScope) {
-          $scope.authenticated = false;
-          $scope.districts = Districts.query();
-          $scope.travel_destination_names = [];
-          $scope.complete = false;
-          $scope.show_loading = false;
-          $scope.travel_destinations = TravelDestinations.list.query(function(){
-            angular.forEach($scope.travel_destinations.results, function(item){
-              $scope.travel_destination_names.push(item.name.toLowerCase());
-              item['name_lowercased']= item.name.toLowerCase();
-            })
-          });
-          $scope.travel_destination_search = '';
-          $scope.categories = ['keamanan', 'kebersihan', 'kenyamanan', 'lainnya'];
-          $scope.closeDialog = function() {
-            $mdDialog.hide();
-          };
-          $scope.searchSelectedChange = function(destination){
-            $scope.newReport.travel_destination = '/api/traveldestinations/' + destination.id + '/';
-          };
-          $scope.searchTextChange = function(destination_name){
-            if (destination_name){
-              destination_name = destination_name.toLowerCase();
-            }
-            if($rootScope.arrayContains($scope.travel_destination_names, destination_name)){
-              angular.forEach($scope.travel_destinations.results, function(item){
-                if (item.name_lowercased == destination_name){
-                  $scope.newReport.travel_destination = '/api/traveldestinations/' + item.id + '/';
-                }
-              });
-            }
-            else{
-              $scope.newReport.travel_destination = '';
-            }
-          };
-          $scope.errors = [];
-          $scope.newReport = new Reports();
-          $scope.save = function() {
-            $scope.show_loading = true;
-            return $scope.newReport.$save().then(function(result) {
-              $scope.complete = true;
-              $scope.show_loading = false;
-            },
-            function(data){
-              $scope.errors = data.data;
-              $scope.show_loading = false;
-            })
-          };
-        }
-      };
 
       $scope.images_length = $scope.travel_destination.results[0].images.length;
       $scope.main_images = [];
@@ -298,17 +232,24 @@ kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route'
         }
       });
 
-      $scope.currentIndex = 0;
-
-      $scope.isCurrentSlideIndex = function (index) {
-        return $scope.currentIndex === index;
-      };
-
-      $scope.nextSlide = function () {
-        $scope.currentIndex = ($scope.currentIndex < $scope.main_images.length - 1) ? ++$scope.currentIndex : 0;
-      };
-
+      $scope.travel_destination_contents = [];
+      angular.forEach($scope.travel_destination.results[0].contents, function(content, index){
+        $scope.travel_destination_contents.push($resource(content+'?format=json').get());
+        if (index == $scope.travel_destination.results.length - 1){
+          $scope.show_loading = false;
+        }
+      });
     });
+
+    $scope.currentIndex = 0;
+
+    $scope.isCurrentSlideIndex = function (index) {
+      return $scope.currentIndex === index;
+    };
+
+    $scope.nextSlide = function () {
+      $scope.currentIndex = ($scope.currentIndex < $scope.main_images.length - 1) ? ++$scope.currentIndex : 0;
+    };
   }
 ]);
 
@@ -405,6 +346,102 @@ kompresControllers.controller('ArticleRepeatCtrl', ['$scope', '$resource', '$exc
       });
     };
     init();
+  }
+]);
+
+kompresControllers.controller('ReportCtrl', ['$scope', '$mdDialog',
+  function($scope, $mdDialog) {
+    $scope.showReport = function(ev) {
+      $mdDialog.show({
+        controller: DialogController,
+        templateUrl: '/partials/report/',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+      });
+      function DialogController($scope, $mdDialog, Districts, Reports, TravelDestinations, $rootScope, Upload) {
+        $scope.uploadCount = 0;
+        $scope.upload = function (file, report) {
+          Upload.upload({
+            url: '/api/reportimages/',
+            data: {'image': file, 'name': file.name, 'tag': 'report', 'report': report}
+          }).then(function (resp) {
+            $scope.uploadCount = $scope.uploadCount + 1;
+            if ($scope.uploadCount == $scope.files.length){
+              $scope.uploadCount = 0;
+              $scope.complete = true;
+              $scope.show_loading = false;
+            }
+            //console.log('Success ' + resp.config.data.image.name + 'uploaded. Response: ' + resp.data);
+          }, function (resp) {
+            //console.log('Error status: ' + resp.status);
+          }, function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.image.name);
+          });
+        };
+        $scope.uploadFiles = function (files, report) {
+          if (files && files.length) {
+            for (var i = 0; i < files.length; i++) {
+              $scope.upload(files[i], report);
+              console.log(files[i].name);
+            }
+          }
+        };
+        $scope.uploadImages = function() {
+          $scope.uploadFiles($scope.files, $scope.report);
+        };
+
+
+        $scope.authenticated = false;
+        $scope.districts = Districts.query();
+        $scope.travel_destination_names = [];
+        $scope.complete = false;
+        $scope.show_loading = false;
+        $scope.travel_destinations = TravelDestinations.list.query(function(){
+          angular.forEach($scope.travel_destinations.results, function(item){
+            $scope.travel_destination_names.push(item.name.toLowerCase());
+            item['name_lowercased']= item.name.toLowerCase();
+          })
+        });
+        $scope.travel_destination_search = '';
+        $scope.categories = ['keamanan', 'kebersihan', 'kenyamanan', 'lainnya'];
+        $scope.closeDialog = function() {
+          $mdDialog.hide();
+        };
+        $scope.searchSelectedChange = function(destination){
+          $scope.newReport.travel_destination = '/api/traveldestinations/' + destination.id + '/';
+        };
+        $scope.searchTextChange = function(destination_name){
+          if (destination_name){
+            destination_name = destination_name.toLowerCase();
+          }
+          if($rootScope.arrayContains($scope.travel_destination_names, destination_name)){
+            angular.forEach($scope.travel_destinations.results, function(item){
+              if (item.name_lowercased == destination_name){
+                $scope.newReport.travel_destination = '/api/traveldestinations/' + item.id + '/';
+              }
+            });
+          }
+          else{
+            $scope.newReport.travel_destination = '';
+          }
+        };
+        $scope.errors = [];
+        $scope.newReport = new Reports();
+        $scope.save = function() {
+          $scope.show_loading = true;
+          return $scope.newReport.$save().then(function(result) {
+                $scope.report = '/api/reports/' + result.id + '/';
+                $scope.uploadImages();
+              },
+              function(data){
+                $scope.errors = data.data;
+                $scope.show_loading = false;
+              })
+        };
+      }
+    };
   }
 ]);
 

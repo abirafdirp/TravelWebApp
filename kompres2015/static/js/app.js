@@ -131,6 +131,7 @@ var kompresApp = angular.module('kompres', [
   'ngSanitize',
   'uiGmapgoogle-maps',
   'angular-carousel',
+  'ngFileUpload',
 ]);
 
 // differentiate angular and django template language

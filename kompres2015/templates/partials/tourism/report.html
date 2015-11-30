@@ -10,8 +10,9 @@
 	</md-toolbar>
 	<md-dialog-content id="report_view">
 		<div class="md-dialog-content" layout="column" layout-align="center center">
-			<form role="form" name="reportForm" ng-submit="save()" novalidate layout="column" layout-align="center center">
-				<md-autocomplete
+			<form role="form" name="reportForm" ng-submit="save()" novalidate>
+				<div layout="row" style="min-width: 400px" layout-align="left center" class="md-block">
+					<md-autocomplete
 								md-search-text="travel_destination_search"
 								md-items="travel_destination in travel_destinations.results | filter: travel_destination_search | orderBy: 'name'"
 								md-item-text="travel_destination.name"
@@ -26,7 +27,8 @@
 								id="id_travel_destination"
 								class="form-control"
 								type="text"
-								required>
+								required
+								flex="60">
 					<md-item-template>
 						<span class="animated fadeIn" md-highlight-text="travel_destination_search" md-highlight-flags="^i">{$travel_destination.name$}</span>
 					</md-item-template>
@@ -36,10 +38,9 @@
 						<div ng-message="required" ng-repeat="error in errors.travel_destination">{$error$}</div>
 					</div>
 				</md-autocomplete>
-
-				<md-input-container flex>
+					<md-input-container flex class="report-category">
 					<label for="id_category">Kategori</label>
-					<md-select ng-model="newReport.category" name="category" id="id_category" class="form-control" required style="min-width: 180px;">
+					<md-select ng-model="newReport.category" name="category" id="id_category" class="form-control" required>
 						<md-option ng-repeat="category in categories" value="{$category$}">
 							{$category$}
 						</md-option>
@@ -48,23 +49,39 @@
 						<div ng-message="required" ng-repeat="error in errors.category">{$error$}</div>
 					</div>
 				</md-input-container>
-				<md-input-container>
+				</div>
+
+
+
+				<md-input-container class="md-block">
 					<label for="id_report">Isi Komplain</label>
 					<textarea name="report" id="id_report" class="form-control" type="text" ng-model="newReport.report" placeholder="Isi Komplain" required></textarea>
 					<div ng-messages="reportForm.report.$error">
 						<div ng-message="required" ng-repeat="error in errors.report">{$error$}</div>
 					</div>
 				</md-input-container>
+				<div layout="column" layout-align="center center">
+					<md-button class="md-raised" ngf-select ng-model="files" ngf-multiple="true" flex>Unggah gambar</md-button>
+				</div>
+				<div layout="row" layout-align="center center" layout-wrap flex>
+					<div flex="33" ng-repeat="file in files" layout-align="center center">
+						<img ngf-thumbnail="file" class="upload-thumb">
+					</div>
+				</div>
+				<div flex></div>
 				<div ng-show="errors" class="animated fadeIn">
 					<p ng-show="errors.travel_destination" class="md-body-1">Harap masukan lokasi wisata yang tepat</p>
 				</div>
 				<div ng-if="complete == true">
-						<p class="md-body-1">Komplain berhasil dibuat, terima kasih atas laporannya.</p>
+					<p class="md-body-1">Komplain berhasil dibuat, terima kasih atas laporannya.</p>
 				</div>
 				<span ng-show="show_loading && !complete && errors.length == 0">
 					<md-progress-circular md-mode="indeterminate"></md-progress-circular>
 				</span>
-				<md-button class="md-raised md-accent" ng-click="save()">Laporkan</md-button>
+				<div flex></div>
+				<div layout="column" layout-align="center center">
+					<md-button class="md-raised md-primary" ng-click="save()">Laporkan</md-button>
+				</div>
 			</form>
 		</div>
 	</md-dialog-content>

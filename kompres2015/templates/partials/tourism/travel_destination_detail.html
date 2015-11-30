@@ -62,7 +62,7 @@
 						<ng-md-icon icon="directions" size="20" aria-label="tanggal"></ng-md-icon>
 						<a ng-href="/peta?ltd={$travel_destination.latitude$}&lng={$travel_destination.longitude$}" class="animated fadeIn"><span>lihat di peta</span></a>
 					</div>
-					<div ng-if="travel_destination.latitude && travel_destination.longitude">
+					<div ng-if="travel_destination.latitude && travel_destination.longitude" ng-controller="ReportCtrl">
 						<md-button class="md-raised" ng-click="showReport()">komplain</md-button>
 					</div>
 			</div>
