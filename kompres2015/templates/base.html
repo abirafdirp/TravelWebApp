@@ -18,13 +18,14 @@
 
 
 	<!-- Main CSS -->
+	<base href="/">
 	<meta name="google-site-verification" content="3XIlrF3EbwJMvjzEbh6NV3dXCiG5vcyeH0Y_HKwIoBs" />
 </head>
 
 <body ng-controller="MasterCtrl">
 
 <div ng-controller="NavCtrl" layout="column" layout-fill>
-
+	<header>
 	<md-toolbar class="md-primary navbar" ng-cloak>
 		<div class="md-toolbar-tools">
 				<span flex="20">
@@ -72,9 +73,10 @@
 					</span>
 		</div>
 	</md-toolbar>
+		</header>
 
 
-	<main ng-view ng-cloak flex></main>
+	<main ng-view ng-cloak flex="grow"></main>
 
 	<footer>
 		<div layout="row" layout-align="center center">
