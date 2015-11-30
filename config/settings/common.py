@@ -24,6 +24,7 @@ DJANGO_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
@@ -49,11 +50,6 @@ THIRD_PARTY_APPS = (
 
     # DRF auto generated docs
     'rest_framework_swagger',
-
-    'fluent_comments',  # comments
-    'django_comments',
-    'django.contrib.sites',  # override default comments view
-    'threadedcomments',
 
     'django_extensions',
     'ckeditor',  # WYSIWYG editor
@@ -303,12 +299,6 @@ LOGGING = {
 ADMIN_URL = r'^admin/'
 
 # Your common stuff: Below this line define 3rd party library settings
-
-# comments
-FLUENT_COMMENTS_USE_EMAIL_NOTIFICATION = False
-
-# django-threadedcomments
-COMMENTS_APP = 'fluent_comments'
 
 # django-ckeditor
 #CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'

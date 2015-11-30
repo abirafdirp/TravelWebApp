@@ -63,3 +63,5 @@ django-ckeditor==5.0.2
 django-grappelli==2.7.2
 
 django-annoying==0.8.4
+
+django-extensions==1.5.7
