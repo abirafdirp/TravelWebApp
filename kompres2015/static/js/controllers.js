@@ -186,7 +186,19 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
             });
           });
         });
-      });
+      },angular.forEach($scope.travel_destinations.results, function(item){
+        Marker.addMarker(item);
+        if ($rootScope.arrayContains($scope.categories, item.type) == false){
+          $scope.categories.push(String(item.type));
+        }
+        item['district_resolved'] = $resource(item.district).get(function(){
+          //item['distance'] = $rootScope.distance($scope.user.district.latitude, $scope.user.district.longitude, item.district_resolved.latitude, item.district_resolved.longitude);
+          item['province'] = $resource(item.district_resolved.province).get(function(){
+            item['region'] = $resource(item.province.region).get();
+          });
+        });
+      })
+      );
       $scope.show_loading = false;
     });
 
