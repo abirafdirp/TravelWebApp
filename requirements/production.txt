@@ -13,4 +13,6 @@ gevent==1.0.2
 # ---------------
 django-mailgun==0.7.2
 
+django-sslify==0.2.7
+
 

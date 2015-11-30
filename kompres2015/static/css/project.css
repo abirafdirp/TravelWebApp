@@ -271,6 +271,11 @@ a {
     margin: 5px 5px 5px 5px;
 }
 
+.report-category {
+    position: relative;
+    top: -8px;
+}
+
 .content {
     margin-top: 80px;
 }

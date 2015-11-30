@@ -11,7 +11,7 @@
 	<md-dialog-content id="report_view">
 		<div class="md-dialog-content" layout="column" layout-align="center center">
 			<form role="form" name="reportForm" ng-submit="save()" novalidate>
-				<div layout="row" style="min-width: 400px" layout-align="left center" class="md-block">
+				<div layout="row" style="min-width: 400px" layout-align="left center">
 					<md-autocomplete
 								md-search-text="travel_destination_search"
 								md-items="travel_destination in travel_destinations.results | filter: travel_destination_search | orderBy: 'name'"
@@ -19,6 +19,7 @@
 								md-min-length="0"
 								md-floating-label="Lokasi Wisata"
 								md-selected-item-change="searchSelectedChange(travel_destination)"
+								md-selected-item ="travel_destination_local"
 								md-search-text-change="searchTextChange(travel_destination_search)"
 								placeholder="Lokasi Wisata"
 								class="animated fadeIn"

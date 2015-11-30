@@ -351,16 +351,17 @@ kompresControllers.controller('ArticleRepeatCtrl', ['$scope', '$resource', '$exc
 
 kompresControllers.controller('ReportCtrl', ['$scope', '$mdDialog',
   function($scope, $mdDialog) {
-    $scope.showReport = function(ev) {
+    $scope.showReport = function(travel_destination) {
       $mdDialog.show({
+        locals: {travel_destination_local: travel_destination},
         controller: DialogController,
         templateUrl: '/partials/report/',
         parent: angular.element(document.body),
-        targetEvent: ev,
         clickOutsideToClose:true,
       });
-      function DialogController($scope, $mdDialog, Districts, Reports, TravelDestinations, $rootScope, Upload) {
+      function DialogController($scope, $mdDialog, Districts, Reports, TravelDestinations, $rootScope, Upload, travel_destination_local) {
         $scope.uploadCount = 0;
+        $scope.travel_destination_local = travel_destination_local;
         $scope.upload = function (file, report) {
           Upload.upload({
             url: '/api/reportimages/',
