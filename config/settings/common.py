@@ -106,12 +106,12 @@ FIXTURE_DIRS = (
 # MANAGER CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
-ADMINS = (
-    ("""Abirafdi Raditya Putra""", 'abirafdiraditya@gmail.com'),
-)
+# ADMINS = (
+#     ("""Abirafdi Raditya Putra""", 'abirafdiraditya@gmail.com'),
+# )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#managers
-MANAGERS = ADMINS
+# MANAGERS = ADMINS
 
 # DATABASE CONFIGURATION
 # ------------------------------------------------------------------------------
