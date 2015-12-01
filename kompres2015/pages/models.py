@@ -22,3 +22,13 @@ class FeaturedTravelDestination(TimeStampedModel):
 
     def __str__(self):
         return self.travel_destination.name
+
+
+class HomeLink(TimeStampedModel):
+    image = models.ImageField()
+    title = models.CharField(max_length=30)
+    link = models.CharField(max_length=100)
+    page = models.ForeignKey(Page)
+
+    def __str__(self):
+        return self.title + ' ' + self.link

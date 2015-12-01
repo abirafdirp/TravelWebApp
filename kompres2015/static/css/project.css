@@ -160,6 +160,11 @@ a {
     overflow: hidden;
 }
 
+.featured-dest-img{
+    height: 300px;
+    width: 100%;
+}
+
 #posts-categories a {
     color: white;
     text-decoration: none;
@@ -433,7 +438,7 @@ md-autocomplete[md-floating-label] md-input-container{
 .home-tagline{
     background-color: rgba(30,30,30,0.7);
     color: white;
-    padding: 5px 5px 5px 5px;
+    padding: 5px 30px 5px 30px;
     border-radius: 3%;
 }
 

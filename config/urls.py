@@ -31,6 +31,7 @@ from kompres2015.image.views import ArticleImageViewSet
 
 from kompres2015.pages.views import PageViewSet
 from kompres2015.pages.views import FeaturedTravelDestinationViewSet
+from kompres2015.pages.views import HomeLinkViewSet
 
 from kompres2015.authentication.views import FacebookLogin
 
@@ -156,6 +157,12 @@ page_list = PageViewSet.as_view({
 page_detail = PageViewSet.as_view({
     'get': 'retrieve',
 })
+home_link_list = HomeLinkViewSet.as_view({
+    'get': 'list',
+})
+home_link_detail = HomeLinkViewSet.as_view({
+    'get': 'retrieve',
+})
 featured_travel_destination_list = FeaturedTravelDestinationViewSet.as_view({
     'get': 'list',
 })
@@ -206,6 +213,8 @@ urlpatterns += format_suffix_patterns([
     url(r'^api/featuredtraveldestinations/(?P<pk>[0-9]+)/$', featured_travel_destination_detail, name='featured-travel-destination-detail'),
     url(r'^api/articles/$', article_list, name='article-list'),
     url(r'^api/articles/(?P<pk>[0-9]+)/$', article_detail, name='article-detail'),
+    url(r'^api/homelinks/$', home_link_list, name='home-link-list'),
+    url(r'^api/homelinks/(?P<pk>[0-9]+)/$', home_link_detail, name='home-link-detail'),
     url(r'^api/traveldestinationcontents/$', travel_destination_content_list, name='travel-destination-content-list'),
     url(r'^api/traveldestinationcontents/(?P<pk>[0-9]+)/$', travel_destination_content_detail, name='travel-destination-content-detail'),
 ])

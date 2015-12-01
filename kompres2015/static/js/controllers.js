@@ -272,6 +272,7 @@ kompresControllers.controller('TravelDestinationRepeatCtrl', ['$scope', '$resour
         $exceptionHandler("The TravelDestinationRepeatController must be initialized with a travel_destination in scope");
       }
       $scope.TravelDestinationInRepeat = $scope.travel_destination;
+      console.log($scope.travel_destination);
       if($scope.travel_destination.short_description.length > 180){
         $scope.travel_destination_short_description = $scope.travel_destination.short_description.substring(0,180) + ' ...';
       }
@@ -469,10 +470,19 @@ kompresControllers.controller('VisitsCtrl', ['$scope', 'Visits',
   }
 ]);
 
-kompresControllers.controller('HomeCtrl', ['$scope', 'Visits', 'TravelDestinations', 'Articles', 'Page',
-  function($scope, Visits, TravelDestinations, Articles, Page) {
+kompresControllers.controller('HomeCtrl', ['$scope', 'Visits', 'TravelDestinations', 'Articles', 'Page', '$resource',
+  function($scope, Visits, TravelDestinations, Articles, Page, $resource) {
     Page.query(function(data){
       $scope.page = data.results[0];
+      $scope.page.featured_travel_destinations = [];
+      angular.forEach($scope.page.featureds, function(travel_destination, index){
+        $resource(travel_destination).get(function(data){
+          $scope.page.featured_travel_destinations.push($resource(data.travel_destination).get(function(){
+            if (index == $scope.page.featureds.length -1 ){}
+            $scope.resolved = true;
+          }));
+        });
+      });
     });
   }
 ]);
