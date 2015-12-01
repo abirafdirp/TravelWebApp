@@ -129,6 +129,7 @@ var kompresApp = angular.module('kompres', [
   'uiGmapgoogle-maps',
   'angular-carousel',
   'ngFileUpload',
+  'angularVideoBg',
 ]);
 
 // differentiate angular and django template language
@@ -142,7 +143,8 @@ kompresApp.config(['$routeProvider', '$locationProvider',
     $routeProvider.
       when('/', {
         templateUrl: '/partials/home/',
-        activetab: 'home'
+        activetab: 'home',
+        controller: 'HomeCtrl'
       }).
       when('/artikel', {
         templateUrl: '/partials/article-list/',

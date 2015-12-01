@@ -15,7 +15,6 @@ angular.module('angularDjangoRegistrationAuthApp')
           .then(function(data){
             // success case
             $scope.show_loading = false;
-            $location.path("/");
           },function(data){
             // error case
             $scope.show_loading = false;

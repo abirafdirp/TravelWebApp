@@ -417,6 +417,19 @@ md-autocomplete[md-floating-label] md-input-container{
     padding-top: 30px;
 }
 
+.video-container {
+    position: absolute !important;
+    top: 63px;
+    height: 700px;
+    width: 100%;
+}
+
+.video-content {
+    top: 63px;
+    position: relative;
+    z-index: 100;
+}
+
 #dest-search-box-title{
     margin-left: 4px;
     padding-left: 1px;

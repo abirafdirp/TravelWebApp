@@ -170,34 +170,34 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
     $scope.travel_destinations = TravelDestinations.list.query();
     $scope.travel_destinations.$promise.then(function(){
       $scope.user = djangoAuth.profile().then(function(data){
-        $scope.user = data;
-        $resource($scope.user.district+'?format=json').get(function(data){
-          $scope.user.district = data;
-          angular.forEach($scope.travel_destinations.results, function(item){
+            $scope.user = data;
+            $resource($scope.user.district+'?format=json').get(function(data){
+              $scope.user.district = data;
+              angular.forEach($scope.travel_destinations.results, function(item){
+                Marker.addMarker(item);
+                if ($rootScope.arrayContains($scope.categories, item.type) == false){
+                  $scope.categories.push(String(item.type));
+                }
+                item['district_resolved'] = $resource(item.district).get(function(){
+                  item['distance'] = $rootScope.distance($scope.user.district.latitude, $scope.user.district.longitude, item.district_resolved.latitude, item.district_resolved.longitude);
+                  item['province'] = $resource(item.district_resolved.province).get(function(){
+                    item['region'] = $resource(item.province.region).get();
+                  });
+                });
+              });
+            });
+          },angular.forEach($scope.travel_destinations.results, function(item){
             Marker.addMarker(item);
             if ($rootScope.arrayContains($scope.categories, item.type) == false){
               $scope.categories.push(String(item.type));
             }
             item['district_resolved'] = $resource(item.district).get(function(){
-              item['distance'] = $rootScope.distance($scope.user.district.latitude, $scope.user.district.longitude, item.district_resolved.latitude, item.district_resolved.longitude);
+              //item['distance'] = $rootScope.distance($scope.user.district.latitude, $scope.user.district.longitude, item.district_resolved.latitude, item.district_resolved.longitude);
               item['province'] = $resource(item.district_resolved.province).get(function(){
                 item['region'] = $resource(item.province.region).get();
               });
             });
-          });
-        });
-      },angular.forEach($scope.travel_destinations.results, function(item){
-        Marker.addMarker(item);
-        if ($rootScope.arrayContains($scope.categories, item.type) == false){
-          $scope.categories.push(String(item.type));
-        }
-        item['district_resolved'] = $resource(item.district).get(function(){
-          //item['distance'] = $rootScope.distance($scope.user.district.latitude, $scope.user.district.longitude, item.district_resolved.latitude, item.district_resolved.longitude);
-          item['province'] = $resource(item.district_resolved.province).get(function(){
-            item['region'] = $resource(item.province.region).get();
-          });
-        });
-      })
+          })
       );
       $scope.show_loading = false;
     });
@@ -442,11 +442,16 @@ kompresControllers.controller('ReportCtrl', ['$scope', '$mdDialog',
         };
         $scope.errors = [];
         $scope.newReport = new Reports();
+        $scope.newReport.travel_destination = '/api/traveldestinations/' + travel_destination_local.id +'/';
         $scope.save = function() {
           $scope.show_loading = true;
-          return $scope.newReport.$save().then(function(result) {
+          $scope.newReport.$save().then(function(result) {
                 $scope.report = '/api/reports/' + result.id + '/';
-                $scope.uploadImages();
+                if ($scope.files){
+                  $scope.uploadImages();
+                }
+                $scope.complete = true;
+                $scope.show_loading = false;
               },
               function(data){
                 $scope.errors = data.data;
@@ -461,6 +466,14 @@ kompresControllers.controller('ReportCtrl', ['$scope', '$mdDialog',
 kompresControllers.controller('VisitsCtrl', ['$scope', 'Visits',
   function($scope, Visits) {
     $scope.visits = Visits.query();
+  }
+]);
+
+kompresControllers.controller('HomeCtrl', ['$scope', 'Visits', 'TravelDestinations', 'Articles', 'Page',
+  function($scope, Visits, TravelDestinations, Articles, Page) {
+    Page.query(function(data){
+      $scope.page = data.results[0];
+    });
   }
 ]);
 

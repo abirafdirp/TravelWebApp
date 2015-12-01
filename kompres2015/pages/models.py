@@ -7,6 +7,7 @@ from kompres2015.tourism.models import TravelDestination
 
 class Page(TimeStampedModel):
     video = models.TextField(blank=True, null=True)
+    video_start = models.IntegerField(blank=True, null=True)
     travel_destination_list_image = models.ImageField(blank=True, null=True)
     article_list_image = models.ImageField(blank=True, null=True, help_text="harap gambar berwarna gelap")
     article_list_tagline = models.CharField(max_length=80, blank=True, null=True)

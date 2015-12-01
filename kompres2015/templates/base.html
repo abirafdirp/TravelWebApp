@@ -76,12 +76,14 @@
 		</header>
 
 
-	<main ng-view ng-cloak flex="grow"></main>
+	<main ng-view flex="grow"></main>
 
-	<footer>
-		<div layout="row" layout-align="center center">
+	<footer md-theme="destination">
+		<md-toolbar class="md-accent">
+			<div class="md-toolbar-tools">
 			<h2>My Awesome Footer</h2>
-		</div>
+				</div>
+		</md-toolbar>
 	</footer>
 
 
@@ -104,6 +106,7 @@
 	<script src="{% static 'js/angular-carousel.min.js'%}"></script>
 	<script src="{% static 'js/angular-material-icons.min.js'%}"></script>
 	<script src="{% static 'js/ng-file-upload.min.js'%}"></script>
+	<script src="{% static 'js/angular-video-bg.min.js'%}"></script>
 
 	<!-- angular google maps -->
 	<script src="{% static 'js/angular-simple-logger.min.js'%}"></script>

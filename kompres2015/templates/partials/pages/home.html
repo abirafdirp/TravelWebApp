@@ -1,5 +1,15 @@
-<div ng-controller="HomePageCtrl">
-	<div ng-repeat="homepage in homepage.results">
-{#		<img flex class="bg" src="{$ homepage.image $}">#}
-	</div>
-</div>
+
+  <div flex class="video-container">
+    <video-bg ng-if="page" video-id="page.video" start="page.video_start" flex>
+    </video-bg>
+  </div>
+
+<div class="video-content">
+<div layout="column" layout-align="left center">
+      <div flex></div>
+      <div layout="row" layout-align="left center">
+        <h2>Discover Indonesia</h2>
+      </div>
+    </div>
+
+  </div>
