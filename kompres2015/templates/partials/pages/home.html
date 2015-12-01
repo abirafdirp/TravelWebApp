@@ -15,20 +15,23 @@
     </div>
     <div class="home-nav" ng-if="resolved">
       <div layout="row" layout-wrap layout-margin>
-        <md-card ng-repeat="travel_destination in page.featured_travel_destinations" ng-controller="TravelDestinationRepeatCtrl" flex="33">
-          <img ng-show="thumbnail.image != null" ng-src="{$thumbnail.image$}" class="md-card-image animated fadeIn" alt="Washed Out">
-          <md-card-title>
-            <md-card-title-text>
-              <span class="md-headline">{$travel_destination.name$}</span>
-            </md-card-title-text>
-          </md-card-title>
-          <md-card-content>
-            <div layout="row" layout-padding layout-margin layout-align="right center">
-              <div flex></div>
-              <ng-md-icon icon="keyboard_arrow_right" size="52" aria-label="user"></ng-md-icon>
-            </div>
-          </md-card-content>
-        </md-card>
+        <div ng-repeat="travel_destination in page.featured_travel_destinations" ng-controller="TravelDestinationRepeatCtrl" flex="25" layout="row">
+          <md-card flex>
+            <img ng-show="thumbnail.image != null" ng-src="{$thumbnail.image$}" class="md-card-image animated fadeIn" alt="Washed Out">
+            <md-card-title>
+              <md-card-title-text layout-margin>
+                <span class="md-headline">{$travel_destination.name$}</span>
+              </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+              <div layout="row"layout-align="right center" layout-margin>
+                <div flex></div>
+                <ng-md-icon icon="keyboard_arrow_right" size="52" aria-label="user"></ng-md-icon>
+              </div>
+            </md-card-content>
+          </md-card>
+          <div flex="10"></div>
+        </div>
       </div>
     </div>
   </div>
