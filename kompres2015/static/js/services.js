@@ -1,15 +1,42 @@
 var kompresServices = angular.module('kompresServices', ['ngResource']);
 
-kompresServices.service('PostCategory', ['$rootScope',
-  function($rootScope) {
+kompresServices.service('ColorRandomizer', [
+  function() {
+    // remember to pick dark colors
+    // 1 red 2 teal 3 orange 4 indigo 5 purple
+    // all colors above are material's colors
+    this.colors = [
+        '#F44336',
+        '#009688',
+        '#ff5722',
+        '#3f51b5',
+        '#673ab7',
+        '#2196F3'
+    ];
+
+    // function is based on http://stackoverflow.com/questions/1527803/generating-random-numbers-in-javascript-in-a-specific-range
+    this.getColor = function(){
+      return this.colors[Math.floor(Math.random() * (6))];
+    }
+  }
+]);
+
+
+kompresServices.service('PostCategory', ['$rootScope', 'ColorRandomizer',
+  function($rootScope, ColorRandomizer) {
     this.categories = [];
+    this.colors = [];
     this.addCategory = function(category) {
       if (!$rootScope.arrayContains(this.categories, category)){
         this.categories.push(String(category));
+        this.colors.push(ColorRandomizer.getColor());
       }
     };
     this.getCategories = function(){
       return this.categories;
+    }
+    this.getColors = function(){
+      return this.colors;
     }
   }
 ]);

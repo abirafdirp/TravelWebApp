@@ -43,7 +43,7 @@
 							</div>
 						</a>
 					</md-toolbar>
-					<md-toolbar ng-repeat="category in categories" id="posts-categories" class="{$ setColor($index) $}">
+					<md-toolbar ng-repeat="category in categories" id="posts-categories" style="background-color: {$ categories_colors[$index] $}">
 						<a href="javascript:void(0)" ng-click="ArticleSearch.setCategorySearch(category)">
 							<div class="md-toolbar-tools">
 								<h2 class="md-flex">{$ category $}</h2>
@@ -63,7 +63,12 @@
 						<md-progress-circular md-mode="indeterminate"></md-progress-circular>
 					</div>
 
-					<div ng-cloak ng-show="show_loading == false" ng-repeat="article in articles.results | filter: ArticleSearch.search | filter: ArticleSearch.category_search" ng-controller="ArticleRepeatCtrl" flex="33" flex-sm="100" flex-md="50">
+					<div ng-cloak ng-show="show_loading == false"
+							 dir-paginate="article in articles.results | filter: ArticleSearch.search | filter: ArticleSearch.category_search | itemsPerPage: 3 "
+							 current-page="article"
+							 ng-controller="ArticleRepeatCtrl"
+							 flex="80"
+									flex-sm="100">
 
 						<md-card id="posts">
 							<a ng-href="/artikel/{$ slugify(article.title) $}">
@@ -72,15 +77,11 @@
 
 							</a>
 							<md-card-content>
-						<span class="md-body-2" layout="row" layout-wrap>
-							<span flex="100" flex-gt-lg="60">
+						<span class="md-body-2">
 								<ng-md-icon icon="access_time" size="20" aria-label="tanggal"></ng-md-icon>
-								{$ article.date $}
-							</span>
-							<span flex="100" flex-gt-lg="40">
+								{$ article.date $}&nbsp;&nbsp;
 								<ng-md-icon icon="sort" size="20" aria-label="tanggal"></ng-md-icon>
 								<a href="javascript:void(0)" ng-click="ArticleSearch.setCategorySearch(article.category)"> {$ article.category $}</a>
-							</span>
 						</span>
 								<p class="md-body-1">
 									{$ article_short_description $}
@@ -96,3 +97,5 @@
 		</md-content>
 	</div>
 </div>
+
+<dir-pagination-controls></dir-pagination-controls>

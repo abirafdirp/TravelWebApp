@@ -36,19 +36,19 @@
 				<span flex="60" layout-align="center center" layout="row" flex-md="50">
 					<md-button href="/lokasi-wisata" ng-mouseleave="traveldestination_icon = 'terrain'" ng-mouseenter="traveldestination_icon = 'satellite'"ng-click="TravelDestinationSearch.clearAllSearch(); TravelDestinationSearch.resetIcon()">
 						<md-tooltip md-direction="down" class="tooltip"><span class="md-body-2">lokasi wisata</span></md-tooltip>
-						<ng-md-icon icon="{$traveldestination_icon$}" aria-label="article"></ng-md-icon>
+						<ng-md-icon icon="{$traveldestination_icon$}" aria-label="article" options='{"rotation": "none"}'></ng-md-icon>
 					</md-button>
 					<md-button href="/artikel" ng-mouseleave="article_icon = 'my_library_books'" ng-mouseenter="article_icon = 'format_align_left'" ng-click="ArticleSearch.clearAllSearch(); ArticleSearch.resetIcon()">
 						<md-tooltip md-direction="down" class="tooltip"><span class="md-body-2">artikel</span></md-tooltip>
-						<ng-md-icon icon="{$article_icon$}" aria-label="article"></ng-md-icon>
+						<ng-md-icon icon="{$article_icon$}" aria-label="article" options='{"rotation": "none"}'></ng-md-icon>
 					</md-button>
 					<md-button href="/peta" ng-mouseleave="map_icon = 'directions'" ng-mouseenter="map_icon = 'navigation'">
 						<md-tooltip md-direction="down" class="tooltip"><span class="md-body-2">peta</span></md-tooltip>
-						<ng-md-icon icon="{$map_icon$}" aria-label="article"></ng-md-icon>
+						<ng-md-icon icon="{$map_icon$}" aria-label="article" options='{"rotation": "none"}'></ng-md-icon>
 					</md-button>
 					<md-button href="/info" ng-mouseleave="info_icon = 'info'" ng-mouseenter="info_icon = 'info_outline'">
 						<md-tooltip md-direction="down" class="tooltip"><span class="md-body-2">info dan kontak</span></md-tooltip>
-						<ng-md-icon icon="{$info_icon$}" aria-label="article"></ng-md-icon>
+						<ng-md-icon icon="{$info_icon$}" aria-label="article" options='{"rotation": "none"}'></ng-md-icon>
 					</md-button>
 				</span>
 				<span flex layout-align="right center">
@@ -107,6 +107,7 @@
 	<script src="{% static 'js/angular-material-icons.min.js'%}"></script>
 	<script src="{% static 'js/ng-file-upload.min.js'%}"></script>
 	<script src="{% static 'js/angular-video-bg.min.js'%}"></script>
+	<script src="{% static 'js/dirPagination.js'%}"></script>
 
 	<!-- angular google maps -->
 	<script src="{% static 'js/angular-simple-logger.min.js'%}"></script>

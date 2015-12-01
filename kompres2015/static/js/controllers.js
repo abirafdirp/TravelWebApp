@@ -153,7 +153,6 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
         $resource($scope.user.district+'?format=json').get(function(data) {
           $scope.user.district = data;
           angular.forEach($scope.travel_destinations.results, function(item){
-            console.log(item);
             item['distance'] = $rootScope.distance($scope.user.district.latitude, $scope.user.district.longitude, item.district_resolved.latitude, item.district_resolved.longitude);
           });
         });
@@ -272,7 +271,6 @@ kompresControllers.controller('TravelDestinationRepeatCtrl', ['$scope', '$resour
         $exceptionHandler("The TravelDestinationRepeatController must be initialized with a travel_destination in scope");
       }
       $scope.TravelDestinationInRepeat = $scope.travel_destination;
-      console.log($scope.travel_destination);
       if($scope.travel_destination.short_description.length > 180){
         $scope.travel_destination_short_description = $scope.travel_destination.short_description.substring(0,180) + ' ...';
       }
@@ -288,31 +286,18 @@ kompresControllers.controller('TravelDestinationRepeatCtrl', ['$scope', '$resour
 ]);
 
 kompresControllers.controller('ArticleListCtrl', ['$scope', '$route', '$routeParams', '$resource', '$timeout', '$filter', 'Articles', 'PostCategory',
-  function($scope, $route, $routeParams, $resource, $timeout, $filter, Articles, PostCategory) {
+  'ColorRandomizer', '$rootScope',
+  function($scope, $route, $routeParams, $resource, $timeout, $filter, Articles, PostCategory, ColorRandomizer, $rootScope) {
     $scope.$route = $route;
     $scope.params = $routeParams;
     $scope.show_loading = true;
     $scope.categories = PostCategory.getCategories();
+    $scope.categories_colors = PostCategory.getColors();
     $scope.search = $scope.params.search;
     $scope.color = 'md-warn';
 
     $scope.category_icon = 'keyboard_arrow_right';
     $scope.all_category_icon = 'keyboard_arrow_right';
-
-    $scope.setColor = function (index){
-      if (index == 0){
-        return 'material-blue';
-      }
-      else if(index == 1) {
-        return 'material-indigo';
-      }
-      else if(index == 2){
-        return 'material-blue-grey'
-      }
-      else {
-        return 'material-deep-purple';
-      }
-    };
 
     $scope.articles = Articles.list.query();
     $scope.articles.$promise.then(function() {
@@ -347,8 +332,8 @@ kompresControllers.controller('ArticleRepeatCtrl', ['$scope', '$resource', '$exc
       }
       $scope.articleInRepeat = $scope.article;
       $scope.show_loading = true;
-      if($scope.article.short_description.length > 180){
-        $scope.article_short_description = $scope.article.short_description.substring(0,180) + ' ...';
+      if($scope.article.short_description.length > 500){
+        $scope.article_short_description = $scope.article.short_description.substring(0,500) + ' ...';
       }
       else{
         $scope.article_short_description = $scope.article.short_description;
@@ -398,7 +383,6 @@ kompresControllers.controller('ReportCtrl', ['$scope', '$mdDialog',
           if (files && files.length) {
             for (var i = 0; i < files.length; i++) {
               $scope.upload(files[i], report);
-              console.log(files[i].name);
             }
           }
         };
@@ -470,20 +454,24 @@ kompresControllers.controller('VisitsCtrl', ['$scope', 'Visits',
   }
 ]);
 
-kompresControllers.controller('HomeCtrl', ['$scope', 'Visits', 'TravelDestinations', 'Articles', 'Page', '$resource',
-  function($scope, Visits, TravelDestinations, Articles, Page, $resource) {
+kompresControllers.controller('HomeCtrl', ['$scope', 'Visits', 'TravelDestinations', 'Articles', 'Page', '$resource', 'ColorRandomizer',
+  function($scope, Visits, TravelDestinations, Articles, Page, $resource, ColorRandomizer) {
     $scope.travel_destination_counter = 0;
+    $scope.icon = 'keyboard_arrow_right'
+
     Page.query(function(data){
       $scope.page = data.results[0];
       $scope.page.featured_travel_destinations = [];
       angular.forEach($scope.page.featureds, function(travel_destination){
         $resource(travel_destination).get(function(data){
-          $scope.page.featured_travel_destinations.push($resource(data.travel_destination).get(function(){
+          $resource(data.travel_destination).get(function(data){
+            data.color = ColorRandomizer.getColor();
+            $scope.page.featured_travel_destinations.push(data);
             $scope.travel_destination_counter += 1;
             if ($scope.travel_destination_counter == $scope.page.featureds.length){
               $scope.resolved = true;
             }
-          }));
+          });
         });
       });
     });

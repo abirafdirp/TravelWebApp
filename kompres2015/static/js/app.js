@@ -130,6 +130,7 @@ var kompresApp = angular.module('kompres', [
   'angular-carousel',
   'ngFileUpload',
   'angularVideoBg',
+  'angularUtils.directives.dirPagination',
 ]);
 
 // differentiate angular and django template language

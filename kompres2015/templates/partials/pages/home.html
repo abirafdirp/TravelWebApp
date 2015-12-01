@@ -16,7 +16,7 @@
     <div class="home-nav" ng-if="resolved">
       <div layout="row" layout-wrap layout-margin>
         <div ng-repeat="travel_destination in page.featured_travel_destinations" ng-controller="TravelDestinationRepeatCtrl" flex="25" layout="row">
-          <md-card flex>
+          <md-card flex class="video-shadow" ng-mouseenter="icon = 'keyboard_tab'" ng-mouseleave="icon = 'keyboard_arrow_right'">
             <img ng-show="thumbnail.image != null" ng-src="{$thumbnail.image$}" class="md-card-image animated fadeIn" alt="Washed Out">
             <md-card-title>
               <md-card-title-text layout-margin>
@@ -26,7 +26,7 @@
             <md-card-content>
               <div layout="row"layout-align="right center" layout-margin>
                 <div flex></div>
-                <ng-md-icon icon="keyboard_arrow_right" size="52" aria-label="user"></ng-md-icon>
+                <ng-md-icon icon="{$icon$}" size="42" style="fill: {$travel_destination.color$}" aria-label="user"></ng-md-icon>
               </div>
             </md-card-content>
           </md-card>
