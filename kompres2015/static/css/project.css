@@ -425,9 +425,16 @@ md-autocomplete[md-floating-label] md-input-container{
 }
 
 .video-content {
-    top: 63px;
+    top: 200px;
     position: relative;
     z-index: 100;
+}
+
+.home-tagline{
+    background-color: rgba(30,30,30,0.7);
+    color: white;
+    padding: 5px 5px 5px 5px;
+    border-radius: 3%;
 }
 
 #dest-search-box-title{
