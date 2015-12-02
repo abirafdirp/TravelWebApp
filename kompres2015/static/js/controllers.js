@@ -1,7 +1,7 @@
 var kompresControllers = angular.module('kompresControllers', []);
 
-kompresControllers.controller('NavCtrl', ['$scope', '$route', '$mdDialog', 'ArticleSearch', 'TravelDestinationSearch',
-  function($scope, $route, $mdDialog, ArticleSearch, TravelDestinationSearch) {
+kompresControllers.controller('NavCtrl', ['$scope', '$route', '$mdDialog', 'ArticleSearch', 'TravelDestinationSearch', '$mdSidenav',
+  function($scope, $route, $mdDialog, ArticleSearch, TravelDestinationSearch, $mdSidenav) {
     $scope.$route = $route;
     $scope.logout_clicked = false;
     $scope.traveldestination_icon = 'terrain';
@@ -10,6 +10,10 @@ kompresControllers.controller('NavCtrl', ['$scope', '$route', '$mdDialog', 'Arti
     $scope.info_icon = 'info';
     $scope.ArticleSearch = ArticleSearch;
     $scope.TravelDestinationSearch = TravelDestinationSearch;
+
+    $scope.toggleMenu = function() {
+      $mdSidenav('left').toggle();
+    };
 
     $scope.reset_logout_clicked = function() {
       $scope.logout_clicked = false;
