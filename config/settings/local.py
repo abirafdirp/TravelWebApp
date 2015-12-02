@@ -24,24 +24,6 @@ SECRET_KEY = env("DJANGO_SECRET_KEY", default='CHANGEME!!!lkj72j=2ns@%^p@eg@w%7w
 # EMAIL CONFIGURATION
 # ------------------------------------------------------------------------------
 EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
-# EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'abiraf.bot@gmail.com'
-EMAIL_HOST_PASSWORD = 'Razor321'
-EMAIL_PORT = 587
-
-
-
-
-# CACHING
-# ------------------------------------------------------------------------------
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'LOCATION': ''
-    }
-}
 
 # django-debug-toolbar
 # ------------------------------------------------------------------------------

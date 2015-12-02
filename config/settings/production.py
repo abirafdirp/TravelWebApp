@@ -2,10 +2,8 @@
 '''
 Production Configurations
 
-- Use djangosecure
-- Use Amazon's S3 for storing static files and uploaded media
-- Use mailgun to send emails
-- Use Redis on Heroku
+- Use djangosecure(now merged to 1.8)
+- email backend is using SMTP (GMAIL)
 
 '''
 from __future__ import absolute_import, unicode_literals
@@ -48,25 +46,9 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['*'])
 # END SITE CONFIGURATION
 
-# EMAIL
-# ------------------------------------------------------------------------------
-# DEFAULT_FROM_EMAIL = env('DJANGO_DEFAULT_FROM_EMAIL',
-#                          default='kompres2015 <noreply@example.com>')
-# EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
-# MAILGUN_ACCESS_KEY = env('DJANGO_MAILGUN_API_KEY')
-# MAILGUN_SERVER_NAME = env('DJANGO_MAILGUN_SERVER_NAME')
-# EMAIL_SUBJECT_PREFIX = env("DJANGO_EMAIL_SUBJECT_PREFIX", default='[kompres2015] ')
-# SERVER_EMAIL = env('DJANGO_SERVER_EMAIL', default=DEFAULT_FROM_EMAIL)
-
 # EMAIL CONFIGURATION
 # ------------------------------------------------------------------------------
-EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
-# EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'abiraf.bot@gmail.com'
-EMAIL_HOST_PASSWORD = 'Razor321'
-EMAIL_PORT = 587
+EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
 
 # TEMPLATE CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -81,21 +63,6 @@ TEMPLATES[0]['OPTIONS']['loaders'] = [
 # ------------------------------------------------------------------------------
 # Raises ImproperlyConfigured exception if DATABASE_URL not in os.environ
 DATABASES['default'] = env.db("DATABASE_URL")
-
-# CACHING
-# ------------------------------------------------------------------------------
-# Heroku URL does not pass the DB number, so we parse it in
-# CACHES = {
-#     "default": {
-#         "BACKEND": "django_redis.cache.RedisCache",
-#         "LOCATION": "{0}/{1}".format(env.cache_url('REDIS_URL', default="redis://127.0.0.1:6379"), 0),
-#         "OPTIONS": {
-#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
-#             "IGNORE_EXCEPTIONS": True,  # mimics memcache behavior.
-#                                         # http://niwinz.github.io/django-redis/latest/#_memcached_exceptions_behavior
-#         }
-#     }
-# }
 
 
 # Custom Admin URL, use {% url 'admin:index' %}

@@ -242,57 +242,24 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
 
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'abiraf.bot@gmail.com'
+EMAIL_HOST_PASSWORD = 'Razor321'
+EMAIL_PORT = 587
+
 # SLUGLIFIER
 AUTOSLUG_SLUGIFY_FUNCTION = 'slugify.slugify'
 
 
-# LOGGING CONFIGURATION
+# CACHING
 # ------------------------------------------------------------------------------
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#logging
-# A sample logging configuration. The only tangible logging
-# performed by this configuration is to send an email to
-# the site admins on every HTTP 500 error when DEBUG=False.
-# See http://docs.djangoproject.com/en/dev/topics/logging for
-# more details on how to customize your logging configuration.
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'filters': {
-#         'require_debug_false': {
-#             '()': 'django.utils.log.RequireDebugFalse'
-#         }
-#     },
-#     'formatters': {
-#         'verbose': {
-#             'format': '%(levelname)s %(asctime)s %(module)s '
-#                       '%(process)d %(thread)d %(message)s'
-#         },
-#     },
-#     'handlers': {
-#         'mail_admins': {
-#             'level': 'ERROR',
-#             'filters': ['require_debug_false'],
-#             'class': 'django.utils.log.AdminEmailHandler'
-#         },
-#         'console': {
-#             'level': 'DEBUG',
-#             'class': 'logging.StreamHandler',
-#             'formatter': 'verbose',
-#         },
-#     },
-#     'loggers': {
-#         'django.request': {
-#             'handlers': ['mail_admins'],
-#             'level': 'ERROR',
-#             'propagate': True
-#         },
-#         'django.security.DisallowedHost': {
-#             'level': 'ERROR',
-#             'handlers': ['console', 'mail_admins'],
-#             'propagate': True
-#         }
-#     }
-# }
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': ''
+    }
+}
 
 
 # Location of root django.contrib.admin URL, use {% url 'admin:index' %}
