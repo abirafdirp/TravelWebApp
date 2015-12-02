@@ -8,6 +8,11 @@ from kompres2015.tourism.models import TravelDestinationContent
 from kompres2015.tourism.models import Report
 
 from kompres2015.image.models import TravelDestinationImage
+from kompres2015.image.models import ReportImage
+
+
+class ReportImagesInline(admin.TabularInline):
+    model = ReportImage
 
 
 class TravelDestinationContentInline(admin.TabularInline):
@@ -19,7 +24,7 @@ class TravelDestinationImageInline(admin.TabularInline):
 
 
 class ReportAdmin(admin.ModelAdmin):
-    pass
+    inlines = [ReportImagesInline]
 
 
 class TravelDestinationAdmin(ForeignKeyAutocompleteAdmin):

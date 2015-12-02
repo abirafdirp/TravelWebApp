@@ -457,13 +457,27 @@ kompresControllers.controller('ReportListCtrl', ['$scope', 'Reports', 'djangoAut
         $scope.reports_resolved = [];
         angular.forEach($scope.user.reports, function(report){
           $resource(report + '?format=json').get(function(data){
-            if(data.approved == true){
-              $scope.reports_resolved.push(data);
-            }
+            $scope.reports_resolved.push(data);
           });
         });
       });
     });
+  }
+]);
+
+kompresControllers.controller('ReportListRepeatCtrl', ['$scope', '$resource', '$exceptionHandler',
+  function($scope, $resource, $exceptionHandler) {
+    var init = function() {
+      if (typeof $scope.report === "undefined") {
+        $exceptionHandler("The ReportListRepeatController must be initialized with a report in scope");
+      }
+      $scope.travel_destination = $resource($scope.report.travel_destination).get();
+      if ($scope.report.images.length > 0){
+        $scope.image = $resource($scope.report.images[0]).get();
+      }
+    };
+
+    init();
   }
 ]);
 

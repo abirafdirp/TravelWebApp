@@ -1,4 +1,4 @@
-<md-dialog aria-label="Mango (Fruit)" flex="20">
+<md-dialog aria-label="Mango (Fruit)" flex="25">
 	<md-toolbar>
 		<div class="md-toolbar-tools">
 			<h2>Profil</h2>
@@ -114,8 +114,26 @@
 				</md-content>
 			</md-tab>
 			<md-tab label="Komplain">
-				<md-content class="md-padding" ng-controller="ReportListCtrl">
-					{$ reports_resolved $}
+				<md-content class="md-padding" ng-controller="ReportListCtrl" layout="row" layout-align="center center" layout-wrap>
+					<h4 class="md-subheading">Tanda ceklis menandakan komplain anda sudah berhasil diverifikasi. Terima kasih atas kontribusinya.</h4>
+					<md-list flex="100">
+						<div dir-paginate="report in reports_resolved | itemsPerPage: 4" pagination-id="report">
+						<md-list-item class="md-3-line md-long-text" ng-controller="ReportListRepeatCtrl" flex>
+							<img ng-src="{$image.image$}" class="md-avatar" alt="" style="color: grey"/>
+							<div class="md-list-item-text">
+								<h3>{$ travel_destination.name $}</h3>
+								<p>
+									{$report.created_date | date:'d  MMMM  yyyy'$}<br>
+									{$report.report$}
+									<md-checkbox class="md-secondary" ng-model="report.approved" ng-disabled="true"></md-checkbox>
+								</p>
+							</div>
+						</md-list-item>
+							</div>
+					</md-list>
+					<div max-size="5" flex="100" layout-align="center-center" layout="row">
+						<dir-pagination-controls pagination-id="report" flex></dir-pagination-controls>
+					</div>
 				</md-content>
 			</md-tab>
 		</md-tabs>
