@@ -29,8 +29,8 @@
 		<md-content ng-cloak class="md-padding animated fadeIn" ng-show="show_loading == false">
 			<div layout="row" layout-no-wrap>
 				<div flex="20" hide-sm hide-md layout-padding layout="column" layout-sm="column">
-					<md-content ng-show="search_opened" id="dest-search-box">
-						<span class="md-headline animated fadeIn" id="dest-search-box-title">cari</span>
+					<md-content ng-show="search_opened" id="art-search-box">
+						<span class="md-headline animated fadeIn" id="dest-search-box-title">Cari</span>
 						<md-autocomplete
 										md-search-text="TravelDestinationSearch.category_search"
 										md-items="category in $parent.categories | filter:TravelDestinationSearch.category_search | orderBy: 'category'"
@@ -89,23 +89,23 @@
 						</md-autocomplete>
 					</md-content>
 					<!--<md-content ng-show="!search_opened" id="dest-search-box">-->
-						<!--{$ user $}-->
+					<!--{$ user $}-->
 					<!--</md-content>-->
 				</div>
 
 				<div layout="row" layout-wrap flex="80" flex-sm="100" flex-md="100">
-					<div ng-cloak ng-repeat="travel_destination in travel_destinations.results | filter: TravelDestinationSearch.search | filter: TravelDestinationSearch.district_search
+					<div ng-cloak dir-paginate="travel_destination in travel_destinations.results | filter: TravelDestinationSearch.search | filter: TravelDestinationSearch.district_search
 					| filter: TravelDestinationSearch.category_search | filter: TravelDestinationSearch.province_search | filter: TravelDestinationSearch.region_search | filter: search
-					| orderBy: 'distance'"
-							 ng-controller="TravelDestinationRepeatCtrl" flex="33" flex-sm="100" flex-md="50">
+					| orderBy: 'distance' | itemsPerPage: 9"
+							 flex="33" flex-sm="100" flex-md="50">
+						<div ng-controller="TravelDestinationRepeatCtrl">
+							<md-card id="posts">
+								<a ng-href="/lokasi-wisata/{$ slugify(travel_destination.name) $}">
+									<span class="md-title article-list-title">{$ travel_destination.name $}</span>
+									<div class="article-image"><img ng-show="thumbnail.image != null" ng-src="{$thumbnail.image$}" class="md-card-image animated fadeIn" alt="Washed Out"></div>
 
-						<md-card id="posts">
-							<a ng-href="/lokasi-wisata/{$ slugify(travel_destination.name) $}">
-								<span class="md-title article-list-title">{$ travel_destination.name $}</span>
-								<div class="article-image"><img ng-show="thumbnail.image != null" ng-src="{$thumbnail.image$}" class="md-card-image animated fadeIn" alt="Washed Out"></div>
-
-							</a>
-							<md-card-content>
+								</a>
+								<md-card-content>
 						<span class="md-body-2" layout="row" layout-wrap>
 							<span flex="100" flex-gt-lg="60">
 								<ng-md-icon icon="sort" size="20" aria-label="tanggal"></ng-md-icon>
@@ -120,15 +120,21 @@
 								</a>
 							</span>
 						</span>
-								<p class="md-body-1">
-									{$ travel_destination_short_description $}
-								</p>
-							</md-card-content>
-						</md-card>
-						<br/>
+									<p class="md-body-1">
+										{$ travel_destination_short_description $}
+									</p>
+								</md-card-content>
+							</md-card>
+							<br/>
+						</div>
 					</div>
 				</div>
 
+			</div>
+			<div layout="row" layout-align="center center">
+				<div flex-offset="5">
+					<dir-pagination-controls></dir-pagination-controls>
+				</div>
 			</div>
 
 		</md-content>

@@ -1,4 +1,4 @@
-<md-dialog aria-label="Mango (Fruit)">
+<md-dialog aria-label="Mango (Fruit)" flex="20">
 	<md-toolbar>
 		<div class="md-toolbar-tools">
 			<h2>Profil</h2>
@@ -14,9 +14,9 @@
 				<md-content class="md-padding" ng-controller="UserprofileCtrl">
 					<form role="form" name="userProfileForm" ng-submit="updateProfile(userProfileForm, model)" novalidate>
 
-						<div class="md-dialog-content" layout="column" layout-align="center center">
+						<div class="md-dialog-content" layout="row" layout-wrap layout-align="center center">
 
-							<md-input-container class="md-block">
+							<md-input-container flex="100">
 								<label for="id_first_name">Nama</label>
 								<input name="first_name" id="id_first_name" class="form-control" type="text" ng-model="model.first_name" placeholder="Nama" />
 								<div ng-messages="userProfileForm.first_name.$error">
@@ -24,28 +24,28 @@
 								</div>
 							</md-input-container>
 							<!--<md-input-container class="md-block">-->
-								<!--<label for="id_last_name">Last Name</label>-->
-								<!--<input name="last_name" id="id_last_name" class="form-control" type="text" ng-model="model.last_name" placeholder="Last Name" />-->
-								<!--<div ng-messages="userProfileForm.last_name.$error">-->
-									<!--<div ng-message="required" ng-repeat="error in errors.last_name">{$error$}</div>-->
-								<!--</div>-->
+							<!--<label for="id_last_name">Last Name</label>-->
+							<!--<input name="last_name" id="id_last_name" class="form-control" type="text" ng-model="model.last_name" placeholder="Last Name" />-->
+							<!--<div ng-messages="userProfileForm.last_name.$error">-->
+							<!--<div ng-message="required" ng-repeat="error in errors.last_name">{$error$}</div>-->
+							<!--</div>-->
 							<!--</md-input-container>-->
 							<!--<md-input-container class="md-block">-->
-								<!--<label for="id_district">Kabupaten</label>-->
-								<!--<input name="district" id="id_district" class="form-control" type="text" ng-model="model.district_name" placeholder="Kabupaten" />-->
-								<!--<div ng-messages="userProfileForm.district.$error">-->
-									<!--<div ng-message="required" ng-repeat="error in errors.district">{$error$}</div>-->
-								<!--</div>-->
+							<!--<label for="id_district">Kabupaten</label>-->
+							<!--<input name="district" id="id_district" class="form-control" type="text" ng-model="model.district_name" placeholder="Kabupaten" />-->
+							<!--<div ng-messages="userProfileForm.district.$error">-->
+							<!--<div ng-message="required" ng-repeat="error in errors.district">{$error$}</div>-->
+							<!--</div>-->
 							<!--</md-input-container>-->
-							<md-autocomplete flex
-										 md-search-text="district_search"
-										 md-items="district in districts.results | filter:district_search | orderBy: 'name'"
-										 md-item-text="district.name"
-										 md-selected-item-change="hyperlinkedIt(district)"
-										 md-min-length="0"
-										 placeholder="Kabupaten"
-										 md-floating-label="Kabupaten"
-										 class="animated fadeIn">
+							<md-autocomplete flex="100"
+															 md-search-text="district_search"
+															 md-items="district in districts.results | filter:district_search | orderBy: 'name'"
+															 md-item-text="district.name"
+															 md-selected-item-change="hyperlinkedIt(district)"
+															 md-min-length="0"
+															 placeholder="Kabupaten"
+															 md-floating-label="Kabupaten"
+															 class="animated fadeIn">
 								<md-item-template>
 									<span class="animated fadeIn" md-highlight-text="district_search" md-highlight-flags="^i">{$district.name$}</span>
 								</md-item-template>
@@ -80,18 +80,18 @@
 				<md-content class="md-padding" ng-controller="PasswordchangeCtrl">
 					<form role="form" ng-submit="changePassword(changePasswordForm)" name="changePasswordForm" ng-if="authenticated" novalidate>
 
-						<div class="md-dialog-content" layout="column" layout-align="center center">
+						<div class="md-dialog-content" layout="row" layout-wrap layout-align="center center">
 
-							<md-input-container class="md-block">
-								<label for="id_password1">New Password</label>
-								<input name="new_password1" id="id_password1" type="password" ng-model="model.new_password1" placeholder="New Password" class="form-control" required />
+							<md-input-container class="md-block" flex="100">
+								<label for="id_password1">Password Baru</label>
+								<input name="new_password1" id="id_password1" type="password" ng-model="model.new_password1" placeholder="Password Baru" class="form-control" required />
 								<div ng-messages="changePasswordForm.new_password1.$error">
 									<div ng-message="required" ng-repeat="error in errors.new_password1">{$error$}</div>
 								</div>
 							</md-input-container>
-							<md-input-container class="md-block">
-								<label for="id_password2">Repeat Password</label>
-								<input name="new_password2" id="id_password2" type="password" ng-model="model.new_password2" placeholder="Repeat Password" class="form-control" required />
+							<md-input-container class="md-block" flex="100">
+								<label for="id_password2">Ulangi Password</label>
+								<input name="new_password2" id="id_password2" type="password" ng-model="model.new_password2" placeholder="Ulangi Password" class="form-control" required />
 								<div ng-messages="changePasswordForm.new_password2.$error">
 									<div ng-message="required" ng-repeat="error in errors.new_password2">{$error$}</div>
 								</div>
@@ -111,6 +111,11 @@
 							<md-button class="md-raised md-accent" type="submit">ubah password</md-button>
 						</div>
 					</form>
+				</md-content>
+			</md-tab>
+			<md-tab label="Komplain">
+				<md-content class="md-padding" ng-controller="ReportListCtrl">
+					{$ reports_resolved $}
 				</md-content>
 			</md-tab>
 		</md-tabs>

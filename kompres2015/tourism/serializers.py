@@ -61,7 +61,7 @@ class ReportSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Report
-        fields = ('id', 'category', 'report', 'travel_destination', 'user', 'images',)
+        fields = ('id', 'category', 'report', 'travel_destination', 'user', 'images', 'approved',)
         read_only_fields = ('user',)
 
 

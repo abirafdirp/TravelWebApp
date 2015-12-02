@@ -76,8 +76,9 @@ class Report(TimeStampedModel):
     category = models.CharField(verbose_name="Kategori", max_length=30,
                                 choices=CATEGORY_CHOICES)
     report = models.TextField(verbose_name='Isi komplain')
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, related_name='reports')
     travel_destination = models.ForeignKey(TravelDestination)
+    approved = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = 'Komplain pengunjung'

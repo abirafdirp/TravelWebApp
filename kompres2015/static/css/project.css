@@ -70,18 +70,18 @@ a.md-button.main-nav:not([disabled]):hover {
 }
 
 img.bg {
-  /* Set rules to fill background */
-  min-height: 100%;
-  min-width: 1024px;
+    /* Set rules to fill background */
+    min-height: 100%;
+    min-width: 1024px;
 
-  /* Set up proportionate scaling */
-  width: 100%;
-  height: auto;
+    /* Set up proportionate scaling */
+    width: 100%;
+    height: auto;
 
-  /* Set up positioning */
-  position: fixed;
-  top: 0;
-  left: 0;
+    /* Set up positioning */
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 
 body {
@@ -93,7 +93,7 @@ body {
 }
 
 [ng\:cloak], [ng-cloak], .ng-cloak {
-  display: none !important;
+    display: none !important;
 }
 
 md-toolbar a:focus {
@@ -124,6 +124,12 @@ md-toolbar a.md-button {
 
 .article-list {
     margin-top: 0;
+}
+
+#article-left-nav a{
+    outline: 0;
+    color: rgba(40, 40, 40, 0.87);
+    text-decoration: none;
 }
 
 md-button {
@@ -390,8 +396,8 @@ a {
 
 #travel-destination-search {
     -webkit-box-shadow: 0px 0px 3px 1px rgba(212,212,212,1);
--moz-box-shadow: 0px 0px 3px 1px rgba(212,212,212,1);
-box-shadow: 0px 0px 3px 1px rgba(212,212,212,1);
+    -moz-box-shadow: 0px 0px 3px 1px rgba(212,212,212,1);
+    box-shadow: 0px 0px 3px 1px rgba(212,212,212,1);
 }
 
 .dest-search-icon {
@@ -433,6 +439,11 @@ md-autocomplete[md-floating-label] md-input-container{
     padding-top: 30px;
 }
 
+#art-search-box {
+    padding-top: 30px;
+    padding-left: 30px;
+}
+
 .video-container {
     position: absolute !important;
     top: 63px;
@@ -460,6 +471,17 @@ md-autocomplete[md-floating-label] md-input-container{
     border-bottom: 6px solid teal;
     position: relative;
     top: -25px;
+    padding-bottom: 3px;
+}
+
+#art-search-box-title{
+    margin-left: 0;
+    padding-left: 1px;
+    padding-right: 80px;
+    border-bottom: 6px solid #3F51B5;
+    position: relative;
+    top: -15px;
+    left: -8px;
     padding-bottom: 3px;
 }
 
@@ -585,16 +607,16 @@ md-autocomplete[md-floating-label] md-input-container{
 }
 
 ul[rn-carousel] > li {
-  position: relative;
-  margin-left: -100%;
+    position: relative;
+    margin-left: -100%;
 }
 
 ul[rn-carousel] > li:first-child {
-  margin-left: 0;
+    margin-left: 0;
 }
 
 ul[rn-carousel] img {
-  max-width: 100%;
+    max-width: 100%;
 }
 .slider {
     width: 100%;
@@ -602,4 +624,68 @@ ul[rn-carousel] img {
     overflow: hidden;
     position: relative;
     background: #e6e6e6;
+}
+
+.pagination {
+    height: 36px;
+    margin: 18px 0;
+}
+.pagination ul {
+    display: inline-block;
+    *display: inline;
+    /* IE7 inline-block hack */
+
+    *zoom: 1;
+    margin-left: 0;
+    margin-bottom: 0;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+.pagination li {
+    display: inline;
+}
+.pagination a {
+    float: left;
+    padding: 0 14px;
+    line-height: 34px;
+    text-decoration: none;
+    outline: 0;
+    border: 1px solid #ddd;
+    border-left-width: 0;
+}
+.pagination a:hover,
+.pagination .active a {
+    background-color: #f5f5f5;
+}
+.pagination .active a {
+    color: #999999;
+    cursor: default;
+}
+.pagination .disabled span,
+.pagination .disabled a,
+.pagination .disabled a:hover {
+    color: #999999;
+    background-color: transparent;
+    cursor: default;
+}
+.pagination li:first-child a {
+    border-left-width: 1px;
+    -webkit-border-radius: 3px 0 0 3px;
+    -moz-border-radius: 3px 0 0 3px;
+    border-radius: 3px 0 0 3px;
+}
+.pagination li:last-child a {
+    -webkit-border-radius: 0 3px 3px 0;
+    -moz-border-radius: 0 3px 3px 0;
+    border-radius: 0 3px 3px 0;
+}
+.pagination-centered {
+    text-align: center;
+}
+.pagination-right {
+    text-align: right;
 }

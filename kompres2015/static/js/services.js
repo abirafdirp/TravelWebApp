@@ -1,22 +1,29 @@
 var kompresServices = angular.module('kompresServices', ['ngResource']);
 
-kompresServices.service('ColorRandomizer', [
-  function() {
+kompresServices.service('ColorRandomizer', ['$rootScope',
+  function($rootScope) {
+    // this service will provide not repeating random colors
     // remember to pick dark colors
-    // 1 red 2 teal 3 orange 4 indigo 5 purple
+    // 1 red 2 blue-grey 3 orange 4 indigo 5 purple
     // all colors above are material's colors
     this.colors = [
         '#F44336',
-        '#009688',
+        '#607D8B',
         '#ff5722',
         '#3f51b5',
         '#673ab7',
         '#2196F3'
     ];
-
-    // function is based on http://stackoverflow.com/questions/1527803/generating-random-numbers-in-javascript-in-a-specific-range
+    // must be list of index of colors
+    this.colors_index = [0,1,2,3,4,5];
+    this.colors_index_counter = -1;
+    this.colors_index = $rootScope.shuffle(this.colors_index);
     this.getColor = function(){
-      return this.colors[Math.floor(Math.random() * (6))];
+      this.colors_index_counter += 1;
+      if (this.colors_index_counter == this.colors_index.length){
+        this.colors_index_counter = 0;
+      }
+      return this.colors[this.colors_index[this.colors_index_counter]];
     }
   }
 ]);
@@ -34,10 +41,10 @@ kompresServices.service('PostCategory', ['$rootScope', 'ColorRandomizer',
     };
     this.getCategories = function(){
       return this.categories;
-    }
+    };
     this.getColors = function(){
       return this.colors;
-    }
+    };
   }
 ]);
 
@@ -290,10 +297,17 @@ kompresServices.factory('Reports', ['$resource',
 ]);
 
 kompresServices.factory('Users', ['$resource',
-  function($resource){
-    return $resource('/api/users/?format=json', {}, {
-      query: {method:'GET'}
-    })
+  function($resource) {
+    return {
+      list : $resource('/api/users/?format=json', {}, {
+      query: {method: 'GET'}
+      }),
+      detail : $resource('/api/users/?username=:username', {
+        user:'@user'
+      }, {
+      query: {method: 'GET'}
+      })
+    }
   }
 ]);
 

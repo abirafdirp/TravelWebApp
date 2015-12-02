@@ -448,6 +448,25 @@ kompresControllers.controller('ReportCtrl', ['$scope', '$mdDialog',
   }
 ]);
 
+kompresControllers.controller('ReportListCtrl', ['$scope', 'Reports', 'djangoAuth', 'Users', '$resource',
+  function($scope, Reports, djangoAuth, Users, $resource) {
+    djangoAuth.profile().then(function(data){
+      $scope.user = Users.detail.query({'username': data.username});
+      $scope.user.$promise.then(function(){
+        $scope.user = $scope.user.results[0];
+        $scope.reports_resolved = [];
+        angular.forEach($scope.user.reports, function(report){
+          $resource(report + '?format=json').get(function(data){
+            if(data.approved == true){
+              $scope.reports_resolved.push(data);
+            }
+          });
+        });
+      });
+    });
+  }
+]);
+
 kompresControllers.controller('VisitsCtrl', ['$scope', 'Visits',
   function($scope, Visits) {
     $scope.visits = Visits.query();

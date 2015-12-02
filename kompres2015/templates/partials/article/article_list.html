@@ -25,77 +25,75 @@
 
 
 		<md-content ng-cloak class="md-padding article-list" ng-show="show_loading == false">
-			<div layout="row" layout-no-wrap>
-				<div flex="20" hide-sm hide-md layout-padding layout="column" layout-sm="column" id="article-left-nav">
-					<md-toolbar class="md-primary">
-						<div class="md-toolbar-tools" layout-align="center center">
-							<h2 class="md-display-2">KATEGORI</h2>
-						</div>
-					</md-toolbar>
-					<md-toolbar id="posts-categories" class="md-accent">
-						<a href="javascript:void(0)" ng-click="ArticleSearch.clearCategorySearch()">
-							<div class="md-toolbar-tools">
-								<h2 class="md-flex">semua</h2>
-								<span flex></span>
-								<md-button class="md-icon-button" aria-label="Favorite">
-									<ng-md-icon icon="{$ArticleSearch.getCategoryIcon('')$}" size="22" aria-label="user"></ng-md-icon>
-								</md-button>
-							</div>
-						</a>
-					</md-toolbar>
-					<md-toolbar ng-repeat="category in categories" id="posts-categories" style="background-color: {$ categories_colors[$index] $}">
-						<a href="javascript:void(0)" ng-click="ArticleSearch.setCategorySearch(category)">
-							<div class="md-toolbar-tools">
-								<h2 class="md-flex">{$ category $}</h2>
-								<span flex></span>
-								<md-button class="md-icon-button" aria-label="Favorite">
-									<ng-md-icon icon="{$ArticleSearch.getCategoryIcon(category)$}" size="22" aria-label="user"></ng-md-icon>
-								</md-button>
-							</div>
-						</a>
+			<div layout="column">
+				<div layout="row" layout-no-wrap>
 
-					</md-toolbar>
-				</div>
+					<div flex="20" hide-sm hide-md id="article-left-nav" layout-padding layout="column">
+						<md-content id="art-search-box">
+							<div class="md-headline animated fadeIn" id="art-search-box-title" flex="75">Kategori</div>
 
-				<div layout="row" layout-wrap flex="80" flex-sm="100" flex-md="100">
 
-					<div ng-show="show_loading == true" class="loading">
-						<md-progress-circular md-mode="indeterminate"></md-progress-circular>
-					</div>
-
-					<div ng-cloak ng-show="show_loading == false"
-							 dir-paginate="article in articles.results | filter: ArticleSearch.search | filter: ArticleSearch.category_search | itemsPerPage: 3 "
-							 current-page="article"
-							 ng-controller="ArticleRepeatCtrl"
-							 flex="80"
-									flex-sm="100">
-
-						<md-card id="posts">
-							<a ng-href="/artikel/{$ slugify(article.title) $}">
-								<span class="md-title article-list-title">{$ article.title $}</span>
-								<div class="article-image"><img ng-show="thumbnail.image != null" ng-src="{$thumbnail.image$}" class="md-card-image animated fadeIn" alt="Washed Out"></div>
-
+							<a href="javascript:void(0)" ng-click="ArticleSearch.clearCategorySearch()">
+								<div layout="row" layout-align="start center">
+									<div flex="50" class="md-subhead">semua</div>
+									<md-button class="md-icon-button" aria-label="Favorite">
+										<ng-md-icon icon="{$ArticleSearch.getCategoryIcon('')$}" size="26" style="fill: #E91E63" aria-label="user"></ng-md-icon>
+									</md-button>
+								</div>
 							</a>
-							<md-card-content>
-						<span class="md-body-2">
-								<ng-md-icon icon="access_time" size="20" aria-label="tanggal"></ng-md-icon>
-								{$ article.date $}&nbsp;&nbsp;
-								<ng-md-icon icon="sort" size="20" aria-label="tanggal"></ng-md-icon>
-								<a href="javascript:void(0)" ng-click="ArticleSearch.setCategorySearch(article.category)"> {$ article.category $}</a>
-						</span>
-								<p class="md-body-1">
-									{$ article_short_description $}
-								</p>
-							</md-card-content>
-						</md-card>
-						<br/>
+							<div ng-repeat="category in categories">
+
+								<a href="javascript:void(0)" ng-click="ArticleSearch.setCategorySearch(category)">
+									<div layout="row" layout-align="start center">
+										<span class="md-subhead" flex="50">{$ category $}</span>
+										<md-button class="md-icon-button" aria-label="Favorite">
+											<ng-md-icon icon="{$ArticleSearch.getCategoryIcon(category)$}" size="26" style="fill: {$ categories_colors[$index] $}" aria-label="user"></ng-md-icon>
+										</md-button>
+									</div>
+								</a>
+
+							</div>
+						</md-content>
+					</div>
+
+					<div layout="row" layout-wrap flex="70" flex-sm="100">
+
+						<div ng-show="show_loading == true" class="loading">
+							<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+						</div>
+
+						<div ng-cloak ng-show="show_loading == false"
+								 dir-paginate="article in articles.results | filter: ArticleSearch.search | filter: ArticleSearch.category_search | itemsPerPage: 3 ">
+							<div ng-controller="ArticleRepeatCtrl">
+								<md-card id="posts">
+									<a ng-href="/artikel/{$ slugify(article.title) $}">
+										<span class="md-title article-list-title">{$ article.title $}</span>
+										<div class="article-image"><img ng-show="thumbnail.image != null" ng-src="{$thumbnail.image$}" class="md-card-image animated fadeIn" alt="Washed Out"></div>
+
+									</a>
+									<md-card-content>
+										<span class="md-body-2">
+												<ng-md-icon icon="access_time" size="20" aria-label="tanggal"></ng-md-icon>
+												{$ article.date $}&nbsp;&nbsp;
+												<ng-md-icon icon="sort" size="20" aria-label="tanggal"></ng-md-icon>
+												<a href="javascript:void(0)" ng-click="ArticleSearch.setCategorySearch(article.category)"> {$ article.category $}</a>
+										</span>
+										<p class="md-body-1">
+											{$ article_short_description $}
+										</p>
+									</md-card-content>
+								</md-card>
+								<br/>
+							</div>
+						</div>
 					</div>
 				</div>
-
 			</div>
-
+			<div layout="row" layout-align="center center">
+				<div flex-offset="5">
+					<dir-pagination-controls></dir-pagination-controls>
+				</div>
+			</div>
 		</md-content>
 	</div>
 </div>
-
-<dir-pagination-controls></dir-pagination-controls>

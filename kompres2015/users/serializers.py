@@ -6,9 +6,11 @@ from kompres2015.region.models import District
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
+    reports = serializers.HyperlinkedRelatedField(many=True, view_name='report-detail', read_only=True)
+
     class Meta:
         model = User
-        fields = ('id', 'username', 'name')
+        fields = ('id', 'username', 'name', 'reports')
 
 
 class UserRestSerializer(UserDetailsSerializer):
