@@ -195,7 +195,7 @@ kompresApp.config(['$routeProvider', '$locationProvider',
 kompresApp.config(function($authProvider) {
   $authProvider.facebook({
     url: "/api/login/social/token/facebook/",
-    clientId: '295137440610143'
+    clientId: '538377002985975'
   });
 });
 
