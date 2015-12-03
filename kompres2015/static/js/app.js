@@ -227,6 +227,7 @@ kompresApp.config(function($mdThemingProvider) {
       .warnPalette('red');
 });
 
+// TODO change to angular-slugify
 kompresApp.run(function($rootScope, ArticleSearch, TravelDestinationSearch, Marker) {
   $rootScope.slugify = function (name) {
     return name.replace(/ /g,'-').toLowerCase()

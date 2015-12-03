@@ -36,8 +36,6 @@ DJANGO_APPS = (
     'django.contrib.admin',
 )
 THIRD_PARTY_APPS = (
-    'crispy_forms',  # Form layouts
-
     # registration including API
     'rest_framework',
     'rest_framework.authtoken',

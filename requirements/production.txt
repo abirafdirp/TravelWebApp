@@ -1,7 +1,4 @@
 -r base.txt
-# WSGI Handler
-# ------------------------------------------------
-gevent==1.0.2
 
-
-
+# Nothing here... Many useful modules won't work in PythonAnwyhere
+# such as celery/redis
