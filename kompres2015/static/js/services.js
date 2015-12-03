@@ -245,6 +245,11 @@ kompresServices.factory('TravelDestinations', ['$resource',
         travel_destination_name:'@travel_destination_name'
       }, {
       query: {method: 'GET'}
+      }),
+      model : $resource('/api/traveldestinations/?name=:travel_destination_name&fields=model_3d', {
+        travel_destination_name:'@travel_destination_name'
+      }, {
+      query: {method: 'GET'}
       })
     }
   }

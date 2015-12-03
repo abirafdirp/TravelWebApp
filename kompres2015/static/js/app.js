@@ -132,6 +132,7 @@ var kompresApp = angular.module('kompres', [
   'angularVideoBg',
   'angularUtils.directives.dirPagination',
   'satellizer',
+  'tjsModelViewer',
 ]);
 
 // differentiate angular and django template language
@@ -184,6 +185,11 @@ kompresApp.config(['$routeProvider', '$locationProvider',
               });
             }
           }
+        }).
+        when('/lokasi-wisata/:travel_destination_name/3d', {
+          templateUrl: '/partials/modelviewer/',
+          activetab: 'travel-destination',
+          travel_destination_name: function (params) {return params.travel_destination_name}
         }).
         otherwise({
           redirectTo: '/'

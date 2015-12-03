@@ -41,7 +41,7 @@ class TravelDestinationSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = TravelDestination
         fields = ('id', 'name', 'district', 'full_description', 'short_description',
-                  'visits', 'contents', 'type', 'images', 'thumbnail', 'latitude', 'longitude')
+                  'visits', 'contents', 'type', 'images', 'thumbnail', 'latitude', 'longitude', 'model_3d')
 
 
 class VisitSerializer(serializers.HyperlinkedModelSerializer):

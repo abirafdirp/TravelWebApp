@@ -549,6 +549,26 @@ kompresControllers.controller('ReportImagesCtrl', ['$scope', 'ReportImages',
   }
 ]);
 
+kompresApp.controller('ModelViewerCtrl', ['$scope', 'TravelDestinations', '$routeParams',
+  function ($scope, TravelDestinations, $routeParams) {
+    $scope.params = $routeParams;
+    $scope.assimpModelUrl = '/partials/test/';
+    //$scope.travel_destination_name = $scope.params.travel_destination_name.replace(/-/g,' ');
+    //TravelDestinations.model.get({travel_destination_name:$scope.travel_destination_name}, function(data){
+    //  console.log(data);
+    //  $scope.assimpModelUrl = data.results[0].model_3d;
+    //});
+
+    $scope.changeModel = function() {
+      if ($scope.assimpModelUrl == "models/interior.3ds.json") {
+        $scope.assimpModelUrl = "models/jeep1.ms3d.json";
+      }
+      else {
+        $scope.assimpModelUrl = "models/interior.3ds.json";
+      }
+    };
+  }]);
+
 kompresControllers.controller('ImagesCtrl', ['$scope', 'Images',
   function($scope, Images) {
     $scope.images = Images.query();

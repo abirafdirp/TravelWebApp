@@ -35,6 +35,9 @@ class TravelDestination(TimeStampedModel):
     short_description = models.TextField(verbose_name='Deskripsi Singkat',
                                blank=True, null=True)
 
+    # TODO convert this to a model
+    model_3d = models.FileField(upload_to='models', blank=True, null=True)
+
     class Meta:
         verbose_name = 'Lokasi Wisata'
 

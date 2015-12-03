@@ -32,8 +32,8 @@ class TravelDestinationAdmin(ForeignKeyAutocompleteAdmin):
        'district': ('name',),
     }
 
-    fields = ('name', 'district', 'latitude', 'longitude', 'thumbnail', 'full_description', 'short_description', 'type')
-
+    fields = ('name', 'district', 'latitude', 'longitude', 'thumbnail', 'full_description', 'short_description', 'type',
+              'model_3d')
     inlines = [
         TravelDestinationContentInline,
         TravelDestinationImageInline,
