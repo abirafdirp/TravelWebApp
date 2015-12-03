@@ -41,6 +41,8 @@ THIRD_PARTY_APPS = (
     # registration including API
     'rest_framework',
     'rest_framework.authtoken',
+    'social.apps.django_app.default',  # python social auth
+    'rest_social_auth',
     'rest_auth',
     'allauth',
     'allauth.account',
@@ -222,6 +224,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # AUTHENTICATION CONFIGURATION
 # ------------------------------------------------------------------------------
 AUTHENTICATION_BACKENDS = (
+    'social.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
@@ -268,7 +271,7 @@ ADMIN_URL = r'^admin/'
 # Your common stuff: Below this line define 3rd party library settings
 
 # django-ckeditor
-#CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+# CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 REST_FRAMEWORK = {
@@ -284,3 +287,8 @@ REST_FRAMEWORK = {
 REST_AUTH_SERIALIZERS = {
     'USER_DETAILS_SERIALIZER': 'kompres2015.users.serializers.UserRestSerializer'
 }
+
+# python-social-auth
+# ------------------
+SOCIAL_AUTH_FACEBOOK_KEY = '538377002985975'
+SOCIAL_AUTH_FACEBOOK_SECRET = '6acb3b4270167d49471389502b1f7170'

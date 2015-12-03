@@ -131,6 +131,7 @@ var kompresApp = angular.module('kompres', [
   'ngFileUpload',
   'angularVideoBg',
   'angularUtils.directives.dirPagination',
+  'satellizer',
 ]);
 
 // differentiate angular and django template language
@@ -190,6 +191,13 @@ kompresApp.config(['$routeProvider', '$locationProvider',
     $locationProvider.html5Mode(true);
   }
 ]);
+
+kompresApp.config(function($authProvider) {
+  $authProvider.facebook({
+    url: "/api/login/social/token/facebook/",
+    clientId: '295137440610143'
+  });
+});
 
 kompresApp.config(['$httpProvider',
   function($httpProvider) {
