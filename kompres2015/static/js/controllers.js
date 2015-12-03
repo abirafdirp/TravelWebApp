@@ -527,38 +527,37 @@ kompresControllers.controller('UsersCtrl', ['$scope', 'Users',
   }
 ]);
 
-function set_user(response){
-  var source;
-  if (response){
-    source = response.data;
-  } else {
-    source = {
-      'username': null,
-      'first_name': null,
-      'last_name': null,
-      'email': null
-    };
-  }
-  self.user.username = source.username;
-  self.user.first_name = source.first_name;
-  self.user.last_name = source.last_name;
-  self.user.email = source.email;
-}
-
 kompresControllers.controller('FacebookTokenCtrl', ['$scope', '$auth', '$http',
   function($scope, $auth, $http) {
-    self = this;
-    self.user = {};
-    set_user();
-    if ($auth.getToken()) {
-      $http.get('/api/login/social/token_user/').then(function (response) {
-        set_user(response);
-      });
+    function set_user(response){
+      var source;
+      if (response){
+        console.log(response);
+        source = response.data;
+      } else {
+        source = {
+          'username': null,
+          'first_name': null,
+          'last_name': null,
+          'email': null
+        };
+      }
+      $scope.user.username = source.username;
+      $scope.user.first_name = source.first_name;
+      $scope.user.last_name = source.last_name;
+      $scope.user.email = source.email;
     }
+    $scope.user = {};
     $scope.authenticate = function (provider) {
       $auth.authenticate(provider).then(function (response) {
         $auth.setToken(response.data.token);
-        set_user(response);
+        $http({
+          url: '/api/login/social/token_user/',
+          method: "POST",
+          data: { 'provider': 'facebook', 'code': $auth.getToken() }
+        }).then(function (response) {
+              set_user(response);
+            });
       });
     };
     $scope.logout = function () {
