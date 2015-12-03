@@ -42,7 +42,6 @@ THIRD_PARTY_APPS = (
     'rest_framework',
     'rest_framework.authtoken',
     'social.apps.django_app.default',  # python social auth
-    'rest_social_auth',
     'rest_auth',
     'allauth',
     'allauth.account',
@@ -244,6 +243,7 @@ ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
+SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
@@ -287,8 +287,3 @@ REST_FRAMEWORK = {
 REST_AUTH_SERIALIZERS = {
     'USER_DETAILS_SERIALIZER': 'kompres2015.users.serializers.UserRestSerializer'
 }
-
-# python-social-auth
-# ------------------
-SOCIAL_AUTH_FACEBOOK_KEY = '538377002985975'
-SOCIAL_AUTH_FACEBOOK_SECRET = '6acb3b4270167d49471389502b1f7170'

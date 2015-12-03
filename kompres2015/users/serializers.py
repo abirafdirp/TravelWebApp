@@ -7,10 +7,12 @@ from kompres2015.region.models import District
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     reports = serializers.HyperlinkedRelatedField(many=True, view_name='report-detail', read_only=True)
+    district = serializers.HyperlinkedRelatedField(source="userprofile.district", view_name='district-detail',
+                                                   queryset=District.objects.all())
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'name', 'reports')
+        fields = ('id', 'username', 'name', 'reports', 'district')
 
 
 class UserRestSerializer(UserDetailsSerializer):
@@ -19,7 +21,7 @@ class UserRestSerializer(UserDetailsSerializer):
                                                    queryset=District.objects.all())
 
     class Meta(UserDetailsSerializer.Meta):
-        fields = UserDetailsSerializer.Meta.fields + ('district',)
+        fields = UserDetailsSerializer.Meta.fields + ('district', 'shadow_banned',)
 
     def update(self, instance, validated_data):
         profile_data = validated_data.pop('userprofile', {})

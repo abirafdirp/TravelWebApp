@@ -192,10 +192,11 @@ kompresApp.config(['$routeProvider', '$locationProvider',
   }
 ]);
 
+// TODO env vars this (move to template), change the settings in the Facebook Developer Apps
 kompresApp.config(function($authProvider) {
   $authProvider.facebook({
-    url: "/api/login/social/token/facebook/",
-    clientId: '538377002985975'
+    url: "/rest-auth/facebook/",
+    clientId: '538377002985975',
   });
 });
 

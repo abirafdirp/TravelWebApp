@@ -527,42 +527,18 @@ kompresControllers.controller('UsersCtrl', ['$scope', 'Users',
   }
 ]);
 
-kompresControllers.controller('FacebookTokenCtrl', ['$scope', '$auth', '$http',
-  function($scope, $auth, $http) {
-    function set_user(response){
-      var source;
-      if (response){
-        console.log(response);
-        source = response.data;
-      } else {
-        source = {
-          'username': null,
-          'first_name': null,
-          'last_name': null,
-          'email': null
-        };
-      }
-      $scope.user.username = source.username;
-      $scope.user.first_name = source.first_name;
-      $scope.user.last_name = source.last_name;
-      $scope.user.email = source.email;
-    }
-    $scope.user = {};
-    $scope.authenticate = function (provider) {
-      $auth.authenticate(provider).then(function (response) {
-        $auth.setToken(response.data.token);
-        $http({
-          url: '/api/login/social/token_user/',
-          method: "POST",
-          data: { 'provider': 'facebook', 'code': $auth.getToken() }
-        }).then(function (response) {
-              set_user(response);
-            });
+kompresControllers.controller('FacebookTokenCtrl', ['$scope', '$auth', 'djangoAuth', '$rootScope',
+  function($scope, $auth, djangoAuth, $rootScope) {
+    $scope.authenticate = function(){
+      $auth.authenticate('facebook').then(function(response){
+        djangoAuth.authenticated = true;
+        $rootScope.$broadcast("djangoAuth.logged_in", response);
       });
     };
     $scope.logout = function () {
       $auth.removeToken();
-      set_user();
+      djangoAuth.authenticated = true;
+      $rootScope.$broadcast("djangoAuth.logged_out");
     };
   }
 ]);

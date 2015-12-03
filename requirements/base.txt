@@ -46,8 +46,6 @@ markdown==2.6.2
 django-filter==0.11.0
 django-rest-swagger==0.3.4
 django-rest-auth==0.6.0
-python-social-auth==0.2.13
-rest-social-auth==0.3.1
 
 # mysql
 wheel==0.26.0
