@@ -96,6 +96,28 @@ kompresServices.service('Marker', ['$resource', '$rootScope',
   }
 ]);
 
+kompresServices.service('TransportationSearch', [
+  function() {
+    this.search = '';
+
+    this.clearSearch = function() {
+      if(this.search != null){
+        this.search = '';
+      }
+    };
+
+    this.setSearch = function(search) {
+      this.search = search;
+    };
+
+    this.clearAllSearch = function() {
+      this.search = '';
+      this.category_search = '';
+    };
+
+  }
+]);
+
 kompresServices.service('ArticleSearch', [
   function() {
     this.search_icon = 'search';
@@ -226,8 +248,8 @@ kompresServices.factory('Transportations', ['$resource',
       list : $resource('/api/transportations/?format=json', {}, {
       query: {method: 'GET'}
       }),
-      district : $resource('/api/transportations/?district_name=:district_name', {
-        district_name:'@district_name'
+      district : $resource('/api/transportations/?district=:district', {
+        district:'@district'
       }, {
       query: {method: 'GET'}
       })
@@ -249,8 +271,8 @@ kompresServices.factory('Districts', ['$resource',
       list : $resource('/api/districts/?format=json&fields=id,name,latitude,longitude,province,region', {}, {
       query: {method: 'GET'}
       }),
-      transport : $resource('/api/districts/?transportation_name=:transportation_name', {
-        transportation_name:'@transportation_name'
+      transport : $resource('/api/districts/?transportation=:transportation', {
+        transportation:'@transportation'
       }, {
       query: {method: 'GET'}
       })

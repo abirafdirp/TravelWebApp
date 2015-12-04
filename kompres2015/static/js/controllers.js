@@ -8,6 +8,7 @@ kompresControllers.controller('NavCtrl', ['$scope', '$route', '$mdDialog', 'Arti
     $scope.article_icon = 'my_library_books';
     $scope.map_icon = 'directions';
     $scope.info_icon = 'info';
+    $scope.transportation_icon = 'directions_bus';
     $scope.ArticleSearch = ArticleSearch;
     $scope.TravelDestinationSearch = TravelDestinationSearch;
 
@@ -140,9 +141,34 @@ kompresControllers.controller('DistrictsCtrl', ['$scope', 'Districts',
   }
 ]);
 
-kompresControllers.controller('TransportationListCtrl', ['$scope', 'Transportations',
-  function($scope, Transportations) {
-    $scope.transportations = Transportations.list.query();
+kompresControllers.controller('TransportationListCtrl', ['$scope', 'Transportations', '$routeParams', '$resource',
+  function($scope, Transportations, $routeParams, $resource) {
+    $scope.params = $routeParams;
+    $scope.transportation_search = '';
+    $scope.search = $scope.params.search;
+    $scope.transportations = Transportations.list.query(function(response){
+      angular.forEach(response.results, function(transportation){
+        transportation['districts_resolved'] = [];
+        angular.forEach(transportation.districts, function(district){
+          $resource(district).get(function(response){
+            transportation.districts_resolved.push(response);
+          });
+        });
+      });
+    });
+  }
+]);
+
+kompresControllers.controller('TransportationRepeatCtrl', ['$scope', '$resource', '$exceptionHandler',
+  function($scope, $resource, $exceptionHandler) {
+    var init = function() {
+      if (typeof $scope.transportation === "undefined") {
+        $exceptionHandler("The TransportationRepeatController must be initialized with a transportation in scope");
+      }
+      $scope.districts_resolved = [];
+    };
+
+    init();
   }
 ]);
 
@@ -183,7 +209,6 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
             $resource($scope.user.district+'?format=json').get(function(data){
               $scope.user.district = data;
               angular.forEach($scope.travel_destinations.results, function(item){
-                Marker.addMarker(item);
                 if ($rootScope.arrayContains($scope.categories, item.type) == false){
                   $scope.categories.push(String(item.type));
                 }
@@ -196,7 +221,6 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
               });
             });
           },angular.forEach($scope.travel_destinations.results, function(item){
-            Marker.addMarker(item);
             if ($rootScope.arrayContains($scope.categories, item.type) == false){
               $scope.categories.push(String(item.type));
             }
@@ -321,6 +345,7 @@ kompresControllers.controller('ArticleListCtrl', ['$scope', '$route', '$routePar
     $scope.articles.$promise.then(function() {
       angular.forEach($scope.articles.results, function(item){
         item.date = $filter('date')(item.date, 'd  MMMM  yyyy');
+        PostCategory.addCategory(item.category);
       });
       $scope.show_loading = false;
     });
@@ -356,7 +381,6 @@ kompresControllers.controller('ArticleRepeatCtrl', ['$scope', '$resource', '$exc
       else{
         $scope.article_short_description = $scope.article.short_description;
       }
-      PostCategory.addCategory($scope.article.category);
       $scope.thumbnail = $resource($scope.article.thumbnail).get(function() {
         $scope.show_loading = false;
       });

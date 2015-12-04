@@ -11,4 +11,8 @@ class TransportationViewSet(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         queryset = Transportation.objects.all()
+        district = self.request.query_params.get('district', None)
+
+        if district is not None:
+            queryset = Transportation.objects.filter(districts__name=district)
         return queryset
