@@ -159,6 +159,15 @@ kompresControllers.controller('TransportationListCtrl', ['$scope', 'Transportati
   }
 ]);
 
+kompresControllers.controller('TransportationInDestCtrl', ['$scope', 'Transportations', '$routeParams', '$resource',
+  function($scope, Transportations, $routeParams, $resource) {
+    $scope.params = $routeParams;
+    $scope.transportation_search = '';
+    $scope.search = $scope.params.search;
+    $scope.transportations = Transportations.in_district.query({district:$scope.$parent.district.name});
+  }
+]);
+
 kompresControllers.controller('TransportationRepeatCtrl', ['$scope', '$resource', '$exceptionHandler',
   function($scope, $resource, $exceptionHandler) {
     var init = function() {
@@ -239,19 +248,13 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
 ]);
 
 kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route', '$routeParams', 'TravelDestinations', '$resource', '$interval', '$mdDialog',
-  'TravelDestinationSearch', '$location', 'ColorRandomizer',
-  function($scope, $route, $routeParams, TravelDestinations, $resource, $interval, $mdDialog, TravelDestinationSearch, $location, ColorRandomizer) {
+  'TravelDestinationSearch', '$location', 'Transportations',
+  function($scope, $route, $routeParams, TravelDestinations, $resource, $interval, $mdDialog, TravelDestinationSearch, $location, Transportations) {
     $scope.$route = $route;
     $scope.params = $routeParams;
     $scope.travel_destination_name = $scope.params.travel_destination_name.replace(/-/g,' ');
     $scope.TravelDestinationSearch = TravelDestinationSearch;
     $scope.show_loading = true;
-
-    $scope.ColorRandomizer = ColorRandomizer;
-
-    $scope.getColor = function(){
-
-    };
 
     $scope.current_url = $location.absUrl();
 
@@ -259,6 +262,7 @@ kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route'
     $scope.travel_destination.$promise.then(function() {
       var url = $scope.travel_destination.results[0].district+'?format=json';
       $scope.district = $resource(url).get(function(){
+        $scope.transportations = Transportations.in_district.query({district:$scope.district.name});
         $scope.province = $resource($scope.district.province).get(function(){
           $scope.region = $resource($scope.province.region).get(function(){
             //showloading

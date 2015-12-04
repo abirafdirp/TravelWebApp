@@ -248,7 +248,7 @@ kompresServices.factory('Transportations', ['$resource',
       list : $resource('/api/transportations/?format=json', {}, {
       query: {method: 'GET'}
       }),
-      district : $resource('/api/transportations/?district=:district', {
+      in_district : $resource('/api/transportations/?district=:district', {
         district:'@district'
       }, {
       query: {method: 'GET'}
