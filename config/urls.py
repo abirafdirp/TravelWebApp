@@ -21,6 +21,7 @@ from kompres2015.tourism.views import TravelDestinationViewSet
 from kompres2015.tourism.views import VisitViewSet
 from kompres2015.tourism.views import ReportViewSet
 from kompres2015.tourism.views import TravelDestinationContentViewSet
+from kompres2015.tourism.views import model_3d_view
 
 from kompres2015.users.views import UserViewSet
 
@@ -32,6 +33,8 @@ from kompres2015.image.views import ArticleImageViewSet
 from kompres2015.pages.views import PageViewSet
 from kompres2015.pages.views import FeaturedTravelDestinationViewSet
 from kompres2015.pages.views import HomeLinkViewSet
+
+from kompres2015.transportation.views import TransportationViewSet
 
 from kompres2015.authentication.views import FacebookLogin
 
@@ -176,6 +179,12 @@ article_list = ArticleViewSet.as_view({
 article_detail = ArticleViewSet.as_view({
     'get': 'retrieve',
 })
+transportation_list = TransportationViewSet.as_view({
+    'get': 'list',
+})
+transportation_detail = TransportationViewSet.as_view({
+    'get': 'retrieve',
+})
 travel_destination_content_list = TravelDestinationContentViewSet.as_view({
     'get': 'list',
 })
@@ -218,6 +227,8 @@ urlpatterns += format_suffix_patterns([
     url(r'^api/homelinks/(?P<pk>[0-9]+)/$', home_link_detail, name='home-link-detail'),
     url(r'^api/traveldestinationcontents/$', travel_destination_content_list, name='travel-destination-content-list'),
     url(r'^api/traveldestinationcontents/(?P<pk>[0-9]+)/$', travel_destination_content_detail, name='travel-destination-content-detail'),
+    url(r'^api/transportations/$', transportation_list, name='transportation-list'),
+    url(r'^api/transportation/(?P<pk>[0-9]+)/$', transportation_detail, name='transportation-detail'),
 ])
 
 
@@ -239,7 +250,7 @@ urlpatterns += [
         name="map"),
     url(r'^partials/modelviewer/$', TemplateView.as_view(template_name='partials/tourism/3d_viewer.html'),
         name="model-viewer-partial"),
-    url(r'^partials/test/$', TemplateView.as_view(template_name='partials/tourism/test.html'),
+    url(r'^partials/modelviewer/(?P<travel_destination_name>.*)/$$', model_3d_view,
         name="test-viewer-partial"),
 ]
 

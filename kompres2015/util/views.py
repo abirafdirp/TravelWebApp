@@ -31,4 +31,5 @@ def api_root(request, format=None):
         'articles': reverse('article-list', request=request, format=None),
         'travel destination contents': reverse('travel-destination-content-list', request=request, format=None),
         'home links': reverse('home-link-list', request=request, format=None),
+        'transportations': reverse('transportation-list', request=request, format=None),
     })

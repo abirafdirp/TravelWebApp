@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="{% static 'css/animate.css' %}">
 	<link rel="stylesheet" href="{% static 'css/auth.css' %}">
 	<link rel="stylesheet" href="{% static 'css/angular-material-icons.css' %}">
+	<link rel="stylesheet" href="{% static 'css/angular-social-share.min.css' %}">
 	<link rel="stylesheet" href="{% static 'css/angular-carousel.min.css' %}">
 	<link rel="stylesheet" href="{% static 'css/project.css' %}">
 
@@ -137,7 +138,7 @@
 				<main ng-view></main>
 	</div>
 
-	<footer md-theme="destination" ng-cloak>
+	<footer md-theme="default" ng-cloak>
 		<md-toolbar class="md-accent">
 			<div class="md-toolbar-tools">
 				<h2>My Awesome Footer</h2>
@@ -156,9 +157,6 @@
 	<script src="{% static 'js/angular-messages.js' %}"></script>
 	<script src="{% static 'js/angular-touch.min.js'%}"></script>
 
-	<!-- directive for threejs -->
-	<script src="{% static 'js/tjsModelViewer.js' %}"></script>
-
 	<!-- localization -->
 	<script src="{% static 'js/locales/angular-locale_id-id.js' %}"></script>
 
@@ -174,6 +172,10 @@
 	<script src="{% static 'js/angular-video-bg.min.js'%}"></script>
 	<script src="{% static 'js/dirPagination.js'%}"></script>
 	<script src="{% static 'js/satellizer.min.js'%}"></script>
+	<script src="{% static 'js/angular-social-share.min.js'%}"></script>
+
+	<!-- angular social share provider -->
+	<script src="{% static 'js/twitter-widget.min.js'%}"></script>
 
 	<!-- angular google maps -->
 	<script src="{% static 'js/angular-simple-logger.min.js'%}"></script>
@@ -195,6 +197,9 @@
 	<script src="{% static 'js/directives.js' %}"></script>
 	<script src="{% static 'js/project.js' %}"></script>
 	<script src="{% static 'js/services.js' %}"></script>
+
+	<!-- directive for threejs -->
+	<script src="{% static 'js/tjsModelViewer.js' %}"></script>
 
 	<!-- angular-django-registration auth -->
 	<script src="{% static 'js/controllers/main.js' %}"></script>

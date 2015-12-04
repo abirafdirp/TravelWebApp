@@ -22,6 +22,7 @@ kompresServices.service('ColorRandomizer', ['$rootScope',
       this.colors_index_counter += 1;
       if (this.colors_index_counter == this.colors_index.length){
         this.colors_index_counter = 0;
+        this.colors_index = $rootScope.shuffle(this.colors_index);
       }
       return this.colors[this.colors_index[this.colors_index_counter]];
     }
@@ -232,6 +233,21 @@ kompresServices.factory('Districts', ['$resource',
     return $resource('/api/districts/?format=json', {}, {
       query: {method:'GET'}
     })
+  }
+]);
+
+kompresServices.factory('Districts', ['$resource',
+  function($resource) {
+    return {
+      list : $resource('/api/districts/?format=json&fields=id,name,latitude,longitude,province,region', {}, {
+      query: {method: 'GET'}
+      }),
+      detail : $resource('/api/districts/?name=:transportation_name', {
+        transportation_name:'@transportation_name'
+      }, {
+      query: {method: 'GET'}
+      })
+    }
   }
 ]);
 

@@ -133,7 +133,13 @@ var kompresApp = angular.module('kompres', [
   'angularUtils.directives.dirPagination',
   'satellizer',
   'tjsModelViewer',
+  'djds4rce.angular-socialshare',
 ]);
+
+// TODO move this to template
+kompresApp.run(function($FB){
+  $FB.init('538377002985975');
+});
 
 // differentiate angular and django template language
 kompresApp.config(function($interpolateProvider) {
@@ -228,8 +234,8 @@ kompresApp.config(function($mdThemingProvider) {
 
 kompresApp.config(function($mdThemingProvider) {
   $mdThemingProvider.theme('destination')
-      .primaryPalette('red')
-      .accentPalette('blue')
+      .primaryPalette('indigo')
+      .accentPalette('blue-grey')
       .warnPalette('red');
 });
 

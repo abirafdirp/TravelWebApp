@@ -14,7 +14,7 @@
 				<h2>{$ article.title $}</h2>
 			</div>
 		</md-toolbar>
-		<md-content layout="row" layout-sm="column">
+		<md-content layout="row" layout-sm="column" layout-margin layout-padding>
 			<span flex="5"></span>
 			<md-list flex="65" flex-sm="95" flex-order-sm="1">
 				<md-list-item layout="column">
@@ -32,37 +32,36 @@
 			</md-list>
 			<div id="article-nav" flex="25" layout="column" flex-order-sm="0" flex-sm="95" flex-offset-sm="5">
 				<div layout="column">
-					<span flex="10"></span>
-					<span flex="grow">
+					<div class="dest-side-row">
 						<ng-md-icon icon="access_time" size="20" aria-label="tanggal"></ng-md-icon>
 						<span>{$article.date | date:'d  MMMM  yyyy' $}</span>
-					</span>
-					<span flex="grow">
+					</div>
+					<div class="dest-side-row">
 						<span flex="5"></span>
-					 <ng-md-icon icon="account_circle" size="20" aria-label="author"></ng-md-icon>
+						<ng-md-icon icon="account_circle" size="20" aria-label="author"></ng-md-icon>
 						<span>{$article.author $}</span>
-					</span>
-					<span flex="grow">
+					</div>
+					<div class="dest-side-row">
 						<ng-md-icon icon="sort" size="20" aria-label="tanggal"></ng-md-icon>
 						<a href="/artikel/?search=info"> {$ article.category $}</a>
-						</span>
+					</div>
 				</div>
 			</div>
-				</div>
-		</md-content>
-
-		<!--<div class="material-blue-grey">-->
-		<!--<div layout="column" layout-align="left center">-->
-		<!--<h1 class="md-display-1" flex="80" flex-offset="5">{$ article.title $}</h1>-->
-		<!--<div flex="80" flex-offset="5" layout="row" layout-align="center center">-->
-		<!--<span layout="row" layout-align="left center" flex="50" flex-sm="100"><ng-md-icon icon="access_time" size="20" aria-label="tanggal"></ng-md-icon>{$article.created_date | date:'d  MMMM  yyyy' $}</span>-->
-		<!--<span flex="grow"></span>-->
-		<!--<span layout="row" layout-align="left center" flex="50" flex-sm="100"><ng-md-icon icon="access_time" size="20" aria-label="tanggal"></ng-md-icon>{$article.created_date | date:'d  MMMM  yyyy' $}</span>-->
-		<!--</div>-->
-		<!--</div>-->
-
-		<!--</div>-->
 	</div>
+	</md-content>
+
+	<!--<div class="material-blue-grey">-->
+	<!--<div layout="column" layout-align="left center">-->
+	<!--<h1 class="md-display-1" flex="80" flex-offset="5">{$ article.title $}</h1>-->
+	<!--<div flex="80" flex-offset="5" layout="row" layout-align="center center">-->
+	<!--<span layout="row" layout-align="left center" flex="50" flex-sm="100"><ng-md-icon icon="access_time" size="20" aria-label="tanggal"></ng-md-icon>{$article.created_date | date:'d  MMMM  yyyy' $}</span>-->
+	<!--<span flex="grow"></span>-->
+	<!--<span layout="row" layout-align="left center" flex="50" flex-sm="100"><ng-md-icon icon="access_time" size="20" aria-label="tanggal"></ng-md-icon>{$article.created_date | date:'d  MMMM  yyyy' $}</span>-->
+	<!--</div>-->
+	<!--</div>-->
+
+	<!--</div>-->
+</div>
 
 
 </div>

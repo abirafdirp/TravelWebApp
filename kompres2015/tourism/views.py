@@ -1,3 +1,8 @@
+import json
+
+from django.http import JsonResponse
+from django.core.exceptions import ObjectDoesNotExist
+
 from rest_framework import viewsets
 from rest_framework import permissions
 
@@ -83,3 +88,16 @@ class TravelDestinationContentViewSet(viewsets.ReadOnlyModelViewSet):
             return queryset
 
         return queryset
+
+
+def model_3d_view(request, travel_destination_name):
+    travel_destination_name = travel_destination_name.replace('-', ' ')
+    try:
+        travel_destination = TravelDestination.objects.get(name=travel_destination_name)
+    except ObjectDoesNotExist:
+        return JsonResponse({'errors': 'travel destination does not exist'})
+    file = open(travel_destination.model_3d.path, 'r')
+    text = file.read().replace('\n', ' ')
+    jsonned = json.loads(text)
+    file.close()
+    return JsonResponse(jsonned)

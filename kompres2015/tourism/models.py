@@ -8,10 +8,6 @@ from kompres2015.region.models import District
 from kompres2015.users.models import User
 
 
-class Transportation(TimeStampedModel):
-    name = models.CharField(max_length=40)
-
-
 class TravelDestination(TimeStampedModel):
     TYPE_CHOICES = (
         ('Museum', 'Museum'),
@@ -24,6 +20,7 @@ class TravelDestination(TimeStampedModel):
 
     name = models.CharField(max_length=30, unique=True)
     type = models.CharField(choices=TYPE_CHOICES, max_length=30)
+    website = models.URLField(help_text="opsional", blank=True, null=True)
     latitude = models.FloatField(blank=True, null=True)
     longitude = models.FloatField(blank=True, null=True)
     district = models.ForeignKey(District, verbose_name='Kabupaten',
@@ -35,7 +32,6 @@ class TravelDestination(TimeStampedModel):
     short_description = models.TextField(verbose_name='Deskripsi Singkat',
                                blank=True, null=True)
 
-    # TODO convert this to a model
     model_3d = models.FileField(upload_to='models', blank=True, null=True)
 
     class Meta:
