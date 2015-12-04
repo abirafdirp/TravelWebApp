@@ -177,6 +177,10 @@ kompresApp.config(['$routeProvider', '$locationProvider',
           templateUrl: '/partials/report/',
           activetab: 'message-us'
         }).
+        when('/metoda-transportasi', {
+          templateUrl: '/partials/transportation-list/',
+          activetab: 'transportation'
+        }).
         when('/peta', {
           templateUrl: '/partials/map/',
           activetab: 'map',

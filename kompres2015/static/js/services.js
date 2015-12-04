@@ -220,6 +220,21 @@ kompresServices.factory('Regions', ['$resource',
   }
 ]);
 
+kompresServices.factory('Transportations', ['$resource',
+  function($resource) {
+    return {
+      list : $resource('/api/transportations/?format=json', {}, {
+      query: {method: 'GET'}
+      }),
+      district : $resource('/api/transportations/?district_name=:district_name', {
+        district_name:'@district_name'
+      }, {
+      query: {method: 'GET'}
+      })
+    }
+  }
+]);
+
 kompresServices.factory('Provinces', ['$resource',
   function($resource){
     return $resource('/api/provinces/?format=json', {}, {
@@ -234,7 +249,7 @@ kompresServices.factory('Districts', ['$resource',
       list : $resource('/api/districts/?format=json&fields=id,name,latitude,longitude,province,region', {}, {
       query: {method: 'GET'}
       }),
-      detail : $resource('/api/districts/?name=:transportation_name', {
+      transport : $resource('/api/districts/?transportation_name=:transportation_name', {
         transportation_name:'@transportation_name'
       }, {
       query: {method: 'GET'}

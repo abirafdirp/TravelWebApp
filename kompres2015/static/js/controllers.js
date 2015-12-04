@@ -140,6 +140,12 @@ kompresControllers.controller('DistrictsCtrl', ['$scope', 'Districts',
   }
 ]);
 
+kompresControllers.controller('TransportationListCtrl', ['$scope', 'Transportations',
+  function($scope, Transportations) {
+    $scope.transportations = Transportations.list.query();
+  }
+]);
+
 
 kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', '$routeParams', '$resource', '$rootScope', 'TravelDestinations', 'Districts',
   'Provinces', 'Regions', 'Marker', 'djangoAuth',

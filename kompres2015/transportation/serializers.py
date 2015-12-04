@@ -9,4 +9,4 @@ class TransportationSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Transportation
-        fields = ('id', 'name', 'districts', 'description', 'website')
+        fields = ('id', 'name', 'districts', 'description', 'website', 'image',)

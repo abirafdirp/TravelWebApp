@@ -9,6 +9,7 @@ class Transportation(TimeStampedModel):
     districts = models.ManyToManyField(District, related_name='transportations')
     description = models.TextField()
     website = models.URLField(blank=True, null=True)
+    image = models.ImageField(blank=True, null=True)
 
     class Meta:
         verbose_name = 'Metoda Transportasi'
