@@ -163,7 +163,7 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
       });
     });
 
-    $scope.districts = Districts.query();
+    $scope.districts = Districts.list.query();
     $scope.provinces = Provinces.query();
     $scope.regions = Regions.query();
 
@@ -404,7 +404,7 @@ kompresControllers.controller('ReportCtrl', ['$scope', '$mdDialog',
 
 
         $scope.authenticated = false;
-        $scope.districts = Districts.query();
+        $scope.districts = Districts.list.query();
         $scope.travel_destination_names = [];
         $scope.complete = false;
         $scope.show_loading = false;

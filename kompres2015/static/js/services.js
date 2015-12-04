@@ -229,14 +229,6 @@ kompresServices.factory('Provinces', ['$resource',
 ]);
 
 kompresServices.factory('Districts', ['$resource',
-  function($resource){
-    return $resource('/api/districts/?format=json', {}, {
-      query: {method:'GET'}
-    })
-  }
-]);
-
-kompresServices.factory('Districts', ['$resource',
   function($resource) {
     return {
       list : $resource('/api/districts/?format=json&fields=id,name,latitude,longitude,province,region', {}, {
