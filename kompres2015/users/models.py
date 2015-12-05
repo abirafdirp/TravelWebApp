@@ -8,6 +8,9 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from annoying.fields import AutoOneToOneField
+from ckeditor.fields import RichTextField
+
+from kompres2015.util.models import TimeStampedModel
 
 
 @python_2_unicode_compatible
@@ -29,3 +32,8 @@ class UserProfile(models.Model):
     user = AutoOneToOneField(User, related_name='userprofile', primary_key=True)
 
     district = models.ForeignKey('region.District', blank=True, null=True)
+
+
+class Email(TimeStampedModel):
+    subject = models.CharField(max_length=50)
+    content = RichTextField()

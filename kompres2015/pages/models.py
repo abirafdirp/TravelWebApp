@@ -31,5 +31,13 @@ class HomeLink(TimeStampedModel):
     page = models.ForeignKey(Page, related_name='homelinks')
     description = models.CharField(max_length=150)
 
+    TYPE_CHOICES = (
+        ('at video', 'at video'),
+        ('main 1', 'main 1'),
+        ('main 2', 'main 2'),
+        ('common', 'common'),
+    )
+    type = models.CharField(choices=TYPE_CHOICES, blank=True, null=True, max_length=15)
+
     def __str__(self):
         return self.title + ' ' + self.link

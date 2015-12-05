@@ -1,66 +1,82 @@
+<div layout="column" layout-fill>
+  <div flex class="video-container">
+    <video-bg ng-if="page" video-id="page.video" start="page.video_start" flex>
+    </video-bg>
+  </div>
 
-<div flex class="video-container">
-  <video-bg ng-if="page" video-id="page.video" start="page.video_start" flex>
-  </video-bg>
-</div>
-
-<div class="video-content" flex>
-  <div layout="column">
-    <div layout="row" layout-align="left center" layout-margin layout-wrap>
-      <div class="home-tagline">
-        <h2>Discover Indonesia</h2>
-      </div>
-      <div flex>
-      </div>
-    </div>
-    <div class="home-nav" ng-if="resolved">
-      <div layout="row" layout-wrap layout-margin>
-        <div ng-repeat="home_link in page.home_links"
-             flex-gt-lg="25"
-             flex-lg="33"
-             flex-md="45"
-             flex-sm="90"
-             layout="row">
-          <md-card flex class="video-shadow" ng-mouseenter="icon = 'keyboard_tab'" ng-mouseleave="icon = 'keyboard_arrow_right'">
-            <img ng-show="home_link.image != null" ng-src="{$home_link.image$}" class="md-card-image animated fadeIn" alt="Washed Out">
-            <md-card-title class="remove-height">
-                <span class="md-headline home-link-title" style="background-color: {$home_link.color$}">{$home_link.title$}</span>
-            </md-card-title>
-            <md-card-content>
-              <div layout="row" layout-align="start center" layout-margin>
-                <span class="md-body-1">{$home_link.description$}</span>
-                <div flex></div>
-                <ng-md-icon icon="{$icon$}" size="42" style="fill: {$home_link.color2$}" aria-label="user" options='{"duration": 300}'></ng-md-icon>
-              </div>
-            </md-card-content>
-          </md-card>
-          <div flex="10"></div>
+  <div class="video-content" flex>
+    <div layout="column">
+      <div layout="row" layout-align="left center" layout-margin layout-wrap>
+        <div class="home-tagline">
+          <h2>Discover Indonesia</h2>
         </div>
+        <div flex>
+        </div>
+      </div>
+      <div ng-if="resolved">
+        <div layout="row" layout-wrap layout-margin>
+          <div  layout="row">
+            <md-card ng-repeat="home_link in page.home_links" ng-if="home_link.type == 'at video'"
+                     flex
+                     ng-mouseenter="icon = 'keyboard_tab'"
+                     ng-mouseleave="icon = 'keyboard_arrow_right'"
+                     flex-gt-lg="25"
+                     flex-lg="33"
+                     flex-md="45"
+                     flex-sm="90">
+              <img ng-show="home_link.image != null" ng-src="{$home_link.image$}" class="md-card-image animated fadeIn" alt="Washed Out">
+              <md-card-title class="remove-height">
+                <span class="md-headline home-link-title" style="background-color: {$home_link.color$}">{$home_link.title$}</span>
+              </md-card-title>
+              <md-card-content>
+                <div layout="row" layout-align="start center" layout-margin>
+                  <span class="md-body-1">{$home_link.description$}</span>
+                  <ng-md-icon icon="{$icon$}" size="42" style="fill: {$home_link.color2$}" aria-label="user" options='{"duration": 300}'></ng-md-icon>
+                </div>
+              </md-card-content>
+            </md-card>
+            <div flex="10"></div>
+          </div>
 
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!--<div ng-repeat="home_link in page.home_links"-->
-             <!--ng-controller="TravelDestinationRepeatCtrl"-->
-             <!--flex-gt-lg="25"-->
-             <!--flex-lg="33"-->
-             <!--flex-md="45"-->
-             <!--flex-sm="90"-->
-             <!--layout="row">-->
-          <!--<md-card flex class="video-shadow" ng-mouseenter="icon = 'keyboard_tab'" ng-mouseleave="icon = 'keyboard_arrow_right'">-->
-            <!--<img ng-show="thumbnail.image != null" ng-src="{$thumbnail.image$}" class="md-card-image animated fadeIn" alt="Washed Out">-->
-            <!--<md-card-title>-->
-                <!--<span class="md-headline home-link-title">{$travel_destination.name$}</span>-->
-            <!--</md-card-title>-->
-            <!--<md-card-content>-->
-              <!--<div layout="row"layout-align="right center" layout-margin>-->
-                <!--<span class="md-headline">{$travel_destination.name$}</span>-->
-                <!--<div flex></div>-->
-                <!--<ng-md-icon icon="{$icon$}" size="42" style="fill: {$travel_destination.color$}" aria-label="user" options='{"duration": 300}'></ng-md-icon>-->
-              <!--</div>-->
-            <!--</md-card-content>-->
-          <!--</md-card>-->
-          <!--<div flex="10"></div>-->
-        <!--</div>-->
+  <div ng-if="resolved" layout="row" layout-margin class="home-content">
+    <div flex-gt-lg="50"
+         flex-lg="50"
+         flex-md="100"
+         flex-sm="100">
+      <md-card ng-repeat="home_link in page.home_links" ng-if="home_link.type == 'main 1'" flex class="video-shadow">
+        <img ng-show="home_link.image != null" ng-src="{$home_link.image$}" class="md-card-image animated fadeIn" alt="Washed Out">
+        <md-card-content>
+          <div layout="row" layout-align="start center" layout-margin>
+            <span class="md-title">{$home_link.description$}</span>
+          </div>
+        </md-card-content>
+      </md-card>
+    </div>
+
+    <div flex layout="column">
+      <div layout="row" layout-wrap>
+        <md-card ng-repeat="home_link in page.home_links" ng-if="home_link.type == 'common'" flex class="video-shadow"
+                 flex-gt-lg="45"
+                 flex-lg="45"
+                 flex-md="45"
+                 flex-sm="90">
+          <img ng-show="home_link.image != null" ng-src="{$home_link.image$}" class="md-card-image animated fadeIn" alt="Washed Out">
+          <md-card-content>
+            <div layout="row" layout-align="start center" layout-margin>
+              <span class="md-body-1">{$home_link.description$}</span>
+            </div>
+          </md-card-content>
+        </md-card>
+      </div>
+    </div>
+
+    <div flex="5"></div>
+
+  </div>
+  <div flex>&nbsp;</div>
+</div>

@@ -33,5 +33,5 @@ class HomeLinkSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = HomeLink
-        fields = ('id', 'image', 'title', 'link', 'page', 'description')
+        fields = ('id', 'image', 'title', 'link', 'page', 'description', 'type')
 

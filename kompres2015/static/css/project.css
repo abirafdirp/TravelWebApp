@@ -149,10 +149,15 @@ md-button {
     transition: 0.2s;
 }
 
+.home-content {
+    margin-top: 300px;
+    margin-bottom: 30px;
+}
+
 .video-shadow:hover{
-    -webkit-box-shadow: 0px 0px 17px 4px rgba(60,60,60,1);
-    -moz-box-shadow: 0px 0px 17px 4px rgba(60,60,60,1);
-    box-shadow: 0px 0px 17px 4px rgba(60,60,60,1);
+    -webkit-box-shadow: 0px 0px 17px 4px rgba(200,200,200,1);
+    -moz-box-shadow: 0px 0px 17px 4px rgba(200,200,200,1);
+    box-shadow: 0px 0px 17px 4px rgba(200,200,200,1);
     transition: 0.2s;
 }
 
@@ -451,7 +456,7 @@ md-autocomplete[md-floating-label] md-input-container{
 .video-container {
     position: absolute !important;
     top: 63px;
-    height: 700px;
+    height: 85%;
     width: 100%;
 }
 
