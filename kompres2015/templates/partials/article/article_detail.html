@@ -14,23 +14,35 @@
 				<h2>{$ article.title $}</h2>
 			</div>
 		</md-toolbar>
-		<md-content layout="row" layout-sm="column" layout-margin layout-padding>
+		<md-content layout="row" layout-sm="column" layout-md="column" layout-margin layout-padding>
 			<span flex="5"></span>
-			<md-list flex="65" flex-sm="95" flex-order-sm="1">
+			<md-list flex="65" flex-sm="95" flex-md="95" flex-order-sm="1" flex-order-md="1">
 				<md-list-item layout="column">
 					<div class="md-list-item-text">
 						<div ng-bind-html="article.article | trustAsHtml"></div>
 					</div>
 					<md-divider></md-divider>
 				</md-list-item>
-				<md-list-item layout="column">
-					<div class="md-list-item-text">
-						<h4 class="md-headline">Artikel Terkait</h4>
-						<div ng-bind-html="article.article | trustAsHtml"></div>
-					</div>
-				</md-list-item>
 			</md-list>
-			<div id="article-nav" flex="25" layout="column" flex-order-sm="0" flex-sm="95" flex-offset-sm="5">
+			<div id="article-nav" flex="25" layout="column" hide-md hide-sm>
+				<div layout="column">
+					<div class="dest-side-row">
+						<ng-md-icon icon="access_time" size="20" aria-label="tanggal"></ng-md-icon>
+						<span>{$article.date | date:'d  MMMM  yyyy' $}</span>
+					</div>
+					<div class="dest-side-row">
+						<span flex="5"></span>
+						<ng-md-icon icon="account_circle" size="20" aria-label="author"></ng-md-icon>
+						<span>{$article.author $}</span>
+					</div>
+					<div class="dest-side-row">
+						<ng-md-icon icon="sort" size="20" aria-label="tanggal"></ng-md-icon>
+						<a href="/artikel/?search=info"> {$ article.category $}</a>
+					</div>
+				</div>
+			</div>
+			<div layout="row" flex-order-sm="0" flex-order-md="0" hide-lg hide-gt-lg>
+				<div flex="5"></div>
 				<div layout="column">
 					<div class="dest-side-row">
 						<ng-md-icon icon="access_time" size="20" aria-label="tanggal"></ng-md-icon>
@@ -49,18 +61,6 @@
 			</div>
 	</div>
 	</md-content>
-
-	<!--<div class="material-blue-grey">-->
-	<!--<div layout="column" layout-align="left center">-->
-	<!--<h1 class="md-display-1" flex="80" flex-offset="5">{$ article.title $}</h1>-->
-	<!--<div flex="80" flex-offset="5" layout="row" layout-align="center center">-->
-	<!--<span layout="row" layout-align="left center" flex="50" flex-sm="100"><ng-md-icon icon="access_time" size="20" aria-label="tanggal"></ng-md-icon>{$article.created_date | date:'d  MMMM  yyyy' $}</span>-->
-	<!--<span flex="grow"></span>-->
-	<!--<span layout="row" layout-align="left center" flex="50" flex-sm="100"><ng-md-icon icon="access_time" size="20" aria-label="tanggal"></ng-md-icon>{$article.created_date | date:'d  MMMM  yyyy' $}</span>-->
-	<!--</div>-->
-	<!--</div>-->
-
-	<!--</div>-->
 </div>
 
 

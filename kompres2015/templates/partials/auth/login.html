@@ -14,15 +14,15 @@
 			<div class="md-dialog-content" layout="column" layout-align="center center">
 
 				<md-input-container class="md-block">
-					<label for="id_username">username</label>
-					<input auto-focus name="username" id="id_username" type="text" ng-model="model.username" placeholder="username" class="form-control" required />
+					<label for="id_username">Username</label>
+					<input auto-focus name="username" id="id_username" type="text" ng-model="model.username" placeholder="Username" class="form-control" required />
 					<div ng-messages="loginForm.username.$error">
 						<div ng-message="required" ng-repeat="error in errors.username">{$error$}</div>
 					</div>
 				</md-input-container>
 				<md-input-container class="md-block">
-					<label for="id_password">password</label>
-					<input name="password" id="id_password" type="password" ng-model="model.password" placeholder="password" class="form-control" required />
+					<label for="id_password">Password</label>
+					<input name="password" id="id_password" type="password" ng-model="model.password" placeholder="Password" class="form-control" required />
 					<div ng-messages="loginForm.password.$error">
 						<div ng-message="required" ng-repeat="error in errors.password">{$error$}</div>
 					</div>

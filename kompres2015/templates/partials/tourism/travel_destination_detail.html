@@ -52,39 +52,39 @@
 					<div class='md-padding'>
 
 
-							<div layout="column">
-								<div layout="row" layout-margin layout-padding layout-wrap flex="75">
-									<md-list flex="100">
-										<div dir-paginate="transportation in transportations.results | itemsPerPage: 9">
-											<md-list-item class="md-3-line md-long-text" flex>
-												<img ng-src="{$transportation.image$}" class="md-avatar" alt=""/>
-												<div class="md-list-item-text">
-													<h3>
-														{$ transportation.name $} &nbsp;&nbsp;
-														<ng-md-icon icon="link" size="20" aria-label="tanggal"></ng-md-icon> <a ng-href="{$transportation.website$}">{$transportation.website$}</a>
-													</h3>
-													<p>&nbsp;</p>
-													<p>
-														{$transportation.description$}<br>
-													</p>
-													<p>&nbsp;</p>
-												</div>
-												<md-divider ng-if="!$last"></md-divider>
-											</md-list-item>
-										</div>
-									</md-list>
-								</div>
+						<div layout="column">
+							<div layout="row" layout-margin layout-padding layout-wrap flex="75">
+								<md-list flex="100">
+									<div dir-paginate="transportation in transportations.results | itemsPerPage: 9">
+										<md-list-item class="md-3-line md-long-text" flex>
+											<img ng-src="{$transportation.image$}" class="md-avatar" alt=""/>
+											<div class="md-list-item-text">
+												<h3>
+													{$ transportation.name $} &nbsp;&nbsp;
+													<ng-md-icon icon="link" size="20" aria-label="tanggal"></ng-md-icon> <a ng-href="{$transportation.website$}">{$transportation.website$}</a>
+												</h3>
+												<p>&nbsp;</p>
+												<p>
+													{$transportation.description$}<br>
+												</p>
+												<p>&nbsp;</p>
+											</div>
+											<md-divider ng-if="!$last"></md-divider>
+										</md-list-item>
+									</div>
+								</md-list>
 							</div>
-							<div layout="row" layout-align="center" layout-margin layout-padding>
-								<dir-pagination-controls auto-hide="false"></dir-pagination-controls>
-							</div>
+						</div>
+						<div layout="row" layout-align="center" layout-margin layout-padding>
+							<dir-pagination-controls auto-hide="false"></dir-pagination-controls>
+						</div>
 
 
 					</div>
 				</md-tab>
 			</md-tabs>
 			<div flex="5"></div>
-			<div flex="25" class="dest-side" layout="column">
+			<div flex="25" class="dest-side" layout="column" md-theme="dest-side">
 				<div class="dest-side-row">
 					<ng-md-icon icon="place" size="20" aria-label="tanggal"></ng-md-icon>
 					<a ng-href="/lokasi-wisata?search={$district.name$}" class="animated fadeIn" ng-if="district.name"><span>{$district.name $}</span></a>,
@@ -99,18 +99,14 @@
 				</div>
 				<div class="dest-side-row" ng-if="travel_destination.website">
 					<ng-md-icon icon="link" size="20" aria-label="tanggal"></ng-md-icon>
-					<a ng-href="{$travel_destination.website">{$travel_destination.website$}</a>
-				</div>
-				<div class="dest-side-row">
-					<ng-md-icon icon="directions" size="20" aria-label="tanggal"></ng-md-icon>
-					<a ng-href="/peta?ltd={$travel_destination.latitude$}&lng={$travel_destination.longitude$}">lihat di peta&nbsp;</a>
+					<a ng-href="{$travel_destination.website$}">{$travel_destination.website$}</a>
 				</div>
 				<div class="dest-side-row" layout="row" layout-align="start">
 					<ng-md-icon icon="facebook-box" size="20" aria-label="tanggal"></ng-md-icon>
 					<a facebook class="facebookShare" data-url='{$current_url$}' data-shares='shares' style="margin-left: 5px">{$ shares $}</a>
 					<span flex></span>
 				</div>
-				<div class="dest-side-row" layout="row" layout-align="start">
+				<div class="dest-side-row-last" layout="row" layout-align="start">
 					<ng-md-icon icon="twitter" size="20" aria-label="tanggal"></ng-md-icon>
 					<a twitter data-lang="id"
 						 style="margin-left: 5px"
@@ -121,20 +117,45 @@
 						 data-text='Saya telah mengunjungi {$travel_destination.name$}, kapan giliranmu?' ></a>
 					<span flex></span>
 				</div>
-				<div flex></div>
-				<div layout="row" layout-align="start center" flex>
-					<div ng-controller="ReportCtrl" ng-show="authenticated">
-						<md-button class="md-raised md-warn" ng-click="showReport(travel_destination)">
-							<ng-md-icon icon="report_problem" size="20" aria-label="tanggal"></ng-md-icon> komplain&nbsp;
-						</md-button>
-					</div>
+				<div layout="row">
+					<div flex="10" flex-md="0" flex-sm="0"></div>
+					<md-button ng-href="/peta?ltd={$travel_destination.latitude$}&lng={$travel_destination.longitude$}" class="md-raised md-primary" flex>
+						<ng-md-icon icon="directions" size="20" aria-label="tanggal"></ng-md-icon> lihat di peta&nbsp;
+					</md-button>
+					<div flex="20" flex-md="5" flex-sm="5"></div>
+				</div>
+				<div layout="row" ng-show="travel_destination.model_3d">
+					<div flex="10" flex-md="0" flex-sm="0"></div>
+					<md-button ng-href="/peta?ltd={$travel_destination.latitude$}&lng={$travel_destination.longitude$}" class="md-raised md-accent" flex>
+						<ng-md-icon icon="3d_rotation" size="20" aria-label="tanggal"></ng-md-icon> Lihat Dalam 3d&nbsp;
+					</md-button>
+					<div flex="20" flex-md="5" flex-sm="5"></div>
+				</div>
+				<div layout="row" ng-show="!travel_destination.model_3d">
+					<div flex="10" flex-md="0" flex-sm="0"></div>
+					<md-button ng-href="/peta?ltd={$travel_destination.latitude$}&lng={$travel_destination.longitude$}" class="md-raised md-accent" ng-disabled="true" flex>
+						<ng-md-icon icon="3d_rotation" size="20" aria-label="tanggal"></ng-md-icon> Lihat Dalam 3d&nbsp;
+					</md-button>
+					<div flex="20" flex-md="5" flex-sm="5"></div>
+				</div>
+				<div ng-controller="ReportCtrl" ng-show="authenticated" layout="row">
+					<div flex="10" flex-md="0" flex-sm="0"></div>
+					<md-button class="md-raised md-warn" ng-click="showReport(travel_destination)" flex>
+						<ng-md-icon icon="report_problem" size="20" aria-label="tanggal"></ng-md-icon> komplain&nbsp;
+					</md-button>
+					<div flex="20" flex-md="5" flex-sm="5"></div>
+				</div>
+				<div layout="row" layout-align="center center">
+					<div flex="10" flex-md="0" flex-sm="0"></div>
 					<md-button class="md-raised md-warn" ng-show="!authenticated">
 						<md-tooltip md-direction="down">
 							anda harus masuk terlebih dahulu
 						</md-tooltip>
 						<ng-md-icon icon="report_problem" size="20" aria-label="tanggal"></ng-md-icon> komplain&nbsp;
 					</md-button>
+					<div flex="20" flex-md="5" flex-sm="5"></div>
 				</div>
+				<div flex></div>
 			</div>
 		</div>
 	</div>

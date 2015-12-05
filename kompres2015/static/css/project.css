@@ -517,6 +517,10 @@ md-autocomplete[md-floating-label] md-input-container{
     margin-bottom: 10px;
 }
 
+.dest-side-row-last{
+    margin-bottom: 35px;
+}
+
 .angular-google-map-container {
     width: 100%;
     height: 93.5%;
@@ -576,7 +580,7 @@ canvas {
 
 #transportation-list{
     position: relative;
-    top: 90px;
+    top: 100px;
 }
 
 .resize {

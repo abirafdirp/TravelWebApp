@@ -250,8 +250,8 @@ urlpatterns += [
         name="map"),
     url(r'^partials/modelviewer/$', TemplateView.as_view(template_name='partials/tourism/3d_viewer.html'),
         name="model-viewer-partial"),
-    url(r'^partials/modelviewer/(?P<travel_destination_name>.*)/$$', model_3d_view,
-        name="test-viewer-partial"),
+    url(r'^partials/models/(?P<travel_destination_name>.*)/$', model_3d_view,
+        name="models-partial"),
     url(r'^partials/transportation-list/$', TemplateView.as_view(template_name='partials/transportation/transportation_list.html'),
         name="transportation-list-partial"),
 ]

@@ -238,8 +238,15 @@ kompresApp.config(function($mdThemingProvider) {
 
 kompresApp.config(function($mdThemingProvider) {
   $mdThemingProvider.theme('destination')
-      .primaryPalette('indigo')
-      .accentPalette('blue-grey')
+      .primaryPalette('teal')
+      .accentPalette('pink')
+      .warnPalette('red');
+});
+
+kompresApp.config(function($mdThemingProvider) {
+  $mdThemingProvider.theme('dest-side')
+      .primaryPalette('teal')
+      .accentPalette('indigo')
       .warnPalette('red');
 });
 

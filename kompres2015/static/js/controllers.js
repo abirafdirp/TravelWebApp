@@ -159,15 +159,6 @@ kompresControllers.controller('TransportationListCtrl', ['$scope', 'Transportati
   }
 ]);
 
-kompresControllers.controller('TransportationInDestCtrl', ['$scope', 'Transportations', '$routeParams', '$resource',
-  function($scope, Transportations, $routeParams, $resource) {
-    $scope.params = $routeParams;
-    $scope.transportation_search = '';
-    $scope.search = $scope.params.search;
-    $scope.transportations = Transportations.in_district.query({district:$scope.$parent.district.name});
-  }
-]);
-
 kompresControllers.controller('TransportationRepeatCtrl', ['$scope', '$resource', '$exceptionHandler',
   function($scope, $resource, $exceptionHandler) {
     var init = function() {
@@ -595,7 +586,7 @@ kompresApp.controller('ModelViewerCtrl', ['$scope', 'TravelDestinations', '$rout
   function ($scope, TravelDestinations, $routeParams) {
     $scope.params = $routeParams;
     $scope.travel_destination_name = $scope.params.travel_destination_name.replace(/-/g,'%20');
-    $scope.assimpModelUrl = 'partials/modelviewer/' + $scope.travel_destination_name + '/';
+    $scope.assimpModelUrl = 'partials/models/' + $scope.travel_destination_name + '/';
   }]);
 
 kompresControllers.controller('ImagesCtrl', ['$scope', 'Images',

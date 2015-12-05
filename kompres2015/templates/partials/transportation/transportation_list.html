@@ -1,5 +1,5 @@
 <div ng-controller="TransportationListCtrl" layout="column" id="transportation-list">
-  <div layout="row">
+  <div layout="row" flex>
     <div flex="20"></div>
     <div layout="row" flex>
       <ng-md-icon icon="search" size="20" aria-label="tanggal"></ng-md-icon> <md-input-container class="md-block" flex>
@@ -16,8 +16,9 @@
           <div class="md-list-item-text">
             <h3>
               {$ transportation.name $} &nbsp;&nbsp;
-              <ng-md-icon icon="link" size="20" aria-label="tanggal"></ng-md-icon> <a ng-href="{$transportation.website$}">{$transportation.website$}</a>
             </h3>
+            <p>&nbsp;</p>
+            <p><ng-md-icon icon="link" size="20" aria-label="tanggal"></ng-md-icon> <a ng-href="{$transportation.website$}">{$transportation.website$}</a></p>
             <p>&nbsp;</p>
             <p>
               {$transportation.description$}<br>
