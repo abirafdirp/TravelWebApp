@@ -28,7 +28,8 @@ class HomeLink(TimeStampedModel):
     image = models.ImageField()
     title = models.CharField(max_length=30)
     link = models.CharField(max_length=100)
-    page = models.ForeignKey(Page)
+    page = models.ForeignKey(Page, related_name='homelinks')
+    description = models.CharField(max_length=150)
 
     def __str__(self):
         return self.title + ' ' + self.link

@@ -273,10 +273,11 @@ kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route'
             $scope.gallery_images.push(image);
           }
         });
+        // hacky fix, dependant on client speed
         if (index == $scope.images_length - 1){
           $interval(function(){
             $scope.nextSlide();
-          },5400,12);
+          },10260,20);
         }
       });
 
@@ -527,11 +528,15 @@ kompresControllers.controller('VisitsCtrl', ['$scope', 'Visits',
 kompresControllers.controller('HomeCtrl', ['$scope', 'Visits', 'TravelDestinations', 'Articles', 'Page', '$resource', 'ColorRandomizer',
   function($scope, Visits, TravelDestinations, Articles, Page, $resource, ColorRandomizer) {
     $scope.travel_destination_counter = 0;
-    $scope.icon = 'keyboard_arrow_right'
+    $scope.homelink_counter = 0;
+    $scope.travel_destination_resolved = false;
+    $scope.homelinks_resolved = false;
+    $scope.icon = 'keyboard_arrow_right';
 
     Page.query(function(data){
       $scope.page = data.results[0];
       $scope.page.featured_travel_destinations = [];
+      $scope.page.home_links = [];
       angular.forEach($scope.page.featureds, function(travel_destination){
         $resource(travel_destination).get(function(data){
           $resource(data.travel_destination).get(function(data){
@@ -539,9 +544,27 @@ kompresControllers.controller('HomeCtrl', ['$scope', 'Visits', 'TravelDestinatio
             $scope.page.featured_travel_destinations.push(data);
             $scope.travel_destination_counter += 1;
             if ($scope.travel_destination_counter == $scope.page.featureds.length){
-              $scope.resolved = true;
+              $scope.travel_destination_resolved = true;
+              if ($scope.homelinks_resolved){
+                $scope.resolved = true;
+              }
             }
           });
+        });
+      });
+
+      angular.forEach($scope.page.homelinks, function(home_link){
+        $resource(home_link).get(function(data){
+          data.color = ColorRandomizer.getColor();
+          data.color2 = ColorRandomizer.getColor();
+          $scope.page.home_links.push(data);
+          $scope.homelink_counter += 1;
+          if ($scope.homelink_counter == $scope.page.homelinks.length){
+            $scope.homelinks_resolved = true;
+            if ($scope.travel_destination_resolved){
+              $scope.resolved = true;
+            }
+          }
         });
       });
     });
