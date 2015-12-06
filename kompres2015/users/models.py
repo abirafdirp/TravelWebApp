@@ -33,6 +33,9 @@ class UserProfile(models.Model):
 
     district = models.ForeignKey('region.District', blank=True, null=True)
 
+    def __str__(self):
+        return self.user.name
+
 
 class Email(TimeStampedModel):
     subject = models.CharField(max_length=50)

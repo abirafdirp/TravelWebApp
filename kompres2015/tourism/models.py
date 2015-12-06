@@ -18,8 +18,8 @@ class TravelDestination(TimeStampedModel):
         ('Lokasi Historis', 'Lokasi Historis'),
     )
 
-    name = models.CharField(max_length=30, unique=True)
-    type = models.CharField(choices=TYPE_CHOICES, max_length=30)
+    name = models.CharField(max_length=30, unique=True, verbose_name='Nama')
+    type = models.CharField(choices=TYPE_CHOICES, max_length=30, verbose_name='Kategori')
     website = models.URLField(help_text="opsional", blank=True, null=True)
     latitude = models.FloatField(blank=True, null=True)
     longitude = models.FloatField(blank=True, null=True)
@@ -36,18 +36,20 @@ class TravelDestination(TimeStampedModel):
 
     class Meta:
         verbose_name = 'Lokasi Wisata'
+        verbose_name_plural = 'Lokasi-lokasi Wisata'
 
     def __str__(self):
         return self.name
 
 
 class TravelDestinationContent(TimeStampedModel):
-    name = models.CharField(max_length=30)
-    content = RichTextField()
+    name = models.CharField(max_length=20, verbose_name='Judul')
+    content = RichTextField(verbose_name='Konten')
     travel_destination = models.ForeignKey(TravelDestination, related_name='contents')
 
     class Meta:
         verbose_name = 'Konten Lokasi Wisata'
+        verbose_name_plural = 'Konten-konten Lokasi Wisata'
 
     def __str__(self):
         return self.name
@@ -59,6 +61,7 @@ class Visit(TimeStampedModel):
 
     class Meta:
         verbose_name = 'Kunjungan'
+        verbose_name_plural = 'Data Kunjungan'
         unique_together = ('creation_date', 'travel_destination', 'user')
 
     def __str__(self):
@@ -75,12 +78,13 @@ class Report(TimeStampedModel):
     category = models.CharField(verbose_name="Kategori", max_length=30,
                                 choices=CATEGORY_CHOICES)
     report = models.TextField(verbose_name='Isi komplain')
-    user = models.ForeignKey(User, related_name='reports')
-    travel_destination = models.ForeignKey(TravelDestination)
-    approved = models.BooleanField(default=False)
+    user = models.ForeignKey(User, related_name='reports', verbose_name='User')
+    travel_destination = models.ForeignKey(TravelDestination, verbose_name='Lokasi Wisata')
+    approved = models.BooleanField(default=False, verbose_name='Diverifikasi')
 
     class Meta:
         verbose_name = 'Komplain pengunjung'
+        verbose_name_plural = 'Komplain-komplain pengunjung'
 
     def __str__(self):
         return self.user.username + ' - ' + self.travel_destination.name + ' - ' \

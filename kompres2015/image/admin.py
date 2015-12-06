@@ -7,19 +7,39 @@ from kompres2015.image.models import ArticleImage
 
 
 class ReportImageAdmin(admin.ModelAdmin):
-    pass
+    readonly_fields = ('admin_image',)
+
+    def admin_image(self, obj):
+        return '<img src="%s"/>' % obj.image.url
+    admin_image.allow_tags = True
+    admin_image.short_description = 'Preview'
 
 
 class ImageAdmin(admin.ModelAdmin):
-    pass
+    readonly_fields = ('admin_image',)
+
+    def admin_image(self, obj):
+        return '<img src="%s" style="max-width: 400px; width: 100%%;"/>' % obj.image.url
+    admin_image.allow_tags = True
+    admin_image.short_description = 'Preview'
 
 
 class TravelDestinationImageAdmin(admin.ModelAdmin):
-    pass
+    readonly_fields = ('admin_image',)
+
+    def admin_image(self, obj):
+        return '<img src="%s" style="max-width: 400px; width: 100%%;"/>' % obj.image.url
+    admin_image.allow_tags = True
+    admin_image.short_description = 'Preview'
 
 
 class ArticleImageAdmin(admin.ModelAdmin):
-    pass
+    readonly_fields = ('admin_image',)
+
+    def admin_image(self, obj):
+        return '<img src="%s" style="max-width: 400px; width: 100%%;"/>' % obj.image.url
+    admin_image.allow_tags = True
+    admin_image.short_description = 'Preview'
 
 admin.site.register(Image, ImageAdmin)
 admin.site.register(ReportImage, ReportImageAdmin)

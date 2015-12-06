@@ -32,7 +32,10 @@ DJANGO_APPS = (
     # 'django.contrib.humanize',
 
     # Admin
-    'grappelli',
+    'ckeditor',  # WYSIWYG editor
+    'ckeditor_uploader',
+    'jet.dashboard',
+    'jet',
     'django.contrib.admin',
 )
 THIRD_PARTY_APPS = (
@@ -51,8 +54,6 @@ THIRD_PARTY_APPS = (
     'rest_framework_swagger',
 
     'django_extensions',
-    'ckeditor',  # WYSIWYG editor
-    'ckeditor_uploader',
 
     'annoying',
 )
@@ -270,8 +271,15 @@ ADMIN_URL = r'^admin/'
 # Your common stuff: Below this line define 3rd party library settings
 
 # django-ckeditor
-# CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
 CKEDITOR_UPLOAD_PATH = 'uploads/'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'skin': 'minimalist'
+    },
+}
+
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (

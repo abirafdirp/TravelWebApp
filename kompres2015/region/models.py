@@ -27,6 +27,10 @@ class Province(Location):
     def __str__(self):
         return self.name
 
+    @staticmethod
+    def autocomplete_search_fields():
+        return 'name', 'region__name', 'districts__name'
+
 
 class District(Location):
     name = models.CharField(max_length=40, unique=True)
@@ -40,6 +44,10 @@ class District(Location):
 
     def __unicode__(self):
         return unicode(self.name).encode('utf-8')
+
+    @staticmethod
+    def autocomplete_search_fields():
+        return 'name', 'province__name', 'province__region__name'
 
 
 
