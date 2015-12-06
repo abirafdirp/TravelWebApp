@@ -42,7 +42,6 @@ THIRD_PARTY_APPS = (
     # registration including API
     'rest_framework',
     'rest_framework.authtoken',
-    'social.apps.django_app.default',  # python social auth
     'rest_auth',
     'allauth',
     'allauth.account',

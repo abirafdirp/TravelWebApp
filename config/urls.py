@@ -75,7 +75,6 @@ urlpatterns += [
     url(r'^rest-auth/', include('rest_auth.urls')),
     url(r'^rest-auth/facebook/$', FacebookLogin.as_view(), name='fb_login'),
     url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
-    url(r'^api/login/', include('rest_social_auth.urls_token')),
 
     url(r'^akun/konfirmasi-reset-password/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})$',
         TemplateView.as_view(template_name='base.html'), name='password_reset_confirm'),
