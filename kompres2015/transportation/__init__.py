@@ -1,1 +1,1 @@
-__author__ = 'PC-1'
+default_app_config = 'kompres2015.transportation.apps.TransportationConfig'

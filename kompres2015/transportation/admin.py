@@ -1,11 +1,19 @@
 from django.contrib import admin
 
-from django_extensions.admin import ForeignKeyAutocompleteAdmin
+from jet.filters import RelatedFieldAjaxListFilter
 
 from kompres2015.transportation.models import Transportation
 
 
 class TransportationAdmin(admin.ModelAdmin):
-    pass
+    readonly_fields = ('admin_image',)
+
+    list_display = ['name', 'link_it', 'get_districts']
+
+    list_filter = (
+        ('districts', RelatedFieldAjaxListFilter),
+    )
+
+    search_fields = ['name']
 
 admin.site.register(Transportation, TransportationAdmin)

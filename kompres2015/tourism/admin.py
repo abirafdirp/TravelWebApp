@@ -18,11 +18,6 @@ class ReportImagesInline(admin.StackedInline):
 
     readonly_fields = ('admin_image',)
 
-    def admin_image(self, obj):
-        return '<img src="%s" style="max-width: 400px; width: 100%%;"/>' % obj.image.url
-    admin_image.allow_tags = True
-    admin_image.short_description = 'Preview'
-
 
 class TravelDestinationContentInline(admin.StackedInline):
     model = TravelDestinationContent
@@ -37,6 +32,8 @@ class TravelDestinationImageInline(admin.StackedInline):
     extra = 20
     verbose_name_plural = 'Foto-foto Lokasi Wisata'
 
+    readonly_fields = ('admin_image',)
+
 
 class ReportAdmin(admin.ModelAdmin):
     inlines = [ReportImagesInline]
@@ -50,8 +47,6 @@ class ReportAdmin(admin.ModelAdmin):
         'created_date',
         'approved',
     )
-
-
 
     def get_image_count(self, obj):
         return obj.images.count()
@@ -82,6 +77,8 @@ class TravelDestinationAdmin(admin.ModelAdmin):
         TravelDestinationContentInline,
         TravelDestinationImageInline,
     ]
+
+    search_fields = ['name']
 
     list_display = ['name', 'type', 'district', 'get_province']
 
