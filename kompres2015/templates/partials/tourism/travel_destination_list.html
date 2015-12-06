@@ -88,15 +88,18 @@
 							</md-not-found>
 						</md-autocomplete>
 					</div>
-					<!--<md-content ng-show="!search_opened" id="dest-search-box">-->
-					<!--{$ user $}-->
-					<!--</md-content>-->
+
+					<div ng-if="allow_distance_toggle" class="animated fadeIn" id="toggle-distance">
+						<md-checkbox ng-model="distance_toggle" aria-label="Checkbox 1" ng-disabled="true">
+							urutkan berdasarkan lokasi terdekat
+						</md-checkbox>
+					</div>
 				</div>
 
 				<div layout="row" layout-wrap flex="80" flex-sm="100" flex-md="100">
 					<div ng-cloak dir-paginate="travel_destination in travel_destinations.results | filter: TravelDestinationSearch.search | filter: TravelDestinationSearch.district_search
 					| filter: TravelDestinationSearch.category_search | filter: TravelDestinationSearch.province_search | filter: TravelDestinationSearch.region_search | filter: search
-					| orderBy: 'distance' | itemsPerPage: 9"
+					| itemsPerPage: 9"
 							 flex="33" flex-sm="100" flex-md="50">
 						<div ng-controller="TravelDestinationRepeatCtrl">
 							<md-card id="posts">
