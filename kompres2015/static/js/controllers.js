@@ -239,8 +239,8 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
 ]);
 
 kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route', '$routeParams', 'TravelDestinations', '$resource', '$interval', '$mdDialog',
-  'TravelDestinationSearch', '$location', 'Transportations',
-  function($scope, $route, $routeParams, TravelDestinations, $resource, $interval, $mdDialog, TravelDestinationSearch, $location, Transportations) {
+  'TravelDestinationSearch', '$location', 'Transportations', '$rootScope',
+  function($scope, $route, $routeParams, TravelDestinations, $resource, $interval, $mdDialog, TravelDestinationSearch, $location, Transportations, $rootScope) {
     $scope.$route = $route;
     $scope.params = $routeParams;
     $scope.travel_destination_name = $scope.params.travel_destination_name.replace(/-/g,' ');
@@ -251,6 +251,7 @@ kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route'
 
     $scope.travel_destination = TravelDestinations.detail.query({travel_destination_name:$scope.travel_destination_name});
     $scope.travel_destination.$promise.then(function() {
+      $rootScope.title = $scope.travel_destination.results[0].name + ' - Discover Indonesia';
       var url = $scope.travel_destination.results[0].district+'?format=json';
       $scope.district = $resource(url).get(function(){
         $scope.transportations = Transportations.in_district.query({district:$scope.district.name});
@@ -348,14 +349,17 @@ kompresControllers.controller('ArticleListCtrl', ['$scope', '$route', '$routePar
   }
 ]);
 
-kompresControllers.controller('ArticleDetailCtrl', ['$scope', '$route', '$routeParams', '$resource', 'Articles',
-  function($scope, $route, $routeParams, $resource, Articles) {
+kompresControllers.controller('ArticleDetailCtrl', ['$scope', '$route', '$routeParams', '$resource', 'Articles', '$rootScope',
+  function($scope, $route, $routeParams, $resource, Articles, $rootScope) {
     $scope.$route = $route;
     $scope.params = $routeParams;
     $scope.show_loading = true;
     $scope.article_name = $scope.params.article_name.replace(/-/g,' ');
+
     $scope.article = Articles.detail.query({article_name:$scope.article_name});
     $scope.article.$promise.then(function() {
+      console.log($scope.article);
+      $rootScope.title = $scope.article.results[0].title + ' - Discover Indonesia';
       $scope.main_image = $resource($scope.article.results[0].main_image+'?format=json').get(function() {
         $scope.show_loading = false;
       });
@@ -488,15 +492,12 @@ kompresControllers.controller('ReportCtrl', ['$scope', '$mdDialog',
 
 kompresControllers.controller('ReportListCtrl', ['$scope', 'Reports', 'djangoAuth', 'Users', '$resource',
   function($scope, Reports, djangoAuth, Users, $resource) {
-    djangoAuth.profile().then(function(data){
-      $scope.user = Users.detail.query({'username': data.username});
-      $scope.user.$promise.then(function(){
-        $scope.user = $scope.user.results[0];
-        $scope.reports_resolved = [];
-        angular.forEach($scope.user.reports, function(report){
-          $resource(report + '?format=json').get(function(data){
-            $scope.reports_resolved.push(data);
-          });
+    $scope.user = djangoAuth.profile().then(function(data){
+      $scope.user = data;
+      $scope.reports_resolved = [];
+      angular.forEach($scope.user.reports, function(report){
+        $resource(report + '?format=json').get(function(data){
+          $scope.reports_resolved.push(data);
         });
       });
     });
@@ -527,31 +528,14 @@ kompresControllers.controller('VisitsCtrl', ['$scope', 'Visits',
 
 kompresControllers.controller('HomeCtrl', ['$scope', 'Visits', 'TravelDestinations', 'Articles', 'Page', '$resource', 'ColorRandomizer',
   function($scope, Visits, TravelDestinations, Articles, Page, $resource, ColorRandomizer) {
-    $scope.travel_destination_counter = 0;
     $scope.homelink_counter = 0;
-    $scope.travel_destination_resolved = false;
-    $scope.homelinks_resolved = false;
+    $scope.resolved = false;
     $scope.icon = 'keyboard_arrow_right';
 
     Page.query(function(data){
       $scope.page = data.results[0];
       $scope.page.featured_travel_destinations = [];
       $scope.page.home_links = [];
-      angular.forEach($scope.page.featureds, function(travel_destination){
-        $resource(travel_destination).get(function(data){
-          $resource(data.travel_destination).get(function(data){
-            data.color = ColorRandomizer.getColor();
-            $scope.page.featured_travel_destinations.push(data);
-            $scope.travel_destination_counter += 1;
-            if ($scope.travel_destination_counter == $scope.page.featureds.length){
-              $scope.travel_destination_resolved = true;
-              if ($scope.homelinks_resolved){
-                $scope.resolved = true;
-              }
-            }
-          });
-        });
-      });
 
       angular.forEach($scope.page.homelinks, function(home_link){
         $resource(home_link).get(function(data){
@@ -561,9 +545,7 @@ kompresControllers.controller('HomeCtrl', ['$scope', 'Visits', 'TravelDestinatio
           $scope.homelink_counter += 1;
           if ($scope.homelink_counter == $scope.page.homelinks.length){
             $scope.homelinks_resolved = true;
-            if ($scope.travel_destination_resolved){
-              $scope.resolved = true;
-            }
+            $scope.resolved = true;
           }
         });
       });
@@ -605,9 +587,10 @@ kompresControllers.controller('ReportImagesCtrl', ['$scope', 'ReportImages',
   }
 ]);
 
-kompresApp.controller('ModelViewerCtrl', ['$scope', 'TravelDestinations', '$routeParams',
-  function ($scope, TravelDestinations, $routeParams) {
+kompresApp.controller('ModelViewerCtrl', ['$scope', 'TravelDestinations', '$routeParams', '$rootScope',
+  function ($scope, TravelDestinations, $routeParams, $rootScope) {
     $scope.params = $routeParams;
+    $rootScope.title = '3D - ' + $scope.params.travel_destination_name;
     $scope.travel_destination_name = $scope.params.travel_destination_name.replace(/-/g,'%20');
     $scope.assimpModelUrl = 'partials/models/' + $scope.travel_destination_name + '/';
   }]);

@@ -18,21 +18,50 @@ class TravelDestination(TimeStampedModel):
         ('Lokasi Historis', 'Lokasi Historis'),
     )
 
-    name = models.CharField(max_length=30, unique=True, verbose_name='Nama')
-    type = models.CharField(choices=TYPE_CHOICES, max_length=30, verbose_name='Kategori')
-    website = models.URLField(help_text="opsional", blank=True, null=True)
+    name = models.CharField(
+        max_length=30,
+        unique=True,
+        verbose_name='Nama'
+    )
+    type = models.CharField(
+        choices=TYPE_CHOICES,
+        max_length=30,
+        verbose_name='Kategori'
+    )
+    website = models.URLField(
+        help_text="opsional",
+        blank=True,
+        null=True
+    )
     latitude = models.FloatField(blank=True, null=True)
     longitude = models.FloatField(blank=True, null=True)
-    district = models.ForeignKey(District, verbose_name='Kabupaten',
-                                 related_name='travel_destinations',
-                                 blank=True, null=True)
-    thumbnail = models.ForeignKey('image.TravelDestinationImage', blank=True, null=True)
-    full_description = RichTextField(verbose_name='Deskripsi lengkap',
-                                     blank=True, null=True)
-    short_description = models.TextField(verbose_name='Deskripsi Singkat',
-                               blank=True, null=True)
-
-    model_3d = models.FileField(upload_to='models', blank=True, null=True)
+    district = models.ForeignKey(
+        District,
+        verbose_name='Kabupaten',
+        related_name='travel_destinations',
+        blank=True,
+        null=True
+    )
+    thumbnail = models.ForeignKey(
+        'image.TravelDestinationImage',
+        blank=True,
+        null=True
+    )
+    full_description = RichTextField(
+        verbose_name='Deskripsi lengkap',
+        blank=True,
+        null=True
+    )
+    short_description = models.TextField(
+        verbose_name='Deskripsi Singkat',
+        blank=True,
+        null=True
+    )
+    model_3d = models.FileField(
+        upload_to='models',
+        blank=True,
+        null=True
+    )
 
     class Meta:
         verbose_name = 'Lokasi Wisata'
@@ -43,9 +72,15 @@ class TravelDestination(TimeStampedModel):
 
 
 class TravelDestinationContent(TimeStampedModel):
-    name = models.CharField(max_length=20, verbose_name='Judul')
+    name = models.CharField(
+        max_length=20,
+        verbose_name='Judul'
+    )
     content = RichTextField(verbose_name='Konten')
-    travel_destination = models.ForeignKey(TravelDestination, related_name='contents')
+    travel_destination = models.ForeignKey(
+        TravelDestination,
+        related_name='contents'
+    )
 
     class Meta:
         verbose_name = 'Konten Lokasi Wisata'
@@ -56,7 +91,10 @@ class TravelDestinationContent(TimeStampedModel):
 
 
 class Visit(TimeStampedModel):
-    travel_destination = models.ForeignKey(TravelDestination, related_name='visits')
+    travel_destination = models.ForeignKey(
+        TravelDestination,
+        related_name='visits'
+    )
     user = models.ForeignKey(User)
 
     class Meta:
@@ -75,12 +113,25 @@ class Report(TimeStampedModel):
         ('kenyamanan', 'kenyamanan'),
         ('lainnya', 'lainnya'),
     )
-    category = models.CharField(verbose_name="Kategori", max_length=30,
-                                choices=CATEGORY_CHOICES)
+    category = models.CharField(
+        verbose_name="Kategori",
+        max_length=30,
+        choices=CATEGORY_CHOICES
+    )
     report = models.TextField(verbose_name='Isi komplain')
-    user = models.ForeignKey(User, related_name='reports', verbose_name='User')
-    travel_destination = models.ForeignKey(TravelDestination, verbose_name='Lokasi Wisata')
-    approved = models.BooleanField(default=False, verbose_name='Diverifikasi')
+    user = models.ForeignKey(
+        User,
+        related_name='reports',
+        verbose_name='User'
+    )
+    travel_destination = models.ForeignKey(
+        TravelDestination,
+        verbose_name='Lokasi Wisata'
+    )
+    approved = models.BooleanField(
+        default=False,
+        verbose_name='Diverifikasi'
+    )
 
     class Meta:
         verbose_name = 'Komplain pengunjung'

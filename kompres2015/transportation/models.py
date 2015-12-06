@@ -5,12 +5,22 @@ from kompres2015.region.models import District
 
 
 class Transportation(TimeStampedModel):
-    name = models.CharField(max_length=40, verbose_name='nama')
-    districts = models.ManyToManyField(District, related_name='transportations', verbose_name='Kabupaten')
+    name = models.CharField(
+        max_length=40,
+        verbose_name='nama'
+    )
+    districts = models.ManyToManyField(
+        District,
+        related_name='transportations',
+        verbose_name='Kabupaten'
+    )
     description = models.TextField(verbose_name='Deskripsi')
-    website = models.URLField(blank=True, null=True)
+    website = models.URLField(
+        blank=True,
+        null=True
+    )
     # TODO unset null
-    image = models.ImageField(blank=True, null=True)
+    image = models.ImageField(null=True, blank=True)
 
     def admin_image(self):
         return '<img src="%s" style="max-width: 400px; width: 100%%;"/>' % self.image.url

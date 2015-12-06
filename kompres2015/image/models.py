@@ -32,8 +32,16 @@ class Image(TimeStampedModel):
 
 
 class ReportImage(Image):
-    report = models.ForeignKey(Report, related_name='images', verbose_name='Komplain')
-    user = models.ForeignKey(User, related_name='report_images', verbose_name='User')
+    report = models.ForeignKey(
+        Report,
+        related_name='images',
+        verbose_name='Komplain'
+    )
+    user = models.ForeignKey(
+        User,
+        related_name='report_images',
+        verbose_name='User'
+    )
     image = models.ImageField(upload_to='reports')
 
     def admin_image(self):
@@ -52,8 +60,13 @@ class ReportImage(Image):
 
 
 class TravelDestinationImage(Image):
-    travel_destination = models.ForeignKey(TravelDestination, related_name='images',
-                                           blank=True, null=True, verbose_name='Lokasi Wisata')
+    travel_destination = models.ForeignKey(
+        TravelDestination,
+        related_name='images',
+        blank=True,
+        null=True,
+        verbose_name='Lokasi Wisata'
+    )
     travel_destination_content = models.ForeignKey(TravelDestinationContent, related_name='images',
                                                    blank=True, null=True)
     image = models.ImageField(upload_to='travel_destinations')

@@ -17,11 +17,19 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 class UserRestSerializer(UserDetailsSerializer):
 
-    district = serializers.HyperlinkedRelatedField(source="userprofile.district", view_name='district-detail',
-                                                   queryset=District.objects.all())
+    district = serializers.HyperlinkedRelatedField(
+        source="userprofile.district",
+        view_name='district-detail',
+        queryset=District.objects.all()
+    )
+    reports = serializers.HyperlinkedRelatedField(
+        view_name='report-detail',
+        many=True,
+        read_only=True
+    )
 
     class Meta(UserDetailsSerializer.Meta):
-        fields = UserDetailsSerializer.Meta.fields + ('district', 'shadow_banned',)
+        fields = UserDetailsSerializer.Meta.fields + ('district', 'shadow_banned', 'reports')
 
     def update(self, instance, validated_data):
         profile_data = validated_data.pop('userprofile', {})

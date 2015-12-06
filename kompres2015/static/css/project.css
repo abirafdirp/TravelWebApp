@@ -151,7 +151,6 @@ md-button {
 
 .home-content {
     margin-top: 300px;
-    margin-bottom: 30px;
 }
 
 .video-shadow:hover{
@@ -365,6 +364,10 @@ a {
     -webkit-box-shadow: 0px 2px 0px -1px rgba(255,255,255,1);
     -moz-box-shadow: 0px 2px 0px -1px rgba(255,255,255,1);
     box-shadow: 0px 2px 0px -1px rgba(255,255,255,1);
+}
+
+footer {
+    margin-top: 80px;
 }
 .search-input:focus {
     outline:none;

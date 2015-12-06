@@ -5,114 +5,116 @@ angular.module('angularDjangoRegistrationAuthApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-])
-    .config(['$routeProvider', '$locationProvider',
-      function ($routeProvider, $LocationProvider) {
-        $routeProvider
-            .when('/akun', {
-              templateUrl: '/partials/account/',
-              controller: 'MainCtrl',
-              resolve: {
-                authenticated: ['djangoAuth', function(djangoAuth){
-                  return djangoAuth.authenticationStatus();
-                }],
-              }
-            })
-            .when('/akun/daftar', {
-              templateUrl: '/partials/register/',
-              resolve: {
-                authenticated: ['djangoAuth', function(djangoAuth){
-                  return djangoAuth.authenticationStatus();
-                }],
-              }
-            })
-            .when('/akun/reset-password', {
-              templateUrl: '/partials/passwordreset/',
-              resolve: {
-                authenticated: ['djangoAuth', function(djangoAuth){
-                  return djangoAuth.authenticationStatus();
-                }],
-              }
-            })
-            .when('/akun/konfirmasi-reset-password/:firstToken/:passwordResetToken/', {
-              templateUrl: '/partials/passwordresetconfirm/',
-              resolve: {
-                authenticated: ['djangoAuth', function(djangoAuth){
-                  return djangoAuth.authenticationStatus();
-                }],
-              }
-            })
-            .when('/akun/masuk', {
-              templateUrl: '/partials/login/',
-              resolve: {
-                authenticated: ['djangoAuth', function(djangoAuth){
-                  return djangoAuth.authenticationStatus();
-                }],
-              }
-            })
-            .when('/akun/konfirmasi-email/:emailVerificationToken', {
-              templateUrl: '/partials/verifyemail/',
-              resolve: {
-                authenticated: ['djangoAuth', function(djangoAuth){
-                  return djangoAuth.authenticationStatus();
-                }],
-              }
-            })
-            .when('/rest-auth/registration/account-confirm-email/:emailVerificationToken', {
-              templateUrl: '/partials/verifyemail/',
-              resolve: {
-                authenticated: ['djangoAuth', function(djangoAuth){
-                  return djangoAuth.authenticationStatus();
-                }],
-              }
-            })
-            .when('/akun/keluar', {
-              templateUrl: '/partials/logout/',
-              resolve: {
-                authenticated: ['djangoAuth', function(djangoAuth){
-                  return djangoAuth.authenticationStatus();
-                }],
-              }
-            })
-            .when('/akun/profil', {
-              templateUrl: '/partials/userprofile/',
-              resolve: {
-                authenticated: ['djangoAuth', function(djangoAuth){
-                  return djangoAuth.authenticationStatus();
-                }],
-              }
-            })
-            .when('/akun/ubah-password', {
-              templateUrl: '/partials/changepassword/',
-              resolve: {
-                authenticated: ['djangoAuth', function(djangoAuth){
-                  return djangoAuth.authenticationStatus();
-                }],
-              }
-            })
-            .when('/tidak-diizinkan', {
-              templateUrl: '/partials/restricted',
-              controller: 'RestrictedCtrl',
-              resolve: {
-                authenticated: ['djangoAuth', function(djangoAuth){
-                  return djangoAuth.authenticationStatus();
-                }],
-              }
-            })
-            .when('/harus-login/', {
-              templateUrl: '/partials/authrequired/',
-              controller: 'AuthrequiredCtrl',
-              resolve: {
-                authenticated: ['djangoAuth', function(djangoAuth){
-                  return djangoAuth.authenticationStatus(true);
-                }],
-              }
-            })
-            .otherwise({
-              redirectTo: '/'
-            });
-        $LocationProvider.html5Mode(true);
-      }]);
+]).config(['$routeProvider', '$locationProvider',
+  function ($routeProvider, $LocationProvider) {
+    $routeProvider
+        .when('/akun', {
+          templateUrl: '/partials/account/',
+          controller: 'MainCtrl',
+          resolve: {
+            authenticated: ['djangoAuth', function(djangoAuth){
+              return djangoAuth.authenticationStatus();
+            }],
+          }
+        })
+        .when('/akun/daftar', {
+          templateUrl: '/partials/register/',
+          resolve: {
+            authenticated: ['djangoAuth', function(djangoAuth){
+              return djangoAuth.authenticationStatus();
+            }],
+          }
+        })
+        .when('/akun/reset-password', {
+          templateUrl: '/partials/passwordreset/',
+          resolve: {
+            authenticated: ['djangoAuth', function(djangoAuth){
+              return djangoAuth.authenticationStatus();
+            }],
+          }
+        })
+        .when('/akun/konfirmasi-reset-password/:firstToken/:passwordResetToken/', {
+          templateUrl: '/partials/passwordresetconfirm/',
+          resolve: {
+            authenticated: ['djangoAuth', function(djangoAuth){
+              return djangoAuth.authenticationStatus();
+            }],
+          }
+        })
+        .when('/akun/masuk', {
+          templateUrl: '/partials/login/',
+          resolve: {
+            authenticated: ['djangoAuth', function(djangoAuth){
+              return djangoAuth.authenticationStatus();
+            }],
+          }
+        })
+        .when('/akun/konfirmasi-email/:emailVerificationToken', {
+          templateUrl: '/partials/verifyemail/',
+          resolve: {
+            authenticated: ['djangoAuth', function(djangoAuth){
+              return djangoAuth.authenticationStatus();
+            }],
+          }
+        })
+        .when('/rest-auth/registration/account-confirm-email/:emailVerificationToken', {
+          templateUrl: '/partials/verifyemail/',
+          resolve: {
+            authenticated: ['djangoAuth', function(djangoAuth){
+              return djangoAuth.authenticationStatus();
+            }],
+          }
+        })
+        .when('/akun/keluar', {
+          templateUrl: '/partials/logout/',
+          resolve: {
+            authenticated: ['djangoAuth', function(djangoAuth){
+              return djangoAuth.authenticationStatus();
+            }],
+          }
+        })
+        .when('/akun/profil', {
+          templateUrl: '/partials/userprofile/',
+          resolve: {
+            authenticated: ['djangoAuth', function(djangoAuth){
+              return djangoAuth.authenticationStatus();
+            }],
+          }
+        })
+        .when('/akun/ubah-password', {
+          templateUrl: '/partials/changepassword/',
+          resolve: {
+            authenticated: ['djangoAuth', function(djangoAuth){
+              return djangoAuth.authenticationStatus();
+            }],
+          }
+        })
+        .when('/tidak-diizinkan', {
+          templateUrl: '/partials/restricted',
+          controller: 'RestrictedCtrl',
+          resolve: {
+            authenticated: ['djangoAuth', function(djangoAuth){
+              return djangoAuth.authenticationStatus();
+            }],
+          }
+        })
+        .when('/harus-login/', {
+          templateUrl: '/partials/authrequired/',
+          controller: 'AuthrequiredCtrl',
+          resolve: {
+            authenticated: ['djangoAuth', function(djangoAuth){
+              return djangoAuth.authenticationStatus(true);
+            }],
+          }
+        })
+        .otherwise({
+          redirectTo: '/'
+        });
+    $LocationProvider.html5Mode(true);
+  }])
+    .run(function(djangoAuth){
+      djangoAuth.initialize('rest-auth', false);
+    });
 
 var kompresApp = angular.module('kompres', [
   'ngRoute',
@@ -136,11 +138,6 @@ var kompresApp = angular.module('kompres', [
   'djds4rce.angular-socialshare',
 ]);
 
-// TODO move this to template
-kompresApp.run(function($FB){
-  $FB.init('538377002985975');
-});
-
 // differentiate angular and django template language
 kompresApp.config(function($interpolateProvider) {
   $interpolateProvider.startSymbol('{$');
@@ -152,38 +149,34 @@ kompresApp.config(['$routeProvider', '$locationProvider',
     $routeProvider.
         when('/', {
           templateUrl: '/partials/home/',
-          activetab: 'home',
+          title: 'Discover Indonesia - Portal lengkap untuk semua kebutuhan pariwisata di Indonesia',
           controller: 'HomeCtrl'
         }).
         when('/artikel', {
           templateUrl: '/partials/article-list/',
-          activetab: 'article'
+          title: 'Discover Indonesia - Artikel'
         }).
         when('/artikel/:article_name', {
           templateUrl: '/partials/article-detail/',
-          activetab: 'article',
+          title: '',
           article_name: function (params) {return params.article_name}
         }).
         when('/lokasi-wisata', {
           templateUrl: '/partials/travel-destination-list/',
-          activetab: 'travel-destination'
+          title: 'Discover Indonesia - Lokasi wisata'
         }).
         when('/lokasi-wisata/:travel_destination_name', {
           templateUrl: '/partials/travel-destination-detail/',
-          activetab: 'travel-destination',
+          title: '',
           travel_destination_name: function (params) {return params.travel_destination_name}
-        }).
-        when('/komplain', {
-          templateUrl: '/partials/report/',
-          activetab: 'message-us'
         }).
         when('/metoda-transportasi', {
           templateUrl: '/partials/transportation-list/',
-          activetab: 'transportation'
+          title: 'Discover Indonesia - Metoda Transportasi'
         }).
         when('/peta', {
           templateUrl: '/partials/map/',
-          activetab: 'map',
+          title: 'Discover Indonesia - Peta',
           controller: 'MapCtrl',
           resolve: {
             "travel_destinations": function(TravelDestinations, $resource, Marker){
@@ -198,7 +191,7 @@ kompresApp.config(['$routeProvider', '$locationProvider',
         }).
         when('/lokasi-wisata/:travel_destination_name/3d', {
           templateUrl: '/partials/modelviewer/',
-          activetab: 'travel-destination',
+          title:  '',
           travel_destination_name: function (params) {return params.travel_destination_name}
         }).
         otherwise({
@@ -207,14 +200,6 @@ kompresApp.config(['$routeProvider', '$locationProvider',
     $locationProvider.html5Mode(true);
   }
 ]);
-
-// TODO env vars this (move to template), change the settings in the Facebook Developer Apps
-kompresApp.config(function($authProvider) {
-  $authProvider.facebook({
-    url: "/rest-auth/facebook/",
-    clientId: '538377002985975',
-  });
-});
 
 kompresApp.config(['$httpProvider',
   function($httpProvider) {
@@ -226,7 +211,7 @@ kompresApp.config(function($mdThemingProvider) {
   $mdThemingProvider.theme('default')
       .primaryPalette('teal')
       .accentPalette('red')
-      .warnPalette('pink');
+      .warnPalette('indigo');
 });
 
 kompresApp.config(function($mdThemingProvider) {
@@ -304,10 +289,8 @@ kompresApp.run(function($rootScope, ArticleSearch, TravelDestinationSearch, Mark
 
 kompresApp.filter('trustAsHtml', function($sce) { return $sce.trustAsHtml; });
 
-kompresApp.config(function(uiGmapGoogleMapApiProvider) {
-  uiGmapGoogleMapApiProvider.configure({
-    key: 'AIzaSyC72PSYYQFRLF_8cXUVu-Mu4xXFvwQoKZw',
-    v: '3.20', //defaults to latest 3.X anyhow
-    libraries: 'weather,geometry,visualization'
+kompresApp.run(['$rootScope', function($rootScope) {
+  $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
+    $rootScope.title = current.$$route.title;
   });
-});
+}]);

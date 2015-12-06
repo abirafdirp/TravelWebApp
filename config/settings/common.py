@@ -292,3 +292,8 @@ REST_FRAMEWORK = {
 REST_AUTH_SERIALIZERS = {
     'USER_DETAILS_SERIALIZER': 'kompres2015.users.serializers.UserRestSerializer'
 }
+
+
+# secret keys
+FB_CLIENTID = '538377002985975'
+GMAPS_TOKEN = 'AIzaSyC72PSYYQFRLF_8cXUVu-Mu4xXFvwQoKZw'

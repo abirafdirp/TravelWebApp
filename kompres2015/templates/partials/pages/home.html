@@ -1,4 +1,8 @@
-<div layout="column" layout-fill>
+<div ng-show="!resolved" class="loading">
+  <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>
+
+<div layout="column" layout-fill ng-if="resolved" ng-cloak class="animated fadeIn">
   <div flex class="video-container">
     <video-bg ng-if="page" video-id="page.video" start="page.video_start" flex>
     </video-bg>

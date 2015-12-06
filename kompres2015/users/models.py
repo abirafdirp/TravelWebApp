@@ -34,7 +34,7 @@ class UserProfile(models.Model):
     district = models.ForeignKey('region.District', blank=True, null=True)
 
     def __str__(self):
-        return self.user.name
+        return self.user.username
 
 
 class Email(TimeStampedModel):

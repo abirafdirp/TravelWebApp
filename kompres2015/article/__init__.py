@@ -1,0 +1,1 @@
+default_app_config = 'kompres2015.article.apps.ArticleConfig'

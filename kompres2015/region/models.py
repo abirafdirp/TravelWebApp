@@ -3,7 +3,7 @@ from kompres2015.util.models import TimeStampedModel
 
 
 class Location(TimeStampedModel):
-    latitude = models.FloatField(blank=True,null=True)
+    latitude = models.FloatField(blank=True, null=True)
     longitude = models.FloatField(blank=True, null=True)
 
 
@@ -32,7 +32,11 @@ class Region(Location):
 
 class Province(Location):
     name = models.CharField(max_length=40, unique=True)
-    region = models.ForeignKey(Region, related_name='provinces', verbose_name='Wilayah')
+    region = models.ForeignKey(
+        Region,
+        related_name='provinces',
+        verbose_name='Wilayah'
+    )
 
     def get_districts(self):
         return ", ".join([p.name for p in self.districts.all()])
@@ -52,7 +56,11 @@ class Province(Location):
 
 class District(Location):
     name = models.CharField(max_length=40, unique=True)
-    province = models.ForeignKey(Province, related_name='districts', verbose_name='Provinsi')
+    province = models.ForeignKey(
+        Province,
+        related_name='districts',
+        verbose_name='Provinsi'
+    )
 
     def get_region(self):
         return self.province.region.name

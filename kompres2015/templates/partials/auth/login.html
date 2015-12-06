@@ -35,7 +35,13 @@
 					<md-progress-circular md-mode="indeterminate"></md-progress-circular>
 				</span>
 				<md-button ng-show="show_loading == false || errors" type="submit" class="md-raised md-primary">masuk</md-button>
-				<md-button class="md-raised md-accent" ng-click="setTab('Facebook')">Login Dengan Facebook</md-button>
+
+				<div ng-controller="FacebookTokenCtrl">
+					<md-button class="md-raised md-warn" ng-click="authenticate()">
+						<ng-md-icon icon="facebook" size="22" aria-label="user"></ng-md-icon>Masuk Dengan Facebook
+					</md-button>
+				</div>
+
 				<md-button class="md-raised md-accent" ng-click="setTab('Lupa Password')">lupa password</md-button>
 			</div>
 			<div ng-if="authenticated">{$ closeDialogDelayed() $}</div>
@@ -70,11 +76,6 @@
 
 			</div>
 		</form>
-		<div ng-show="tab =='Facebook'" ng-controller="FacebookTokenCtrl">
-			<md-button ng-click="authenticate()">Login facebook (OAuth 2.0)</md-button>
-			<md-button ng-click="logout()">logout</md-button>
-			{$user$}
-		</div>
 	</md-dialog-content>
 
 </md-dialog>
