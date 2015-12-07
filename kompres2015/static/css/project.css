@@ -432,6 +432,14 @@ md-autocomplete[md-floating-label] md-input-container{
     margin-bottom: 5px;
 }
 
+.checkbox-dest{
+    padding-top: 13px;
+    padding-bottom: 13px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+}
+
 .category-search {
     border-right: 2px solid teal;
 }
@@ -584,6 +592,12 @@ md-autocomplete[md-floating-label] md-input-container{
     position: absolute;
     top: 63px;
     left: 0;
+}
+
+.sidenav-dest {
+    padding-left: 8px;
+    padding-top: 30px;
+    padding-bottom: 0;
 }
 
 .legend {
