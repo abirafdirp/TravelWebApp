@@ -1,5 +1,6 @@
 from rest_framework import viewsets
 from rest_framework import permissions
+from rest_framework import exceptions
 
 from kompres2015.image.models import ReportImage
 from kompres2015.image.models import Image
@@ -15,10 +16,17 @@ from kompres2015.util.views import CreateListRetrieveViewSet
 
 
 class ReportImageViewSet(CreateListRetrieveViewSet):
-    queryset = ReportImage.objects.all()
     filter_fields = ('tag', 'name')
     serializer_class = ReportImageSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get_queryset(self):
+        if self.request.user:
+            queryset = ReportImage.objects.filter(user=self.request.user)
+        else:
+            return exceptions.NotAuthenticated
+
+        return queryset
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)

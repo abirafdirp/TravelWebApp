@@ -125,9 +125,6 @@ report_list = ReportViewSet.as_view({
 report_detail = ReportViewSet.as_view({
     'get': 'retrieve',
 })
-user_list = UserViewSet.as_view({
-    'get': 'list',
-})
 user_detail = UserViewSet.as_view({
     'get': 'retrieve',
 })
@@ -208,7 +205,6 @@ urlpatterns += format_suffix_patterns([
     url(r'^api/visits/(?P<pk>[0-9]+)/$', visit_detail, name='visit-detail'),
     url(r'^api/reports/$', report_list, name='report-list'),
     url(r'^api/reports/(?P<pk>[0-9]+)/$', report_detail, name='report-detail'),
-    url(r'^api/users/$', user_list, name='user-list'),
     url(r'^api/users/(?P<pk>[0-9]+)/$', user_detail, name='user-detail'),
     url(r'^api/reportimages/$', report_image_list, name='report-image-list'),
     url(r'^api/reportimages/(?P<pk>[0-9]+)/$', report_image_detail, name='report-image-detail'),

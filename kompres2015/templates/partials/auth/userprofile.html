@@ -45,7 +45,7 @@
 								<span ng-show="show_loading && errors.length == 0 && !complete">
 									<md-progress-circular md-mode="indeterminate"></md-progress-circular>
 								</span>
-							<div ng-if="complete == true">
+							<div ng-if="complete == true" flex="100" layout="row" layout-align="center center">
 								<p class="md-body-1">Profil anda berhasil diperbaharui</p>
 							</div>
 							<md-button type="submit" ng-show="show_loading == false || errors" class="md-primary md-raised">Perbaharui profil</md-button>

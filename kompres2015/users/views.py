@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse
 from django.views.generic import DetailView, ListView, RedirectView, UpdateView
 
 from rest_framework import viewsets
+from rest_framework import permissions
 
 from .models import User
 from kompres2015.users.models import User
@@ -54,4 +55,5 @@ from kompres2015.users.serializers import UserSerializer
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = UserSerializer
     queryset = User.objects.all()
+    permission_classes = (permissions.IsAuthenticated,)
     filter_fields = ('username', 'name')

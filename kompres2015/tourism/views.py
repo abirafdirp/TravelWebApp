@@ -5,6 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from rest_framework import viewsets
 from rest_framework import permissions
+from rest_framework import exceptions
 
 from kompres2015.tourism.models import TravelDestination
 from kompres2015.tourism.models import Visit
@@ -43,26 +44,30 @@ class TravelDestinationViewSet(viewsets.ReadOnlyModelViewSet):
         return queryset
 
 
-class VisitViewSet(viewsets.ReadOnlyModelViewSet):
+class VisitViewSet(CreateListRetrieveViewSet):
     serializer_class = VisitSerializer
+    permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
-        queryset = Visit.objects.all()
-        username = self.request.query_params.get('username', None)
+        if self.request.user:
+            queryset = Visit.objects.filter(user=self.request.user)
+        else:
+            return exceptions.NotAuthenticated
 
-        if username is not None:
-            queryset = queryset.filter(user__username=username)
-            return queryset
         return queryset
 
 
 class ReportViewSet(CreateListRetrieveViewSet):
     serializer_class = ReportSerializer
     filter_fields = ('report', )
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
-        queryset = Report.objects.all()
+        if self.request.user:
+            queryset = Report.objects.filter(user=self.request.user)
+        else:
+            return exceptions.NotAuthenticated
+
         username = self.request.query_params.get('username', None)
 
         if username is not None:

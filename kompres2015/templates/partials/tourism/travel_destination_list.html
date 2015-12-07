@@ -37,7 +37,7 @@
 										md-item-text="category"
 										md-min-length="0"
 										placeholder="Kategori"
-										md-floating-label="kategori"
+										md-floating-label="Kategori"
 										class="animated fadeIn dest-search-row category-search">
 							<md-item-template>
 								<span class="animated fadeIn" md-highlight-text="TravelDestinationSearch.category_search" md-highlight-flags="^i">{$category$}</span>
@@ -50,8 +50,8 @@
 										md-items="district in $parent.districts.results | filter:TravelDestinationSearch.district_search | orderBy: 'name'"
 										md-item-text="district.name"
 										md-min-length="0"
-										placeholder="kabupaten"
-										md-floating-label="kabupaten"
+										placeholder="Kabupaten"
+										md-floating-label="Kabupaten"
 										class="animated fadeIn dest-search-row district-search">
 							<md-item-template>
 								<span class="animated fadeIn" md-highlight-text="TravelDestinationSearch.district_search" md-highlight-flags="^i">{$district.name$}</span>
@@ -64,8 +64,8 @@
 										md-items="province in $parent.provinces.results | filter:TravelDestinationSearch.province_search | orderBy: 'name'"
 										md-item-text="province.name"
 										md-min-length="0"
-										md-floating-label="provinsi"
-										placeholder="provinsi"
+										md-floating-label="Provinsi"
+										placeholder="Provinsi"
 										class="animated fadeIn dest-search-row province-search">
 							<md-item-template>
 								<span class="animated fadeIn" md-highlight-text="TravelDestinationSearch.province_search" md-highlight-flags="^i">{$province.name$}</span>
@@ -78,8 +78,8 @@
 										md-items="region in $parent.regions.results | filter:TravelDestinationSearch.region_search | orderBy: 'name'"
 										md-item-text="region.name"
 										md-min-length="0"
-										md-floating-label="wilayah"
-										placeholder="wilayah"
+										md-floating-label="Wilayah"
+										placeholder="Wilayah"
 										class="animated fadeIn dest-search-row region-search">
 							<md-item-template>
 								<span class="animated fadeIn" md-highlight-text="TravelDestinationSearch.region_search" md-highlight-flags="^i">{$region.name$}</span>
@@ -89,9 +89,23 @@
 						</md-autocomplete>
 					</div>
 
-					<div ng-if="allow_distance_toggle" class="animated fadeIn" id="toggle-distance">
-						<md-checkbox ng-model="distance_toggle" aria-label="Checkbox 1" ng-disabled="true">
-							urutkan berdasarkan lokasi terdekat
+					<div ng-if="show_sidenav" class="animated fadeIn art-search-box" id="toggle-distance" layout="column" layout-wrap>
+						<md-autocomplete
+										md-search-text="current_location"
+										md-items="district in $parent.districts.results | filter:current_location | orderBy: 'name'"
+										md-item-text="district.name"
+										md-min-length="0"
+										placeholder="Lokasi anda sekarang"
+										md-floating-label="Lokasi anda"
+										class="dest-search-row district-search">
+							<md-item-template>
+								<span class="animated fadeIn" md-highlight-text="current_location" md-highlight-flags="^i">{$district.name$}</span>
+							</md-item-template>
+							<md-not-found>
+							</md-not-found>
+						</md-autocomplete>
+						<md-checkbox ng-model="distance_toggle" aria-label="Checkbox 1" ng-click="toggleDistance(distance_toggle)">
+							Urutkan berdasarkan lokasi terdekat
 						</md-checkbox>
 					</div>
 				</div>

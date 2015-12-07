@@ -90,7 +90,9 @@ angular.module('angularDjangoRegistrationAuthApp')
             }).then(function(data){
                 if(!djangoAuth.use_session){
                     $http.defaults.headers.common.Authorization = 'Token ' + data.key;
-                    $cookies.put('token', data.key);
+                    var now = new Date();
+                    var exp = new Date(now.getFullYear()+1, now.getMonth(), now.getDate());
+                    $cookies.put('token', data.key, {expires: exp});
                 }
                 djangoAuth.authenticated = true;
                 $rootScope.$broadcast("djangoAuth.logged_in", data);
@@ -131,7 +133,7 @@ angular.module('angularDjangoRegistrationAuthApp')
             return this.request({
                 'method': "GET",
                 'url': "/user/"
-            }); 
+            });
         },
         'updateProfile': function(data){
             return this.request({
@@ -146,8 +148,8 @@ angular.module('angularDjangoRegistrationAuthApp')
             return this.request({
                 'method': "POST",
                 'url': "/registration/verify-email/",
-                'data': {'key': key} 
-            });            
+                'data': {'key': key}
+            });
         },
         'confirmReset': function(uid,token,password1,password2){
             return this.request({
