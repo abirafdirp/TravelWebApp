@@ -50,7 +50,7 @@ class VisitSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Visit
-        fields = ('id', 'created_date', 'travel_destination', 'user')
+        fields = ('id', 'created_date', 'travel_destination')
 
 
 class ReportSerializer(serializers.HyperlinkedModelSerializer):
@@ -61,8 +61,8 @@ class ReportSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Report
-        fields = ('id', 'category', 'report', 'travel_destination', 'user', 'images', 'approved', 'created_date')
-        read_only_fields = ('user',)
+        fields = ('id', 'category', 'report', 'travel_destination',
+                  'images', 'approved', 'created_date')
 
 
 class TravelDestinationContentSerializer(serializers.HyperlinkedModelSerializer):

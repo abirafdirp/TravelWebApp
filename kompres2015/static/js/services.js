@@ -332,7 +332,7 @@ kompresServices.factory('Articles', ['$resource',
 
 kompresServices.factory('Visits', ['$resource',
   function($resource){
-    return $resource('/api/visits/?format=json', {}, {
+    return $resource('/api/user/visits/?format=json', {}, {
       query: {method:'GET'}
     })
   }
@@ -340,30 +340,15 @@ kompresServices.factory('Visits', ['$resource',
 
 kompresServices.factory('Reports', ['$resource',
   function($resource){
-    return $resource('/api/reports/?format=json', {}, {
+    return $resource('/api/user/reports/?format=json', {}, {
       query: {method:'GET'}
     })
   }
 ]);
 
-kompresServices.factory('Users', ['$resource',
-  function($resource) {
-    return {
-      list : $resource('/api/users/?format=json', {}, {
-      query: {method: 'GET'}
-      }),
-      detail : $resource('/api/users/?username=:username', {
-        user:'@user'
-      }, {
-      query: {method: 'GET'}
-      })
-    }
-  }
-]);
-
 kompresServices.factory('ReportImages', ['$resource',
   function($resource){
-    return $resource('/api/reportimages/?format=json', {}, {
+    return $resource('/api/user/reportimages/?format=json', {}, {
       query: {method:'GET'}
     })
   }

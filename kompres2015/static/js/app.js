@@ -111,10 +111,7 @@ angular.module('angularDjangoRegistrationAuthApp', [
           redirectTo: '/'
         });
     $LocationProvider.html5Mode(true);
-  }])
-    .run(function(djangoAuth){
-      djangoAuth.initialize('rest-auth', false);
-    });
+  }]);
 
 var kompresApp = angular.module('kompres', [
   'ngRoute',
@@ -206,6 +203,12 @@ kompresApp.config(['$httpProvider',
     $httpProvider.defaults.xsrfCookieName = 'csrftoken';
     $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
   }]);
+
+kompresApp.run(['$http', '$cookies' ,function($http, $cookies) {
+  if($cookies.get('token')){
+    $http.defaults.headers.common.Authorization = 'Token ' + $cookies.get('token');
+  }
+}]);
 
 kompresApp.config(function($mdThemingProvider) {
   $mdThemingProvider.theme('default')
