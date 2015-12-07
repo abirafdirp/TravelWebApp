@@ -114,6 +114,7 @@ travel_destination_detail = TravelDestinationViewSet.as_view({
 })
 visit_list = VisitViewSet.as_view({
     'get': 'list',
+    'post': 'create',
 })
 visit_detail = VisitViewSet.as_view({
     'get': 'retrieve',
@@ -254,6 +255,8 @@ urlpatterns += [
         name="models-partial"),
     url(r'^partials/transportation-list/$', TemplateView.as_view(template_name='partials/transportation/transportation_list.html'),
         name="transportation-list-partial"),
+    url(r'^partials/visit/$', TemplateView.as_view(template_name='partials/tourism/visit.html'),
+        name="visit-partial"),
 ]
 
 # angular-django-registration-auth partial views

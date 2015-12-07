@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.validators import UniqueTogetherValidator
 
 from kompres2015.tourism.models import TravelDestination
 from kompres2015.tourism.models import TravelDestinationContent
@@ -46,11 +47,18 @@ class TravelDestinationSerializer(serializers.HyperlinkedModelSerializer):
 
 class VisitSerializer(serializers.HyperlinkedModelSerializer):
     travel_destination = serializers.HyperlinkedRelatedField(view_name='travel-destination-detail',
-                                                             read_only=True)
+                                                             queryset=TravelDestination.objects.all())
 
     class Meta:
         model = Visit
-        fields = ('id', 'created_date', 'travel_destination')
+        fields = ('id', 'travel_destination', 'date')
+
+        validators = [
+            UniqueTogetherValidator(
+                queryset=Visit.objects.all(),
+                fields=('date', 'travel_destination')
+            )
+        ]
 
 
 class ReportSerializer(serializers.HyperlinkedModelSerializer):

@@ -1,0 +1,36 @@
+<md-dialog aria-label="komplain">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>Kunjungan</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="closeDialog()">
+        <ng-md-icon icon="close" aria-label="close dialog"></ng-md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content id="report_view">
+    <div class="md-dialog-content" layout="column" layout-align="center center">
+      <form role="form" name="visitForm" ng-submit="save()" novalidate>
+        <div layout="column" style="min-width: 400px" layout-align="center center" layout-margin>
+          <h4>Kapan anda mengunjungi {$travel_destination.name$} ?</h4>
+          <md-datepicker ng-model="date" md-placeholder="tanggal" md-max-date="max_date" flex></md-datepicker>
+        </div>
+        <div flex></div>
+        <div layout="column" layout-align="center center">
+          <div ng-if="complete == true">
+            <p class="md-body-1">Terima kasih</p>
+          </div>
+				<span ng-show="show_loading && !complete && errors.length == 0">
+					<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+				</span>
+          <div flex></div>
+          <div layout="column" layout-align="center center">
+            <md-button class="md-raised md-primary" ng-click="save()">Ok</md-button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </md-dialog-content>
+
+</md-dialog>
+

@@ -56,6 +56,9 @@ class VisitViewSet(CreateListRetrieveViewSet):
 
         return queryset
 
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
 
 class ReportViewSet(CreateListRetrieveViewSet):
     serializer_class = ReportSerializer

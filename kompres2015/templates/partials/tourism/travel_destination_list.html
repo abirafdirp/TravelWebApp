@@ -107,6 +107,11 @@
 						<md-checkbox ng-model="distance_toggle" aria-label="Checkbox 1" ng-click="toggleDistance(distance_toggle)">
 							Urutkan berdasarkan lokasi terdekat
 						</md-checkbox>
+						<div>
+							<md-checkbox ng-model="distance_visit" aria-label="Checkbox 2" ng-click="toggleDistance(distance_toggle)">
+								sembunyikan lokasi wisata yang sudah dikunjugi
+							</md-checkbox>
+						</div>
 					</div>
 				</div>
 
@@ -120,8 +125,13 @@
 								<a ng-href="/lokasi-wisata/{$ slugify(travel_destination.name) $}">
 									<span class="md-title article-list-title">{$ travel_destination.name $}</span>
 									<div class="article-image"><img ng-show="thumbnail.image != null" ng-src="{$thumbnail.image$}" class="md-card-image animated fadeIn" alt="Washed Out"></div>
-
 								</a>
+								<div style="height: 0" ng-if="travel_destination.visited" class="animated fadeIn">
+									<span class="visited">
+										<ng-md-icon icon="check" style="fill: white">
+										</ng-md-icon> sudah dikunjungi
+									</span>
+								</div>
 								<md-card-content>
 						<span class="md-body-2" layout="row" layout-wrap>
 							<span flex="100" flex-gt-lg="60">

@@ -96,14 +96,16 @@ class Visit(TimeStampedModel):
         related_name='visits'
     )
     user = models.ForeignKey(User)
+    date = models.DateField(verbose_name='tanggal', blank=True, null=True)
 
+    # TODO change unique togther to date
     class Meta:
         verbose_name = 'Kunjungan'
         verbose_name_plural = 'Data Kunjungan'
         unique_together = ('creation_date', 'travel_destination', 'user')
 
     def __str__(self):
-        return str(self.created_date) + ' ' + self.user.name + ' ' + self.travel_destination.name
+        return str(self.created_date) + ' ' + self.user.username + ' ' + self.travel_destination.name
 
 
 class Report(TimeStampedModel):
