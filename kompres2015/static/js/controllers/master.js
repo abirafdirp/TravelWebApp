@@ -9,6 +9,9 @@ angular.module('angularDjangoRegistrationAuthApp')
       djangoAuth.authenticationStatus(true).then(function(){
             $scope.authenticated = true;
             $scope.show = true;
+            djangoAuth.profile().then(function(data){
+              $scope.user = data;
+            })
           },
           function(){
             $scope.show = true
@@ -21,6 +24,9 @@ angular.module('angularDjangoRegistrationAuthApp')
       // Wait and respond to the log in event.
       $scope.$on('djangoAuth.logged_in', function() {
         $scope.authenticated = true;
+        djangoAuth.profile().then(function(data){
+              $scope.user = data;
+            });
       });
       // If the user attempts to access a restricted page, redirect them back to the main page.
       $scope.$on('$routeChangeError', function(ev, current, previous, rejection){

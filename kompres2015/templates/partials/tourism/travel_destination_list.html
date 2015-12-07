@@ -89,26 +89,33 @@
 						</md-autocomplete>
 					</div>
 
-					<div ng-if="show_sidenav" class="animated fadeIn art-search-box" id="toggle-distance" layout="column" layout-wrap>
-						<md-autocomplete
-										md-search-text="current_location"
-										md-items="district in $parent.districts.results | filter:current_location | orderBy: 'name'"
-										md-item-text="district.name"
-										md-min-length="0"
-										placeholder="Lokasi anda sekarang"
-										md-floating-label="Lokasi anda"
-										class="dest-search-row district-search">
-							<md-item-template>
-								<span class="animated fadeIn" md-highlight-text="current_location" md-highlight-flags="^i">{$district.name$}</span>
-							</md-item-template>
-							<md-not-found>
-							</md-not-found>
-						</md-autocomplete>
-						<md-checkbox ng-model="distance_toggle" aria-label="Checkbox 1" ng-click="toggleDistance(distance_toggle)">
-							Urutkan berdasarkan lokasi terdekat
+					<div ng-if="show_sidenav" class="animated fadeIn" layout="row" layout-wrap>
+						<div layout="row" layout-align="center center" flex="85">
+							<ng-md-icon icon="place" style="position: relative; margin-left: 5px; margin-right: 5px;">
+							</ng-md-icon>
+							<md-autocomplete
+											md-search-text="current_location"
+											md-items="district in $parent.districts.results | filter:current_location | orderBy: 'name'"
+											md-item-text="district.name"
+											md-min-length="0"
+											placeholder="Lokasi anda sekarang"
+											md-floating-label="Lokasi anda"
+											class="dest-side-row"
+											flex
+											ng-disabled="authenticated">
+								<md-item-template>
+									<span class="animated fadeIn" md-highlight-text="current_location" md-highlight-flags="^i">{$district.name$}</span>
+								</md-item-template>
+								<md-not-found>
+								</md-not-found>
+							</md-autocomplete>
+						</div>
+						<div flex="20"></div>
+						<md-checkbox ng-model="distance_toggle" aria-label="Checkbox 1" ng-click="toggleDistance(distance_toggle)" flex="100" class="md-body-1">
+							urutkan berdasarkan lokasi terdekat
 						</md-checkbox>
 						<div>
-							<md-checkbox ng-model="distance_visit" aria-label="Checkbox 2" ng-click="toggleDistance(distance_toggle)">
+							<md-checkbox ng-if="authenticated" class="animated fadeIn md-body-1" ng-model="distance_visit" aria-label="Checkbox 2" ng-click="toggleDistance(distance_toggle)">
 								sembunyikan lokasi wisata yang sudah dikunjugi
 							</md-checkbox>
 						</div>
@@ -133,20 +140,20 @@
 									</span>
 								</div>
 								<md-card-content>
-						<span class="md-body-2" layout="row" layout-wrap>
-							<span flex="100" flex-gt-lg="60">
-								<ng-md-icon icon="sort" size="20" aria-label="tanggal"></ng-md-icon>
-								<a href="javascript:void(0)" ng-click="TravelDestinationSearch.setSearch(travel_destination.type)">
-									<span class="animated fadeIn">{$ travel_destination.type $}</span>
-								</a>
-							</span>
-							<span flex="100" flex-gt-lg="40" ng-show="district.name != null" class="animated fadeIn">
-								<ng-md-icon icon="place" size="20" aria-label="tempat"></ng-md-icon>
-								<a href="javascript:void(0)" ng-click="TravelDestinationSearch.setSearch(district.name)">
-									{$ district.name $}
-								</a>
-							</span>
-						</span>
+								<span class="md-body-2" layout="row" layout-wrap>
+									<span flex="100" flex-gt-lg="60">
+										<ng-md-icon icon="sort" size="20" aria-label="tanggal"></ng-md-icon>
+										<a href="javascript:void(0)" ng-click="TravelDestinationSearch.setSearch(travel_destination.type)">
+											<span class="animated fadeIn">{$ travel_destination.type $}</span>
+										</a>
+									</span>
+									<span flex="100" flex-gt-lg="40" ng-show="district.name != null" class="animated fadeIn">
+										<ng-md-icon icon="place" size="20" aria-label="tempat"></ng-md-icon>
+										<a href="javascript:void(0)" ng-click="TravelDestinationSearch.setSearch(district.name)">
+											{$ district.name $}
+										</a>
+									</span>
+								</span>
 									<p class="md-body-1">
 										{$ travel_destination_short_description $}
 									</p>

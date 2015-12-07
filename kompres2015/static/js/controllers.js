@@ -1,7 +1,7 @@
 var kompresControllers = angular.module('kompresControllers', []);
 
-kompresControllers.controller('NavCtrl', ['$scope', '$route', '$mdDialog', 'ArticleSearch', 'TravelDestinationSearch', '$mdSidenav',
-  function($scope, $route, $mdDialog, ArticleSearch, TravelDestinationSearch, $mdSidenav) {
+kompresControllers.controller('NavCtrl', ['$scope', '$route', '$mdDialog', 'ArticleSearch', 'TravelDestinationSearch', '$mdSidenav', 'djangoAuth',
+  function($scope, $route, $mdDialog, ArticleSearch, TravelDestinationSearch, $mdSidenav, djangoAuth) {
     $scope.$route = $route;
     $scope.logout_clicked = false;
     $scope.traveldestination_icon = 'terrain';
@@ -11,6 +11,33 @@ kompresControllers.controller('NavCtrl', ['$scope', '$route', '$mdDialog', 'Arti
     $scope.transportation_icon = 'directions_bus';
     $scope.ArticleSearch = ArticleSearch;
     $scope.TravelDestinationSearch = TravelDestinationSearch;
+
+    $scope.logout = function() {
+      djangoAuth.logout();
+    };
+
+    // confirm dialog bugged on 1.0.0 RC4, https://github.com/angular/material/issues/5947
+    // too afraid too update, use custom dialog instead
+    $scope.showConfirmLogout = function(ev) {
+      $mdDialog.show({
+        controller: DialogController,
+        templateUrl: '/partials/logout/',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+      });
+      function DialogController($scope, $mdDialog, djangoAuth) {
+        $scope.closeDialog = function() {
+          $mdDialog.hide();
+        };
+        $scope.logout = function(){
+          djangoAuth.logout().then(function(){
+            $scope.authenticated = false;
+            $scope.closeDialog();
+          });
+        };
+      }
+    };
 
     $scope.toggleMenu = function() {
       $mdSidenav('left').toggle();
@@ -191,6 +218,10 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
     $scope.category_icon = 'keyboard_arrow_right';
     $scope.all_category_icon = 'keyboard_arrow_right';
 
+    $scope.$on('djangoAuth.logged_in', function(){
+      $scope.show_sidenav = true;
+    });
+
     $scope.show_sidenav = false;
     $scope.distance_toggle = false;
     $scope.orderByDistance = function() {
@@ -221,7 +252,7 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
 
     $scope.deffered_distances = [];
 
-    $scope.visit.$promise.then(function(){
+    $scope.visit.$promise.finally(function(){
       $scope.travel_destinations = TravelDestinations.list.query();
 
       $scope.travel_destinations.$promise.then(function(){
@@ -236,7 +267,6 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
                   if ($rootScope.arrayContains($scope.visits, item.id) == true){
                     item['visited'] = true;
                   }
-                  console.log(item);
                   item['district_resolved'] = $resource(item.district).get(function(){
                     item['distance'] = $rootScope.distance($scope.user.district.latitude, $scope.user.district.longitude, item.district_resolved.latitude, item.district_resolved.longitude);
                     $scope.deffered_distances.push(item.distance);
@@ -254,6 +284,8 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
                 });
               });
             },angular.forEach($scope.travel_destinations.results, function(item){
+              $scope.show_sidenav = true;
+              $scope.sidenav_disabled = true;
               if ($rootScope.arrayContains($scope.categories, item.type) == false){
                 $scope.categories.push(String(item.type));
               }
@@ -332,7 +364,7 @@ kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route'
         if (index == $scope.images_length - 1){
           $interval(function(){
             $scope.nextSlide();
-          },10260,20);
+          },10290,20);
         }
       });
 

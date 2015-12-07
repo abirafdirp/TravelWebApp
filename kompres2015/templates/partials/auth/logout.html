@@ -1,2 +1,25 @@
-<div id="logout_view" ng-controller="LogoutCtrl">
-</div>
+<md-dialog aria-label="daftar">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>Peringatan</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="closeDialog()">
+        <ng-md-icon icon="close" aria-label="close dialog"></ng-md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content layout="row" layout-align="center center" layout-margin layout-padding layout-wrap>
+    <div flex="100">
+      Anda yakin ingin keluar?
+    </div>
+    <div layout="row">
+      <md-button ng-click="closeDialog()" class="md-raised md-primary">
+        tidak
+      </md-button>
+      <md-button ng-click="logout()" class="md-raised md-accent">
+        ya
+      </md-button>
+    </div>
+  </md-dialog-content>
+</md-dialog>
+

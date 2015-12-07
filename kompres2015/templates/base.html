@@ -61,16 +61,11 @@
 				</div>
 				<div flex layout="row" layout-align="end center" hide-sm hide-md ng-if="show" ng-cloak class="animated fadeIn">
 					<md-button ng-show="authenticated" ng-click="showProfile($event)" class="lowercase user-nav">
-						<ng-md-icon icon="account_box" size="22" aria-label="user"></ng-md-icon> <span>Profil</span>
+						{$user.username$} <ng-md-icon icon="account_box" size="22" aria-label="user"></ng-md-icon> <span>Profil</span>
 					</md-button>
-					<md-button ng-show="authenticated" ng-click="logout_clicked = true" class="lowercase user-nav">
+					<md-button ng-show="authenticated" ng-click="showConfirmLogout()" class="lowercase user-nav">
 						<ng-md-icon icon="logout" size="22" aria-label="user"></ng-md-icon> <span>Keluar</span>
 					</md-button>
-					<span ng-if="logout_clicked == true">
-						<span ng-controller="LogoutCtrl">
-							{$ reset_logout_clicked() $}
-						</span>
-					</span>
 					<md-button ng-hide="authenticated" ng-click="showLogin($event)" class="lowercase user-nav">
 						<ng-md-icon icon="login" size="22" aria-label="user"></ng-md-icon> <span>Masuk</span>
 					</md-button>
