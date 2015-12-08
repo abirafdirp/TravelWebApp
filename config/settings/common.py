@@ -299,4 +299,4 @@ FB_CLIENTID = env.str('FB_CLIENTID')
 GMAPS_TOKEN = env.str('GMAPS_TOKEN')
 
 # minification
-COMPRESS_ENABLED = False
+COMPRESS_ENABLED = True
