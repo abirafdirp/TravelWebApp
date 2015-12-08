@@ -207,6 +207,10 @@ a {
     background-color: #607D8B !important;
     color: white;
 }
+
+.material-deep-purple{
+    background-color: #673AB7 !important;
+}
 .material-teal{
     background-color: rgb(0,150,136) !important;
     color: white !important;
@@ -214,10 +218,6 @@ a {
 
 .material-blue{
     background-color: #2196F3 !important;
-}
-
-.material-deep-purple{
-    background-color: #673AB7 !important;
 }
 
 #category-search-box {
@@ -433,8 +433,8 @@ md-autocomplete[md-floating-label] md-input-container{
 }
 
 .checkbox-dest{
-    padding-top: 13px;
-    padding-bottom: 13px;
+    padding-top: 16px;
+    padding-bottom: 16px;
     margin-top: 0;
     margin-right: 0;
     margin-bottom: 0;
@@ -453,6 +453,18 @@ md-autocomplete[md-floating-label] md-input-container{
 }
 .region-search {
     border-right: 2px solid #E91E63;
+}
+
+.blue-grey-border-right{
+    border-right: 2px solid #607D8B;
+}
+
+.light-blue-border-right{
+    border-right: 2px solid #2196F3;
+}
+
+.purple-border-right{
+    border-right: 2px solid #673AB7;
 }
 
 #dest-search-box {
@@ -488,7 +500,7 @@ md-autocomplete[md-floating-label] md-input-container{
     background-color: rgb(0,150,136);
     z-index: 200;
     color: white;
-    padding: 4px 4px 4px 4px;
+    padding: 4px 10px 4px 4px;
 }
 
 .home-tagline{
@@ -597,7 +609,7 @@ md-autocomplete[md-floating-label] md-input-container{
 .sidenav-dest {
     padding-left: 8px;
     padding-top: 30px;
-    padding-bottom: 0;
+    padding-bottom: 20px;
 }
 
 .legend {
@@ -635,6 +647,10 @@ md-autocomplete[md-floating-label] md-input-container{
 .map-search md-content {
     padding: 5px 15px 8px 10px;
     background-color: rgba(255,255,255,0.93);
+}
+
+.pad-right {
+    padding-right: 20px;
 }
 
 .parent {

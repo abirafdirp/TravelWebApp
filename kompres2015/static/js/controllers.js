@@ -209,11 +209,15 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
     $scope.travel_destination_name = $scope.params.travel_destination_name;
     $scope.search = $scope.params.search;
     $scope.categories = [];
-
-    $scope.current_location = '';
-    $scope.districts = Districts.list.query();
+    $scope.district_names = [];
+    $scope.districts = Districts.list.query(function(data){
+      angular.forEach(data.results, function(item){
+        $scope.district_names.push(item.name.toLowerCase());
+      });
+    });
     $scope.provinces = Provinces.query();
     $scope.regions = Regions.query();
+    $scope.current_location = '';
 
     $scope.category_icon = 'keyboard_arrow_right';
     $scope.all_category_icon = 'keyboard_arrow_right';
@@ -223,13 +227,12 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
     });
 
     $scope.$on('djangoAuth.logged_out', function(){
+      $scope.current_location = '';
       init();
     });
 
 
-    // uhhh it appears the angular-material checkoxes have strange behaviours
-    // the ng-model doesn't propagate to controllers and the value is negated
-    // TODO inspect this
+    // toggle value is passed after the model change, that's why it's negated
     $scope.visited_toggle = false;
     $scope.hide_visited = false;
     $scope.visitToggle = function(cond){
@@ -241,10 +244,47 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
       }
     };
 
+    $scope.current_district = '';
+    $scope.district_search = '';
+
+    $scope.searchSelectedChange = function(district){
+      $scope.current_district = district;
+    };
+
+    $scope.searchTextChange = function(search){
+      if (search) {
+        search = search.toLowerCase();
+      }
+      if ($rootScope.arrayContains($scope.district_names, search)){
+        angular.forEach($scope.districts.results, function(item){
+          if (item.name.toLowerCase() == search){
+            $scope.current_district = item;
+          }
+        });
+      }
+      else {
+        $scope.current_district = '';
+      }
+    };
+
     $scope.show_sidenav = false;
+    $scope.distance_toggle_auth = false;
     $scope.distance_toggle = false;
-    $scope.orderByDistance = function() {
-      $scope.travel_destinations.results = $filter('orderBy')($scope.travel_destinations.results, 'distance');
+    // distance toggle value is passed after the model change, that's why it's negated
+    // and also the checkboxes scopes seems isolated ????
+    $scope.orderByDistance = function(distance_toggle) {
+      if (distance_toggle == false){
+        if (($scope.current_district != '') || (!$scope.authenticated)){
+          angular.forEach($scope.travel_destinations.results, function(item){
+            console.log(item.district_resolved + $scope.current_district);
+            item['distance'] = $rootScope.distance($scope.current_district.latitude, $scope.current_district.longitude, item.district_resolved.latitude, item.district_resolved.longitude);
+          });
+        }
+        $scope.travel_destinations.results = $filter('orderBy')($scope.travel_destinations.results, 'distance');
+      }
+      else {
+        $scope.orderByRandom();
+      }
     };
 
     $scope.orderByRandom = function() {
@@ -271,6 +311,7 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
                 $scope.user = data;
                 $resource($scope.user.district+'?format=json').get(function(data){
                   $scope.user.district = data;
+                  $scope.district_search = $scope.user.district.name;
                   angular.forEach($scope.travel_destinations.results, function(item){
                     if ($rootScope.arrayContains($scope.categories, item.type) == false){
                       $scope.categories.push(String(item.type));
@@ -279,14 +320,13 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
                       item['visited'] = true;
                     }
                     item['distance'] = $rootScope.distance($scope.user.district.latitude, $scope.user.district.longitude, item.latitude, item.longitude);
-                    console.log(item);
                     $scope.deffered_distances += 1;
                     if ($scope.deffered_distances.length == $scope.travel_destinations.results.length){
                       $scope.deffered_distances = 0;
                       $scope.show_sidenav = true;
                       // instant orderby
                       //$scope.orderByDistance();
-                      //$scope.distance_toggle = true;
+                      //$scope.distance_toggle_auth = true;
                     }
                     item['district_resolved'] = $resource(item.district).get(function(){
                       item['province'] = $resource(item.district_resolved.province).get(function(){
@@ -302,7 +342,6 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
                   $scope.categories.push(String(item.type));
                 }
                 item['district_resolved'] = $resource(item.district).get(function(){
-                  //item['distance'] = $rootScope.distance($scope.user.district.latitude, $scope.user.district.longitude, item.district_resolved.latitude, item.district_resolved.longitude);
                   item['province'] = $resource(item.district_resolved.province).get(function(){
                     item['region'] = $resource(item.province.region).get();
                   });
@@ -574,7 +613,6 @@ kompresControllers.controller('ReportCtrl', ['$scope', '$mdDialog',
         $scope.travel_destinations = TravelDestinations.list.query(function(){
           angular.forEach($scope.travel_destinations.results, function(item){
             $scope.travel_destination_names.push(item.name.toLowerCase());
-            item['name_lowercased']= item.name.toLowerCase();
           })
         });
         $scope.travel_destination_search = '';
@@ -591,7 +629,7 @@ kompresControllers.controller('ReportCtrl', ['$scope', '$mdDialog',
           }
           if($rootScope.arrayContains($scope.travel_destination_names, destination_name)){
             angular.forEach($scope.travel_destinations.results, function(item){
-              if (item.name_lowercased == destination_name){
+              if (item.name.toLowerCase() == destination_name){
                 $scope.newReport.travel_destination = '/api/traveldestinations/' + item.id + '/';
               }
             });
@@ -802,7 +840,6 @@ kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$rout
       $scope.travel_destination_names = [];
       angular.forEach($scope.travel_destinations.results, function (item) {
         $scope.travel_destination_names.push(item.name.toLowerCase());
-        item['name_lowercased'] = item.name.toLowerCase();
       });
     });
 
@@ -829,15 +866,12 @@ kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$rout
       }
       if ($rootScope.arrayContains($scope.travel_destination_names, search)){
         angular.forEach($scope.travel_destinations.results, function(item){
-          if (item.name_lowercased == search){
+          if (item.name.toLowerCase() == search){
             $scope.map.center.latitude = item.latitude;
             $scope.map.center.longitude = item.longitude;
             $scope.map.zoom = 14;
           }
         });
-      }
-      else{
-        search = '';
       }
     };
 

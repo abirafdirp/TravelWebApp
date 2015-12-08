@@ -29,10 +29,10 @@
 		<md-content ng-cloak class="md-padding animated fadeIn" ng-show="show_loading == false">
 			<div layout="row" layout-no-wrap>
 				<div flex="20" hide-sm hide-md layout-padding layout="column" layout-sm="column">
-					<div ng-show="search_opened" class="sidenav-dest">
+					<div class="sidenav-dest">
 						<span class="md-headline animated fadeIn" id="dest-search-box-title">Cari</span>
 						<div layout="row">
-							<ng-md-icon icon="place" style="position: relative; margin-left: 5px; margin-right: 5px;"></ng-md-icon>
+							<ng-md-icon icon="sort" style="position: relative; margin-left: 5px; margin-right: 5px;"></ng-md-icon>
 							<md-autocomplete
 											md-search-text="TravelDestinationSearch.category_search"
 											md-items="category in $parent.categories | filter:TravelDestinationSearch.category_search | orderBy: 'category'"
@@ -68,7 +68,7 @@
 							</md-autocomplete>
 						</div>
 						<div layout="row">
-							<ng-md-icon icon="place" style="position: relative; margin-left: 5px; margin-right: 5px;"></ng-md-icon>
+							<ng-md-icon icon="layers" style="position: relative; margin-left: 5px; margin-right: 5px;"></ng-md-icon>
 							<md-autocomplete
 											md-search-text="TravelDestinationSearch.province_search"
 											md-items="province in $parent.provinces.results | filter:TravelDestinationSearch.province_search | orderBy: 'name'"
@@ -86,7 +86,7 @@
 							</md-autocomplete>
 						</div>
 						<div layout="row">
-							<ng-md-icon icon="place" style="position: relative; margin-left: 5px; margin-right: 5px;"></ng-md-icon>
+							<ng-md-icon icon="blur_on" style="position: relative; margin-left: 5px; margin-right: 5px;"></ng-md-icon>
 							<md-autocomplete
 											md-search-text="TravelDestinationSearch.region_search"
 											md-items="region in $parent.regions.results | filter:TravelDestinationSearch.region_search | orderBy: 'name'"
@@ -106,13 +106,15 @@
 					</div>
 
 					<div ng-if="show_sidenav" class="animated fadeIn" layout="column" layout-wrap layout-fill>
-						<div layout="row" layout-align="center center" class="category-search">
+						<div layout="row" layout-align="center center" class="light-blue-border-right pad-right">
 							<ng-md-icon icon="place" style="position: relative; margin-left: 5px; margin-right: 5px;">
 							</ng-md-icon>
 							<md-autocomplete
-											md-search-text="current_location"
+											md-search-text="district_search"
 											md-items="district in $parent.districts.results | filter:current_location | orderBy: 'name'"
 											md-item-text="district.name"
+											md-selected-item-change="searchSelectedChange(district)"
+										 	md-search-text-change="searchTextChange(district_search)"
 											md-min-length="0"
 											placeholder="Lokasi anda sekarang"
 											md-floating-label="Lokasi anda"
@@ -126,12 +128,30 @@
 								</md-not-found>
 							</md-autocomplete>
 						</div>
-						<md-checkbox ng-model="distance_toggle" aria-label="Checkbox 1" ng-click="orderByDistance(distance_toggle)" flex="100" class="md-body-1 province-search checkbox-dest">
-							urutkan berdasarkan lokasi terdekat
+						<md-checkbox ng-model="distance_toggle_auth"
+												 aria-label="Checkbox 1"
+												 ng-click="orderByDistance(distance_toggle_auth)"
+												 flex="100"
+												 ng-hide="!authenticated"
+												 class="md-body-1 checkbox-dest">
+							Urutkan berdasarkan lokasi terdekat
 						</md-checkbox>
 						<div>
-							<md-checkbox ng-if="authenticated" class="animated fadeIn md-body-1 region-search checkbox-dest" ng-model="visited_toggle" aria-label="Checkbox 2" ng-click="visitToggle(visited_toggle)">
-								sembunyikan lokasi wisata yang sudah dikunjugi {$visited_toggle$}
+						</div>
+						<md-checkbox ng-model="distance_toggle"
+												 aria-label="Checkbox 1"
+												 ng-click="orderByDistance(distance_toggle)"
+												 flex="100"
+												 ng-hide="authenticated"
+												 class="md-body-1 checkbox-dest">
+							Urutkan berdasarkan lokasi terdekat
+						</md-checkbox>
+						<div>
+							<md-checkbox ng-if="authenticated"
+													 class="animated fadeIn md-body-1 checkbox-dest"
+													 ng-model="visited_toggle" aria-label="Checkbox 2"
+													 ng-click="visitToggle(visited_toggle)">
+								Sembunyikan lokasi wisata yang sudah dikunjugi
 							</md-checkbox>
 						</div>
 					</div>
