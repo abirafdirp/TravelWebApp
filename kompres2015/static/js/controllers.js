@@ -168,8 +168,8 @@ kompresControllers.controller('DistrictsCtrl', ['$scope', 'Districts',
   }
 ]);
 
-kompresControllers.controller('TransportationListCtrl', ['$scope', 'Transportations', '$routeParams', '$resource',
-  function($scope, Transportations, $routeParams, $resource) {
+kompresControllers.controller('TransportationListCtrl', ['$scope', 'Transportations', '$routeParams', 'cachedResource',
+  function($scope, Transportations, $routeParams, cachedResource) {
     $scope.params = $routeParams;
     $scope.transportation_search = '';
     $scope.search = $scope.params.search;
@@ -177,7 +177,7 @@ kompresControllers.controller('TransportationListCtrl', ['$scope', 'Transportati
       angular.forEach(response.results, function(transportation){
         transportation['districts_resolved'] = [];
         angular.forEach(transportation.districts, function(district){
-          $resource(district).get(function(response){
+          cachedResource(district).get(function(response){
             transportation.districts_resolved.push(response);
           });
         });
@@ -186,8 +186,8 @@ kompresControllers.controller('TransportationListCtrl', ['$scope', 'Transportati
   }
 ]);
 
-kompresControllers.controller('TransportationRepeatCtrl', ['$scope', '$resource', '$exceptionHandler',
-  function($scope, $resource, $exceptionHandler) {
+kompresControllers.controller('TransportationRepeatCtrl', ['$scope', 'cachedResource', '$exceptionHandler',
+  function($scope, cachedResource, $exceptionHandler) {
     var init = function() {
       if (typeof $scope.transportation === "undefined") {
         $exceptionHandler("The TransportationRepeatController must be initialized with a transportation in scope");
@@ -200,9 +200,9 @@ kompresControllers.controller('TransportationRepeatCtrl', ['$scope', '$resource'
 ]);
 
 
-kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', '$routeParams', '$resource', '$rootScope', 'TravelDestinations', 'Districts',
+kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', '$routeParams', 'cachedResource', '$rootScope', 'TravelDestinations', 'Districts',
   'Provinces', 'Regions', 'Marker', 'djangoAuth', '$filter', 'Visits',
-  function($scope, $route, $routeParams, $resource, $rootScope, TravelDestinations, Districts, Provinces, Regions, Marker, djangoAuth, $filter, Visits) {
+  function($scope, $route, $routeParams, cachedResource, $rootScope, TravelDestinations, Districts, Provinces, Regions, Marker, djangoAuth, $filter, Visits) {
     $scope.$route = $route;
     $scope.params = $routeParams;
     $scope.show_loading = true;
@@ -227,7 +227,7 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
     });
 
     $scope.$on('djangoAuth.logged_out', function(){
-      $scope.current_location = '';
+      $scope.district_search = '';
       init();
     });
 
@@ -249,16 +249,21 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
 
     $scope.searchSelectedChange = function(district){
       $scope.current_district = district;
+      $scope.orderByDistanceFromCtrl($scope.distance_toggle_wat);
     };
 
     $scope.searchTextChange = function(search){
       if (search) {
         search = search.toLowerCase();
       }
+      else {
+        $scope.current_district = '';
+      }
       if ($rootScope.arrayContains($scope.district_names, search)){
         angular.forEach($scope.districts.results, function(item){
           if (item.name.toLowerCase() == search){
             $scope.current_district = item;
+            $scope.orderByDistanceFromCtrl($scope.distance_toggle_wat);
           }
         });
       }
@@ -269,14 +274,36 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
 
     $scope.show_sidenav = false;
     $scope.distance_toggle_auth = false;
+
+    // SPHAGETTIIIII
+    //
+    // checkbox model must be replicated with the ng-click function (distance_toggle_wat)
+    // the booleans checking are also guessed....
+    //
+    // TODO investigate checkbox behaviour and clean this mess up
+    // checkbox scope seems isolated, but must be declared in controller
     $scope.distance_toggle = false;
-    // distance toggle value is passed after the model change, that's why it's negated
+    // distance toggle value is passed before the model change, that's why it's negated
     // and also the checkboxes scopes seems isolated ????
     $scope.orderByDistance = function(distance_toggle) {
+      $scope.distance_toggle_wat = distance_toggle;
       if (distance_toggle == false){
         if (($scope.current_district != '') || (!$scope.authenticated)){
           angular.forEach($scope.travel_destinations.results, function(item){
-            console.log(item.district_resolved + $scope.current_district);
+            item['distance'] = $rootScope.distance($scope.current_district.latitude, $scope.current_district.longitude, item.district_resolved.latitude, item.district_resolved.longitude);
+          });
+        }
+        $scope.travel_destinations.results = $filter('orderBy')($scope.travel_destinations.results, 'distance');
+      }
+      else {
+        $scope.orderByRandom();
+      }
+    };
+
+    $scope.orderByDistanceFromCtrl = function(distance_toggle) {
+      if (distance_toggle == false){
+        if (($scope.current_district != '') || (!$scope.authenticated)){
+          angular.forEach($scope.travel_destinations.results, function(item){
             item['distance'] = $rootScope.distance($scope.current_district.latitude, $scope.current_district.longitude, item.district_resolved.latitude, item.district_resolved.longitude);
           });
         }
@@ -295,7 +322,7 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
       $scope.visit = Visits.query(function(data){
         $scope.visits = [];
         angular.forEach(data.results, function(data){
-          $resource(data.travel_destination).get(function(dest){
+          cachedResource(data.travel_destination).get(function(dest){
             $scope.visits.push(dest.id);
           });
         });
@@ -309,7 +336,7 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
         $scope.travel_destinations.$promise.then(function(){
           $scope.user = djangoAuth.profile().then(function(data){
                 $scope.user = data;
-                $resource($scope.user.district+'?format=json').get(function(data){
+                cachedResource($scope.user.district+'?format=json').get(function(data){
                   $scope.user.district = data;
                   $scope.district_search = $scope.user.district.name;
                   angular.forEach($scope.travel_destinations.results, function(item){
@@ -328,9 +355,9 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
                       //$scope.orderByDistance();
                       //$scope.distance_toggle_auth = true;
                     }
-                    item['district_resolved'] = $resource(item.district).get(function(){
-                      item['province'] = $resource(item.district_resolved.province).get(function(){
-                        item['region'] = $resource(item.province.region).get();
+                    item['district_resolved'] = cachedResource(item.district).get(function(){
+                      item['province'] = cachedResource(item.district_resolved.province).get(function(){
+                        item['region'] = cachedResource(item.province.region).get();
                       });
                     });
                   });
@@ -341,9 +368,9 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
                 if ($rootScope.arrayContains($scope.categories, item.type) == false){
                   $scope.categories.push(String(item.type));
                 }
-                item['district_resolved'] = $resource(item.district).get(function(){
-                  item['province'] = $resource(item.district_resolved.province).get(function(){
-                    item['region'] = $resource(item.province.region).get();
+                item['district_resolved'] = cachedResource(item.district).get(function(){
+                  item['province'] = cachedResource(item.district_resolved.province).get(function(){
+                    item['region'] = cachedResource(item.province.region).get();
                   });
                 });
               })
@@ -358,10 +385,10 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
     $scope.$on('djangoAuth.profile_updated', function() {
       djangoAuth.profile().then(function(data){
         $scope.user = data;
-        $resource($scope.user.district+'?format=json').get(function(data) {
+        cachedResource($scope.user.district+'?format=json').get(function(data) {
           $scope.user.district = data;
           angular.forEach($scope.travel_destinations.results, function(item){
-            item['district_resolved'] = $resource(item.district).get(function(){
+            item['district_resolved'] = cachedResource(item.district).get(function(){
               item['distance'] = $rootScope.distance($scope.user.district.latitude, $scope.user.district.longitude, item.district_resolved.latitude, item.district_resolved.longitude);
             });
           });
@@ -372,9 +399,9 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
   }
 ]);
 
-kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route', '$routeParams', 'TravelDestinations', '$resource', '$interval', '$mdDialog',
+kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route', '$routeParams', 'TravelDestinations', 'cachedResource', '$interval', '$mdDialog',
   'TravelDestinationSearch', '$location', 'Transportations', '$rootScope',
-  function($scope, $route, $routeParams, TravelDestinations, $resource, $interval, $mdDialog, TravelDestinationSearch, $location, Transportations, $rootScope) {
+  function($scope, $route, $routeParams, TravelDestinations, cachedResource, $interval, $mdDialog, TravelDestinationSearch, $location, Transportations, $rootScope) {
     $scope.$route = $route;
     $scope.params = $routeParams;
     $scope.travel_destination_name = $scope.params.travel_destination_name.replace(/-/g,' ');
@@ -387,10 +414,10 @@ kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route'
     $scope.travel_destination.$promise.then(function() {
       $rootScope.title = $scope.travel_destination.results[0].name + ' - Discover Indonesia';
       var url = $scope.travel_destination.results[0].district+'?format=json';
-      $scope.district = $resource(url).get(function(){
+      $scope.district = cachedResource(url).get(function(){
         $scope.transportations = Transportations.in_district.query({district:$scope.district.name});
-        $scope.province = $resource($scope.district.province).get(function(){
-          $scope.region = $resource($scope.province.region).get(function(){
+        $scope.province = cachedResource($scope.district.province).get(function(){
+          $scope.region = cachedResource($scope.province.region).get(function(){
             //showloading
           });
         });
@@ -400,7 +427,7 @@ kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route'
       $scope.main_images = [];
       $scope.gallery_images = [];
       angular.forEach($scope.travel_destination.results[0].images, function (image, index){
-        $resource(image+'?format=json').get(function(image){
+        cachedResource(image+'?format=json').get(function(image){
           if (image.type == 'main'){
             $scope.main_images.push(image);
           }
@@ -418,7 +445,7 @@ kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route'
 
       $scope.travel_destination_contents = [];
       angular.forEach($scope.travel_destination.results[0].contents, function(content, index){
-        $scope.travel_destination_contents.push($resource(content+'?format=json').get());
+        $scope.travel_destination_contents.push(cachedResource(content+'?format=json').get());
         if (index == $scope.travel_destination.results.length - 1){
           $scope.show_loading = false;
         }
@@ -476,8 +503,8 @@ kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route'
   }
 ]);
 
-kompresControllers.controller('TravelDestinationRepeatCtrl', ['$scope', '$resource', '$exceptionHandler', 'djangoAuth', '$rootScope',
-  function($scope, $resource, $exceptionHandler, djangoAuth, $rootScope) {
+kompresControllers.controller('TravelDestinationRepeatCtrl', ['$scope', 'cachedResource', '$exceptionHandler', 'djangoAuth', '$rootScope',
+  function($scope, cachedResource, $exceptionHandler, djangoAuth, $rootScope) {
     var init = function() {
       if (typeof $scope.travel_destination === "undefined") {
         $exceptionHandler("The TravelDestinationRepeatController must be initialized with a travel_destination in scope");
@@ -489,17 +516,17 @@ kompresControllers.controller('TravelDestinationRepeatCtrl', ['$scope', '$resour
       else{
         $scope.travel_destination_short_description = $scope.travel_destination.short_description;
       }
-      $scope.district = $resource($scope.travel_destination.district).get();
-      $scope.thumbnail = $resource($scope.travel_destination.thumbnail).get();
+      $scope.district = cachedResource($scope.travel_destination.district).get();
+      $scope.thumbnail = cachedResource($scope.travel_destination.thumbnail).get();
     };
 
     init();
   }
 ]);
 
-kompresControllers.controller('ArticleListCtrl', ['$scope', '$route', '$routeParams', '$resource', '$timeout', '$filter', 'Articles', 'PostCategory',
+kompresControllers.controller('ArticleListCtrl', ['$scope', '$route', '$routeParams', 'cachedResource', '$timeout', '$filter', 'Articles', 'PostCategory',
   'ColorRandomizer', '$rootScope',
-  function($scope, $route, $routeParams, $resource, $timeout, $filter, Articles, PostCategory, ColorRandomizer, $rootScope) {
+  function($scope, $route, $routeParams, cachedResource, $timeout, $filter, Articles, PostCategory, ColorRandomizer, $rootScope) {
     $scope.$route = $route;
     $scope.params = $routeParams;
     $scope.show_loading = true;
@@ -522,8 +549,8 @@ kompresControllers.controller('ArticleListCtrl', ['$scope', '$route', '$routePar
   }
 ]);
 
-kompresControllers.controller('ArticleDetailCtrl', ['$scope', '$route', '$routeParams', '$resource', 'Articles', '$rootScope',
-  function($scope, $route, $routeParams, $resource, Articles, $rootScope) {
+kompresControllers.controller('ArticleDetailCtrl', ['$scope', '$route', '$routeParams', 'cachedResource', 'Articles', '$rootScope',
+  function($scope, $route, $routeParams, cachedResource, Articles, $rootScope) {
     $scope.$route = $route;
     $scope.params = $routeParams;
     $scope.show_loading = true;
@@ -532,15 +559,15 @@ kompresControllers.controller('ArticleDetailCtrl', ['$scope', '$route', '$routeP
     $scope.article = Articles.detail.query({article_name:$scope.article_name});
     $scope.article.$promise.then(function() {
       $rootScope.title = $scope.article.results[0].title + ' - Discover Indonesia';
-      $scope.main_image = $resource($scope.article.results[0].main_image+'?format=json').get(function() {
+      $scope.main_image = cachedResource($scope.article.results[0].main_image+'?format=json').get(function() {
         $scope.show_loading = false;
       });
     });
   }
 ]);
 
-kompresControllers.controller('ArticleRepeatCtrl', ['$scope', '$resource', '$exceptionHandler', 'PostCategory',
-  function($scope, $resource, $exceptionHandler,  PostCategory) {
+kompresControllers.controller('ArticleRepeatCtrl', ['$scope', 'cachedResource', '$exceptionHandler', 'PostCategory',
+  function($scope, cachedResource, $exceptionHandler,  PostCategory) {
     var init = function() {
       if (typeof $scope.article === "undefined") {
         $exceptionHandler("The ArticleRepeatController must be initialized with a article in scope");
@@ -553,7 +580,7 @@ kompresControllers.controller('ArticleRepeatCtrl', ['$scope', '$resource', '$exc
       else{
         $scope.article_short_description = $scope.article.short_description;
       }
-      $scope.thumbnail = $resource($scope.article.thumbnail).get(function() {
+      $scope.thumbnail = cachedResource($scope.article.thumbnail).get(function() {
         $scope.show_loading = false;
       });
     };
@@ -661,13 +688,13 @@ kompresControllers.controller('ReportCtrl', ['$scope', '$mdDialog',
   }
 ]);
 
-kompresControllers.controller('ReportListCtrl', ['$scope', 'Reports', 'djangoAuth', '$resource', '$filter',
-  function($scope, Reports, djangoAuth, $resource, $filter) {
+kompresControllers.controller('ReportListCtrl', ['$scope', 'Reports', 'djangoAuth', 'cachedResource', '$filter',
+  function($scope, Reports, djangoAuth, cachedResource, $filter) {
     $scope.user = djangoAuth.profile().then(function(data){
       $scope.user = data;
       $scope.reports_resolved = [];
       angular.forEach($scope.user.reports, function(report){
-        $resource(report + '?format=json').get(function(data){
+        cachedResource(report + '?format=json').get(function(data){
           $scope.reports_resolved.push(data);
           if ($scope.reports_resolved.length == $scope.user.reports.length){
             $scope.reports_resolved = $filter('orderBy')($scope.reports_resolved, '-created_date');
@@ -678,15 +705,15 @@ kompresControllers.controller('ReportListCtrl', ['$scope', 'Reports', 'djangoAut
   }
 ]);
 
-kompresControllers.controller('ReportListRepeatCtrl', ['$scope', '$resource', '$exceptionHandler',
-  function($scope, $resource, $exceptionHandler) {
+kompresControllers.controller('ReportListRepeatCtrl', ['$scope', 'cachedResource', '$exceptionHandler',
+  function($scope, cachedResource, $exceptionHandler) {
     var init = function() {
       if (typeof $scope.report === "undefined") {
         $exceptionHandler("The ReportListRepeatController must be initialized with a report in scope");
       }
-      $scope.travel_destination = $resource($scope.report.travel_destination).get();
+      $scope.travel_destination = cachedResource($scope.report.travel_destination).get();
       if ($scope.report.images.length > 0){
-        $scope.image = $resource($scope.report.images[0]).get();
+        $scope.image = cachedResource($scope.report.images[0]).get();
       }
     };
 
@@ -694,12 +721,12 @@ kompresControllers.controller('ReportListRepeatCtrl', ['$scope', '$resource', '$
   }
 ]);
 
-kompresControllers.controller('VisitsCtrl', ['$scope', 'Visits', '$resource',
-  function($scope, Visits, $resource) {
+kompresControllers.controller('VisitsCtrl', ['$scope', 'Visits', 'cachedResource',
+  function($scope, Visits, cachedResource) {
     $scope.show = false;
     $scope.visits = Visits.query(function(data){
       angular.forEach(data.results, function(visit){
-        $resource(visit.travel_destination).get(function(dest){
+        cachedResource(visit.travel_destination).get(function(dest){
           if (dest.id == $scope.$parent.travel_destination.id){
             $scope.show = false;
           }
@@ -710,8 +737,8 @@ kompresControllers.controller('VisitsCtrl', ['$scope', 'Visits', '$resource',
   }
 ]);
 
-kompresControllers.controller('HomeCtrl', ['$scope', 'Visits', 'TravelDestinations', 'Articles', 'Page', '$resource', 'ColorRandomizer',
-  function($scope, Visits, TravelDestinations, Articles, Page, $resource, ColorRandomizer) {
+kompresControllers.controller('HomeCtrl', ['$scope', 'Visits', 'TravelDestinations', 'Articles', 'Page', 'cachedResource', 'ColorRandomizer',
+  function($scope, Visits, TravelDestinations, Articles, Page, cachedResource, ColorRandomizer) {
     $scope.homelink_counter = 0;
     $scope.resolved = false;
     $scope.icon = 'keyboard_arrow_right';
@@ -722,7 +749,7 @@ kompresControllers.controller('HomeCtrl', ['$scope', 'Visits', 'TravelDestinatio
       $scope.page.home_links = [];
 
       angular.forEach($scope.page.homelinks, function(home_link){
-        $resource(home_link).get(function(data){
+        cachedResource(home_link).get(function(data){
           data.color = ColorRandomizer.getColor();
           data.color2 = ColorRandomizer.getColor();
           $scope.page.home_links.push(data);
@@ -823,9 +850,9 @@ kompresControllers.controller('SearchCtrl', ['$scope', 'ArticleSearch', '$timeou
   }
 ]);
 
-kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$routeParams', '$resource', '$route',
+kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$routeParams', 'cachedResource', '$route',
   'travel_destinations', 'Marker', 'uiGmapGoogleMapApi', '$rootScope',
-  function($scope, TravelDestinations, $routeParams, $resource, $route, travel_destinations, Marker, uiGmapGoogleMapApi, $rootScope) {
+  function($scope, TravelDestinations, $routeParams, cachedResource, $route, travel_destinations, Marker, uiGmapGoogleMapApi, $rootScope) {
     $scope.map = {
       "center": {
         "latitude": -4.6111678,

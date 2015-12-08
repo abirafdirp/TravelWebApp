@@ -111,7 +111,7 @@
 							</ng-md-icon>
 							<md-autocomplete
 											md-search-text="district_search"
-											md-items="district in $parent.districts.results | filter:current_location | orderBy: 'name'"
+											md-items="district in $parent.districts.results | filter: district_search | orderBy: 'name'"
 											md-item-text="district.name"
 											md-selected-item-change="searchSelectedChange(district)"
 										 	md-search-text-change="searchTextChange(district_search)"
@@ -143,6 +143,7 @@
 												 ng-click="orderByDistance(distance_toggle)"
 												 flex="100"
 												 ng-hide="authenticated"
+												 ng-disabled="!current_district"
 												 class="md-body-1 checkbox-dest">
 							Urutkan berdasarkan lokasi terdekat
 						</md-checkbox>

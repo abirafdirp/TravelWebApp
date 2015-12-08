@@ -29,6 +29,30 @@ kompresServices.service('ColorRandomizer', ['$rootScope',
   }
 ]);
 
+kompresApp.factory('cachedResource', function ($resource, $cacheFactory) {
+  var cache = $cacheFactory('resourceCache');
+
+  var interceptor = {
+    response: function (response) {
+      cache.remove(response.config.url);
+      console.log('cache removed', response.config.url);
+      return response;
+    }
+  };
+
+  return function (url, paramDefaults, actions, options) {
+    actions = angular.extend({}, actions, {
+      'get':    { method: 'GET', cache: cache },
+      'query':  { method: 'GET', cache: cache},
+      'save':   { method: 'POST', interceptor: interceptor },
+      'remove': { method: 'DELETE', interceptor: interceptor },
+      'delete': { method: 'DELETE', interceptor: interceptor },
+    });
+
+    return $resource(url, paramDefaults, actions, options);
+  };
+});
+
 
 kompresServices.service('PostCategory', ['$rootScope', 'ColorRandomizer',
   function($rootScope, ColorRandomizer) {
@@ -49,8 +73,8 @@ kompresServices.service('PostCategory', ['$rootScope', 'ColorRandomizer',
   }
 ]);
 
-kompresServices.service('Marker', ['$resource', '$rootScope',
-  function($resource, $rootScope) {
+kompresServices.service('Marker', ['cachedResource', '$rootScope',
+  function(cachedResource, $rootScope) {
     this.markers = [];
 
     function Marker(id, latitude, longitude, thumbnail_image, short_description, name, type) {
@@ -219,13 +243,13 @@ kompresServices.service('TravelDestinationSearch', [
   }
 ]);
 
-kompresServices.factory('TravelDestinationContents', ['$resource',
-  function($resource) {
+kompresServices.factory('TravelDestinationContents', ['cachedResource',
+  function(cachedResource) {
     return {
-      list : $resource('/api/traveldestinationcontents/?format=json', {}, {
+      list : cachedResource('/api/traveldestinationcontents/?format=json', {}, {
       query: {method: 'GET'}
       }),
-      detail : $resource('/api/traveldestinationcontents/?travel_destination=:travel_destination_name', {
+      detail : cachedResource('/api/traveldestinationcontents/?travel_destination=:travel_destination_name', {
         travel_destination_name:'@travel_destination_name'
       }, {
       query: {method: 'GET'}
@@ -234,21 +258,21 @@ kompresServices.factory('TravelDestinationContents', ['$resource',
   }
 ]);
 
-kompresServices.factory('Regions', ['$resource',
-  function($resource){
-    return $resource('/api/regions/?format=json', {}, {
+kompresServices.factory('Regions', ['cachedResource',
+  function(cachedResource){
+    return cachedResource('/api/regions/?format=json', {}, {
       query: {method:'GET'}
     })
   }
 ]);
 
-kompresServices.factory('Transportations', ['$resource',
-  function($resource) {
+kompresServices.factory('Transportations', ['cachedResource',
+  function(cachedResource) {
     return {
-      list : $resource('/api/transportations/?format=json', {}, {
+      list : cachedResource('/api/transportations/?format=json', {}, {
       query: {method: 'GET'}
       }),
-      in_district : $resource('/api/transportations/?district=:district', {
+      in_district : cachedResource('/api/transportations/?district=:district', {
         district:'@district'
       }, {
       query: {method: 'GET'}
@@ -257,21 +281,21 @@ kompresServices.factory('Transportations', ['$resource',
   }
 ]);
 
-kompresServices.factory('Provinces', ['$resource',
-  function($resource){
-    return $resource('/api/provinces/?format=json', {}, {
+kompresServices.factory('Provinces', ['cachedResource',
+  function(cachedResource){
+    return cachedResource('/api/provinces/?format=json', {}, {
       query: {method:'GET'}
     })
   }
 ]);
 
-kompresServices.factory('Districts', ['$resource',
-  function($resource) {
+kompresServices.factory('Districts', ['cachedResource',
+  function(cachedResource) {
     return {
-      list : $resource('/api/districts/?format=json&fields=id,name,latitude,longitude,province,region', {}, {
+      list : cachedResource('/api/districts/?format=json&fields=id,name,latitude,longitude,province,region', {}, {
       query: {method: 'GET'}
       }),
-      transport : $resource('/api/districts/?transportation=:transportation', {
+      transport : cachedResource('/api/districts/?transportation=:transportation', {
         transportation:'@transportation'
       }, {
       query: {method: 'GET'}
@@ -280,33 +304,18 @@ kompresServices.factory('Districts', ['$resource',
   }
 ]);
 
-kompresServices.factory('TravelDestinations', ['$resource',
-  function($resource) {
+kompresServices.factory('TravelDestinations', ['cachedResource',
+  function(cachedResource) {
     return {
-      list : $resource('/api/traveldestinations/?format=json&fields=id,latitude,longitude,name,district,short_description,type,thumbnail', {}, {
+      list : cachedResource('/api/traveldestinations/?format=json&fields=id,latitude,longitude,name,district,short_description,type,thumbnail', {}, {
       query: {method: 'GET'}
       }),
-      detail : $resource('/api/traveldestinations/?name=:travel_destination_name', {
+      detail : cachedResource('/api/traveldestinations/?name=:travel_destination_name', {
         travel_destination_name:'@travel_destination_name'
       }, {
       query: {method: 'GET'}
       }),
-      model : $resource('/api/traveldestinations/?name=:travel_destination_name&fields=model_3d', {
-        travel_destination_name:'@travel_destination_name'
-      }, {
-      query: {method: 'GET'}
-      })
-    }
-  }
-]);
-
-kompresServices.factory('TravelDestinationsContents', ['$resource',
-  function($resource) {
-    return {
-      list : $resource('/api/traveldestinationcontents/?format=json', {}, {
-      query: {method: 'GET'}
-      }),
-      detail : $resource('/api/traveldestinationcontents/?name=:travel_destination_name', {
+      model : cachedResource('/api/traveldestinations/?name=:travel_destination_name&fields=model_3d', {
         travel_destination_name:'@travel_destination_name'
       }, {
       query: {method: 'GET'}
@@ -315,13 +324,28 @@ kompresServices.factory('TravelDestinationsContents', ['$resource',
   }
 ]);
 
-kompresServices.factory('Articles', ['$resource',
-  function($resource) {
+kompresServices.factory('TravelDestinationsContents', ['cachedResource',
+  function(cachedResource) {
     return {
-      list : $resource('/api/articles/?format=json&fields=title,author,category,short_description,date,thumbnail', {}, {
+      list : cachedResource('/api/traveldestinationcontents/?format=json', {}, {
       query: {method: 'GET'}
       }),
-      detail : $resource('/api/articles/?title=:article_name', {
+      detail : cachedResource('/api/traveldestinationcontents/?name=:travel_destination_name', {
+        travel_destination_name:'@travel_destination_name'
+      }, {
+      query: {method: 'GET'}
+      })
+    }
+  }
+]);
+
+kompresServices.factory('Articles', ['cachedResource',
+  function(cachedResource) {
+    return {
+      list : cachedResource('/api/articles/?format=json&fields=title,author,category,short_description,date,thumbnail', {}, {
+      query: {method: 'GET'}
+      }),
+      detail : cachedResource('/api/articles/?title=:article_name', {
         article_name:'@article_name'
       }, {
       query: {method: 'GET'}
@@ -330,65 +354,65 @@ kompresServices.factory('Articles', ['$resource',
   }
 ]);
 
-kompresServices.factory('Visits', ['$resource',
-  function($resource){
-    return $resource('/api/user/visits/?format=json', {}, {
+kompresServices.factory('Visits', ['cachedResource',
+  function(cachedResource){
+    return cachedResource('/api/user/visits/?format=json', {}, {
       query: {method:'GET'}
     })
   }
 ]);
 
-kompresServices.factory('Reports', ['$resource',
-  function($resource){
-    return $resource('/api/user/reports/?format=json', {}, {
+kompresServices.factory('Reports', ['cachedResource',
+  function(cachedResource){
+    return cachedResource('/api/user/reports/?format=json', {}, {
       query: {method:'GET'}
     })
   }
 ]);
 
-kompresServices.factory('ReportImages', ['$resource',
-  function($resource){
-    return $resource('/api/user/reportimages/?format=json', {}, {
+kompresServices.factory('ReportImages', ['cachedResource',
+  function(cachedResource){
+    return cachedResource('/api/user/reportimages/?format=json', {}, {
       query: {method:'GET'}
     })
   }
 ]);
 
-kompresServices.factory('Images', ['$resource',
-  function($resource){
-    return $resource('/api/Images/?format=json', {}, {
+kompresServices.factory('Images', ['cachedResource',
+  function(cachedResource){
+    return cachedResource('/api/Images/?format=json', {}, {
       query: {method:'GET'}
     })
   }
 ]);
 
-kompresServices.factory('ArticleImages', ['$resource',
-  function($resource){
-    return $resource('/api/articleimages/?format=json', {}, {
+kompresServices.factory('ArticleImages', ['cachedResource',
+  function(cachedResource){
+    return cachedResource('/api/articleimages/?format=json', {}, {
       query: {method:'GET', isArray: true}
     })
   }
 ]);
 
-kompresServices.factory('TravelDestinationImages', ['$resource',
-  function($resource){
-    return $resource('/api/traveldestinationimages/?format=json', {}, {
+kompresServices.factory('TravelDestinationImages', ['cachedResource',
+  function(cachedResource){
+    return cachedResource('/api/traveldestinationimages/?format=json', {}, {
       query: {method:'GET'}
     })
   }
 ]);
 
-kompresServices.factory('FeaturedTravelDestinations', ['$resource',
-  function($resource){
-    return $resource('/api/featuredtraveldestinations/?format=json', {}, {
+kompresServices.factory('FeaturedTravelDestinations', ['cachedResource',
+  function(cachedResource){
+    return cachedResource('/api/featuredtraveldestinations/?format=json', {}, {
       query: {method:'GET'}
     })
   }
 ]);
 
-kompresServices.factory('Page', ['$resource',
-  function($resource){
-    return $resource('/api/pages/?format=json', {}, {
+kompresServices.factory('Page', ['cachedResource',
+  function(cachedResource){
+    return cachedResource('/api/pages/?format=json', {}, {
       query: {method:'GET'}
     })
   }

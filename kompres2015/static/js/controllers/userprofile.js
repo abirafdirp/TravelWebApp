@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularDjangoRegistrationAuthApp')
-    .controller('UserprofileCtrl', ['$scope', 'djangoAuth', 'Validate', '$resource', 'Districts', function ($scope, djangoAuth, Validate, $resource, Districts) {
+    .controller('UserprofileCtrl', ['$scope', 'djangoAuth', 'Validate', 'cachedResource', 'Districts', function ($scope, djangoAuth, Validate, cachedResource, Districts) {
       $scope.model = {'first_name':'','last_name':'','email':'','district':''};
       $scope.complete = false;
       $scope.show_loading = false;
@@ -12,7 +12,7 @@ angular.module('angularDjangoRegistrationAuthApp')
       };
       djangoAuth.profile().then(function(data){
         $scope.model = data;
-        $scope.model.district_name = $resource(data.district+'?format=json').get(function(){
+        $scope.model.district_name = cachedResource(data.district+'?format=json').get(function(){
           if ($scope.model.district_name.name){
             $scope.district_search = $scope.model.district_name.name;
           }
