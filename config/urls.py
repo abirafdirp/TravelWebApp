@@ -71,6 +71,9 @@ urlpatterns += [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/docs/', include('rest_framework_swagger.urls')),
 
+    # django-rest-auth will call internal django password reset and try to find
+    # a url named password_reset_confirm, unlike email verification,
+    # it does not do that.
     url(r'^akun/konfirmasi-reset-password/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})$',
         TemplateView.as_view(template_name='base.html'), name='password_reset_confirm'),
 
@@ -84,7 +87,7 @@ urlpatterns += [
 ]
 
 
-# because I use hyperlinkedfields, I can't use default routers anymore. Every
+# Because I use hyperlinkedfields, I can't use default routers anymore. every
 # urls must be explicitly defined.
 region_list = RegionViewSet.as_view({
     'get': 'list',
