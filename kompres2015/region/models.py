@@ -5,10 +5,14 @@ from kompres2015.util.models import TimeStampedModel
 class Location(TimeStampedModel):
     latitude = models.FloatField()
     longitude = models.FloatField()
+    name = models.CharField(
+        max_length=40,
+        unique=True,
+        verbose_name='Nama'
+    )
 
 
 class Region(Location):
-    name = models.CharField(max_length=40, unique=True)
 
     class Meta:
         verbose_name = "Wilayah"
@@ -31,7 +35,6 @@ class Region(Location):
 
 
 class Province(Location):
-    name = models.CharField(max_length=40, unique=True)
     region = models.ForeignKey(
         Region,
         related_name='provinces',
@@ -55,7 +58,6 @@ class Province(Location):
 
 
 class District(Location):
-    name = models.CharField(max_length=40, unique=True)
     province = models.ForeignKey(
         Province,
         related_name='districts',

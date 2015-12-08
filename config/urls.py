@@ -47,8 +47,6 @@ urlpatterns = [
         name="about"),
 
     # Django Admin, use {% url 'admin:index' %}
-    # grappelli urls must be placed before admin
-    url(r'^grappelli/', include('grappelli.urls')),
     url(settings.ADMIN_URL, include(admin.site.urls)),
 
     # User management
@@ -216,8 +214,8 @@ urlpatterns += format_suffix_patterns([
     url(r'^api/traveldestinationimages/(?P<pk>[0-9]+)/$', travel_destination_image_detail, name='travel-destination-image-detail'),
     url(r'^api/pages/$', page_list, name='page-list'),
     url(r'^api/pages/(?P<pk>[0-9]+)/$', page_detail, name='page-detail'),
-    url(r'^api/featuredtraveldestinations/$', featured_travel_destination_list, name='featured-travel-destination-list'),
-    url(r'^api/featuredtraveldestinations/(?P<pk>[0-9]+)/$', featured_travel_destination_detail, name='featured-travel-destination-detail'),
+    # url(r'^api/featuredtraveldestinations/$', featured_travel_destination_list, name='featured-travel-destination-list'),
+    # url(r'^api/featuredtraveldestinations/(?P<pk>[0-9]+)/$', featured_travel_destination_detail, name='featured-travel-destination-detail'),
     url(r'^api/articles/$', article_list, name='article-list'),
     url(r'^api/articles/(?P<pk>[0-9]+)/$', article_detail, name='article-detail'),
     url(r'^api/homelinks/$', home_link_list, name='home-link-list'),

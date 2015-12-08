@@ -67,8 +67,12 @@ class TravelDestinationImage(Image):
         null=True,
         verbose_name='Lokasi Wisata'
     )
-    travel_destination_content = models.ForeignKey(TravelDestinationContent, related_name='images',
-                                                   blank=True, null=True)
+    travel_destination_content = models.ForeignKey(
+        TravelDestinationContent, related_name='images',
+        blank=True,
+        verbose_name='Konten Lokasi Wisata',
+        null=True
+    )
     image = models.ImageField(upload_to='travel_destinations')
 
     TYPE_CHOICES = (

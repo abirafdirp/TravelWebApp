@@ -745,7 +745,6 @@ kompresControllers.controller('HomeCtrl', ['$scope', 'Visits', 'TravelDestinatio
 
     Page.query(function(data){
       $scope.page = data.results[0];
-      $scope.page.featured_travel_destinations = [];
       $scope.page.home_links = [];
 
       angular.forEach($scope.page.homelinks, function(home_link){

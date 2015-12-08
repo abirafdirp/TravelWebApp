@@ -102,7 +102,7 @@ kompresServices.service('Marker', ['cachedResource', '$rootScope',
       if (type.toLowerCase() == 'point of interest'){
         this.icon = 'https://maps.gstatic.com/mapfiles/ms2/micons/POI.png'
       }
-      if (type.toLowerCase() == 'lokasi historis') {
+      if (type.toLowerCase() == 'monumen') {
         this.icon = 'https://maps.gstatic.com/mapfiles/ms2/micons/green-dot.png'
       }
     }
@@ -398,14 +398,6 @@ kompresServices.factory('ArticleImages', ['cachedResource',
 kompresServices.factory('TravelDestinationImages', ['cachedResource',
   function(cachedResource){
     return cachedResource('/api/traveldestinationimages/?format=json', {}, {
-      query: {method:'GET'}
-    })
-  }
-]);
-
-kompresServices.factory('FeaturedTravelDestinations', ['cachedResource',
-  function(cachedResource){
-    return cachedResource('/api/featuredtraveldestinations/?format=json', {}, {
       query: {method:'GET'}
     })
   }
