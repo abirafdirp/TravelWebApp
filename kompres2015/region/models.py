@@ -3,8 +3,8 @@ from kompres2015.util.models import TimeStampedModel
 
 
 class Location(TimeStampedModel):
-    latitude = models.FloatField(blank=True, null=True)
-    longitude = models.FloatField(blank=True, null=True)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
 
 
 class Region(Location):

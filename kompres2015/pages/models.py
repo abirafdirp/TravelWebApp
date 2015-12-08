@@ -6,23 +6,44 @@ from kompres2015.tourism.models import TravelDestination
 
 
 class Page(TimeStampedModel):
-    video = models.TextField(blank=True, null=True, help_text="menggunakan Youtube video ID")
-    video_start = models.IntegerField(blank=True, null=True, default=0,
-                                      verbose_name="waktu dimulainya video (dalam detik)")
-    travel_destination_list_image = models.ImageField(blank=True, null=True,
-                                                      verbose_name="foto halaman depan lokasi wisata")
-    article_list_image = models.ImageField(blank=True, null=True, help_text="harap gambar berwarna gelap",
-                                           verbose_name="foto halaman depan artikel")
-    article_list_tagline = models.CharField(max_length=80, blank=True, null=True,
-                                            verbose_name='tagline di halaman depan artikel')
+    video = models.TextField(
+        blank=True,
+        null=True,
+        help_text="menggunakan Youtube video ID"
+    )
+    video_start = models.IntegerField(
+        blank=True,
+        null=True,
+        default=0,
+        verbose_name="waktu dimulainya video (dalam detik)"
+    )
+    travel_destination_list_image = models.ImageField(
+        blank=True,
+        null=True,
+        verbose_name="foto halaman depan lokasi wisata"
+    )
+    article_list_image = models.ImageField(
+        blank=True,
+        null=True,
+        help_text="harap gambar berwarna gelap",
+       verbose_name="foto halaman depan artikel"
+    )
+    article_list_tagline = models.CharField(
+        max_length=80,
+        blank=True,
+        null=True,
+        verbose_name='tagline di halaman depan artikel'
+    )
 
     def admin_image1(self):
-        return '<img src="%s" style="max-width: 400px; width: 100%%;"/>' % self.article_list_image.url
+        return '<img src="%s" style="max-width: 400px; width: 100%%;"/>' % \
+               self.article_list_image.url
     admin_image1.allow_tags = True
     admin_image1.short_description = 'Preview foto halaman depan lokasi wisata'
 
     def admin_image2(self):
-        return '<img src="%s" style="max-width: 400px; width: 100%%;"/>' % self.travel_destination_list_image.url
+        return '<img src="%s" style="max-width: 400px; width: 100%%;"/>' % \
+               self.travel_destination_list_image.url
     admin_image2.allow_tags = True
     admin_image2.short_description = 'Preview foto halaman depan artikel'
 

@@ -17,12 +17,6 @@ class ReportImageAdmin(admin.ModelAdmin):
     )
 
 
-# class ImageAdmin(admin.ModelAdmin):
-#     readonly_fields = ('admin_image',)
-#     search_fields = ('name', 'tag')
-#     list_display = ['name', 'tag']
-
-
 class TravelDestinationImageAdmin(admin.ModelAdmin):
     readonly_fields = ('admin_image',)
     search_fields = ('name', 'tag')

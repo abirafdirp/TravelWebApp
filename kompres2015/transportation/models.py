@@ -15,12 +15,8 @@ class Transportation(TimeStampedModel):
         verbose_name='Kabupaten'
     )
     description = models.TextField(verbose_name='Deskripsi')
-    website = models.URLField(
-        blank=True,
-        null=True
-    )
-    # TODO unset null
-    image = models.ImageField(null=True, blank=True)
+    website = models.URLField()
+    image = models.ImageField()
 
     def admin_image(self):
         return '<img src="%s" style="max-width: 400px; width: 100%%;"/>' % self.image.url

@@ -23,8 +23,8 @@ def update_site_backward(apps, schema_editor):
     Site.objects.update_or_create(
         id=settings.SITE_ID,
         defaults={
-            "domain": "example.com",
-            "name": "example.com"
+            "domain": "https://www.pythonified.com",
+            "name": "Discover Indonesia"
         }
     )
 

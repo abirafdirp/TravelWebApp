@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import formats
 
-from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 
 from kompres2015.util.models import TimeStampedModel
 from kompres2015.region.models import District
@@ -33,29 +33,21 @@ class TravelDestination(TimeStampedModel):
         blank=True,
         null=True
     )
-    latitude = models.FloatField(blank=True, null=True)
-    longitude = models.FloatField(blank=True, null=True)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
     district = models.ForeignKey(
         District,
         verbose_name='Kabupaten',
         related_name='travel_destinations',
-        blank=True,
-        null=True
     )
     thumbnail = models.ForeignKey(
         'image.TravelDestinationImage',
-        blank=True,
-        null=True
     )
-    full_description = RichTextField(
+    full_description = RichTextUploadingField(
         verbose_name='Deskripsi lengkap',
-        blank=True,
-        null=True
     )
     short_description = models.TextField(
         verbose_name='Deskripsi Singkat',
-        blank=True,
-        null=True
     )
     model_3d = models.FileField(
         upload_to='models',
@@ -76,7 +68,7 @@ class TravelDestinationContent(TimeStampedModel):
         max_length=20,
         verbose_name='Judul'
     )
-    content = RichTextField(verbose_name='Konten')
+    content = RichTextUploadingField(verbose_name='Konten')
     travel_destination = models.ForeignKey(
         TravelDestination,
         related_name='contents'

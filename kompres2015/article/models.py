@@ -17,9 +17,6 @@ class Article(TimeStampedModel):
         verbose_name='Judul',
         unique=True,
         max_length=60)
-    article = RichTextUploadingField(
-        verbose_name='Isi artikel'
-    )
     category = models.CharField(
         max_length=30,
         choices=CATEGORY_CHOICES,
@@ -36,6 +33,9 @@ class Article(TimeStampedModel):
         ArticleImage,
         related_name='article_main_image',
         verbose_name='Foto utama'
+    )
+    article = RichTextUploadingField(
+        verbose_name='Isi artikel'
     )
 
     class Meta:
