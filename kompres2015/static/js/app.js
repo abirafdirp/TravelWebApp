@@ -57,7 +57,7 @@ angular.module('angularDjangoRegistrationAuthApp', [
             }],
           }
         })
-        .when('/rest-auth/registration/account-confirm-email/:emailVerificationToken', {
+        .when('/api/registration/account-confirm-email/:emailVerificationToken', {
           templateUrl: '/partials/verifyemail/',
           resolve: {
             authenticated: ['djangoAuth', function(djangoAuth){
