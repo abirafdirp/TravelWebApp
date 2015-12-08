@@ -94,7 +94,7 @@ class Visit(TimeStampedModel):
     class Meta:
         verbose_name = 'Kunjungan'
         verbose_name_plural = 'Data Kunjungan'
-        unique_together = ('creation_date', 'travel_destination', 'user')
+        unique_together = ('created_date', 'travel_destination', 'user')
 
     def __str__(self):
         return str(self.created_date) + ' ' + self.user.username + ' ' + self.travel_destination.name
