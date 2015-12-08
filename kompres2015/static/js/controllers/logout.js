@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('angularDjangoRegistrationAuthApp')
-  .controller('LogoutCtrl', function ($scope, $location, djangoAuth) {
-    djangoAuth.logout();
-  });
+  .controller('LogoutCtrl',['$scope', '$location', 'djangoAuth',
+    function ($scope, $location, djangoAuth) {
+      djangoAuth.logout();
+    }]);

@@ -53,7 +53,7 @@ THIRD_PARTY_APPS = (
     'rest_framework_swagger',
 
     'django_extensions',
-
+    'compressor',
     'annoying',
 )
 
@@ -202,6 +202,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 # MEDIA CONFIGURATION
@@ -296,3 +297,6 @@ REST_AUTH_SERIALIZERS = {
 # secret keys
 FB_CLIENTID = env.str('FB_CLIENTID')
 GMAPS_TOKEN = env.str('GMAPS_TOKEN')
+
+# minification
+COMPRESS_ENABLED = False

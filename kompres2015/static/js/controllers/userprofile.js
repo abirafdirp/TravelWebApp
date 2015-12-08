@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('angularDjangoRegistrationAuthApp')
-    .controller('UserprofileCtrl', ['$scope', 'djangoAuth', 'Validate', 'cachedResource', 'Districts', function ($scope, djangoAuth, Validate, cachedResource, Districts) {
+  .controller('UserprofileCtrl', ['$scope', 'djangoAuth', 'Validate', 'cachedResource', 'Districts',
+    function ($scope, djangoAuth, Validate, cachedResource, Districts) {
       $scope.model = {'first_name':'','last_name':'','email':'','district':''};
       $scope.complete = false;
       $scope.show_loading = false;
@@ -24,15 +25,15 @@ angular.module('angularDjangoRegistrationAuthApp')
         Validate.form_validation(formData,$scope.errors);
         if(!formData.$invalid){
           djangoAuth.updateProfile(model)
-              .then(function(data){
-                // success case
-                $scope.show_loading = true;
-                $scope.complete = true;
-              },function(data){
-                // error case
-                $scope.show_loading = false;
-                $scope.error = data;
-              });
+            .then(function(data){
+              // success case
+              $scope.show_loading = true;
+              $scope.complete = true;
+            },function(data){
+              // error case
+              $scope.show_loading = false;
+              $scope.error = data;
+            });
         }
         else {
           $scope.show_loading = false;

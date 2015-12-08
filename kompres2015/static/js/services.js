@@ -7,12 +7,12 @@ kompresServices.service('ColorRandomizer', ['$rootScope',
     // 1 red 2 blue-grey 3 orange 4 indigo 5 purple
     // all colors above are material's colors
     this.colors = [
-        '#F44336',
-        '#607D8B',
-        '#ff5722',
-        '#3f51b5',
-        '#673ab7',
-        '#2196F3'
+      '#F44336',
+      '#607D8B',
+      '#ff5722',
+      '#3f51b5',
+      '#673ab7',
+      '#2196F3'
     ];
     // must be list of index of colors
     this.colors_index = [0,1,2,3,4,5];
@@ -29,29 +29,30 @@ kompresServices.service('ColorRandomizer', ['$rootScope',
   }
 ]);
 
-kompresApp.factory('cachedResource', function ($resource, $cacheFactory) {
-  var cache = $cacheFactory('resourceCache');
+kompresApp.factory('cachedResource',['$resource', '$cacheFactory',
+  function ($resource, $cacheFactory) {
+    var cache = $cacheFactory('resourceCache');
 
-  var interceptor = {
-    response: function (response) {
-      cache.remove(response.config.url);
-      console.log('cache removed', response.config.url);
-      return response;
-    }
-  };
+    var interceptor = {
+      response: function (response) {
+        cache.remove(response.config.url);
+        console.log('cache removed', response.config.url);
+        return response;
+      }
+    };
 
-  return function (url, paramDefaults, actions, options) {
-    actions = angular.extend({}, actions, {
-      'get':    { method: 'GET', cache: cache },
-      'query':  { method: 'GET', cache: cache},
-      'save':   { method: 'POST', interceptor: interceptor },
-      'remove': { method: 'DELETE', interceptor: interceptor },
-      'delete': { method: 'DELETE', interceptor: interceptor },
-    });
+    return function (url, paramDefaults, actions, options) {
+      actions = angular.extend({}, actions, {
+        'get':    { method: 'GET', cache: cache },
+        'query':  { method: 'GET', cache: cache},
+        'save':   { method: 'POST', interceptor: interceptor },
+        'remove': { method: 'DELETE', interceptor: interceptor },
+        'delete': { method: 'DELETE', interceptor: interceptor },
+      });
 
-    return $resource(url, paramDefaults, actions, options);
-  };
-});
+      return $resource(url, paramDefaults, actions, options);
+    };
+  }]);
 
 
 kompresServices.service('PostCategory', ['$rootScope', 'ColorRandomizer',
@@ -247,12 +248,12 @@ kompresServices.factory('TravelDestinationContents', ['cachedResource',
   function(cachedResource) {
     return {
       list : cachedResource('/api/traveldestinationcontents/?format=json', {}, {
-      query: {method: 'GET'}
+        query: {method: 'GET'}
       }),
       detail : cachedResource('/api/traveldestinationcontents/?travel_destination=:travel_destination_name', {
         travel_destination_name:'@travel_destination_name'
       }, {
-      query: {method: 'GET'}
+        query: {method: 'GET'}
       })
     }
   }
@@ -270,12 +271,12 @@ kompresServices.factory('Transportations', ['cachedResource',
   function(cachedResource) {
     return {
       list : cachedResource('/api/transportations/?format=json', {}, {
-      query: {method: 'GET'}
+        query: {method: 'GET'}
       }),
       in_district : cachedResource('/api/transportations/?district=:district', {
         district:'@district'
       }, {
-      query: {method: 'GET'}
+        query: {method: 'GET'}
       })
     }
   }
@@ -293,12 +294,12 @@ kompresServices.factory('Districts', ['cachedResource',
   function(cachedResource) {
     return {
       list : cachedResource('/api/districts/?format=json&fields=id,name,latitude,longitude,province,region', {}, {
-      query: {method: 'GET'}
+        query: {method: 'GET'}
       }),
       transport : cachedResource('/api/districts/?transportation=:transportation', {
         transportation:'@transportation'
       }, {
-      query: {method: 'GET'}
+        query: {method: 'GET'}
       })
     }
   }
@@ -308,17 +309,17 @@ kompresServices.factory('TravelDestinations', ['cachedResource',
   function(cachedResource) {
     return {
       list : cachedResource('/api/traveldestinations/?format=json&fields=id,latitude,longitude,name,district,short_description,type,thumbnail', {}, {
-      query: {method: 'GET'}
+        query: {method: 'GET'}
       }),
       detail : cachedResource('/api/traveldestinations/?name=:travel_destination_name', {
         travel_destination_name:'@travel_destination_name'
       }, {
-      query: {method: 'GET'}
+        query: {method: 'GET'}
       }),
       model : cachedResource('/api/traveldestinations/?name=:travel_destination_name&fields=model_3d', {
         travel_destination_name:'@travel_destination_name'
       }, {
-      query: {method: 'GET'}
+        query: {method: 'GET'}
       })
     }
   }
@@ -328,12 +329,12 @@ kompresServices.factory('TravelDestinationsContents', ['cachedResource',
   function(cachedResource) {
     return {
       list : cachedResource('/api/traveldestinationcontents/?format=json', {}, {
-      query: {method: 'GET'}
+        query: {method: 'GET'}
       }),
       detail : cachedResource('/api/traveldestinationcontents/?name=:travel_destination_name', {
         travel_destination_name:'@travel_destination_name'
       }, {
-      query: {method: 'GET'}
+        query: {method: 'GET'}
       })
     }
   }
@@ -343,12 +344,12 @@ kompresServices.factory('Articles', ['cachedResource',
   function(cachedResource) {
     return {
       list : cachedResource('/api/articles/?format=json&fields=title,author,category,short_description,date,thumbnail', {}, {
-      query: {method: 'GET'}
+        query: {method: 'GET'}
       }),
       detail : cachedResource('/api/articles/?title=:article_name', {
         article_name:'@article_name'
       }, {
-      query: {method: 'GET'}
+        query: {method: 'GET'}
       })
     }
   }
