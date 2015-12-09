@@ -64,5 +64,7 @@ kompres2015/media/
 !**/migrations/__init__.py
 **/staticfiles/CACHE/
 
+dump.json
+
 # generated staticfiles folder
 **/staticfiles/*

@@ -248,7 +248,6 @@ SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-COURRIERS_BACKEND_CLASS = 'courriers.backends.simple.SimpleBackend'
 
 # SLUGLIFIER
 AUTOSLUG_SLUGIFY_FUNCTION = 'slugify.slugify'

@@ -4,6 +4,6 @@ from kompres2015.custom_email.models import Email
 
 
 class EmailAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['subject', 'created_date']
 
 admin.site.register(Email, EmailAdmin)

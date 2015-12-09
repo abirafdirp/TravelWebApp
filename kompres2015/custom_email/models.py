@@ -12,3 +12,6 @@ class Email(TimeStampedModel):
     class Meta:
         verbose_name = 'Email'
         verbose_name_plural = 'Email'
+
+    def __str__(self):
+        return self.subject
