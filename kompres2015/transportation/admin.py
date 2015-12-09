@@ -6,7 +6,7 @@ from kompres2015.transportation.models import Transportation
 
 
 class TransportationAdmin(admin.ModelAdmin):
-    readonly_fields = ('admin_image',)
+    readonly_fields = ('admin_image', 'modified_date')
 
     list_display = ['name', 'link_it', 'get_districts']
 

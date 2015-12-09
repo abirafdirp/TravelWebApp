@@ -16,7 +16,7 @@ class ReportImagesInline(admin.StackedInline):
     can_delete = False
     extra = 0
 
-    readonly_fields = ('admin_image',)
+    readonly_fields = ('admin_image', 'modified_date')
 
 
 class TravelDestinationContentInline(admin.StackedInline):
@@ -24,6 +24,7 @@ class TravelDestinationContentInline(admin.StackedInline):
     max_num = 4
     extra = 4
     verbose_name_plural = 'Konten-konten Lokasi Wisata'
+    readonly_fields = ('modified_date',)
 
 
 class TravelDestinationImageInline(admin.StackedInline):
@@ -32,7 +33,7 @@ class TravelDestinationImageInline(admin.StackedInline):
     extra = 20
     verbose_name_plural = 'Foto-foto Lokasi Wisata'
 
-    readonly_fields = ('admin_image',)
+    readonly_fields = ('admin_image', 'modified_date')
 
 
 class ReportAdmin(admin.ModelAdmin):
@@ -78,6 +79,7 @@ class TravelDestinationAdmin(admin.ModelAdmin):
         TravelDestinationImageInline,
     ]
 
+    readonly_fields = ('modified_date',)
     search_fields = ['name']
 
     list_display = ['name', 'type', 'district', 'get_province']

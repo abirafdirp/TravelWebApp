@@ -68,6 +68,7 @@ LOCAL_APPS = (
     'kompres2015.pages',
     'kompres2015.article',
     'kompres2015.transportation',
+    'kompres2015.custom_email',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -246,9 +247,8 @@ SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = env.str('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env.str('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
+COURRIERS_BACKEND_CLASS = 'courriers.backends.simple.SimpleBackend'
 
 # SLUGLIFIER
 AUTOSLUG_SLUGIFY_FUNCTION = 'slugify.slugify'
@@ -299,4 +299,4 @@ FB_CLIENTID = env.str('FB_CLIENTID')
 GMAPS_TOKEN = env.str('GMAPS_TOKEN')
 
 # minification
-COMPRESS_ENABLED = True
+COMPRESS_ENABLED = False

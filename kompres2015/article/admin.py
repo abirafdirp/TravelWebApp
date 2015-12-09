@@ -6,7 +6,7 @@ from kompres2015.image.models import ArticleImage
 
 
 class ArticleImageInline(admin.TabularInline):
-    readonly_fields = ('admin_image',)
+    readonly_fields = ('admin_image', 'modified_date')
     model = ArticleImage
 
 

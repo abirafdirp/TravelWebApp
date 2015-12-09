@@ -3,7 +3,6 @@ from django.contrib import admin
 from jet.filters import RelatedFieldAjaxListFilter
 
 from kompres2015.image.models import ReportImage
-from kompres2015.image.models import Image
 from kompres2015.image.models import TravelDestinationImage
 from kompres2015.image.models import ArticleImage
 
@@ -18,7 +17,7 @@ class ReportImageAdmin(admin.ModelAdmin):
 
 
 class TravelDestinationImageAdmin(admin.ModelAdmin):
-    readonly_fields = ('admin_image',)
+    readonly_fields = ('admin_image', 'modified_date')
     search_fields = ('name', 'tag')
     list_display = ['name', 'admin_image_list', 'travel_destination', 'type', 'tag']
     list_filter = (
@@ -28,7 +27,7 @@ class TravelDestinationImageAdmin(admin.ModelAdmin):
 
 
 class ArticleImageAdmin(admin.ModelAdmin):
-    readonly_fields = ('admin_image',)
+    readonly_fields = ('admin_image', 'modified_date')
     search_fields = ('name', 'tag')
     list_display = ['name', 'admin_image_list', 'article', 'type', 'tag']
     list_filter = (

@@ -1,0 +1,1 @@
+default_app_config = 'kompres2015.custom_email.apps.CustomEmailConfig'
