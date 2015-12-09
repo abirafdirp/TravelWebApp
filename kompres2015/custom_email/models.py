@@ -7,6 +7,7 @@ from kompres2015.util.models import TimeStampedModel
 
 class Email(TimeStampedModel):
     subject = models.TextField()
+    content_plaintext = models.TextField()
     content = RichTextUploadingField()
 
     class Meta:

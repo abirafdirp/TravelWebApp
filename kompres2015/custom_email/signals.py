@@ -8,9 +8,10 @@ def send_email(sender, instance, created, **kwargs):
     users = list(User.objects.values_list('email', flat=True))
     mail.send_mail(
         instance.subject,
-        instance.content,
+        instance.content_plaintext,
         'abiraf.bot@gmail.com',
-        users
+        users,
+        html_message=instance.content,
     )
 
 post_save.connect(send_email, sender=Email)
