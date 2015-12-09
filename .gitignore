@@ -56,15 +56,12 @@ node_modules/
 # virtual environments
 .env
 
-# User-uploaded media
-kompres2015/media/
 
 # migrations
 **/migrations/*.*
 !**/migrations/__init__.py
 **/staticfiles/CACHE/
 
-dump.json
 
 # generated staticfiles folder
 **/staticfiles/*
