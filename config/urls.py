@@ -82,6 +82,8 @@ urlpatterns += [
     # User management
     url(r'^accounts/', include('allauth.urls')),
 
+    url(r'^resources/', include('filer.urls')),
+
     url(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS
     url(r'^jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),  # Django JET dashboard URLS
 ]

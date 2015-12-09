@@ -52,6 +52,9 @@ THIRD_PARTY_APPS = (
     # DRF auto generated docs
     'rest_framework_swagger',
 
+    'filer',
+    'easy_thumbnails',
+
     'django_extensions',
     'compressor',
     'annoying',
@@ -299,3 +302,7 @@ GMAPS_TOKEN = env.str('GMAPS_TOKEN')
 
 # minification
 COMPRESS_ENABLED = False
+
+THUMBNAIL_HIGH_RESOLUTION = True
+FILER_CANONICAL_URL = 'public/'
+FILER_DUMP_PAYLOAD = True
