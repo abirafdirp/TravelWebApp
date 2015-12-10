@@ -7,11 +7,11 @@
 	<div ng-if="!show_loading" layout="column" layout-fill ng-repeat="travel_destination in travel_destination.results" class="animated fadeIn">
 		<div layout="row">
 			<h2 hide-sm hide-md ng-repeat="image in main_images" class="tagline md-headline" flex="60"
-					ng-if="isCurrentSlideIndex($index)">{$image.tag$}</h2>
+					ng-if="isCurrentSlideIndex($index) && image.tag">{$image.tag$}</h2>
 			<h2 hide-md hide-lg hide-gt-lg ng-repeat="image in main_images" class="tagline-mobile md-subhead" flex="100"
-					ng-if="isCurrentSlideIndex($index)">{$image.tag$}</h2>
+					ng-if="isCurrentSlideIndex($index) && image.tag">{$image.tag$}</h2>
 			<h2 hide-sm hide-lg hide-gt-lg ng-repeat="image in main_images" class="tagline-medium md-subhead" flex="100"
-					ng-if="isCurrentSlideIndex($index)">{$image.tag$}</h2>
+					ng-if="isCurrentSlideIndex($index) && image.tag">{$image.tag$}</h2>
 		</div>
 		<div class="slider">
 			<ul rn-carousel rn-carousel-auto-slide="10">
@@ -40,7 +40,7 @@
 						<div ng-bind-html="travel_destination_content.content | trustAsHtml"></div>
 					</md-tab-body>
 				</md-tab>
-				<md-tab label="metoda transportasi">
+				<md-tab label="metoda transportasi" ng-if="transportations.results.length > 0">
 					<div class='md-padding'>
 
 

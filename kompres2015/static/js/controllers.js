@@ -445,12 +445,18 @@ kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route'
       });
 
       $scope.travel_destination_contents = [];
-      angular.forEach($scope.travel_destination.results[0].contents, function(content, index){
-        $scope.travel_destination_contents.push(cachedResource(content+'?format=json').get());
-        if (index == $scope.travel_destination.results.length - 1){
-          $scope.show_loading = false;
-        }
-      });
+      if ($scope.travel_destination.results[0].contents.length > 0){
+        angular.forEach($scope.travel_destination.results[0].contents, function(content, index){
+          $scope.travel_destination_contents.push(cachedResource(content+'?format=json').get());
+          if (index == $scope.travel_destination.results.length - 1){
+            $scope.show_loading = false;
+          }
+        });
+      }
+      else {
+        $scope.show_loading = false;
+      }
+
 
       $scope.showVisit = function(travel_destination) {
         $mdDialog.show({
