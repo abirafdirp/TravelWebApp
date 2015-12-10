@@ -65,7 +65,7 @@ class TravelDestination(TimeStampedModel):
 
 class TravelDestinationContent(TimeStampedModel):
     name = models.CharField(
-        max_length=20,
+        max_length=35,
         verbose_name='Judul'
     )
     content = RichTextUploadingField(verbose_name='Konten')
