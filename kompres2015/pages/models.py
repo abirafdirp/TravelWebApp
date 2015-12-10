@@ -21,12 +21,14 @@ class Page(TimeStampedModel):
         blank=True,
         null=True,
         verbose_name="foto halaman depan lokasi wisata",
+        upload_to='page_images'
     )
     article_list_image = models.ImageField(
         blank=True,
         null=True,
         help_text="harap gambar berwarna gelap",
         verbose_name="foto halaman depan artikel",
+        upload_to='page_images'
     )
     article_list_tagline = models.CharField(
         max_length=80,
@@ -64,7 +66,7 @@ class FeaturedTravelDestination(TimeStampedModel):
 
 
 class HomeLink(TimeStampedModel):
-    image = models.ImageField()
+    image = models.ImageField(upload_to='page_images')
     title = models.CharField(max_length=30)
     link = models.CharField(max_length=100)
     page = models.ForeignKey(Page, related_name='homelinks')

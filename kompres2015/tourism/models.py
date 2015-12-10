@@ -51,7 +51,8 @@ class TravelDestination(TimeStampedModel):
     )
     model_3d = models.FileField(
         blank=True,
-        null=True
+        null=True,
+        upload_to='3d_models'
     )
 
     class Meta:

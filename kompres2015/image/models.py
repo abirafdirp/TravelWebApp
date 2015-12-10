@@ -42,7 +42,7 @@ class ReportImage(Image):
         related_name='report_images',
         verbose_name='User'
     )
-    image = models.ImageField()
+    image = models.ImageField(upload_to='report_images')
 
     def admin_image(self):
         return '<img src="%s" style="max-width: 400px; width: 100%%;"/>' % self.image.url
@@ -73,7 +73,7 @@ class TravelDestinationImage(Image):
         verbose_name='Konten Lokasi Wisata',
         null=True
     )
-    image = models.ImageField()
+    image = models.ImageField(upload_to='travel_destination_images')
 
     TYPE_CHOICES = (
         ('main', 'main'),
@@ -107,7 +107,7 @@ class ArticleImage(Image):
     )
     type = models.CharField(choices=TYPE_CHOICES, max_length=20,
                             verbose_name='Tipe')
-    image = models.ImageField()
+    image = models.ImageField(upload_to='article_images')
     article = models.ForeignKey('article.Article', blank=True, null=True,
                                 related_name='images', verbose_name='Artikel')
 

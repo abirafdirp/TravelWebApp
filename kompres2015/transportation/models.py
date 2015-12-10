@@ -16,7 +16,7 @@ class Transportation(TimeStampedModel):
     )
     description = models.TextField(verbose_name='Deskripsi')
     website = models.URLField()
-    image = models.ImageField()
+    image = models.ImageField(upload_to='transportation_images')
 
     def admin_image(self):
         return '<img src="%s" style="max-width: 400px; width: 100%%;"/>' % self.image.url
