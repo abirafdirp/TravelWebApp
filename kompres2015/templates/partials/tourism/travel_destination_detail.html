@@ -40,18 +40,6 @@
 						<div ng-bind-html="travel_destination_content.content | trustAsHtml"></div>
 					</md-tab-body>
 				</md-tab>
-				<md-tab label="galeri" ng-if="gallery_images.length > 0 ">
-					<div class='md-padding'>
-						<div layout="row" layout-wrap>
-							<div ng-repeat="image in gallery_images" flex="33" layout="row" style="margin-top: 10px">
-								<a ng-click="showImage(image.image)" class="pointer">
-									<img ng-src="{$image.image$}" class="gallery-thumbnail" flex>
-								</a>
-								<span flex="10"></span>
-							</div>
-						</div>
-					</div>
-				</md-tab>
 				<md-tab label="metoda transportasi">
 					<div class='md-padding'>
 
@@ -84,6 +72,18 @@
 						</div>
 
 
+					</div>
+				</md-tab>
+				<md-tab label="galeri" ng-if="gallery_images.length > 0 ">
+					<div class='md-padding'>
+						<div layout="row" layout-wrap>
+							<div ng-repeat="image in gallery_images" flex="33" layout="row" style="margin-top: 10px">
+								<a ng-click="showImage(image.image)" class="pointer">
+									<img ng-src="{$image.image$}" class="gallery-thumbnail" flex>
+								</a>
+								<span flex="10"></span>
+							</div>
+						</div>
 					</div>
 				</md-tab>
 			</md-tabs>

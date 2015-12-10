@@ -274,7 +274,8 @@ CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 CKEDITOR_CONFIGS = {
     'default': {
-        'skin': 'minimalist'
+        'toolbar': 'full',
+        'skin': 'bootstrapck'
     },
 }
 

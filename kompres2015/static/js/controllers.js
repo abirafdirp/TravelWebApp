@@ -430,8 +430,9 @@ kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route'
         cachedResource(image+'?format=json').get(function(image){
           if (image.type == 'main'){
             $scope.main_images.push(image);
+            $scope.gallery_images.push(image);
           }
-          if (image.type == 'gallery'){
+          else {
             $scope.gallery_images.push(image);
           }
         });
