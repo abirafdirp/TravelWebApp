@@ -57,7 +57,7 @@ node_modules/
 .env
 
 # media
-**/media/**
+# **/media/**
 
 # migrations
 **/migrations/*.*
