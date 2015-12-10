@@ -1,1651 +1,299 @@
 [
 {
   "fields": {
-    "codename": "add_permission",
-    "name": "Can add permission",
-    "content_type": [
-      "auth",
-      "permission"
-    ]
+    "model": "permission",
+    "app_label": "auth"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 1
 },
 {
   "fields": {
-    "codename": "change_permission",
-    "name": "Can change permission",
-    "content_type": [
-      "auth",
-      "permission"
-    ]
+    "model": "group",
+    "app_label": "auth"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 2
 },
 {
   "fields": {
-    "codename": "delete_permission",
-    "name": "Can delete permission",
-    "content_type": [
-      "auth",
-      "permission"
-    ]
+    "model": "contenttype",
+    "app_label": "contenttypes"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 3
 },
 {
   "fields": {
-    "codename": "add_group",
-    "name": "Can add group",
-    "content_type": [
-      "auth",
-      "group"
-    ]
+    "model": "session",
+    "app_label": "sessions"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 4
 },
 {
   "fields": {
-    "codename": "change_group",
-    "name": "Can change group",
-    "content_type": [
-      "auth",
-      "group"
-    ]
+    "model": "site",
+    "app_label": "sites"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 5
 },
 {
   "fields": {
-    "codename": "delete_group",
-    "name": "Can delete group",
-    "content_type": [
-      "auth",
-      "group"
-    ]
+    "model": "userdashboardmodule",
+    "app_label": "dashboard"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 6
 },
 {
   "fields": {
-    "codename": "add_contenttype",
-    "name": "Can add content type",
-    "content_type": [
-      "contenttypes",
-      "contenttype"
-    ]
+    "model": "bookmark",
+    "app_label": "jet"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 7
 },
 {
   "fields": {
-    "codename": "change_contenttype",
-    "name": "Can change content type",
-    "content_type": [
-      "contenttypes",
-      "contenttype"
-    ]
+    "model": "pinnedapplication",
+    "app_label": "jet"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 8
 },
 {
   "fields": {
-    "codename": "delete_contenttype",
-    "name": "Can delete content type",
-    "content_type": [
-      "contenttypes",
-      "contenttype"
-    ]
+    "model": "logentry",
+    "app_label": "admin"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 9
 },
 {
   "fields": {
-    "codename": "add_session",
-    "name": "Can add session",
-    "content_type": [
-      "sessions",
-      "session"
-    ]
+    "model": "token",
+    "app_label": "authtoken"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 10
 },
 {
   "fields": {
-    "codename": "change_session",
-    "name": "Can change session",
-    "content_type": [
-      "sessions",
-      "session"
-    ]
+    "model": "emailaddress",
+    "app_label": "account"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 11
 },
 {
   "fields": {
-    "codename": "delete_session",
-    "name": "Can delete session",
-    "content_type": [
-      "sessions",
-      "session"
-    ]
+    "model": "emailconfirmation",
+    "app_label": "account"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 12
 },
 {
   "fields": {
-    "codename": "add_site",
-    "name": "Can add site",
-    "content_type": [
-      "sites",
-      "site"
-    ]
+    "model": "socialapp",
+    "app_label": "socialaccount"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 13
 },
 {
   "fields": {
-    "codename": "change_site",
-    "name": "Can change site",
-    "content_type": [
-      "sites",
-      "site"
-    ]
+    "model": "socialaccount",
+    "app_label": "socialaccount"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 14
 },
 {
   "fields": {
-    "codename": "delete_site",
-    "name": "Can delete site",
-    "content_type": [
-      "sites",
-      "site"
-    ]
+    "model": "socialtoken",
+    "app_label": "socialaccount"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 15
 },
 {
   "fields": {
-    "codename": "add_userdashboardmodule",
-    "name": "Can add user dashboard module",
-    "content_type": [
-      "dashboard",
-      "userdashboardmodule"
-    ]
+    "model": "user",
+    "app_label": "users"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 16
 },
 {
   "fields": {
-    "codename": "change_userdashboardmodule",
-    "name": "Can change user dashboard module",
-    "content_type": [
-      "dashboard",
-      "userdashboardmodule"
-    ]
+    "model": "userprofile",
+    "app_label": "users"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 17
 },
 {
   "fields": {
-    "codename": "delete_userdashboardmodule",
-    "name": "Can delete user dashboard module",
-    "content_type": [
-      "dashboard",
-      "userdashboardmodule"
-    ]
+    "model": "email",
+    "app_label": "users"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 18
 },
 {
   "fields": {
-    "codename": "add_bookmark",
-    "name": "Can add bookmark",
-    "content_type": [
-      "jet",
-      "bookmark"
-    ]
+    "model": "traveldestination",
+    "app_label": "tourism"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 19
 },
 {
   "fields": {
-    "codename": "change_bookmark",
-    "name": "Can change bookmark",
-    "content_type": [
-      "jet",
-      "bookmark"
-    ]
+    "model": "traveldestinationcontent",
+    "app_label": "tourism"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 20
 },
 {
   "fields": {
-    "codename": "delete_bookmark",
-    "name": "Can delete bookmark",
-    "content_type": [
-      "jet",
-      "bookmark"
-    ]
+    "model": "visit",
+    "app_label": "tourism"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 21
 },
 {
   "fields": {
-    "codename": "add_pinnedapplication",
-    "name": "Can add pinned application",
-    "content_type": [
-      "jet",
-      "pinnedapplication"
-    ]
+    "model": "report",
+    "app_label": "tourism"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 22
 },
 {
   "fields": {
-    "codename": "change_pinnedapplication",
-    "name": "Can change pinned application",
-    "content_type": [
-      "jet",
-      "pinnedapplication"
-    ]
+    "model": "location",
+    "app_label": "region"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 23
 },
 {
   "fields": {
-    "codename": "delete_pinnedapplication",
-    "name": "Can delete pinned application",
-    "content_type": [
-      "jet",
-      "pinnedapplication"
-    ]
+    "model": "region",
+    "app_label": "region"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 24
 },
 {
   "fields": {
-    "codename": "add_logentry",
-    "name": "Can add log entry",
-    "content_type": [
-      "admin",
-      "logentry"
-    ]
+    "model": "province",
+    "app_label": "region"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 25
 },
 {
   "fields": {
-    "codename": "change_logentry",
-    "name": "Can change log entry",
-    "content_type": [
-      "admin",
-      "logentry"
-    ]
+    "model": "district",
+    "app_label": "region"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 26
 },
 {
   "fields": {
-    "codename": "delete_logentry",
-    "name": "Can delete log entry",
-    "content_type": [
-      "admin",
-      "logentry"
-    ]
+    "model": "image",
+    "app_label": "image"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 27
 },
 {
   "fields": {
-    "codename": "add_token",
-    "name": "Can add token",
-    "content_type": [
-      "authtoken",
-      "token"
-    ]
+    "model": "reportimage",
+    "app_label": "image"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 28
 },
 {
   "fields": {
-    "codename": "change_token",
-    "name": "Can change token",
-    "content_type": [
-      "authtoken",
-      "token"
-    ]
+    "model": "traveldestinationimage",
+    "app_label": "image"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 29
 },
 {
   "fields": {
-    "codename": "delete_token",
-    "name": "Can delete token",
-    "content_type": [
-      "authtoken",
-      "token"
-    ]
+    "model": "articleimage",
+    "app_label": "image"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 30
 },
 {
   "fields": {
-    "codename": "add_emailaddress",
-    "name": "Can add email address",
-    "content_type": [
-      "account",
-      "emailaddress"
-    ]
+    "model": "page",
+    "app_label": "pages"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 31
 },
 {
   "fields": {
-    "codename": "change_emailaddress",
-    "name": "Can change email address",
-    "content_type": [
-      "account",
-      "emailaddress"
-    ]
+    "model": "featuredtraveldestination",
+    "app_label": "pages"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 32
 },
 {
   "fields": {
-    "codename": "delete_emailaddress",
-    "name": "Can delete email address",
-    "content_type": [
-      "account",
-      "emailaddress"
-    ]
+    "model": "homelink",
+    "app_label": "pages"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 33
 },
 {
   "fields": {
-    "codename": "add_emailconfirmation",
-    "name": "Can add email confirmation",
-    "content_type": [
-      "account",
-      "emailconfirmation"
-    ]
+    "model": "article",
+    "app_label": "article"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 34
 },
 {
   "fields": {
-    "codename": "change_emailconfirmation",
-    "name": "Can change email confirmation",
-    "content_type": [
-      "account",
-      "emailconfirmation"
-    ]
+    "model": "transportation",
+    "app_label": "transportation"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 35
 },
 {
   "fields": {
-    "codename": "delete_emailconfirmation",
-    "name": "Can delete email confirmation",
-    "content_type": [
-      "account",
-      "emailconfirmation"
-    ]
+    "model": "email",
+    "app_label": "custom_email"
   },
-  "model": "auth.permission",
+  "model": "contenttypes.contenttype",
   "pk": 36
 },
 {
   "fields": {
-    "codename": "add_socialapp",
-    "name": "Can add social application",
-    "content_type": [
-      "socialaccount",
-      "socialapp"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 37
-},
-{
-  "fields": {
-    "codename": "change_socialapp",
-    "name": "Can change social application",
-    "content_type": [
-      "socialaccount",
-      "socialapp"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 38
-},
-{
-  "fields": {
-    "codename": "delete_socialapp",
-    "name": "Can delete social application",
-    "content_type": [
-      "socialaccount",
-      "socialapp"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 39
-},
-{
-  "fields": {
-    "codename": "add_socialaccount",
-    "name": "Can add social account",
-    "content_type": [
-      "socialaccount",
-      "socialaccount"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 40
-},
-{
-  "fields": {
-    "codename": "change_socialaccount",
-    "name": "Can change social account",
-    "content_type": [
-      "socialaccount",
-      "socialaccount"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 41
-},
-{
-  "fields": {
-    "codename": "delete_socialaccount",
-    "name": "Can delete social account",
-    "content_type": [
-      "socialaccount",
-      "socialaccount"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 42
-},
-{
-  "fields": {
-    "codename": "add_socialtoken",
-    "name": "Can add social application token",
-    "content_type": [
-      "socialaccount",
-      "socialtoken"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 43
-},
-{
-  "fields": {
-    "codename": "change_socialtoken",
-    "name": "Can change social application token",
-    "content_type": [
-      "socialaccount",
-      "socialtoken"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 44
-},
-{
-  "fields": {
-    "codename": "delete_socialtoken",
-    "name": "Can delete social application token",
-    "content_type": [
-      "socialaccount",
-      "socialtoken"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 45
-},
-{
-  "fields": {
-    "codename": "add_folder",
-    "name": "Can add Folder",
-    "content_type": [
-      "filer",
-      "folder"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 46
-},
-{
-  "fields": {
-    "codename": "change_folder",
-    "name": "Can change Folder",
-    "content_type": [
-      "filer",
-      "folder"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 47
-},
-{
-  "fields": {
-    "codename": "delete_folder",
-    "name": "Can delete Folder",
-    "content_type": [
-      "filer",
-      "folder"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 48
-},
-{
-  "fields": {
-    "codename": "can_use_directory_listing",
-    "name": "Can use directory listing",
-    "content_type": [
-      "filer",
-      "folder"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 49
-},
-{
-  "fields": {
-    "codename": "add_folderpermission",
-    "name": "Can add folder permission",
-    "content_type": [
-      "filer",
-      "folderpermission"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 50
-},
-{
-  "fields": {
-    "codename": "change_folderpermission",
-    "name": "Can change folder permission",
-    "content_type": [
-      "filer",
-      "folderpermission"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 51
-},
-{
-  "fields": {
-    "codename": "delete_folderpermission",
-    "name": "Can delete folder permission",
-    "content_type": [
-      "filer",
-      "folderpermission"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 52
-},
-{
-  "fields": {
-    "codename": "add_file",
-    "name": "Can add file",
-    "content_type": [
-      "filer",
-      "file"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 53
-},
-{
-  "fields": {
-    "codename": "change_file",
-    "name": "Can change file",
-    "content_type": [
-      "filer",
-      "file"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 54
-},
-{
-  "fields": {
-    "codename": "delete_file",
-    "name": "Can delete file",
-    "content_type": [
-      "filer",
-      "file"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 55
-},
-{
-  "fields": {
-    "codename": "add_clipboard",
-    "name": "Can add clipboard",
-    "content_type": [
-      "filer",
-      "clipboard"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 56
-},
-{
-  "fields": {
-    "codename": "change_clipboard",
-    "name": "Can change clipboard",
-    "content_type": [
-      "filer",
-      "clipboard"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 57
-},
-{
-  "fields": {
-    "codename": "delete_clipboard",
-    "name": "Can delete clipboard",
-    "content_type": [
-      "filer",
-      "clipboard"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 58
-},
-{
-  "fields": {
-    "codename": "add_clipboarditem",
-    "name": "Can add clipboard item",
-    "content_type": [
-      "filer",
-      "clipboarditem"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 59
-},
-{
-  "fields": {
-    "codename": "change_clipboarditem",
-    "name": "Can change clipboard item",
-    "content_type": [
-      "filer",
-      "clipboarditem"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 60
-},
-{
-  "fields": {
-    "codename": "delete_clipboarditem",
-    "name": "Can delete clipboard item",
-    "content_type": [
-      "filer",
-      "clipboarditem"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 61
-},
-{
-  "fields": {
-    "codename": "add_image",
-    "name": "Can add image",
-    "content_type": [
-      "filer",
-      "image"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 62
-},
-{
-  "fields": {
-    "codename": "change_image",
-    "name": "Can change image",
-    "content_type": [
-      "filer",
-      "image"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 63
-},
-{
-  "fields": {
-    "codename": "delete_image",
-    "name": "Can delete image",
-    "content_type": [
-      "filer",
-      "image"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 64
-},
-{
-  "fields": {
-    "codename": "add_source",
-    "name": "Can add source",
-    "content_type": [
-      "easy_thumbnails",
-      "source"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 65
-},
-{
-  "fields": {
-    "codename": "change_source",
-    "name": "Can change source",
-    "content_type": [
-      "easy_thumbnails",
-      "source"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 66
-},
-{
-  "fields": {
-    "codename": "delete_source",
-    "name": "Can delete source",
-    "content_type": [
-      "easy_thumbnails",
-      "source"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 67
-},
-{
-  "fields": {
-    "codename": "add_thumbnail",
-    "name": "Can add thumbnail",
-    "content_type": [
-      "easy_thumbnails",
-      "thumbnail"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 68
-},
-{
-  "fields": {
-    "codename": "change_thumbnail",
-    "name": "Can change thumbnail",
-    "content_type": [
-      "easy_thumbnails",
-      "thumbnail"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 69
-},
-{
-  "fields": {
-    "codename": "delete_thumbnail",
-    "name": "Can delete thumbnail",
-    "content_type": [
-      "easy_thumbnails",
-      "thumbnail"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 70
-},
-{
-  "fields": {
-    "codename": "add_thumbnaildimensions",
-    "name": "Can add thumbnail dimensions",
-    "content_type": [
-      "easy_thumbnails",
-      "thumbnaildimensions"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 71
-},
-{
-  "fields": {
-    "codename": "change_thumbnaildimensions",
-    "name": "Can change thumbnail dimensions",
-    "content_type": [
-      "easy_thumbnails",
-      "thumbnaildimensions"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 72
-},
-{
-  "fields": {
-    "codename": "delete_thumbnaildimensions",
-    "name": "Can delete thumbnail dimensions",
-    "content_type": [
-      "easy_thumbnails",
-      "thumbnaildimensions"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 73
-},
-{
-  "fields": {
-    "codename": "add_user",
-    "name": "Can add user",
-    "content_type": [
-      "users",
-      "user"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 74
-},
-{
-  "fields": {
-    "codename": "change_user",
-    "name": "Can change user",
-    "content_type": [
-      "users",
-      "user"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 75
-},
-{
-  "fields": {
-    "codename": "delete_user",
-    "name": "Can delete user",
-    "content_type": [
-      "users",
-      "user"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 76
-},
-{
-  "fields": {
-    "codename": "add_userprofile",
-    "name": "Can add user profile",
-    "content_type": [
-      "users",
-      "userprofile"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 77
-},
-{
-  "fields": {
-    "codename": "change_userprofile",
-    "name": "Can change user profile",
-    "content_type": [
-      "users",
-      "userprofile"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 78
-},
-{
-  "fields": {
-    "codename": "delete_userprofile",
-    "name": "Can delete user profile",
-    "content_type": [
-      "users",
-      "userprofile"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 79
-},
-{
-  "fields": {
-    "codename": "add_email",
-    "name": "Can add email",
-    "content_type": [
-      "users",
-      "email"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 80
-},
-{
-  "fields": {
-    "codename": "change_email",
-    "name": "Can change email",
-    "content_type": [
-      "users",
-      "email"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 81
-},
-{
-  "fields": {
-    "codename": "delete_email",
-    "name": "Can delete email",
-    "content_type": [
-      "users",
-      "email"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 82
-},
-{
-  "fields": {
-    "codename": "add_traveldestination",
-    "name": "Can add Lokasi Wisata",
-    "content_type": [
-      "tourism",
-      "traveldestination"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 83
-},
-{
-  "fields": {
-    "codename": "change_traveldestination",
-    "name": "Can change Lokasi Wisata",
-    "content_type": [
-      "tourism",
-      "traveldestination"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 84
-},
-{
-  "fields": {
-    "codename": "delete_traveldestination",
-    "name": "Can delete Lokasi Wisata",
-    "content_type": [
-      "tourism",
-      "traveldestination"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 85
-},
-{
-  "fields": {
-    "codename": "add_traveldestinationcontent",
-    "name": "Can add Konten Lokasi Wisata",
-    "content_type": [
-      "tourism",
-      "traveldestinationcontent"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 86
-},
-{
-  "fields": {
-    "codename": "change_traveldestinationcontent",
-    "name": "Can change Konten Lokasi Wisata",
-    "content_type": [
-      "tourism",
-      "traveldestinationcontent"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 87
-},
-{
-  "fields": {
-    "codename": "delete_traveldestinationcontent",
-    "name": "Can delete Konten Lokasi Wisata",
-    "content_type": [
-      "tourism",
-      "traveldestinationcontent"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 88
-},
-{
-  "fields": {
-    "codename": "add_visit",
-    "name": "Can add Kunjungan",
-    "content_type": [
-      "tourism",
-      "visit"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 89
-},
-{
-  "fields": {
-    "codename": "change_visit",
-    "name": "Can change Kunjungan",
-    "content_type": [
-      "tourism",
-      "visit"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 90
-},
-{
-  "fields": {
-    "codename": "delete_visit",
-    "name": "Can delete Kunjungan",
-    "content_type": [
-      "tourism",
-      "visit"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 91
-},
-{
-  "fields": {
-    "codename": "add_report",
-    "name": "Can add Komplain pengunjung",
-    "content_type": [
-      "tourism",
-      "report"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 92
-},
-{
-  "fields": {
-    "codename": "change_report",
-    "name": "Can change Komplain pengunjung",
-    "content_type": [
-      "tourism",
-      "report"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 93
-},
-{
-  "fields": {
-    "codename": "delete_report",
-    "name": "Can delete Komplain pengunjung",
-    "content_type": [
-      "tourism",
-      "report"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 94
-},
-{
-  "fields": {
-    "codename": "add_location",
-    "name": "Can add location",
-    "content_type": [
-      "region",
-      "location"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 95
-},
-{
-  "fields": {
-    "codename": "change_location",
-    "name": "Can change location",
-    "content_type": [
-      "region",
-      "location"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 96
-},
-{
-  "fields": {
-    "codename": "delete_location",
-    "name": "Can delete location",
-    "content_type": [
-      "region",
-      "location"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 97
-},
-{
-  "fields": {
-    "codename": "add_region",
-    "name": "Can add Wilayah",
-    "content_type": [
-      "region",
-      "region"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 98
-},
-{
-  "fields": {
-    "codename": "change_region",
-    "name": "Can change Wilayah",
-    "content_type": [
-      "region",
-      "region"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 99
-},
-{
-  "fields": {
-    "codename": "delete_region",
-    "name": "Can delete Wilayah",
-    "content_type": [
-      "region",
-      "region"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 100
-},
-{
-  "fields": {
-    "codename": "add_province",
-    "name": "Can add Provinsi",
-    "content_type": [
-      "region",
-      "province"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 101
-},
-{
-  "fields": {
-    "codename": "change_province",
-    "name": "Can change Provinsi",
-    "content_type": [
-      "region",
-      "province"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 102
-},
-{
-  "fields": {
-    "codename": "delete_province",
-    "name": "Can delete Provinsi",
-    "content_type": [
-      "region",
-      "province"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 103
-},
-{
-  "fields": {
-    "codename": "add_district",
-    "name": "Can add Kabupaten",
-    "content_type": [
-      "region",
-      "district"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 104
-},
-{
-  "fields": {
-    "codename": "change_district",
-    "name": "Can change Kabupaten",
-    "content_type": [
-      "region",
-      "district"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 105
-},
-{
-  "fields": {
-    "codename": "delete_district",
-    "name": "Can delete Kabupaten",
-    "content_type": [
-      "region",
-      "district"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 106
-},
-{
-  "fields": {
-    "codename": "add_image",
-    "name": "Can add Foto dan Gambar",
-    "content_type": [
-      "image",
-      "image"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 107
-},
-{
-  "fields": {
-    "codename": "change_image",
-    "name": "Can change Foto dan Gambar",
-    "content_type": [
-      "image",
-      "image"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 108
-},
-{
-  "fields": {
-    "codename": "delete_image",
-    "name": "Can delete Foto dan Gambar",
-    "content_type": [
-      "image",
-      "image"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 109
-},
-{
-  "fields": {
-    "codename": "add_reportimage",
-    "name": "Can add Foto Komplain",
-    "content_type": [
-      "image",
-      "reportimage"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 110
-},
-{
-  "fields": {
-    "codename": "change_reportimage",
-    "name": "Can change Foto Komplain",
-    "content_type": [
-      "image",
-      "reportimage"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 111
-},
-{
-  "fields": {
-    "codename": "delete_reportimage",
-    "name": "Can delete Foto Komplain",
-    "content_type": [
-      "image",
-      "reportimage"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 112
-},
-{
-  "fields": {
-    "codename": "add_traveldestinationimage",
-    "name": "Can add Foto Lokasi Wisata",
-    "content_type": [
-      "image",
-      "traveldestinationimage"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 113
-},
-{
-  "fields": {
-    "codename": "change_traveldestinationimage",
-    "name": "Can change Foto Lokasi Wisata",
-    "content_type": [
-      "image",
-      "traveldestinationimage"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 114
-},
-{
-  "fields": {
-    "codename": "delete_traveldestinationimage",
-    "name": "Can delete Foto Lokasi Wisata",
-    "content_type": [
-      "image",
-      "traveldestinationimage"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 115
-},
-{
-  "fields": {
-    "codename": "add_articleimage",
-    "name": "Can add Foto Artikel",
-    "content_type": [
-      "image",
-      "articleimage"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 116
-},
-{
-  "fields": {
-    "codename": "change_articleimage",
-    "name": "Can change Foto Artikel",
-    "content_type": [
-      "image",
-      "articleimage"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 117
-},
-{
-  "fields": {
-    "codename": "delete_articleimage",
-    "name": "Can delete Foto Artikel",
-    "content_type": [
-      "image",
-      "articleimage"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 118
-},
-{
-  "fields": {
-    "codename": "add_page",
-    "name": "Can add Pengaturan",
-    "content_type": [
-      "pages",
-      "page"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 119
-},
-{
-  "fields": {
-    "codename": "change_page",
-    "name": "Can change Pengaturan",
-    "content_type": [
-      "pages",
-      "page"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 120
-},
-{
-  "fields": {
-    "codename": "delete_page",
-    "name": "Can delete Pengaturan",
-    "content_type": [
-      "pages",
-      "page"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 121
-},
-{
-  "fields": {
-    "codename": "add_featuredtraveldestination",
-    "name": "Can add featured travel destination",
-    "content_type": [
-      "pages",
-      "featuredtraveldestination"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 122
-},
-{
-  "fields": {
-    "codename": "change_featuredtraveldestination",
-    "name": "Can change featured travel destination",
-    "content_type": [
-      "pages",
-      "featuredtraveldestination"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 123
-},
-{
-  "fields": {
-    "codename": "delete_featuredtraveldestination",
-    "name": "Can delete featured travel destination",
-    "content_type": [
-      "pages",
-      "featuredtraveldestination"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 124
-},
-{
-  "fields": {
-    "codename": "add_homelink",
-    "name": "Can add Tautan Halaman Depan",
-    "content_type": [
-      "pages",
-      "homelink"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 125
-},
-{
-  "fields": {
-    "codename": "change_homelink",
-    "name": "Can change Tautan Halaman Depan",
-    "content_type": [
-      "pages",
-      "homelink"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 126
-},
-{
-  "fields": {
-    "codename": "delete_homelink",
-    "name": "Can delete Tautan Halaman Depan",
-    "content_type": [
-      "pages",
-      "homelink"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 127
-},
-{
-  "fields": {
-    "codename": "add_article",
-    "name": "Can add Artikel",
-    "content_type": [
-      "article",
-      "article"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 128
-},
-{
-  "fields": {
-    "codename": "change_article",
-    "name": "Can change Artikel",
-    "content_type": [
-      "article",
-      "article"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 129
-},
-{
-  "fields": {
-    "codename": "delete_article",
-    "name": "Can delete Artikel",
-    "content_type": [
-      "article",
-      "article"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 130
-},
-{
-  "fields": {
-    "codename": "add_transportation",
-    "name": "Can add Metoda Transportasi",
-    "content_type": [
-      "transportation",
-      "transportation"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 131
-},
-{
-  "fields": {
-    "codename": "change_transportation",
-    "name": "Can change Metoda Transportasi",
-    "content_type": [
-      "transportation",
-      "transportation"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 132
-},
-{
-  "fields": {
-    "codename": "delete_transportation",
-    "name": "Can delete Metoda Transportasi",
-    "content_type": [
-      "transportation",
-      "transportation"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 133
-},
-{
-  "fields": {
-    "codename": "add_email",
-    "name": "Can add Email",
-    "content_type": [
-      "custom_email",
-      "email"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 134
-},
-{
-  "fields": {
-    "codename": "change_email",
-    "name": "Can change Email",
-    "content_type": [
-      "custom_email",
-      "email"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 135
-},
-{
-  "fields": {
-    "codename": "delete_email",
-    "name": "Can delete Email",
-    "content_type": [
-      "custom_email",
-      "email"
-    ]
-  },
-  "model": "auth.permission",
-  "pk": 136
-},
-{
-  "fields": {
-    "expire_date": "2015-12-23T08:42:57Z",
-    "session_data": "MmIxZmE0MTc1NjgwMmE2YzhlZDNiZTU3YWQ0OTIzMTZhODAwYzNlOTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiZTc3ZDJmMzBkMWZjYWNkNWRlNTkwZTBjY2YxZWI5ZjhjNTVmYjNmOSIsIl9hdXRoX3VzZXJfaWQiOiIxIiwiZmlsZXJfbGFzdF9mb2xkZXJfaWQiOiIxIn0="
+    "expire_date": "2015-12-24T00:45:57.629Z",
+    "session_data": "NjZiZmJkMjA0YTQ5YTRlODE2Zjk5Mzk5NmM0ZGVmMWYwZWExNWY2MDp7Il9hdXRoX3VzZXJfaGFzaCI6ImE5ZWM3OTI2MmFmMjg2N2I5YTNiMzViNmQzYmVhN2ZlZDQ3OWY5MjgiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0="
   },
   "model": "sessions.session",
-  "pk": "drfyqbvtipr7ejo57wdvgghmfmtwmk3d"
-},
-{
-  "fields": {
-    "expire_date": "2015-12-23T13:04:38.916Z",
-    "session_data": "NDYyODFlYTE0NDJkZDgzYTA0ZjY3ZWRjZDkwOTcwMTdlMDBlMmNjMzp7Il9hdXRoX3VzZXJfaGFzaCI6ImU3N2QyZjMwZDFmY2FjZDVkZTU5MGUwY2NmMWViOWY4YzU1ZmIzZjkiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0="
-  },
-  "model": "sessions.session",
-  "pk": "kj244ekwgwpzu8scv10rzym8wbpdkxcz"
+  "pk": "6xurhzdqqh5b4idosgqfk45nd8ggyj7i"
 },
 {
   "fields": {
@@ -1747,155 +395,994 @@
 },
 {
   "fields": {
-    "date_add": "2015-12-09T13:47:27.301Z",
-    "user": 1,
-    "app_label": "article"
+    "modified_date": "2015-12-10",
+    "tag": "",
+    "name": "test",
+    "created_date": "2015-12-10T00:46:09.803Z"
   },
-  "model": "jet.pinnedapplication",
+  "model": "image.image",
   "pk": 1
 },
 {
   "fields": {
-    "date_add": "2015-12-09T13:47:29.651Z",
-    "user": 1,
-    "app_label": "custom_email"
+    "article": null,
+    "image": "./1.JPG",
+    "type": "thumbnail"
   },
-  "model": "jet.pinnedapplication",
+  "model": "image.articleimage",
+  "pk": 1
+},
+{
+  "fields": {
+    "codename": "add_permission",
+    "name": "Can add permission",
+    "content_type": 1
+  },
+  "model": "auth.permission",
+  "pk": 1
+},
+{
+  "fields": {
+    "codename": "change_permission",
+    "name": "Can change permission",
+    "content_type": 1
+  },
+  "model": "auth.permission",
   "pk": 2
 },
 {
   "fields": {
-    "date_add": "2015-12-09T13:47:30.528Z",
-    "user": 1,
-    "app_label": "image"
+    "codename": "delete_permission",
+    "name": "Can delete permission",
+    "content_type": 1
   },
-  "model": "jet.pinnedapplication",
+  "model": "auth.permission",
   "pk": 3
 },
 {
   "fields": {
-    "date_add": "2015-12-09T13:47:31.481Z",
-    "user": 1,
-    "app_label": "region"
+    "codename": "add_group",
+    "name": "Can add group",
+    "content_type": 2
   },
-  "model": "jet.pinnedapplication",
+  "model": "auth.permission",
   "pk": 4
 },
 {
   "fields": {
-    "date_add": "2015-12-09T13:47:32.462Z",
-    "user": 1,
-    "app_label": "pages"
+    "codename": "change_group",
+    "name": "Can change group",
+    "content_type": 2
   },
-  "model": "jet.pinnedapplication",
+  "model": "auth.permission",
   "pk": 5
 },
 {
   "fields": {
-    "date_add": "2015-12-09T13:47:34.017Z",
-    "user": 1,
-    "app_label": "transportation"
+    "codename": "delete_group",
+    "name": "Can delete group",
+    "content_type": 2
   },
-  "model": "jet.pinnedapplication",
+  "model": "auth.permission",
   "pk": 6
 },
 {
   "fields": {
-    "date_add": "2015-12-09T13:47:35.236Z",
-    "user": 1,
-    "app_label": "tourism"
+    "codename": "add_contenttype",
+    "name": "Can add content type",
+    "content_type": 3
   },
-  "model": "jet.pinnedapplication",
+  "model": "auth.permission",
   "pk": 7
 },
 {
   "fields": {
-    "name": "filer_public/10/fe/10fe65f0-66d6-4f25-9e88-83abacb66fcd/wonderfull-of-raja-ampat-ultimate-underwater1.jpg",
-    "storage_hash": "f9bde26a1556cd667f742bd34ec7c55e",
-    "modified": "2015-12-09T08:42:50Z"
+    "codename": "change_contenttype",
+    "name": "Can change content type",
+    "content_type": 3
   },
-  "model": "easy_thumbnails.source",
-  "pk": 1
-},
-{
-  "fields": {
-    "source": 1,
-    "name": "filer_public_thumbnails/filer_public/10/fe/10fe65f0-66d6-4f25-9e88-83abacb66fcd/wonderfull-of-raja-ampat-ultimate-underwater1.jpg__32x32_q85_crop_subsampling-2_upscale.jpg",
-    "storage_hash": "f9bde26a1556cd667f742bd34ec7c55e",
-    "modified": "2015-12-09T08:42:50Z"
-  },
-  "model": "easy_thumbnails.thumbnail",
-  "pk": 1
-},
-{
-  "fields": {
-    "source": 1,
-    "name": "filer_public_thumbnails/filer_public/10/fe/10fe65f0-66d6-4f25-9e88-83abacb66fcd/wonderfull-of-raja-ampat-ultimate-underwater1.jpg__32x32_q85_crop_subsampling-2_upscale@2x.jpg",
-    "storage_hash": "f9bde26a1556cd667f742bd34ec7c55e",
-    "modified": "2015-12-09T08:42:50Z"
-  },
-  "model": "easy_thumbnails.thumbnail",
-  "pk": 2
-},
-{
-  "fields": {
-    "source": 1,
-    "name": "filer_public_thumbnails/filer_public/10/fe/10fe65f0-66d6-4f25-9e88-83abacb66fcd/wonderfull-of-raja-ampat-ultimate-underwater1.jpg__64x64_q85_crop_subsampling-2_upscale.jpg",
-    "storage_hash": "f9bde26a1556cd667f742bd34ec7c55e",
-    "modified": "2015-12-09T08:42:50Z"
-  },
-  "model": "easy_thumbnails.thumbnail",
-  "pk": 3
-},
-{
-  "fields": {
-    "source": 1,
-    "name": "filer_public_thumbnails/filer_public/10/fe/10fe65f0-66d6-4f25-9e88-83abacb66fcd/wonderfull-of-raja-ampat-ultimate-underwater1.jpg__64x64_q85_crop_subsampling-2_upscale@2x.jpg",
-    "storage_hash": "f9bde26a1556cd667f742bd34ec7c55e",
-    "modified": "2015-12-09T08:42:50Z"
-  },
-  "model": "easy_thumbnails.thumbnail",
-  "pk": 4
-},
-{
-  "fields": {
-    "source": 1,
-    "name": "filer_public_thumbnails/filer_public/10/fe/10fe65f0-66d6-4f25-9e88-83abacb66fcd/wonderfull-of-raja-ampat-ultimate-underwater1.jpg__48x48_q85_crop_subsampling-2_upscale.jpg",
-    "storage_hash": "f9bde26a1556cd667f742bd34ec7c55e",
-    "modified": "2015-12-09T08:42:50Z"
-  },
-  "model": "easy_thumbnails.thumbnail",
-  "pk": 5
-},
-{
-  "fields": {
-    "source": 1,
-    "name": "filer_public_thumbnails/filer_public/10/fe/10fe65f0-66d6-4f25-9e88-83abacb66fcd/wonderfull-of-raja-ampat-ultimate-underwater1.jpg__48x48_q85_crop_subsampling-2_upscale@2x.jpg",
-    "storage_hash": "f9bde26a1556cd667f742bd34ec7c55e",
-    "modified": "2015-12-09T08:42:50Z"
-  },
-  "model": "easy_thumbnails.thumbnail",
-  "pk": 6
-},
-{
-  "fields": {
-    "source": 1,
-    "name": "filer_public_thumbnails/filer_public/10/fe/10fe65f0-66d6-4f25-9e88-83abacb66fcd/wonderfull-of-raja-ampat-ultimate-underwater1.jpg__16x16_q85_crop_subsampling-2_upscale.jpg",
-    "storage_hash": "f9bde26a1556cd667f742bd34ec7c55e",
-    "modified": "2015-12-09T08:42:50Z"
-  },
-  "model": "easy_thumbnails.thumbnail",
-  "pk": 7
-},
-{
-  "fields": {
-    "source": 1,
-    "name": "filer_public_thumbnails/filer_public/10/fe/10fe65f0-66d6-4f25-9e88-83abacb66fcd/wonderfull-of-raja-ampat-ultimate-underwater1.jpg__16x16_q85_crop_subsampling-2_upscale@2x.jpg",
-    "storage_hash": "f9bde26a1556cd667f742bd34ec7c55e",
-    "modified": "2015-12-09T08:42:50Z"
-  },
-  "model": "easy_thumbnails.thumbnail",
+  "model": "auth.permission",
   "pk": 8
+},
+{
+  "fields": {
+    "codename": "delete_contenttype",
+    "name": "Can delete content type",
+    "content_type": 3
+  },
+  "model": "auth.permission",
+  "pk": 9
+},
+{
+  "fields": {
+    "codename": "add_session",
+    "name": "Can add session",
+    "content_type": 4
+  },
+  "model": "auth.permission",
+  "pk": 10
+},
+{
+  "fields": {
+    "codename": "change_session",
+    "name": "Can change session",
+    "content_type": 4
+  },
+  "model": "auth.permission",
+  "pk": 11
+},
+{
+  "fields": {
+    "codename": "delete_session",
+    "name": "Can delete session",
+    "content_type": 4
+  },
+  "model": "auth.permission",
+  "pk": 12
+},
+{
+  "fields": {
+    "codename": "add_site",
+    "name": "Can add site",
+    "content_type": 5
+  },
+  "model": "auth.permission",
+  "pk": 13
+},
+{
+  "fields": {
+    "codename": "change_site",
+    "name": "Can change site",
+    "content_type": 5
+  },
+  "model": "auth.permission",
+  "pk": 14
+},
+{
+  "fields": {
+    "codename": "delete_site",
+    "name": "Can delete site",
+    "content_type": 5
+  },
+  "model": "auth.permission",
+  "pk": 15
+},
+{
+  "fields": {
+    "codename": "add_userdashboardmodule",
+    "name": "Can add user dashboard module",
+    "content_type": 6
+  },
+  "model": "auth.permission",
+  "pk": 16
+},
+{
+  "fields": {
+    "codename": "change_userdashboardmodule",
+    "name": "Can change user dashboard module",
+    "content_type": 6
+  },
+  "model": "auth.permission",
+  "pk": 17
+},
+{
+  "fields": {
+    "codename": "delete_userdashboardmodule",
+    "name": "Can delete user dashboard module",
+    "content_type": 6
+  },
+  "model": "auth.permission",
+  "pk": 18
+},
+{
+  "fields": {
+    "codename": "add_bookmark",
+    "name": "Can add bookmark",
+    "content_type": 7
+  },
+  "model": "auth.permission",
+  "pk": 19
+},
+{
+  "fields": {
+    "codename": "change_bookmark",
+    "name": "Can change bookmark",
+    "content_type": 7
+  },
+  "model": "auth.permission",
+  "pk": 20
+},
+{
+  "fields": {
+    "codename": "delete_bookmark",
+    "name": "Can delete bookmark",
+    "content_type": 7
+  },
+  "model": "auth.permission",
+  "pk": 21
+},
+{
+  "fields": {
+    "codename": "add_pinnedapplication",
+    "name": "Can add pinned application",
+    "content_type": 8
+  },
+  "model": "auth.permission",
+  "pk": 22
+},
+{
+  "fields": {
+    "codename": "change_pinnedapplication",
+    "name": "Can change pinned application",
+    "content_type": 8
+  },
+  "model": "auth.permission",
+  "pk": 23
+},
+{
+  "fields": {
+    "codename": "delete_pinnedapplication",
+    "name": "Can delete pinned application",
+    "content_type": 8
+  },
+  "model": "auth.permission",
+  "pk": 24
+},
+{
+  "fields": {
+    "codename": "add_logentry",
+    "name": "Can add log entry",
+    "content_type": 9
+  },
+  "model": "auth.permission",
+  "pk": 25
+},
+{
+  "fields": {
+    "codename": "change_logentry",
+    "name": "Can change log entry",
+    "content_type": 9
+  },
+  "model": "auth.permission",
+  "pk": 26
+},
+{
+  "fields": {
+    "codename": "delete_logentry",
+    "name": "Can delete log entry",
+    "content_type": 9
+  },
+  "model": "auth.permission",
+  "pk": 27
+},
+{
+  "fields": {
+    "codename": "add_token",
+    "name": "Can add token",
+    "content_type": 10
+  },
+  "model": "auth.permission",
+  "pk": 28
+},
+{
+  "fields": {
+    "codename": "change_token",
+    "name": "Can change token",
+    "content_type": 10
+  },
+  "model": "auth.permission",
+  "pk": 29
+},
+{
+  "fields": {
+    "codename": "delete_token",
+    "name": "Can delete token",
+    "content_type": 10
+  },
+  "model": "auth.permission",
+  "pk": 30
+},
+{
+  "fields": {
+    "codename": "add_emailaddress",
+    "name": "Can add email address",
+    "content_type": 11
+  },
+  "model": "auth.permission",
+  "pk": 31
+},
+{
+  "fields": {
+    "codename": "change_emailaddress",
+    "name": "Can change email address",
+    "content_type": 11
+  },
+  "model": "auth.permission",
+  "pk": 32
+},
+{
+  "fields": {
+    "codename": "delete_emailaddress",
+    "name": "Can delete email address",
+    "content_type": 11
+  },
+  "model": "auth.permission",
+  "pk": 33
+},
+{
+  "fields": {
+    "codename": "add_emailconfirmation",
+    "name": "Can add email confirmation",
+    "content_type": 12
+  },
+  "model": "auth.permission",
+  "pk": 34
+},
+{
+  "fields": {
+    "codename": "change_emailconfirmation",
+    "name": "Can change email confirmation",
+    "content_type": 12
+  },
+  "model": "auth.permission",
+  "pk": 35
+},
+{
+  "fields": {
+    "codename": "delete_emailconfirmation",
+    "name": "Can delete email confirmation",
+    "content_type": 12
+  },
+  "model": "auth.permission",
+  "pk": 36
+},
+{
+  "fields": {
+    "codename": "add_socialapp",
+    "name": "Can add social application",
+    "content_type": 13
+  },
+  "model": "auth.permission",
+  "pk": 37
+},
+{
+  "fields": {
+    "codename": "change_socialapp",
+    "name": "Can change social application",
+    "content_type": 13
+  },
+  "model": "auth.permission",
+  "pk": 38
+},
+{
+  "fields": {
+    "codename": "delete_socialapp",
+    "name": "Can delete social application",
+    "content_type": 13
+  },
+  "model": "auth.permission",
+  "pk": 39
+},
+{
+  "fields": {
+    "codename": "add_socialaccount",
+    "name": "Can add social account",
+    "content_type": 14
+  },
+  "model": "auth.permission",
+  "pk": 40
+},
+{
+  "fields": {
+    "codename": "change_socialaccount",
+    "name": "Can change social account",
+    "content_type": 14
+  },
+  "model": "auth.permission",
+  "pk": 41
+},
+{
+  "fields": {
+    "codename": "delete_socialaccount",
+    "name": "Can delete social account",
+    "content_type": 14
+  },
+  "model": "auth.permission",
+  "pk": 42
+},
+{
+  "fields": {
+    "codename": "add_socialtoken",
+    "name": "Can add social application token",
+    "content_type": 15
+  },
+  "model": "auth.permission",
+  "pk": 43
+},
+{
+  "fields": {
+    "codename": "change_socialtoken",
+    "name": "Can change social application token",
+    "content_type": 15
+  },
+  "model": "auth.permission",
+  "pk": 44
+},
+{
+  "fields": {
+    "codename": "delete_socialtoken",
+    "name": "Can delete social application token",
+    "content_type": 15
+  },
+  "model": "auth.permission",
+  "pk": 45
+},
+{
+  "fields": {
+    "codename": "add_user",
+    "name": "Can add user",
+    "content_type": 16
+  },
+  "model": "auth.permission",
+  "pk": 46
+},
+{
+  "fields": {
+    "codename": "change_user",
+    "name": "Can change user",
+    "content_type": 16
+  },
+  "model": "auth.permission",
+  "pk": 47
+},
+{
+  "fields": {
+    "codename": "delete_user",
+    "name": "Can delete user",
+    "content_type": 16
+  },
+  "model": "auth.permission",
+  "pk": 48
+},
+{
+  "fields": {
+    "codename": "add_userprofile",
+    "name": "Can add user profile",
+    "content_type": 17
+  },
+  "model": "auth.permission",
+  "pk": 49
+},
+{
+  "fields": {
+    "codename": "change_userprofile",
+    "name": "Can change user profile",
+    "content_type": 17
+  },
+  "model": "auth.permission",
+  "pk": 50
+},
+{
+  "fields": {
+    "codename": "delete_userprofile",
+    "name": "Can delete user profile",
+    "content_type": 17
+  },
+  "model": "auth.permission",
+  "pk": 51
+},
+{
+  "fields": {
+    "codename": "add_email",
+    "name": "Can add email",
+    "content_type": 18
+  },
+  "model": "auth.permission",
+  "pk": 52
+},
+{
+  "fields": {
+    "codename": "change_email",
+    "name": "Can change email",
+    "content_type": 18
+  },
+  "model": "auth.permission",
+  "pk": 53
+},
+{
+  "fields": {
+    "codename": "delete_email",
+    "name": "Can delete email",
+    "content_type": 18
+  },
+  "model": "auth.permission",
+  "pk": 54
+},
+{
+  "fields": {
+    "codename": "add_traveldestination",
+    "name": "Can add Lokasi Wisata",
+    "content_type": 19
+  },
+  "model": "auth.permission",
+  "pk": 55
+},
+{
+  "fields": {
+    "codename": "change_traveldestination",
+    "name": "Can change Lokasi Wisata",
+    "content_type": 19
+  },
+  "model": "auth.permission",
+  "pk": 56
+},
+{
+  "fields": {
+    "codename": "delete_traveldestination",
+    "name": "Can delete Lokasi Wisata",
+    "content_type": 19
+  },
+  "model": "auth.permission",
+  "pk": 57
+},
+{
+  "fields": {
+    "codename": "add_traveldestinationcontent",
+    "name": "Can add Konten Lokasi Wisata",
+    "content_type": 20
+  },
+  "model": "auth.permission",
+  "pk": 58
+},
+{
+  "fields": {
+    "codename": "change_traveldestinationcontent",
+    "name": "Can change Konten Lokasi Wisata",
+    "content_type": 20
+  },
+  "model": "auth.permission",
+  "pk": 59
+},
+{
+  "fields": {
+    "codename": "delete_traveldestinationcontent",
+    "name": "Can delete Konten Lokasi Wisata",
+    "content_type": 20
+  },
+  "model": "auth.permission",
+  "pk": 60
+},
+{
+  "fields": {
+    "codename": "add_visit",
+    "name": "Can add Kunjungan",
+    "content_type": 21
+  },
+  "model": "auth.permission",
+  "pk": 61
+},
+{
+  "fields": {
+    "codename": "change_visit",
+    "name": "Can change Kunjungan",
+    "content_type": 21
+  },
+  "model": "auth.permission",
+  "pk": 62
+},
+{
+  "fields": {
+    "codename": "delete_visit",
+    "name": "Can delete Kunjungan",
+    "content_type": 21
+  },
+  "model": "auth.permission",
+  "pk": 63
+},
+{
+  "fields": {
+    "codename": "add_report",
+    "name": "Can add Komplain pengunjung",
+    "content_type": 22
+  },
+  "model": "auth.permission",
+  "pk": 64
+},
+{
+  "fields": {
+    "codename": "change_report",
+    "name": "Can change Komplain pengunjung",
+    "content_type": 22
+  },
+  "model": "auth.permission",
+  "pk": 65
+},
+{
+  "fields": {
+    "codename": "delete_report",
+    "name": "Can delete Komplain pengunjung",
+    "content_type": 22
+  },
+  "model": "auth.permission",
+  "pk": 66
+},
+{
+  "fields": {
+    "codename": "add_location",
+    "name": "Can add location",
+    "content_type": 23
+  },
+  "model": "auth.permission",
+  "pk": 67
+},
+{
+  "fields": {
+    "codename": "change_location",
+    "name": "Can change location",
+    "content_type": 23
+  },
+  "model": "auth.permission",
+  "pk": 68
+},
+{
+  "fields": {
+    "codename": "delete_location",
+    "name": "Can delete location",
+    "content_type": 23
+  },
+  "model": "auth.permission",
+  "pk": 69
+},
+{
+  "fields": {
+    "codename": "add_region",
+    "name": "Can add Wilayah",
+    "content_type": 24
+  },
+  "model": "auth.permission",
+  "pk": 70
+},
+{
+  "fields": {
+    "codename": "change_region",
+    "name": "Can change Wilayah",
+    "content_type": 24
+  },
+  "model": "auth.permission",
+  "pk": 71
+},
+{
+  "fields": {
+    "codename": "delete_region",
+    "name": "Can delete Wilayah",
+    "content_type": 24
+  },
+  "model": "auth.permission",
+  "pk": 72
+},
+{
+  "fields": {
+    "codename": "add_province",
+    "name": "Can add Provinsi",
+    "content_type": 25
+  },
+  "model": "auth.permission",
+  "pk": 73
+},
+{
+  "fields": {
+    "codename": "change_province",
+    "name": "Can change Provinsi",
+    "content_type": 25
+  },
+  "model": "auth.permission",
+  "pk": 74
+},
+{
+  "fields": {
+    "codename": "delete_province",
+    "name": "Can delete Provinsi",
+    "content_type": 25
+  },
+  "model": "auth.permission",
+  "pk": 75
+},
+{
+  "fields": {
+    "codename": "add_district",
+    "name": "Can add Kabupaten",
+    "content_type": 26
+  },
+  "model": "auth.permission",
+  "pk": 76
+},
+{
+  "fields": {
+    "codename": "change_district",
+    "name": "Can change Kabupaten",
+    "content_type": 26
+  },
+  "model": "auth.permission",
+  "pk": 77
+},
+{
+  "fields": {
+    "codename": "delete_district",
+    "name": "Can delete Kabupaten",
+    "content_type": 26
+  },
+  "model": "auth.permission",
+  "pk": 78
+},
+{
+  "fields": {
+    "codename": "add_image",
+    "name": "Can add Foto dan Gambar",
+    "content_type": 27
+  },
+  "model": "auth.permission",
+  "pk": 79
+},
+{
+  "fields": {
+    "codename": "change_image",
+    "name": "Can change Foto dan Gambar",
+    "content_type": 27
+  },
+  "model": "auth.permission",
+  "pk": 80
+},
+{
+  "fields": {
+    "codename": "delete_image",
+    "name": "Can delete Foto dan Gambar",
+    "content_type": 27
+  },
+  "model": "auth.permission",
+  "pk": 81
+},
+{
+  "fields": {
+    "codename": "add_reportimage",
+    "name": "Can add Foto Komplain",
+    "content_type": 28
+  },
+  "model": "auth.permission",
+  "pk": 82
+},
+{
+  "fields": {
+    "codename": "change_reportimage",
+    "name": "Can change Foto Komplain",
+    "content_type": 28
+  },
+  "model": "auth.permission",
+  "pk": 83
+},
+{
+  "fields": {
+    "codename": "delete_reportimage",
+    "name": "Can delete Foto Komplain",
+    "content_type": 28
+  },
+  "model": "auth.permission",
+  "pk": 84
+},
+{
+  "fields": {
+    "codename": "add_traveldestinationimage",
+    "name": "Can add Foto Lokasi Wisata",
+    "content_type": 29
+  },
+  "model": "auth.permission",
+  "pk": 85
+},
+{
+  "fields": {
+    "codename": "change_traveldestinationimage",
+    "name": "Can change Foto Lokasi Wisata",
+    "content_type": 29
+  },
+  "model": "auth.permission",
+  "pk": 86
+},
+{
+  "fields": {
+    "codename": "delete_traveldestinationimage",
+    "name": "Can delete Foto Lokasi Wisata",
+    "content_type": 29
+  },
+  "model": "auth.permission",
+  "pk": 87
+},
+{
+  "fields": {
+    "codename": "add_articleimage",
+    "name": "Can add Foto Artikel",
+    "content_type": 30
+  },
+  "model": "auth.permission",
+  "pk": 88
+},
+{
+  "fields": {
+    "codename": "change_articleimage",
+    "name": "Can change Foto Artikel",
+    "content_type": 30
+  },
+  "model": "auth.permission",
+  "pk": 89
+},
+{
+  "fields": {
+    "codename": "delete_articleimage",
+    "name": "Can delete Foto Artikel",
+    "content_type": 30
+  },
+  "model": "auth.permission",
+  "pk": 90
+},
+{
+  "fields": {
+    "codename": "add_page",
+    "name": "Can add Pengaturan",
+    "content_type": 31
+  },
+  "model": "auth.permission",
+  "pk": 91
+},
+{
+  "fields": {
+    "codename": "change_page",
+    "name": "Can change Pengaturan",
+    "content_type": 31
+  },
+  "model": "auth.permission",
+  "pk": 92
+},
+{
+  "fields": {
+    "codename": "delete_page",
+    "name": "Can delete Pengaturan",
+    "content_type": 31
+  },
+  "model": "auth.permission",
+  "pk": 93
+},
+{
+  "fields": {
+    "codename": "add_featuredtraveldestination",
+    "name": "Can add featured travel destination",
+    "content_type": 32
+  },
+  "model": "auth.permission",
+  "pk": 94
+},
+{
+  "fields": {
+    "codename": "change_featuredtraveldestination",
+    "name": "Can change featured travel destination",
+    "content_type": 32
+  },
+  "model": "auth.permission",
+  "pk": 95
+},
+{
+  "fields": {
+    "codename": "delete_featuredtraveldestination",
+    "name": "Can delete featured travel destination",
+    "content_type": 32
+  },
+  "model": "auth.permission",
+  "pk": 96
+},
+{
+  "fields": {
+    "codename": "add_homelink",
+    "name": "Can add Tautan Halaman Depan",
+    "content_type": 33
+  },
+  "model": "auth.permission",
+  "pk": 97
+},
+{
+  "fields": {
+    "codename": "change_homelink",
+    "name": "Can change Tautan Halaman Depan",
+    "content_type": 33
+  },
+  "model": "auth.permission",
+  "pk": 98
+},
+{
+  "fields": {
+    "codename": "delete_homelink",
+    "name": "Can delete Tautan Halaman Depan",
+    "content_type": 33
+  },
+  "model": "auth.permission",
+  "pk": 99
+},
+{
+  "fields": {
+    "codename": "add_article",
+    "name": "Can add Artikel",
+    "content_type": 34
+  },
+  "model": "auth.permission",
+  "pk": 100
+},
+{
+  "fields": {
+    "codename": "change_article",
+    "name": "Can change Artikel",
+    "content_type": 34
+  },
+  "model": "auth.permission",
+  "pk": 101
+},
+{
+  "fields": {
+    "codename": "delete_article",
+    "name": "Can delete Artikel",
+    "content_type": 34
+  },
+  "model": "auth.permission",
+  "pk": 102
+},
+{
+  "fields": {
+    "codename": "add_transportation",
+    "name": "Can add Metoda Transportasi",
+    "content_type": 35
+  },
+  "model": "auth.permission",
+  "pk": 103
+},
+{
+  "fields": {
+    "codename": "change_transportation",
+    "name": "Can change Metoda Transportasi",
+    "content_type": 35
+  },
+  "model": "auth.permission",
+  "pk": 104
+},
+{
+  "fields": {
+    "codename": "delete_transportation",
+    "name": "Can delete Metoda Transportasi",
+    "content_type": 35
+  },
+  "model": "auth.permission",
+  "pk": 105
+},
+{
+  "fields": {
+    "codename": "add_email",
+    "name": "Can add Email",
+    "content_type": 36
+  },
+  "model": "auth.permission",
+  "pk": 106
+},
+{
+  "fields": {
+    "codename": "change_email",
+    "name": "Can change Email",
+    "content_type": 36
+  },
+  "model": "auth.permission",
+  "pk": 107
+},
+{
+  "fields": {
+    "codename": "delete_email",
+    "name": "Can delete Email",
+    "content_type": 36
+  },
+  "model": "auth.permission",
+  "pk": 108
 },
 {
   "fields": {
@@ -1907,268 +1394,27 @@
     "is_active": true,
     "is_superuser": true,
     "is_staff": true,
-    "last_login": "2015-12-09T13:04:38.884Z",
+    "last_login": "2015-12-10T00:45:57.550Z",
     "groups": [],
     "user_permissions": [],
-    "password": "pbkdf2_sha256$20000$foaW3u7IiLxv$EG6jSk9oBlZNznG7REcKUd4Uz1P4TKyFPvMcyANA6lA=",
+    "password": "pbkdf2_sha256$20000$zEJUxrdPhkdi$57o6V32zMNBlJP7fsqCXCMKneueJ06z+J4qggc37SVE=",
     "email": "abiraf.bot@gmail.com",
-    "date_joined": "2015-12-09T08:41:33Z"
+    "date_joined": "2015-12-10T00:20:32.966Z"
   },
   "model": "users.user",
   "pk": 1
 },
 {
   "fields": {
-    "latitude": -7.1980715,
-    "modified_date": "2015-12-09",
-    "name": "Jawa",
-    "longitude": 110.3934886,
-    "created_date": "2015-12-09T13:58:14.252Z"
-  },
-  "model": "region.location",
-  "pk": 1
-},
-{
-  "fields": {
-    "latitude": -6.2126584,
-    "modified_date": "2015-12-09",
-    "name": "DKI Jakarta",
-    "longitude": 106.8624892,
-    "created_date": "2015-12-09T13:58:40.572Z"
-  },
-  "model": "region.location",
-  "pk": 2
-},
-{
-  "fields": {
-    "latitude": -7.1254385,
-    "modified_date": "2015-12-09",
-    "name": "Jawa Barat",
-    "longitude": 107.7811752,
-    "created_date": "2015-12-09T14:00:42.463Z"
-  },
-  "model": "region.location",
-  "pk": 3
-},
-{
-  "fields": {
-    "latitude": -7.2997583,
-    "modified_date": "2015-12-09",
-    "name": "Jawa Tengah",
-    "longitude": 110.0859846,
-    "created_date": "2015-12-09T14:00:42.477Z"
-  },
-  "model": "region.location",
-  "pk": 4
-},
-{
-  "fields": {
-    "latitude": -7.6145693,
-    "modified_date": "2015-12-09",
-    "name": "Jawa Timur",
-    "longitude": 112.6200474,
-    "created_date": "2015-12-09T14:00:42.542Z"
-  },
-  "model": "region.location",
-  "pk": 5
-},
-{
-  "fields": {
-    "latitude": -8.3801676,
-    "modified_date": "2015-12-09",
-    "name": "Bali",
-    "longitude": 115.2295646,
-    "created_date": "2015-12-09T14:00:42.556Z"
-  },
-  "model": "region.location",
-  "pk": 6
-},
-{
-  "fields": {},
-  "model": "region.region",
-  "pk": 1
-},
-{
-  "fields": {
-    "region": 1
-  },
-  "model": "region.province",
-  "pk": 2
-},
-{
-  "fields": {
-    "region": 1
-  },
-  "model": "region.province",
-  "pk": 3
-},
-{
-  "fields": {
-    "region": 1
-  },
-  "model": "region.province",
-  "pk": 4
-},
-{
-  "fields": {
-    "region": 1
-  },
-  "model": "region.province",
-  "pk": 5
-},
-{
-  "fields": {
-    "region": 1
-  },
-  "model": "region.province",
-  "pk": 6
-},
-{
-  "fields": {
-    "modified_date": "2015-12-09",
-    "tag": "",
-    "name": "test",
-    "created_date": "2015-12-09T08:43:19Z"
-  },
-  "model": "image.image",
-  "pk": 1
-},
-{
-  "fields": {
-    "article": null,
-    "image": 1,
-    "type": "other"
-  },
-  "model": "image.articleimage",
-  "pk": 1
-},
-{
-  "fields": {
-    "subject_location": null,
-    "must_always_publish_copyright": false,
-    "date_taken": "2015-12-09T08:42:49Z",
-    "author": null,
-    "_height": 1200,
-    "_width": 1920,
-    "must_always_publish_author_credit": false,
-    "default_alt_text": null,
-    "default_caption": null
-  },
-  "model": "filer.image",
-  "pk": 1
-},
-{
-  "fields": {
-    "user": [
-      "kompres2015"
-    ]
-  },
-  "model": "filer.clipboard",
-  "pk": 1
-},
-{
-  "fields": {
-    "subject_location": null,
-    "must_always_publish_copyright": false,
-    "date_taken": "2015-12-09T08:42:49Z",
-    "author": null,
-    "_height": 1200,
-    "_width": 1920,
-    "must_always_publish_author_credit": false,
-    "default_alt_text": null,
-    "default_caption": null
-  },
-  "model": "filer.image",
-  "pk": 1
-},
-{
-  "fields": {
-    "rght": 2,
-    "uploaded_at": "2015-12-09T08:42:42Z",
-    "name": "art-images",
-    "parent": null,
-    "level": 0,
-    "created_at": "2015-12-09T08:42:42Z",
-    "modified_at": "2015-12-09T08:42:42Z",
-    "lft": 1,
-    "tree_id": 1,
-    "owner": [
-      "kompres2015"
-    ]
-  },
-  "model": "filer.folder",
-  "pk": 1
-},
-{
-  "fields": {
     "action_flag": 1,
-    "action_time": "2015-12-09T08:43:19Z",
+    "action_time": "2015-12-10T00:46:09.817Z",
     "object_repr": "test",
     "object_id": "1",
     "change_message": "",
-    "user": [
-      "kompres2015"
-    ],
-    "content_type": [
-      "image",
-      "articleimage"
-    ]
+    "user": 1,
+    "content_type": 30
   },
   "model": "admin.logentry",
   "pk": 1
-},
-{
-  "fields": {
-    "action_flag": 1,
-    "action_time": "2015-12-09T13:58:14.289Z",
-    "object_repr": "Jawa",
-    "object_id": "1",
-    "change_message": "",
-    "user": [
-      "kompres2015"
-    ],
-    "content_type": [
-      "region",
-      "region"
-    ]
-  },
-  "model": "admin.logentry",
-  "pk": 2
-},
-{
-  "fields": {
-    "action_flag": 2,
-    "action_time": "2015-12-09T13:58:40.668Z",
-    "object_repr": "Jawa",
-    "object_id": "1",
-    "change_message": "Added Provinsi \"DKI Jakarta\".",
-    "user": [
-      "kompres2015"
-    ],
-    "content_type": [
-      "region",
-      "region"
-    ]
-  },
-  "model": "admin.logentry",
-  "pk": 3
-},
-{
-  "fields": {
-    "action_flag": 2,
-    "action_time": "2015-12-09T14:00:42.600Z",
-    "object_repr": "Jawa",
-    "object_id": "1",
-    "change_message": "Added Provinsi \"Jawa Barat\". Added Provinsi \"Jawa Tengah\". Added Provinsi \"Jawa Timur\". Added Provinsi \"Bali\".",
-    "user": [
-      "kompres2015"
-    ],
-    "content_type": [
-      "region",
-      "region"
-    ]
-  },
-  "model": "admin.logentry",
-  "pk": 4
 }
 ]
