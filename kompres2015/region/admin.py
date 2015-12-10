@@ -7,20 +7,14 @@ from kompres2015.region.models import Province
 from kompres2015.region.models import Region
 
 
-# 99 must be specified because currently django-jet does not seem to have
-# ability to add model from the inline
 class DistrictInline(admin.StackedInline):
     model = District
     fk_name = 'province'
-    max_num = 99
-    extra = 99
 
 
 class ProvinceInline(admin.StackedInline):
     model = Province
     fk_name = 'region'
-    max_num = 99
-    extra = 99
 
 
 class DistrictAdmin(admin.ModelAdmin):

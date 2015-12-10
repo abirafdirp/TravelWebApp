@@ -1,7 +1,5 @@
 from django.db import models
 
-from filer.fields.image import FilerImageField
-
 from kompres2015.tourism.models import TravelDestination
 from kompres2015.tourism.models import Report
 from kompres2015.tourism.models import TravelDestinationContent
@@ -44,7 +42,7 @@ class ReportImage(Image):
         related_name='report_images',
         verbose_name='User'
     )
-    image = FilerImageField()
+    image = models.ImageField()
 
     def admin_image(self):
         return '<img src="%s" style="max-width: 400px; width: 100%%;"/>' % self.image.url
@@ -75,7 +73,7 @@ class TravelDestinationImage(Image):
         verbose_name='Konten Lokasi Wisata',
         null=True
     )
-    image = FilerImageField()
+    image = models.ImageField()
 
     TYPE_CHOICES = (
         ('main', 'main'),
@@ -109,7 +107,7 @@ class ArticleImage(Image):
     )
     type = models.CharField(choices=TYPE_CHOICES, max_length=20,
                             verbose_name='Tipe')
-    image = FilerImageField()
+    image = models.ImageField()
     article = models.ForeignKey('article.Article', blank=True, null=True,
                                 related_name='images', verbose_name='Artikel')
 

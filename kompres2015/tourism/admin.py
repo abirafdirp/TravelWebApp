@@ -29,8 +29,6 @@ class TravelDestinationContentInline(admin.StackedInline):
 
 class TravelDestinationImageInline(admin.StackedInline):
     model = TravelDestinationImage
-    max_num = 20
-    extra = 20
     verbose_name_plural = 'Foto-foto Lokasi Wisata'
 
     readonly_fields = ('admin_image', 'modified_date')

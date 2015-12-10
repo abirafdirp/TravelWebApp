@@ -5,7 +5,7 @@ from kompres2015.article.models import Article
 from kompres2015.image.models import ArticleImage
 
 
-class ArticleImageInline(admin.TabularInline):
+class ArticleImageInline(admin.StackedInline):
     readonly_fields = ('admin_image', 'modified_date')
     model = ArticleImage
 

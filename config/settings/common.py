@@ -52,12 +52,10 @@ THIRD_PARTY_APPS = (
     # DRF auto generated docs
     'rest_framework_swagger',
 
-    'filer',
-    'easy_thumbnails',
-
     'django_extensions',
     'compressor',
     'annoying',
+    'django_backup',
 )
 
 # Apps specific for this project go here.
@@ -120,11 +118,22 @@ FIXTURE_DIRS = (
 # DATABASE CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
+# DATABASES = {
+#     # Raises ImproperlyConfigured exception if DATABASE_URL not in os.environ
+#     'default': env.db("DATABASE_URL", default="postgres:///kompres2015"),
+# }
+# DATABASES['default']['ATOMIC_REQUESTS'] = True
+# backup purpose
 DATABASES = {
-    # Raises ImproperlyConfigured exception if DATABASE_URL not in os.environ
-    'default': env.db("DATABASE_URL", default="postgres:///kompres2015"),
+    'default': {
+        'NAME': 'kompres',         # Or path to database file if using sqlite3.
+        'USER': 'abirafdi',                      # Not used with sqlite3.
+        'PASSWORD': '',                  # Not used with sqlite3.
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
+    }
 }
-DATABASES['default']['ATOMIC_REQUESTS'] = True
+DATABASES['default']['ENGINE'] = 'django.db.backends.mysql'
 
 
 # GENERAL CONFIGURATION
@@ -302,10 +311,6 @@ GMAPS_TOKEN = env.str('GMAPS_TOKEN')
 
 # minification
 COMPRESS_ENABLED = False
-
-THUMBNAIL_HIGH_RESOLUTION = True
-FILER_CANONICAL_URL = 'public/'
-FILER_DUMP_PAYLOAD = True
 
 JET_THEMES = [
     {

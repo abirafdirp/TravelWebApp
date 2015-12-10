@@ -1,7 +1,5 @@
 from django.db import models
 
-from filer.fields.image import FilerImageField
-
 from kompres2015.util.models import TimeStampedModel
 from kompres2015.region.models import District
 
@@ -18,7 +16,7 @@ class Transportation(TimeStampedModel):
     )
     description = models.TextField(verbose_name='Deskripsi')
     website = models.URLField()
-    image = FilerImageField()
+    image = models.ImageField()
 
     def admin_image(self):
         return '<img src="%s" style="max-width: 400px; width: 100%%;"/>' % self.image.url

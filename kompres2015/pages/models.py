@@ -1,7 +1,5 @@
 from django.db import models
 
-from filer.fields.image import FilerImageField
-
 from kompres2015.util.models import TimeStampedModel
 
 from kompres2015.tourism.models import TravelDestination
@@ -19,18 +17,16 @@ class Page(TimeStampedModel):
         default=0,
         verbose_name="waktu dimulainya video (dalam detik)"
     )
-    travel_destination_list_image = FilerImageField(
+    travel_destination_list_image = models.ImageField(
         blank=True,
         null=True,
         verbose_name="foto halaman depan lokasi wisata",
-        related_name='destlist'
     )
-    article_list_image = FilerImageField(
+    article_list_image = models.ImageField(
         blank=True,
         null=True,
         help_text="harap gambar berwarna gelap",
         verbose_name="foto halaman depan artikel",
-        related_name='artlist'
     )
     article_list_tagline = models.CharField(
         max_length=80,
@@ -68,7 +64,7 @@ class FeaturedTravelDestination(TimeStampedModel):
 
 
 class HomeLink(TimeStampedModel):
-    image = FilerImageField()
+    image = models.ImageField()
     title = models.CharField(max_length=30)
     link = models.CharField(max_length=100)
     page = models.ForeignKey(Page, related_name='homelinks')

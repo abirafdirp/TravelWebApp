@@ -2,7 +2,6 @@ from django.db import models
 from django.utils import formats
 
 from ckeditor_uploader.fields import RichTextUploadingField
-from filer.fields.file import FilerFileField
 
 from kompres2015.util.models import TimeStampedModel
 from kompres2015.region.models import District
@@ -50,7 +49,7 @@ class TravelDestination(TimeStampedModel):
     short_description = models.TextField(
         verbose_name='Deskripsi Singkat',
     )
-    model_3d = FilerFileField(
+    model_3d = models.FileField(
         blank=True,
         null=True
     )
