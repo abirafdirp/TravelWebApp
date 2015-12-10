@@ -49,3 +49,5 @@ django-compressor==1.6
 django-debug-toolbar==1.4
 
 django-filer==1.0.4
+
+# pip install -e git+https://github.com/django-backup/django-backup.git#egg=develop

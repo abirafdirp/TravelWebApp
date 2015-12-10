@@ -118,22 +118,22 @@ FIXTURE_DIRS = (
 # DATABASE CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
-# DATABASES = {
-#     # Raises ImproperlyConfigured exception if DATABASE_URL not in os.environ
-#     'default': env.db("DATABASE_URL", default="postgres:///kompres2015"),
-# }
-# DATABASES['default']['ATOMIC_REQUESTS'] = True
-# backup purpose
 DATABASES = {
-    'default': {
-        'NAME': 'kompres',         # Or path to database file if using sqlite3.
-        'USER': 'abirafdi',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
-    }
+    # Raises ImproperlyConfigured exception if DATABASE_URL not in os.environ
+    'default': env.db("DATABASE_URL", default="postgres:///kompres2015"),
 }
-DATABASES['default']['ENGINE'] = 'django.db.backends.mysql'
+DATABASES['default']['ATOMIC_REQUESTS'] = True
+# backup purpose
+# DATABASES = {
+#     'default': {
+#         'NAME': 'kompres',         # Or path to database file if using sqlite3.
+#         'USER': 'abirafdi',                      # Not used with sqlite3.
+#         'PASSWORD': '',                  # Not used with sqlite3.
+#         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+#         'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
+#     }
+# }
+# DATABASES['default']['ENGINE'] = 'django.db.backends.mysql'
 
 
 # GENERAL CONFIGURATION
