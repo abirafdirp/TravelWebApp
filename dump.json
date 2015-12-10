@@ -1,419 +1,6 @@
 [
 {
   "fields": {
-    "model": "permission",
-    "app_label": "auth"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 1
-},
-{
-  "fields": {
-    "model": "group",
-    "app_label": "auth"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 2
-},
-{
-  "fields": {
-    "model": "contenttype",
-    "app_label": "contenttypes"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 3
-},
-{
-  "fields": {
-    "model": "session",
-    "app_label": "sessions"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 4
-},
-{
-  "fields": {
-    "model": "site",
-    "app_label": "sites"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 5
-},
-{
-  "fields": {
-    "model": "userdashboardmodule",
-    "app_label": "dashboard"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 6
-},
-{
-  "fields": {
-    "model": "bookmark",
-    "app_label": "jet"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 7
-},
-{
-  "fields": {
-    "model": "pinnedapplication",
-    "app_label": "jet"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 8
-},
-{
-  "fields": {
-    "model": "logentry",
-    "app_label": "admin"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 9
-},
-{
-  "fields": {
-    "model": "token",
-    "app_label": "authtoken"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 10
-},
-{
-  "fields": {
-    "model": "emailaddress",
-    "app_label": "account"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 11
-},
-{
-  "fields": {
-    "model": "emailconfirmation",
-    "app_label": "account"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 12
-},
-{
-  "fields": {
-    "model": "socialapp",
-    "app_label": "socialaccount"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 13
-},
-{
-  "fields": {
-    "model": "socialaccount",
-    "app_label": "socialaccount"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 14
-},
-{
-  "fields": {
-    "model": "socialtoken",
-    "app_label": "socialaccount"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 15
-},
-{
-  "fields": {
-    "model": "user",
-    "app_label": "users"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 16
-},
-{
-  "fields": {
-    "model": "userprofile",
-    "app_label": "users"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 17
-},
-{
-  "fields": {
-    "model": "email",
-    "app_label": "users"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 18
-},
-{
-  "fields": {
-    "model": "traveldestination",
-    "app_label": "tourism"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 19
-},
-{
-  "fields": {
-    "model": "traveldestinationcontent",
-    "app_label": "tourism"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 20
-},
-{
-  "fields": {
-    "model": "visit",
-    "app_label": "tourism"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 21
-},
-{
-  "fields": {
-    "model": "report",
-    "app_label": "tourism"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 22
-},
-{
-  "fields": {
-    "model": "location",
-    "app_label": "region"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 23
-},
-{
-  "fields": {
-    "model": "region",
-    "app_label": "region"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 24
-},
-{
-  "fields": {
-    "model": "province",
-    "app_label": "region"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 25
-},
-{
-  "fields": {
-    "model": "district",
-    "app_label": "region"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 26
-},
-{
-  "fields": {
-    "model": "image",
-    "app_label": "image"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 27
-},
-{
-  "fields": {
-    "model": "reportimage",
-    "app_label": "image"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 28
-},
-{
-  "fields": {
-    "model": "traveldestinationimage",
-    "app_label": "image"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 29
-},
-{
-  "fields": {
-    "model": "articleimage",
-    "app_label": "image"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 30
-},
-{
-  "fields": {
-    "model": "page",
-    "app_label": "pages"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 31
-},
-{
-  "fields": {
-    "model": "featuredtraveldestination",
-    "app_label": "pages"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 32
-},
-{
-  "fields": {
-    "model": "homelink",
-    "app_label": "pages"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 33
-},
-{
-  "fields": {
-    "model": "article",
-    "app_label": "article"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 34
-},
-{
-  "fields": {
-    "model": "transportation",
-    "app_label": "transportation"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 35
-},
-{
-  "fields": {
-    "model": "email",
-    "app_label": "custom_email"
-  },
-  "model": "contenttypes.contenttype",
-  "pk": 36
-},
-{
-  "fields": {
-    "expire_date": "2015-12-24T00:45:57.629Z",
-    "session_data": "NjZiZmJkMjA0YTQ5YTRlODE2Zjk5Mzk5NmM0ZGVmMWYwZWExNWY2MDp7Il9hdXRoX3VzZXJfaGFzaCI6ImE5ZWM3OTI2MmFmMjg2N2I5YTNiMzViNmQzYmVhN2ZlZDQ3OWY5MjgiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0="
-  },
-  "model": "sessions.session",
-  "pk": "6xurhzdqqh5b4idosgqfk45nd8ggyj7i"
-},
-{
-  "fields": {
-    "domain": "example.com",
-    "name": "kompres2015"
-  },
-  "model": "sites.site",
-  "pk": 1
-},
-{
-  "fields": {
-    "title": "Quick links",
-    "column": 0,
-    "collapsed": false,
-    "settings": "{\"layout\": \"inline\"}",
-    "module": "jet.dashboard.modules.LinkList",
-    "children": "[{\"url\": \"/\", \"title\": \"Return to site\"}, {\"url\": \"/admin/password_change/\", \"title\": \"Change password\"}, {\"url\": \"/admin/logout/\", \"title\": \"Log out\"}]",
-    "user": 1,
-    "app_label": null,
-    "order": 0
-  },
-  "model": "dashboard.userdashboardmodule",
-  "pk": 1
-},
-{
-  "fields": {
-    "title": "Applications",
-    "column": 1,
-    "collapsed": false,
-    "settings": "{\"models\": null, \"exclude\": [\"auth.*\"]}",
-    "module": "jet.dashboard.modules.AppList",
-    "children": "",
-    "user": 1,
-    "app_label": null,
-    "order": 0
-  },
-  "model": "dashboard.userdashboardmodule",
-  "pk": 2
-},
-{
-  "fields": {
-    "title": "Administration",
-    "column": 2,
-    "collapsed": false,
-    "settings": "{\"models\": [\"auth.*\"], \"exclude\": null}",
-    "module": "jet.dashboard.modules.AppList",
-    "children": "",
-    "user": 1,
-    "app_label": null,
-    "order": 0
-  },
-  "model": "dashboard.userdashboardmodule",
-  "pk": 3
-},
-{
-  "fields": {
-    "title": "Recent Actions",
-    "column": 0,
-    "collapsed": false,
-    "settings": "{\"exclude_list\": null, \"include_list\": null, \"limit\": 10, \"user\": null}",
-    "module": "jet.dashboard.modules.RecentActions",
-    "children": "",
-    "user": 1,
-    "app_label": null,
-    "order": 1
-  },
-  "model": "dashboard.userdashboardmodule",
-  "pk": 4
-},
-{
-  "fields": {
-    "title": "Latest Django News",
-    "column": 1,
-    "collapsed": false,
-    "settings": "{\"limit\": 5, \"feed_url\": \"http://www.djangoproject.com/rss/weblog/\"}",
-    "module": "jet.dashboard.modules.Feed",
-    "children": "",
-    "user": 1,
-    "app_label": null,
-    "order": 1
-  },
-  "model": "dashboard.userdashboardmodule",
-  "pk": 5
-},
-{
-  "fields": {
-    "title": "Support",
-    "column": 2,
-    "collapsed": false,
-    "settings": "{\"layout\": \"stacked\"}",
-    "module": "jet.dashboard.modules.LinkList",
-    "children": "[{\"url\": \"http://docs.djangoproject.com/\", \"external\": true, \"title\": \"Django documentation\"}, {\"url\": \"http://groups.google.com/group/django-users\", \"external\": true, \"title\": \"Django \\\"django-users\\\" mailing list\"}, {\"url\": \"irc://irc.freenode.net/django\", \"external\": true, \"title\": \"Django irc channel\"}]",
-    "user": 1,
-    "app_label": null,
-    "order": 1
-  },
-  "model": "dashboard.userdashboardmodule",
-  "pk": 6
-},
-{
-  "fields": {
-    "modified_date": "2015-12-10",
-    "tag": "",
-    "name": "test",
-    "created_date": "2015-12-10T00:46:09.803Z"
-  },
-  "model": "image.image",
-  "pk": 1
-},
-{
-  "fields": {
-    "article": null,
-    "image": "./1.JPG",
-    "type": "thumbnail"
-  },
-  "model": "image.articleimage",
-  "pk": 1
-},
-{
-  "fields": {
     "codename": "add_permission",
     "name": "Can add permission",
     "content_type": 1
@@ -1386,6 +973,112 @@
 },
 {
   "fields": {
+    "expire_date": "2015-12-24T00:45:57.629Z",
+    "session_data": "NjZiZmJkMjA0YTQ5YTRlODE2Zjk5Mzk5NmM0ZGVmMWYwZWExNWY2MDp7Il9hdXRoX3VzZXJfaGFzaCI6ImE5ZWM3OTI2MmFmMjg2N2I5YTNiMzViNmQzYmVhN2ZlZDQ3OWY5MjgiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0="
+  },
+  "model": "sessions.session",
+  "pk": "6xurhzdqqh5b4idosgqfk45nd8ggyj7i"
+},
+{
+  "fields": {
+    "domain": "example.com",
+    "name": "kompres2015"
+  },
+  "model": "sites.site",
+  "pk": 1
+},
+{
+  "fields": {
+    "title": "Quick links",
+    "column": 0,
+    "collapsed": false,
+    "settings": "{\"layout\": \"inline\"}",
+    "module": "jet.dashboard.modules.LinkList",
+    "children": "[{\"url\": \"/\", \"title\": \"Return to site\"}, {\"url\": \"/admin/password_change/\", \"title\": \"Change password\"}, {\"url\": \"/admin/logout/\", \"title\": \"Log out\"}]",
+    "user": 1,
+    "app_label": null,
+    "order": 0
+  },
+  "model": "dashboard.userdashboardmodule",
+  "pk": 1
+},
+{
+  "fields": {
+    "title": "Applications",
+    "column": 1,
+    "collapsed": false,
+    "settings": "{\"models\": null, \"exclude\": [\"auth.*\"]}",
+    "module": "jet.dashboard.modules.AppList",
+    "children": "",
+    "user": 1,
+    "app_label": null,
+    "order": 0
+  },
+  "model": "dashboard.userdashboardmodule",
+  "pk": 2
+},
+{
+  "fields": {
+    "title": "Administration",
+    "column": 2,
+    "collapsed": false,
+    "settings": "{\"models\": [\"auth.*\"], \"exclude\": null}",
+    "module": "jet.dashboard.modules.AppList",
+    "children": "",
+    "user": 1,
+    "app_label": null,
+    "order": 0
+  },
+  "model": "dashboard.userdashboardmodule",
+  "pk": 3
+},
+{
+  "fields": {
+    "title": "Recent Actions",
+    "column": 0,
+    "collapsed": false,
+    "settings": "{\"exclude_list\": null, \"include_list\": null, \"limit\": 10, \"user\": null}",
+    "module": "jet.dashboard.modules.RecentActions",
+    "children": "",
+    "user": 1,
+    "app_label": null,
+    "order": 1
+  },
+  "model": "dashboard.userdashboardmodule",
+  "pk": 4
+},
+{
+  "fields": {
+    "title": "Latest Django News",
+    "column": 1,
+    "collapsed": false,
+    "settings": "{\"limit\": 5, \"feed_url\": \"http://www.djangoproject.com/rss/weblog/\"}",
+    "module": "jet.dashboard.modules.Feed",
+    "children": "",
+    "user": 1,
+    "app_label": null,
+    "order": 1
+  },
+  "model": "dashboard.userdashboardmodule",
+  "pk": 5
+},
+{
+  "fields": {
+    "title": "Support",
+    "column": 2,
+    "collapsed": false,
+    "settings": "{\"layout\": \"stacked\"}",
+    "module": "jet.dashboard.modules.LinkList",
+    "children": "[{\"url\": \"http://docs.djangoproject.com/\", \"external\": true, \"title\": \"Django documentation\"}, {\"url\": \"http://groups.google.com/group/django-users\", \"external\": true, \"title\": \"Django \\\"django-users\\\" mailing list\"}, {\"url\": \"irc://irc.freenode.net/django\", \"external\": true, \"title\": \"Django irc channel\"}]",
+    "user": 1,
+    "app_label": null,
+    "order": 1
+  },
+  "model": "dashboard.userdashboardmodule",
+  "pk": 6
+},
+{
+  "fields": {
     "username": "kompres2015",
     "first_name": "",
     "last_name": "",
@@ -1402,6 +1095,25 @@
     "date_joined": "2015-12-10T00:20:32.966Z"
   },
   "model": "users.user",
+  "pk": 1
+},
+{
+  "fields": {
+    "modified_date": "2015-12-10",
+    "tag": "",
+    "name": "test",
+    "created_date": "2015-12-10T00:46:09.803Z"
+  },
+  "model": "image.image",
+  "pk": 1
+},
+{
+  "fields": {
+    "article": null,
+    "image": "./1.JPG",
+    "type": "thumbnail"
+  },
+  "model": "image.articleimage",
   "pk": 1
 },
 {
