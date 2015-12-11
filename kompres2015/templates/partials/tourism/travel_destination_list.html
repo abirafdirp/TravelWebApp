@@ -159,10 +159,19 @@
 				</div>
 
 				<div layout="row" layout-wrap flex="80" flex-sm="100" flex-md="100" ng-if="hide_visited">
-					<div ng-cloak dir-paginate="travel_destination in travel_destinations.results | filter: TravelDestinationSearch.search | filter: TravelDestinationSearch.district_search
-					| filter: TravelDestinationSearch.category_search | filter: TravelDestinationSearch.province_search | filter: TravelDestinationSearch.region_search | filter: search
-					| itemsPerPage: 9"
-							 flex="33" flex-sm="100" flex-md="50" ng-show="!travel_destination.visited">
+					<div ng-cloak
+							 dir-paginate="travel_destination in travel_destinations.results |
+							 filter: TravelDestinationSearch.search |
+							 filter: TravelDestinationSearch.district_search |
+							 filter: TravelDestinationSearch.category_search |
+							 filter: TravelDestinationSearch.province_search |
+							 filter: TravelDestinationSearch.region_search |
+							 filter: search|
+							 itemsPerPage: 9"
+							 flex="33"
+							 flex-sm="100"
+							 flex-md="50"
+							 ng-show="!travel_destination.visited">
 						<div ng-controller="TravelDestinationRepeatCtrl">
 							<div>
 								<md-card id="posts">

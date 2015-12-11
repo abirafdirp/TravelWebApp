@@ -6,7 +6,7 @@
 
 	<div ng-if="!show_loading" layout="column" layout-fill ng-repeat="travel_destination in travel_destination.results" class="animated fadeIn">
 		<div class="slider">
-			<ul rn-carousel rn-carousel-auto-slide="10" rn-carousel-controls-allow-loop>
+			<ul rn-carousel rn-carousel-auto-slide="10">
 				<li ng-repeat="image in main_images">
 					<img class="faux-image" ng-src="{$ image.image $}">
 					<h2 hide-sm hide-md class="tagline md-headline" flex="60">{$image.tag$}</h2>

@@ -334,6 +334,7 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
         $scope.travel_destinations = TravelDestinations.list.query();
 
         $scope.travel_destinations.$promise.then(function(){
+          $scope.orderByRandom();
           $scope.user = djangoAuth.profile().then(function(data){
                 $scope.user = data;
                 cachedResource($scope.user.district+'?format=json').get(function(data){
@@ -347,12 +348,13 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
                       item['visited'] = true;
                     }
                     item['distance'] = $rootScope.distance($scope.user.district.latitude, $scope.user.district.longitude, item.latitude, item.longitude);
+
+                    // this is bad, should have use $q
                     $scope.deffered_distances += 1;
                     if ($scope.deffered_distances.length == $scope.travel_destinations.results.length){
                       $scope.deffered_distances = 0;
                       $scope.show_sidenav = true;
                       // instant orderby
-                      //$scope.orderByDistance();
                       //$scope.distance_toggle_auth = true;
                     }
                     item['district_resolved'] = cachedResource(item.district).get(function(){
