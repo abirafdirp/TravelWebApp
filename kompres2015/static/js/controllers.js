@@ -409,9 +409,13 @@ kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route'
     $scope.show_loading = true;
 
     $scope.current_url = $location.absUrl();
+    $scope.gallery_images = [];
 
     $scope.travel_destination = TravelDestinations.detail.query({travel_destination_name:$scope.travel_destination_name});
     $scope.travel_destination.$promise.then(function() {
+      cachedResource($scope.travel_destination.results[0].thumbnail+'?format=json').get(function(data){
+        $scope.gallery_images.push(data);
+      });
       $rootScope.title = $scope.travel_destination.results[0].name + ' - Discover Indonesia';
       var url = $scope.travel_destination.results[0].district+'?format=json';
       $scope.district = cachedResource(url).get(function(){
@@ -425,7 +429,6 @@ kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route'
 
       $scope.images_length = $scope.travel_destination.results[0].images.length;
       $scope.main_images = [];
-      $scope.gallery_images = [];
       angular.forEach($scope.travel_destination.results[0].images, function (image, index){
         cachedResource(image+'?format=json').get(function(image){
           if (image.type == 'main'){
@@ -436,12 +439,6 @@ kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route'
             $scope.gallery_images.push(image);
           }
         });
-        // hacky fix, dependant on client speed
-        if (index == $scope.images_length - 1){
-          $interval(function(){
-            $scope.nextSlide();
-          },10290,20);
-        }
       });
 
       $scope.travel_destination_contents = [];
@@ -497,16 +494,6 @@ kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route'
         }
       };
     });
-
-    $scope.currentIndex = 0;
-
-    $scope.isCurrentSlideIndex = function (index) {
-      return $scope.currentIndex === index;
-    };
-
-    $scope.nextSlide = function () {
-      $scope.currentIndex = ($scope.currentIndex < $scope.main_images.length - 1) ? ++$scope.currentIndex : 0;
-    };
   }
 ]);
 
