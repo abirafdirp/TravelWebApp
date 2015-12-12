@@ -17,6 +17,23 @@ class Page(TimeStampedModel):
         default=0,
         verbose_name="waktu dimulainya video (dalam detik)"
     )
+    home_tagline = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name='Deskripsi singkat di halaman depan'
+    )
+    home_tagline_link = models.CharField(
+        blank=True,
+        null=True,
+        verbose_name='Link pada deskripsi',
+        max_length=50
+    )
+    home_tagline_link_title = models.CharField(
+        blank=True,
+        null=True,
+        verbose_name='Judul pada link deskripsi',
+        max_length=40
+    )
     travel_destination_list_image = models.ImageField(
         blank=True,
         null=True,

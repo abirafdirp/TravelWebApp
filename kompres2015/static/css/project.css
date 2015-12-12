@@ -193,6 +193,12 @@ a {
     overflow: hidden;
 }
 
+.homelink-image-video{
+    min-height: 200px;
+    max-height: 200px;
+    overflow: hidden;
+}
+
 .featured-dest-img{
     height: 300px;
     width: 100%;
@@ -526,7 +532,7 @@ md-autocomplete[md-floating-label] md-input-container{
 }
 
 .video-content {
-    top: 130px;
+    top: 80px;
     position: relative;
     z-index: 100;
 }
@@ -545,8 +551,12 @@ md-autocomplete[md-floating-label] md-input-container{
     color: white;
     padding: 5px 30px 5px 30px;
     margin-left: 18px;
-    margin-bottom: 200px;
+    margin-bottom: 5px;
     border-radius: 3%;
+}
+
+md-card a {
+    cursor: pointer;
 }
 
 .home-link-title {

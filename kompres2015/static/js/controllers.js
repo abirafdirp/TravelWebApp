@@ -825,11 +825,39 @@ kompresControllers.controller('SearchCtrl', ['$scope', 'ArticleSearch', '$timeou
     $scope.TravelDestinationSearch = TravelDestinationSearch;
     $scope.search_opened = false;
     $scope.search_icon = 'search';
+    $scope.allow_dest_clear = false;
+
+    $scope.clearAllDestSearch = function(){
+      $scope.TravelDestinationSearch.clearAllSearch();
+    };
+    $scope.allowDestClear = function(){
+      // uhhhh what
+      if ((TravelDestinationSearch.district_search != '') || (TravelDestinationSearch.province_search !='') || (TravelDestinationSearch.region_search != '') || (TravelDestinationSearch.category_search != '')){
+        return false;
+      }
+      return true;
+    };
 
     $scope.params = $routeParams;
 
-    if ($scope.params.kategori){
-      TravelDestinationSearch.setCategorySearch($scope.params.kategori);
+    if ($scope.params.destinasi_kategori){
+      TravelDestinationSearch.setCategorySearch($scope.params.destinasi_kategori);
+    }
+
+    if ($scope.params.destinasi_kabupaten){
+      TravelDestinationSearch.setDistrictSearch($scope.params.destinasi_kabupaten);
+    }
+
+    if ($scope.params.destinasi_provinsi){
+      TravelDestinationSearch.setProvinceSearch($scope.params.destinasi_provinsi);
+    }
+
+    if ($scope.params.destinasi_wilayah){
+      TravelDestinationSearch.setRegionSearch($scope.params.destinasi_wilayah);
+    }
+
+    if ($scope.params.artikel_kategori){
+      ArticleSearch.setCategorySearch($scope.params.artikel_kategori);
     }
 
 

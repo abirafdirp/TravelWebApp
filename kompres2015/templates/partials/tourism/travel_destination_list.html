@@ -105,6 +105,11 @@
 							</md-autocomplete>
 						</div>
 					</div>
+					<div layout="row" layout-align="center center">
+						<md-button class="md-raised md-accent" ng-disabled="allowDestClear()" ng-click="clearAllDestSearch()">
+							Bersihkan Pencarian&nbsp;&nbsp; <ng-md-icon icon="backspace"></ng-md-icon>&nbsp;&nbsp;
+						</md-button>
+					</div>
 
 					<div ng-if="show_sidenav" class="animated fadeIn" layout="column" layout-wrap layout-fill>
 						<div layout="row" layout-align="center center" class="light-blue-border-right pad-right">
@@ -115,7 +120,7 @@
 											md-items="district in $parent.districts.results | filter: district_search | orderBy: 'name'"
 											md-item-text="district.name"
 											md-selected-item-change="searchSelectedChange(district)"
-										 	md-search-text-change="searchTextChange(district_search)"
+											md-search-text-change="searchTextChange(district_search)"
 											md-min-length="0"
 											placeholder="Lokasi anda sekarang"
 											md-floating-label="Lokasi anda"
@@ -190,13 +195,13 @@
 								<span class="md-body-2" layout="row" layout-wrap>
 									<span flex="100" flex-gt-lg="60">
 										<ng-md-icon icon="sort" size="20" aria-label="tanggal"></ng-md-icon>
-										<a href="javascript:void(0)" ng-click="TravelDestinationSearch.setSearch(travel_destination.type)">
+										<a ng-click="TravelDestinationSearch.setCategorySearch(travel_destination.type)">
 											<span class="animated fadeIn">{$ travel_destination.type $}</span>
 										</a>
 									</span>
 									<span flex="100" flex-gt-lg="40" ng-show="district.name != null" class="animated fadeIn">
 										<ng-md-icon icon="place" size="20" aria-label="tempat"></ng-md-icon>
-										<a href="javascript:void(0)" ng-click="TravelDestinationSearch.setSearch(district.name)">
+										<a ng-click="TravelDestinationSearch.setDistrictSearch(district.name)">
 											{$ district.name $}
 										</a>
 									</span>
@@ -234,13 +239,13 @@
 								<span class="md-body-2" layout="row" layout-wrap>
 									<span flex="100" flex-gt-lg="60">
 										<ng-md-icon icon="sort" size="20" aria-label="tanggal"></ng-md-icon>
-										<a href="javascript:void(0)" ng-click="TravelDestinationSearch.setSearch(travel_destination.type)">
+										<a ng-click="TravelDestinationSearch.setCategorySearch(travel_destination.type)">
 											<span class="animated fadeIn">{$ travel_destination.type $}</span>
 										</a>
 									</span>
 									<span flex="100" flex-gt-lg="40" ng-show="district.name != null" class="animated fadeIn">
 										<ng-md-icon icon="place" size="20" aria-label="tempat"></ng-md-icon>
-										<a href="javascript:void(0)" ng-click="TravelDestinationSearch.setSearch(district.name)">
+										<a ng-click="TravelDestinationSearch.setDistrictSearch(district.name)">
 											{$ district.name $}
 										</a>
 									</span>

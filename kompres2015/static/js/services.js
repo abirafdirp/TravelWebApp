@@ -175,7 +175,6 @@ kompresServices.service('ArticleSearch', [
       this.category_search = '';
     };
 
-
     this.getCategoryIcon = function (category) {
       if (this.category_search == category){
         return 'keyboard_tab';
@@ -213,6 +212,16 @@ kompresServices.service('TravelDestinationSearch', [
 
     this.setDistrictSearch = function(search) {
       this.district_search = search;
+    };
+
+    this.clearProvinceSearch = function() {
+      if(this.province_search != null){
+        this.province_search = '';
+      }
+    };
+
+    this.setProvinceSearch = function(search) {
+      this.province_search = search;
     };
 
     this.clearRegionSearch = function() {

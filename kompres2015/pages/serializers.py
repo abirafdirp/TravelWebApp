@@ -6,15 +6,24 @@ from kompres2015.pages.models import HomeLink
 
 
 class PageSerializer(serializers.ModelSerializer):
-    featureds = serializers.HyperlinkedRelatedField(view_name='featured-travel-destination-detail',
-                                                    read_only=True, many=True)
-    homelinks = serializers.HyperlinkedRelatedField(view_name='home-link-detail',
-                                                    read_only=True, many=True)
+    featureds = serializers.HyperlinkedRelatedField(
+        view_name='featured-travel-destination-detail',
+        read_only=True,
+        many=True
+    )
+    homelinks = serializers.HyperlinkedRelatedField(
+        view_name='home-link-detail',
+        read_only=True,
+        many=True
+    )
 
     class Meta:
         model = Page
-        fields = ('id', 'video', 'video_start', 'featureds', 'travel_destination_list_image', 'article_list_image',
-                  'article_list_tagline', 'travel_destination_list_tagline', 'homelinks')
+        fields = ('id', 'video', 'video_start', 'featureds',
+                  'travel_destination_list_image', 'article_list_image',
+                  'article_list_tagline', 'travel_destination_list_tagline',
+                  'homelinks', 'home_tagline', 'home_tagline_link',
+                  'home_tagline_link_title')
 
 
 class FeaturedTravelDestinationSerializer(serializers.ModelSerializer):

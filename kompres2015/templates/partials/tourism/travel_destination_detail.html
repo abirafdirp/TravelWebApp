@@ -86,13 +86,13 @@
 			<div flex="25" class="dest-side" layout="column" md-theme="dest-side">
 				<div class="dest-side-row">
 					<ng-md-icon icon="place" size="20" aria-label="tanggal"></ng-md-icon>
-					<a ng-href="/lokasi-wisata?search={$district.name$}" class="animated fadeIn" ng-if="district.name"><span>{$district.name $}</span></a>,
-					<a ng-href="/lokasi-wisata?search={$province.name$}" class="animated fadeIn" ng-if="province.name"><span>{$province.name $}</span></a>
-					<a ng-href="/lokasi-wisata?search={$region.name$}" class="animated fadeIn" ng-if="region.name"><span>{$region.name $}</span></a>
+					<a ng-href="/lokasi-wisata?destinasi_kabupaten={$district.name$}" class="animated fadeIn" ng-if="district.name"><span>{$district.name $}</span></a>,
+					<a ng-href="/lokasi-wisata?destinasi_provinsi={$province.name$}" class="animated fadeIn" ng-if="province.name"><span>{$province.name $}</span></a>
+					<a ng-href="/lokasi-wisata?destinasi_wilayah={$region.name$}" class="animated fadeIn" ng-if="region.name"><span>{$region.name $}</span></a>
 				</div>
 				<div class="dest-side-row">
 					<ng-md-icon icon="sort" size="20" aria-label="tanggal"></ng-md-icon>
-					<a ng-href="/lokasi-wisata?search={$travel_destination.type$}">
+					<a ng-href="/lokasi-wisata?destinasi_kategori={$travel_destination.type$}">
 						<span class="animated fadeIn">{$ travel_destination.type $}</span>
 					</a>
 				</div>
