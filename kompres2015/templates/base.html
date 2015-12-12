@@ -13,14 +13,14 @@
 
 	<!-- Angular-material CSS -->
 	{% compress css %}
-		<link rel="stylesheet" href="{% static 'css/angular-material.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/angular-material.min.css' %}">
 
-		<link rel="stylesheet" href="{% static 'css/animate.css' %}">
-		<link rel="stylesheet" href="{% static 'css/auth.css' %}">
-		<link rel="stylesheet" href="{% static 'css/angular-material-icons.css' %}">
-		<link rel="stylesheet" href="{% static 'css/angular-social-share.min.css' %}">
-		<link rel="stylesheet" href="{% static 'css/angular-carousel.min.css' %}">
-		<link rel="stylesheet" href="{% static 'css/project.css' %}">
+	<link rel="stylesheet" href="{% static 'css/animate.css' %}">
+	<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+	<link rel="stylesheet" href="{% static 'css/angular-material-icons.css' %}">
+	<link rel="stylesheet" href="{% static 'css/angular-social-share.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/angular-carousel.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/project.css' %}">
 	{% endcompress %}
 
 	<!-- Main CSS -->
@@ -146,80 +146,127 @@
 				<main ng-view flex></main>
 	</div>
 
-	<footer md-theme="default" ng-cloak>
-		<md-toolbar class="md-accent">
-			<div class="md-toolbar-tools">
-				<h2>My Awesome Footer</h2>
+	<footer ng-cloak layout="column">
+		<div class="material-blue" flex="100" layout="row" layout-align="center center">
+			<h4 class="md-subheading">Temukan Berbagai Keindahan dan Lokasi Wisata di Indonesia - Discover Indonesia</h4>
+		</div>
+		<div class="material-teal" flex="100" layout="row" layout-align="center start">
+			<div>
+				<h4 class="md-subheading">Discover Indonesia</h4>
+				<ul>
+					<li>
+						<a href="/lokasi-wisata" class="md-body-1">Lokasi Wisata</a>
+					</li>
+					<li>
+						<a href="/lokasi-wisata" class="md-body-1">Peta</a>
+					</li>
+					<li>
+						<a href="javascript:void(0)" ng-click="showLogin($event)" class="md-body-1">Masuk</a>
+					</li>
+					<li>
+						<a href="javascript:void(0)" ng-click="showRegister($event)" class="md-body-1">Daftar</a>
+					</li>
+				</ul>
 			</div>
-		</md-toolbar>
+			<div flex="5"></div>
+			<div>
+				<h4 class="md-subheading">Artikel</h4>
+				<ul>
+					<li>
+						<a href="/lokasi-wisata" class="md-body-1">Artikel</a>
+					</li>
+				</ul>
+			</div>
+			<div flex="5"></div>
+			<div>
+				<h4 class="md-subheading">Info dan Kontak</h4>
+				<ul>
+					<li>
+						<a href="/lokasi-wisata" class="md-body-1">Info dan Kontak</a>
+					</li>
+				</ul>
+			</div>
+			<div flex="5"></div>
+			<div>
+				<h4 class="md-subheading">Sitemap</h4>
+				<ul>
+					<li>
+						<a href="/lokasi-wisata" class="md-body-1">Sitemap</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="material-teal" layout="row" layout-align="center">
+			<h6>Created by Abirafdi Raditya Putra with the help from open source communities around the world.</h6>
+		</div>
 	</footer>
 
 	{% compress js %}
-		<!-- threejs and its dependencies for angular -->
-		<script src="{% static 'js/three.min.js' %}" type="application/javascript"></script>
-		<script src="{% static 'js/AssimpJSONLoader.js' %}" type="application/javascript"></script>
+	<!-- threejs and its dependencies for angular -->
+	<script src="{% static 'js/three.min.js' %}" type="application/javascript"></script>
+	<script src="{% static 'js/AssimpJSONLoader.js' %}" type="application/javascript"></script>
 
-		<!-- angular v1.4.2 -->
-		<script src="{% static 'js/angular.js' %}" type="application/javascript"></script>
-		<script src="{% static 'js/angular-route.js' %}" type="application/javascript"></script>
-		<script src="{% static 'js/angular-resource.js' %}" type="application/javascript"></script>
-		<script src="{% static 'js/angular-messages.js' %}" type="application/javascript"></script>
-		<script src="{% static 'js/angular-touch.min.js'%}" type="application/javascript"></script>
+	<!-- angular v1.4.2 -->
+	<script src="{% static 'js/angular.js' %}" type="application/javascript"></script>
+	<script src="{% static 'js/angular-route.js' %}" type="application/javascript"></script>
+	<script src="{% static 'js/angular-resource.js' %}" type="application/javascript"></script>
+	<script src="{% static 'js/angular-messages.js' %}" type="application/javascript"></script>
+	<script src="{% static 'js/angular-touch.min.js'%}" type="application/javascript"></script>
 
-		<!-- localization -->
-		<script src="{% static 'js/locales/angular-locale_id-id.js' %}" type="application/javascript"></script>
+	<!-- localization -->
+	<script src="{% static 'js/locales/angular-locale_id-id.js' %}" type="application/javascript"></script>
 
-		<!-- angular-material dependencies -->
-		<script src="{% static 'js/angular-animate.min.js' %}" type="application/javascript"></script>
-		<script src="{% static 'js/angular-aria.min.js' %}" type="application/javascript"></script>
-		<script src="{% static 'js/angular-material.min.js' %}" type="application/javascript"></script>
+	<!-- angular-material dependencies -->
+	<script src="{% static 'js/angular-animate.min.js' %}" type="application/javascript"></script>
+	<script src="{% static 'js/angular-aria.min.js' %}" type="application/javascript"></script>
+	<script src="{% static 'js/angular-material.min.js' %}" type="application/javascript"></script>
 
-		<!-- 3rd party angular libs -->
-		<script src="{% static 'js/angular-carousel.min.js'%}" type="application/javascript"></script>
-		<script src="{% static 'js/angular-material-icons.min.js'%}" type="application/javascript"></script>
-		<script src="{% static 'js/ng-file-upload.min.js'%}" type="application/javascript"></script>
-		<script src="{% static 'js/angular-video-bg.min.js'%}" type="application/javascript"></script>
-		<script src="{% static 'js/dirPagination.js'%}" type="application/javascript"></script>
-		<script src="{% static 'js/satellizer.min.js'%}" type="application/javascript"></script>
-		<script src="{% static 'js/angular-social-share.min.js'%}"type="application/javascript" ></script>
+	<!-- 3rd party angular libs -->
+	<script src="{% static 'js/angular-carousel.min.js'%}" type="application/javascript"></script>
+	<script src="{% static 'js/angular-material-icons.min.js'%}" type="application/javascript"></script>
+	<script src="{% static 'js/ng-file-upload.min.js'%}" type="application/javascript"></script>
+	<script src="{% static 'js/angular-video-bg.min.js'%}" type="application/javascript"></script>
+	<script src="{% static 'js/dirPagination.js'%}" type="application/javascript"></script>
+	<script src="{% static 'js/satellizer.min.js'%}" type="application/javascript"></script>
+	<script src="{% static 'js/angular-social-share.min.js'%}"type="application/javascript" ></script>
 
-		<!-- angular google maps -->
-		<script src="{% static 'js/angular-simple-logger.min.js'%}" type="application/javascript"></script>
-		<script src="{% static 'js/lodash.min.js'%}" type="application/javascript"></script>
-		<script src="{% static 'js/angular-google-maps.min.js'%}" type="application/javascript"></script>
+	<!-- angular google maps -->
+	<script src="{% static 'js/angular-simple-logger.min.js'%}" type="application/javascript"></script>
+	<script src="{% static 'js/lodash.min.js'%}" type="application/javascript"></script>
+	<script src="{% static 'js/angular-google-maps.min.js'%}" type="application/javascript"></script>
 
-		<!--[if lt IE 9]>
+	<!--[if lt IE 9]>
 	<script src="bower_components/es5-shim/es5-shim.js"></script>
 	<script src="bower_components/json3/lib/json3.min.js"></script>
 	<![endif]-->
 
-		<!-- angular-django-registration-auth dependencies -->
-		<script src="{% static 'js/angular-cookies.min.js' %}" type="application/javascript"></script>
-		<script src="{% static 'js/angular-sanitize.min.js' %}" type="application/javascript"></script>
+	<!-- angular-django-registration-auth dependencies -->
+	<script src="{% static 'js/angular-cookies.min.js' %}" type="application/javascript"></script>
+	<script src="{% static 'js/angular-sanitize.min.js' %}" type="application/javascript"></script>
 
-		<!-- my stuff -->
-		<script src="{% static 'js/app.js' %}" type="application/javascript"></script>
-		<script src="{% static 'js/controllers.js' %}" type="application/javascript"></script>
-		<script src="{% static 'js/services.js' %}" type="application/javascript"></script>
+	<!-- my stuff -->
+	<script src="{% static 'js/app.js' %}" type="application/javascript"></script>
+	<script src="{% static 'js/controllers.js' %}" type="application/javascript"></script>
+	<script src="{% static 'js/services.js' %}" type="application/javascript"></script>
 
-		<!-- directive for threejs -->
-		<script src="{% static 'js/tjsModelViewer.js' %}" type="application/javascript"></script>
+	<!-- directive for threejs -->
+	<script src="{% static 'js/tjsModelViewer.js' %}" type="application/javascript"></script>
 
-		<!-- angular-django-registration auth -->
-		<script src="{% static 'js/controllers/main.js' %}" type="application/javascript"></script>
-		<script src="{% static 'js/controllers/register.js' %}" type="application/javascript"></script>
-		<script src="{% static 'js/controllers/passwordreset.js' %}" type="application/javascript"></script>
-		<script src="{% static 'js/controllers/passwordresetconfirm.js' %}" type="application/javascript"></script>
-		<script src="{% static 'js/controllers/login.js' %}" type="application/javascript"></script>
-		<script src="{% static 'js/controllers/verifyemail.js' %}" type="application/javascript"></script>
-		<script src="{% static 'js/controllers/logout.js' %}" type="application/javascript"></script>
-		<script src="{% static 'js/controllers/userprofile.js' %}" type="application/javascript"></script>
-		<script src="{% static 'js/controllers/passwordchange.js' %}" type="application/javascript"></script>
-		<script src="{% static 'js/services/djangoAuth.js' %}" type="application/javascript"></script>
-		<script src="{% static 'js/services/validate.js' %}" type="application/javascript"></script>
-		<script src="{% static 'js/controllers/master.js' %}" type="application/javascript"></script>
-		<script src="{% static 'js/controllers/restricted.js' %}" type="application/javascript"></script>
-		<script src="{% static 'js/controllers/authrequired.js' %}" type="application/javascript"></script>
+	<!-- angular-django-registration auth -->
+	<script src="{% static 'js/controllers/main.js' %}" type="application/javascript"></script>
+	<script src="{% static 'js/controllers/register.js' %}" type="application/javascript"></script>
+	<script src="{% static 'js/controllers/passwordreset.js' %}" type="application/javascript"></script>
+	<script src="{% static 'js/controllers/passwordresetconfirm.js' %}" type="application/javascript"></script>
+	<script src="{% static 'js/controllers/login.js' %}" type="application/javascript"></script>
+	<script src="{% static 'js/controllers/verifyemail.js' %}" type="application/javascript"></script>
+	<script src="{% static 'js/controllers/logout.js' %}" type="application/javascript"></script>
+	<script src="{% static 'js/controllers/userprofile.js' %}" type="application/javascript"></script>
+	<script src="{% static 'js/controllers/passwordchange.js' %}" type="application/javascript"></script>
+	<script src="{% static 'js/services/djangoAuth.js' %}" type="application/javascript"></script>
+	<script src="{% static 'js/services/validate.js' %}" type="application/javascript"></script>
+	<script src="{% static 'js/controllers/master.js' %}" type="application/javascript"></script>
+	<script src="{% static 'js/controllers/restricted.js' %}" type="application/javascript"></script>
+	<script src="{% static 'js/controllers/authrequired.js' %}" type="application/javascript"></script>
 	{% endcompress %}
 
 	<script src="//cdnjs.cloudflare.com/ajax/libs/SVG-Morpheus/0.1.8/svg-morpheus.js"></script>

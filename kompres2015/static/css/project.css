@@ -367,10 +367,33 @@ a {
 }
 
 footer {
-    margin-top: 80px;
+    margin-top: 50px;
 }
 .search-input:focus {
     outline:none;
+}
+
+footer {
+    color: white;
+}
+
+footer li {
+    padding-bottom: 4px;
+}
+
+footer ul {
+    padding-left: 0;
+    list-style: none;
+}
+
+footer a{
+    color: white;
+    text-decoration: none;
+}
+
+footer .material-blue h4 {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .search-input-district {

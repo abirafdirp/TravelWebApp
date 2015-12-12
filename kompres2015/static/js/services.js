@@ -60,8 +60,9 @@ kompresServices.service('PostCategory', ['$rootScope', 'ColorRandomizer',
     this.categories = [];
     this.colors = [];
     this.addCategory = function(category) {
+      category = category.charAt(0).toUpperCase() + category.slice(1);
       if (!$rootScope.arrayContains(this.categories, category)){
-        this.categories.push(String(category));
+        this.categories.push(category);
         this.colors.push(ColorRandomizer.getColor());
       }
     };
@@ -90,8 +91,8 @@ kompresServices.service('Marker', ['cachedResource', '$rootScope',
       if (type.toLowerCase() == 'wisata'){
         this.icon = 'https://maps.gstatic.com/mapfiles/ms2/micons/blue-dot.png'
       }
-      if (type.toLowerCase() == 'belanja'){
-        this.icon = 'https://maps.gstatic.com/mapfiles/ms2/micons/shopping.png'
+      if (type.toLowerCase() == 'taman nasional'){
+        this.icon = 'http://maps.google.com/mapfiles/ms/micons/tree.png'
       }
       if (type.toLowerCase() == 'aktifitas'){
         this.icon = 'https://maps.gstatic.com/mapfiles/ms2/micons/cycling.png'

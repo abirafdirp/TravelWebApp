@@ -8,7 +8,7 @@ from kompres2015.util.models import TimeStampedModel
 
 class Article(TimeStampedModel):
     CATEGORY_CHOICES = (
-        ('berita', 'berita'),
+        ('aktifitas', 'aktifitas'),
         ('event', 'event'),
         ('info', 'info'),
         ('promosi', 'promosi'),

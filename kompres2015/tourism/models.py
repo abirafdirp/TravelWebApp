@@ -12,7 +12,7 @@ class TravelDestination(TimeStampedModel):
     TYPE_CHOICES = (
         ('Museum', 'Museum'),
         ('Wisata', 'Wisata'),
-        ('Belanja', 'Belanja'),
+        ('Taman Nasional', 'Taman Nasional'),
         ('Point of Interest', 'Point of Interest'),
         ('Aktifitas', 'Aktifitas'),
         ('Monumen', 'Monumen'),
