@@ -19,27 +19,31 @@
       </div>
       <div ng-if="resolved">
         <div layout="row" layout-wrap layout-margin>
-          <div  layout="row">
-            <md-card ng-repeat="home_link in page.home_links" ng-if="home_link.type == 'at video'"
-                     flex
-                     ng-mouseenter="icon = 'keyboard_tab'"
-                     ng-mouseleave="icon = 'keyboard_arrow_right'"
-                     flex-gt-lg="25"
-                     flex-lg="33"
-                     flex-md="45"
-                     flex-sm="90">
-              <img ng-show="home_link.image != null" ng-src="{$home_link.image$}" class="md-card-image animated fadeIn" alt="Washed Out">
-              <md-card-title class="remove-height">
-                <span class="md-headline home-link-title" style="background-color: {$home_link.color$}">{$home_link.title$}</span>
-              </md-card-title>
-              <md-card-content>
-                <div layout="row" layout-align="start center" layout-margin>
-                  <span class="md-body-1">{$home_link.description$}</span>
-                  <ng-md-icon icon="{$icon$}" size="42" style="fill: {$home_link.color2$}" aria-label="user" options='{"duration": 300}'></ng-md-icon>
-                </div>
-              </md-card-content>
-            </md-card>
-            <div flex="10"></div>
+          <div  layout="row" layout-margin>
+            <a ng-repeat="home_link in page.home_links | orderBy: 'id'"
+               ng-if="home_link.type == 'at video'"
+               ng-href="{$home_link.link$}"
+               flex
+               ng-mouseenter="icon = 'keyboard_tab'"
+               ng-mouseleave="icon = 'keyboard_arrow_right'"
+               flex-gt-lg="25"
+               flex-lg="25"
+               flex-md="45"
+               flex-sm="90">
+              <md-card>
+                <img ng-show="home_link.image != null" ng-src="{$home_link.image$}" class="md-card-image animated fadeIn" alt="Washed Out">
+                <md-card-title class="remove-height">
+                  <span class="md-headline home-link-title" style="background-color: {$home_link.color$}">{$home_link.title$}</span>
+                </md-card-title>
+                <md-card-content>
+                  <div layout="row" layout-align="start center" layout-margin>
+                    <span class="md-body-1">{$home_link.description$}</span>
+                    <ng-md-icon icon="{$icon$}" size="42" style="fill: {$home_link.color2$}" aria-label="user" options='{"duration": 300}'></ng-md-icon>
+                  </div>
+                </md-card-content>
+              </md-card>
+            </a>
+            <div flex="5"></div>
           </div>
 
         </div>

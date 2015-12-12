@@ -36,6 +36,12 @@ class Page(TimeStampedModel):
         null=True,
         verbose_name='tagline di halaman depan artikel'
     )
+    travel_destination_list_tagline = models.CharField(
+        max_length=80,
+        blank=True,
+        null=True,
+        verbose_name='tagline di halaman depan lokasi wisata'
+    )
 
     def admin_image1(self):
         return '<img src="%s" style="max-width: 400px; width: 100%%;"/>' % \

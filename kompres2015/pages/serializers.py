@@ -14,7 +14,7 @@ class PageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Page
         fields = ('id', 'video', 'video_start', 'featureds', 'travel_destination_list_image', 'article_list_image',
-                  'article_list_tagline', 'homelinks')
+                  'article_list_tagline', 'travel_destination_list_tagline', 'homelinks')
 
 
 class FeaturedTravelDestinationSerializer(serializers.ModelSerializer):
