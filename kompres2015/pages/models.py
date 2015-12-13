@@ -93,7 +93,7 @@ class HomeLink(TimeStampedModel):
     title = models.CharField(max_length=30)
     link = models.CharField(max_length=100)
     page = models.ForeignKey(Page, related_name='homelinks')
-    description = models.CharField(max_length=150)
+    description = models.TextField()
 
     TYPE_CHOICES = (
         ('at video', 'at video'),

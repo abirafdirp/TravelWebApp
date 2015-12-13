@@ -32,6 +32,7 @@ SECURE_BROWSER_XSS_FILTER = True
 SESSION_COOKIE_SECURE = False
 SESSION_COOKIE_HTTPONLY = True
 SECURE_SSL_REDIRECT = env.bool("DJANGO_SECURE_SSL_REDIRECT", default=True)
+HTTPS = True
 
 # SECRET CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -72,3 +73,4 @@ ADMIN_URL = env('DJANGO_ADMIN_URL')
 COMPRESS_ENABLED = True
 EMAIL_HOST_USER = env.str('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env.str('EMAIL_HOST_PASSWORD')
+

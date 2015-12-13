@@ -521,8 +521,7 @@ kompresControllers.controller('TravelDestinationRepeatCtrl', ['$scope', 'cachedR
 ]);
 
 kompresControllers.controller('ArticleListCtrl', ['$scope', '$route', '$routeParams', 'cachedResource', '$timeout', '$filter', 'Articles', 'PostCategory',
-  'ColorRandomizer', '$rootScope',
-  function($scope, $route, $routeParams, cachedResource, $timeout, $filter, Articles, PostCategory, ColorRandomizer, $rootScope) {
+  function($scope, $route, $routeParams, cachedResource, $timeout, $filter, Articles, PostCategory) {
     $scope.$route = $route;
     $scope.params = $routeParams;
     $scope.show_loading = true;
@@ -536,6 +535,7 @@ kompresControllers.controller('ArticleListCtrl', ['$scope', '$route', '$routePar
 
     $scope.articles = Articles.list.query();
     $scope.articles.$promise.then(function() {
+      $scope.articles.results = $filter('orderBy')($scope.articles.results,'date', true);
       angular.forEach($scope.articles.results, function(item){
         item.date = $filter('date')(item.date, 'd  MMMM  yyyy');
         PostCategory.addCategory(item.category);

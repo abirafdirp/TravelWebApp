@@ -291,7 +291,13 @@ urlpatterns += [
 ]
 
 # any urls other than listed above will be redirected to angular base
-urlpatterns += [
-    url(r'', TemplateView.as_view(template_name='base.html'),
-        name="base"),
-]
+if settings.HTTPS:
+    urlpatterns += [
+        url(r'', TemplateView.as_view(template_name='base.html'),
+            name="base"),
+    ]
+else:
+    urlpatterns += [
+        url(r'', TemplateView.as_view(template_name='base_http.html'),
+            name="base"),
+    ]

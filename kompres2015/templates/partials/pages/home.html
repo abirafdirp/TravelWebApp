@@ -10,7 +10,7 @@
 
   <div class="video-content" flex>
     <div layout="column">
-      <div layout="row" layout-align="left center" layout-margin layout-wrap>
+      <div layout="row" layout-align="left center" layout-wrap>
         <div class="home-tagline" flex="45">
           <h2>Discover Indonesia</h2>
           <p>{$page.home_tagline$}</p>
@@ -21,8 +21,8 @@
           </div>
         </div>
       </div>
-      <div ng-if="resolved">
-        <div layout="row" layout-wrap layout-margin>
+      <div ng-if="resolved" class="video-content-cards">
+        <div layout="row" layout-wrap>
           <div  layout="row" layout-margin>
             <a ng-repeat="home_link in page.home_links | orderBy: 'id'"
                ng-if="home_link.type == 'at video'"
@@ -55,40 +55,53 @@
     </div>
   </div>
 
-  <div ng-if="resolved" layout="row" layout-margin class="home-content">
-    <div flex-gt-lg="50"
-         flex-lg="50"
-         flex-md="100"
-         flex-sm="100">
-      <md-card ng-repeat="home_link in page.home_links" ng-if="home_link.type == 'main 1'" flex class="video-shadow">
-        <img ng-show="home_link.image != null" ng-src="{$home_link.image$}" class="md-card-image animated fadeIn" alt="Washed Out">
-        <md-card-content>
-          <div layout="row" layout-align="start center" layout-margin>
-            <span class="md-title">{$home_link.description$}</span>
-          </div>
-        </md-card-content>
-      </md-card>
+  <div ng-if="resolved" layout="row" layout-wrap class="home-content">
+    <div class="home-header" flex="100">
+      <div flex="20" layout="row" layout-align="center center">
+        <div class="bubble md-subhead" layout="row" layout-align="center center">
+          Discover Indonesia
+        </div>
+      </div>
+      <div flex="80"></div>
     </div>
+    <div layout="row" layout-wrap layout-margin>
+      <div flex-gt-lg="50"
+           flex-lg="50"
+           flex-md="100"
+           flex-sm="100">
+        <a ng-repeat="home_link in page.home_links" ng-if="home_link.type == 'main 1'" flex href="{$home_link.link$}">
+          <md-card class="video-shadow">
+            <img ng-show="home_link.image != null" ng-src="{$home_link.image$}" class="md-card-image animated fadeIn" alt="Washed Out">
+            <md-card-content>
+              <div layout="row" layout-align="start center" layout-margin>
+                <span class="md-title">{$home_link.description$}</span>
+              </div>
+            </md-card-content>
+          </md-card>
+        </a>
+      </div>
 
-    <div flex layout="column">
-      <div layout="row" layout-wrap>
-        <md-card ng-repeat="home_link in page.home_links" ng-if="home_link.type == 'common'" flex class="video-shadow"
-                 flex-gt-lg="45"
-                 flex-lg="45"
-                 flex-md="45"
-                 flex-sm="90">
-          <img ng-show="home_link.image != null" ng-src="{$home_link.image$}" class="md-card-image animated fadeIn" alt="Washed Out">
-          <md-card-content>
-            <div layout="row" layout-align="start center" layout-margin>
-              <span class="md-body-1">{$home_link.description$}</span>
-            </div>
-          </md-card-content>
-        </md-card>
+      <div flex layout="column">
+        <div layout="row" layout-wrap>
+          <a ng-repeat="home_link in page.home_links"
+             ng-if="home_link.type == 'common'"
+             href="{$home_link.link$}"
+             flex-gt-lg="45"
+             flex-lg="45"
+             flex-md="45"
+             flex-sm="90">
+            <md-card class="video-shadow">
+              <img ng-show="home_link.image != null" ng-src="{$home_link.image$}" class="md-card-image animated fadeIn" alt="Washed Out">
+              <md-card-content>
+                <div layout="row" layout-align="start center">
+                  <span class="md-body-1">{$home_link.description$}</span>
+                </div>
+              </md-card-content>
+            </md-card>
+          </a>
+        </div>
       </div>
     </div>
 
-    <div flex="5"></div>
-
   </div>
-  <div flex>&nbsp;</div>
 </div>
