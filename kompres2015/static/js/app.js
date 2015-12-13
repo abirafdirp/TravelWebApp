@@ -191,6 +191,10 @@ kompresApp.config(['$routeProvider', '$locationProvider',
           title:  '',
           travel_destination_name: function (params) {return params.travel_destination_name}
         }).
+        when('/info-kontak', {
+          templateUrl: '/partials/contact-info/',
+          title: 'Discover Indonesia - Info dan Kontak'
+        }).
         otherwise({
           redirectTo: '/'
         });

@@ -1,5 +1,7 @@
 from django.db import models
 
+from ckeditor_uploader.fields import RichTextUploadingField
+
 from kompres2015.util.models import TimeStampedModel
 
 from kompres2015.tourism.models import TravelDestination
@@ -58,6 +60,11 @@ class Page(TimeStampedModel):
         blank=True,
         null=True,
         verbose_name='tagline di halaman depan lokasi wisata'
+    )
+    info_and_contact_page = RichTextUploadingField(
+        blank=True,
+        null=True,
+        verbose_name='Halaman Info dan Kontak'
     )
 
     def admin_image1(self):

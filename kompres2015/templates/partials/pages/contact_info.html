@@ -1,0 +1,9 @@
+<div ng-controller="PageCtrl" class="info" layout="column">
+  <md-content>
+    <h2 class="md-display-1" layout="row" layout-align="center center">Info dan Kontak</h2>
+    <div layout="row">
+      <div flex="15"></div>
+      <div flex="70" ng-bind-html="page.results[0].info_and_contact_page | trustAsHtml"></div>
+    </div>
+  </md-content>
+</div>

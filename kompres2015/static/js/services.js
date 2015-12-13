@@ -365,9 +365,9 @@ kompresServices.factory('Articles', ['cachedResource',
   }
 ]);
 
-kompresServices.factory('Visits', ['cachedResource',
-  function(cachedResource){
-    return cachedResource('/api/user/visits/?format=json', {}, {
+kompresServices.factory('Visits', ['$resource',
+  function($resource){
+    return $resource('/api/user/visits/?format=json', {}, {
       query: {method:'GET'}
     })
   }

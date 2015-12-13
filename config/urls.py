@@ -258,6 +258,8 @@ urlpatterns += [
         name="transportation-list-partial"),
     url(r'^partials/visit/$', TemplateView.as_view(template_name='partials/tourism/visit.html'),
         name="visit-partial"),
+    url(r'^partials/contact-info/$', TemplateView.as_view(template_name='partials/pages/contact_info.html'),
+        name="contact-info-partial"),
 ]
 
 # angular-django-registration-auth partial views

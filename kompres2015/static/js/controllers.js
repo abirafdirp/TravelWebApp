@@ -717,18 +717,29 @@ kompresControllers.controller('ReportListRepeatCtrl', ['$scope', 'cachedResource
   }
 ]);
 
-kompresControllers.controller('VisitsCtrl', ['$scope', 'Visits', 'cachedResource',
-  function($scope, Visits, cachedResource) {
-    $scope.show = false;
-    $scope.visits = Visits.query(function(data){
-      angular.forEach(data.results, function(visit){
-        cachedResource(visit.travel_destination).get(function(dest){
-          if (dest.id == $scope.$parent.travel_destination.id){
-            $scope.show = false;
+kompresControllers.controller('VisitsCtrl', ['$scope', 'Visits', 'cachedResource', '$rootScope',
+  function($scope, Visits, $resource, $rootScope) {
+    var init = function(){
+      $scope.disabled = false;
+      Visits.query(function(data){
+            angular.forEach(data.results, function(visit){
+              $resource(visit.travel_destination).get(function(dest){
+                if (dest.id == $scope.$parent.travel_destination.id){
+                  $scope.visited = true;
+                }
+              });
+            });
+          }, function(){
+            $scope.disabled = true
           }
-        });
-      });
-      $scope.show = true;
+      );
+    };
+    init();
+    $rootScope.$on('djangoAuth.logged_in', function(){
+      init();
+    });
+    $rootScope.$on('djangoAuth.logged_out', function(){
+      init();
     });
   }
 ]);

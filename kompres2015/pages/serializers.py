@@ -23,7 +23,7 @@ class PageSerializer(serializers.ModelSerializer):
                   'travel_destination_list_image', 'article_list_image',
                   'article_list_tagline', 'travel_destination_list_tagline',
                   'homelinks', 'home_tagline', 'home_tagline_link',
-                  'home_tagline_link_title')
+                  'home_tagline_link_title', 'info_and_contact_page')
 
 
 class FeaturedTravelDestinationSerializer(serializers.ModelSerializer):
