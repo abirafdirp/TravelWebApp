@@ -298,9 +298,6 @@ REST_AUTH_SERIALIZERS = {
 FB_CLIENTID = env.str('FB_CLIENTID')
 GMAPS_TOKEN = env.str('GMAPS_TOKEN')
 
-# minification
-COMPRESS_ENABLED = False
-
 JET_THEMES = [
     {
         'theme': 'default', # theme folder name
