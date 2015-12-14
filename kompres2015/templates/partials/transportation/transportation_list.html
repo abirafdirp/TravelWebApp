@@ -1,49 +1,51 @@
-<div ng-controller="TransportationListCtrl" layout="column" id="transportation-list" ng-if="!show_loading">
+<div layout="column" flex>
+  <div ng-controller="TransportationListCtrl" layout="column" id="transportation-list" ng-if="!show_loading">
 
-  <div ng-if="show_loading" class="loading">
-    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-  </div>
-
-  <div layout="row" flex>
-    <div flex="20"></div>
-    <div layout="row" flex>
-      <ng-md-icon icon="search" size="20" aria-label="tanggal"></ng-md-icon> <md-input-container class="md-block" flex>
-      <input type="text" ng-model="search" placeholder="Metoda transportasi, kabupaten ....."/>
-    </md-input-container>
+    <div ng-if="show_loading" class="loading">
+      <md-progress-circular md-mode="indeterminate"></md-progress-circular>
     </div>
-    <div flex="20"></div>
-  </div>
-  <div layout="row" layout-margin layout-padding layout-wrap flex="75">
-    <md-list flex="100">
-      <div dir-paginate="transportation in transportations.results | filter: search | itemsPerPage: 9">
-        <md-list-item class="md-3-line md-long-text" flex>
-          <img ng-src="{$transportation.image$}" class="md-avatar" alt=""/>
-          <div class="md-list-item-text">
-            <h3>
-              {$ transportation.name $} &nbsp;&nbsp;
-            </h3>
-            <p>&nbsp;</p>
-            <p><ng-md-icon icon="link" size="20" aria-label="tanggal"></ng-md-icon> <a ng-href="{$transportation.website$}">{$transportation.website$}</a></p>
-            <p>&nbsp;</p>
-            <p>
-              {$transportation.description$}<br>
-            </p>
-            <p>&nbsp;</p>
-            <p>
-              Beroperasi di daerah :
+
+    <div layout="row" flex>
+      <div flex="20"></div>
+      <div layout="row" flex>
+        <ng-md-icon icon="search" size="20" aria-label="tanggal"></ng-md-icon> <md-input-container class="md-block" flex>
+        <input type="text" ng-model="search" placeholder="Metoda transportasi, kabupaten ....."/>
+      </md-input-container>
+      </div>
+      <div flex="20"></div>
+    </div>
+    <div layout="row" layout-margin layout-padding>
+      <md-list flex="100">
+        <div dir-paginate="transportation in transportations.results | filter: search | itemsPerPage: 9">
+          <md-list-item class="md-3-line md-long-text" flex>
+            <img ng-src="{$transportation.image$}" class="md-avatar" alt=""/>
+            <div class="md-list-item-text">
+              <h3>
+                {$ transportation.name $} &nbsp;&nbsp;
+              </h3>
+              <p>&nbsp;</p>
+              <p><ng-md-icon icon="link" size="20" aria-label="tanggal"></ng-md-icon> <a ng-href="{$transportation.website$}">{$transportation.website$}</a></p>
+              <p>&nbsp;</p>
+              <p>
+                {$transportation.description$}<br>
+              </p>
+              <p>&nbsp;</p>
+              <p>
+                Beroperasi di daerah :
               <span ng-repeat="district in transportation.districts_resolved" class="animated fadeIn">
                 <span ng-if="$index == 0">{$district.name$} </span>
                 <span ng-if="$index != 0">, {$district.name$} </span>
               </span>
-            </p>
-            <p>&nbsp;</p>
-          </div>
-          <md-divider ng-if="!$last"></md-divider>
-        </md-list-item>
-      </div>
-    </md-list>
+              </p>
+              <p>&nbsp;</p>
+            </div>
+            <md-divider ng-if="!$last"></md-divider>
+          </md-list-item>
+        </div>
+      </md-list>
+    </div>
   </div>
-</div>
-<div layout="row" layout-align="center" layout-margin layout-padding>
-  <dir-pagination-controls></dir-pagination-controls>
+  <div layout="row" layout-align="center" layout-margin layout-padding>
+    <dir-pagination-controls></dir-pagination-controls>
+  </div>
 </div>
