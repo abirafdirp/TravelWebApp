@@ -13,14 +13,14 @@
 
 	<!-- Angular-material CSS -->
 	{% compress css %}
-	<link rel="stylesheet" href="{% static 'css/angular-material.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/angular-material.min.css' %}">
 
-	<link rel="stylesheet" href="{% static 'css/animate.css' %}">
-	<link rel="stylesheet" href="{% static 'css/auth.css' %}">
-	<link rel="stylesheet" href="{% static 'css/angular-material-icons.css' %}">
-	<link rel="stylesheet" href="{% static 'css/angular-social-share.min.css' %}">
-	<link rel="stylesheet" href="{% static 'css/angular-carousel.min.css' %}">
-	<link rel="stylesheet" href="{% static 'css/project.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/auth.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/angular-material-icons.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/angular-social-share.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/angular-carousel.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/project.css' %}">
 	{% endcompress %}
 
 	<!-- Main CSS -->
@@ -28,7 +28,7 @@
 	<meta name="google-site-verification" content="3XIlrF3EbwJMvjzEbh6NV3dXCiG5vcyeH0Y_HKwIoBs" />
 </head>
 
-<body ng-controller="MasterCtrl">
+<body ng-controller="MasterCtrl" ng-cloak>
 
 <div ng-controller="NavCtrl" layout="column" layout-fill>
 	<header>
@@ -204,11 +204,11 @@
 		</div>
 	</footer>
 
-	<script src="{% static 'js/AssimpJSONLoader.js' %}" type="application/javascript"></script>
-	{% compress js %}
-	<!-- threejs and its dependencies for angular -->
-	<script src="{% static 'js/three.min.js' %}" type="application/javascript"></script>
 
+	<script src="{% static 'js/three.min.js' %}" type="application/javascript"></script>
+	<script src="{% static 'js/AssimpJSONLoader.js' %}" type="application/javascript"></script>
+
+	{% compress js %}
 	<!-- angular v1.4.2 -->
 	<script src="{% static 'js/angular.js' %}" type="application/javascript"></script>
 	<script src="{% static 'js/angular-route.js' %}" type="application/javascript"></script>
@@ -231,17 +231,12 @@
 	<script src="{% static 'js/angular-video-bg.min.js'%}" type="application/javascript"></script>
 	<script src="{% static 'js/dirPagination.js'%}" type="application/javascript"></script>
 	<script src="{% static 'js/satellizer.min.js'%}" type="application/javascript"></script>
-	<script src="{% static 'js/angular-social-share.min.js'%}"type="application/javascript" ></script>
+	<script src="{% static 'js/angular-social-share.min.js'%}" type="application/javascript" ></script>
 
 	<!-- angular google maps -->
 	<script src="{% static 'js/angular-simple-logger.min.js'%}" type="application/javascript"></script>
 	<script src="{% static 'js/lodash.min.js'%}" type="application/javascript"></script>
 	<script src="{% static 'js/angular-google-maps.min.js'%}" type="application/javascript"></script>
-
-	<!--[if lt IE 9]>
-	<script src="bower_components/es5-shim/es5-shim.js"></script>
-	<script src="bower_components/json3/lib/json3.min.js"></script>
-	<![endif]-->
 
 	<!-- angular-django-registration-auth dependencies -->
 	<script src="{% static 'js/angular-cookies.min.js' %}" type="application/javascript"></script>
@@ -270,6 +265,7 @@
 	<script src="{% static 'js/controllers/master.js' %}" type="application/javascript"></script>
 	<script src="{% static 'js/controllers/restricted.js' %}" type="application/javascript"></script>
 	<script src="{% static 'js/controllers/authrequired.js' %}" type="application/javascript"></script>
+
 	<!-- secret keys stuff -->
 	<script type="application/javascript">
 		kompresApp.config(function(uiGmapGoogleMapApiProvider) {
@@ -290,7 +286,6 @@
 
 	<script src="//cdnjs.cloudflare.com/ajax/libs/SVG-Morpheus/0.1.8/svg-morpheus.js"></script>
 	<script src="//platform.twitter.com/widgets.js"></script>
-
 
 </div>
 </body>

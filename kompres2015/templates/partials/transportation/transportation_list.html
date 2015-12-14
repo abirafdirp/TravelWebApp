@@ -1,4 +1,9 @@
-<div ng-controller="TransportationListCtrl" layout="column" id="transportation-list">
+<div ng-controller="TransportationListCtrl" layout="column" id="transportation-list" ng-if="!show_loading">
+
+  <div ng-if="show_loading" class="loading">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+  </div>
+
   <div layout="row" flex>
     <div flex="20"></div>
     <div layout="row" flex>

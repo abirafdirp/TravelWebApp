@@ -96,6 +96,11 @@ body {
     display: none !important;
 }
 
+[ng-cloak]
+{
+  display: none !important;
+}
+
 md-toolbar a:focus {
     outline:0;
 }
@@ -152,7 +157,7 @@ md-button {
     background: url('../images/bg.jpg');
     background-repeat: repeat;
     padding: 30px 20px 30px 20px;
-    margin: 0 0 0 0;
+    margin: 635px 0 0 0;
     -webkit-box-shadow: 0px 0px 17px 2px rgba(179,179,179,1);
     -moz-box-shadow: 0px 0px 17px 2px rgba(179,179,179,1);
     box-shadow: 0px 0px 17px 2px rgba(179,179,179,1);
@@ -494,14 +499,6 @@ footer .material-blue h4 {
 
 .loading {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-}
-.loading-home {
-    position: fixed;
     top: 38%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
@@ -589,8 +586,8 @@ md-autocomplete[md-floating-label] md-input-container{
 }
 
 .video-container {
-    z-index: 100;
-    position: relative !important;
+    z-index: 1;
+    position: absolute !important;
     top: 63px;
     height: 625px;
     width: 100%;

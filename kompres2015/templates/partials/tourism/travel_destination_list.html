@@ -1,172 +1,171 @@
 <div ng-controller="TravelDestinationListCtrl">
 
-	<div ng-show="show_loading == true" class="loading">
-		<md-progress-circular md-mode="indeterminate"></md-progress-circular>
-	</div>
+  <div ng-show="show_loading == true" class="loading">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+  </div>
 
 
-	<div ng-controller="SearchCtrl" ng-show="show_loading == false" class="animated fadeIn">
-		<div ng-controller="PageCtrl" hide-sm hide-md>
-			<div class="faux-image-container">
-				<input ng-show="search_opened" class="search-input" ng-model="$parent.TravelDestinationSearch.search" flex="grow"
-							 flex-offset="5" autofocus spellcheck="false">
-				<img id="faux-image" ng-src="{$ page.results[0].travel_destination_list_image $}">
-				<h3 class="md-display-1 article-title" flex>{$ page.results[0].travel_destination_list_tagline $}</h3>
-			</div>
-		</div>
+  <div ng-controller="SearchCtrl" ng-show="!show_loading" class="animated fadeIn">
+    <div ng-controller="PageCtrl" hide-sm hide-md>
+      <div class="faux-image-container">
+        <input ng-show="search_opened" class="search-input" ng-model="$parent.TravelDestinationSearch.search" flex="grow"
+               flex-offset="5" autofocus spellcheck="false">
+        <img id="faux-image" ng-src="{$ page.results[0].travel_destination_list_image $}">
+        <h3 class="md-display-1 article-title" flex>{$ page.results[0].travel_destination_list_tagline $}</h3>
+      </div>
+    </div>
 
-		<div>
-			<div ng-class="{'search-area': search_opened == true, 'search-not-activated': search_opened == false}">
-			</div>
+    <div>
+      <div ng-class="{'search-area': search_opened == true, 'search-not-activated': search_opened == false}">
+      </div>
 
-			<a class="search-btn material-teal"
-				 ng-click="toggleSearch(); TravelDestinationSearch.clearAllSearch()"
-				 flex flex-offset="5">
-				<ng-md-icon icon="{$search_icon$}" aria-label="article"></ng-md-icon>
-			</a>
-		</div>
-		<div hide-gt-md style="margin-top: 70px;"></div>
+      <a class="search-btn material-teal"
+         ng-click="toggleSearch(); TravelDestinationSearch.clearAllSearch()"
+         flex flex-offset="5">
+        <ng-md-icon icon="{$search_icon$}" aria-label="article"></ng-md-icon>
+      </a>
+    </div>
+    <div hide-gt-md style="margin-top: 70px;"></div>
 
-		<md-content ng-cloak class="md-padding animated fadeIn" ng-show="show_loading == false">
-			<div layout="row" layout-no-wrap>
-				<div flex="20" hide-sm hide-md layout-padding layout="column" layout-sm="column">
-					<div class="sidenav-dest">
-						<span class="md-headline animated fadeIn" id="dest-search-box-title">Cari</span>
-						<div layout="row">
-							<ng-md-icon icon="sort" style="position: relative; margin-left: 5px; margin-right: 5px;"></ng-md-icon>
-							<md-autocomplete
-											md-search-text="TravelDestinationSearch.category_search"
-											md-items="category in $parent.categories | filter:TravelDestinationSearch.category_search | orderBy: 'category'"
-											md-item-text="category"
-											md-min-length="0"
-											placeholder="Kategori"
-											md-floating-label="Kategori"
-											class="animated fadeIn dest-search-row category-search"
-											flex>
-								<md-item-template>
-									<span class="animated fadeIn" md-highlight-text="TravelDestinationSearch.category_search" md-highlight-flags="^i">{$category$}</span>
-								</md-item-template>
-								<md-not-found>
-								</md-not-found>
-							</md-autocomplete>
-						</div>
-						<div layout="row">
-							<ng-md-icon icon="place" style="position: relative; margin-left: 5px; margin-right: 5px;"></ng-md-icon>
-							<md-autocomplete
-											md-search-text="TravelDestinationSearch.district_search"
-											md-items="district in $parent.districts.results | filter:TravelDestinationSearch.district_search | orderBy: 'name'"
-											md-item-text="district.name"
-											md-min-length="0"
-											placeholder="Kabupaten"
-											md-floating-label="Kabupaten"
-											class="animated fadeIn dest-search-row district-search"
-											flex>
-								<md-item-template>
-									<span class="animated fadeIn" md-highlight-text="TravelDestinationSearch.district_search" md-highlight-flags="^i">{$district.name$}</span>
-								</md-item-template>
-								<md-not-found>
-								</md-not-found>
-							</md-autocomplete>
-						</div>
-						<div layout="row">
-							<ng-md-icon icon="layers" style="position: relative; margin-left: 5px; margin-right: 5px;"></ng-md-icon>
-							<md-autocomplete
-											md-search-text="TravelDestinationSearch.province_search"
-											md-items="province in $parent.provinces.results | filter:TravelDestinationSearch.province_search | orderBy: 'name'"
-											md-item-text="province.name"
-											md-min-length="0"
-											md-floating-label="Provinsi"
-											placeholder="Provinsi"
-											class="animated fadeIn dest-search-row province-search"
-											flex>
-								<md-item-template>
-									<span class="animated fadeIn" md-highlight-text="TravelDestinationSearch.province_search" md-highlight-flags="^i">{$province.name$}</span>
-								</md-item-template>
-								<md-not-found>
-								</md-not-found>
-							</md-autocomplete>
-						</div>
-						<div layout="row">
-							<ng-md-icon icon="blur_on" style="position: relative; margin-left: 5px; margin-right: 5px;"></ng-md-icon>
-							<md-autocomplete
-											md-search-text="TravelDestinationSearch.region_search"
-											md-items="region in $parent.regions.results | filter:TravelDestinationSearch.region_search | orderBy: 'name'"
-											md-item-text="region.name"
-											md-min-length="0"
-											md-floating-label="Wilayah"
-											placeholder="Wilayah"
-											class="animated fadeIn dest-search-row region-search"
-											flex>
-								<md-item-template>
-									<span class="animated fadeIn" md-highlight-text="TravelDestinationSearch.region_search" md-highlight-flags="^i">{$region.name$}</span>
-								</md-item-template>
-								<md-not-found>
-								</md-not-found>
-							</md-autocomplete>
-						</div>
-					</div>
-					<div layout="row" layout-align="center center">
-						<md-button class="md-raised md-accent" ng-disabled="allowDestClear()" ng-click="clearAllDestSearch()">
-							Bersihkan Pencarian&nbsp;&nbsp; <ng-md-icon icon="backspace"></ng-md-icon>&nbsp;&nbsp;
-						</md-button>
-					</div>
+      <div layout="row" layout-no-wrap class="md-padding animated fadeIn" ng-show="show_loading == false">
+        <div flex="20" hide-sm hide-md layout-padding layout="column" layout-sm="column">
+          <div class="sidenav-dest">
+            <span class="md-headline animated fadeIn" id="dest-search-box-title">Cari</span>
+            <div layout="row">
+              <ng-md-icon icon="sort" style="position: relative; margin-left: 5px; margin-right: 5px;"></ng-md-icon>
+              <md-autocomplete
+                      md-search-text="TravelDestinationSearch.category_search"
+                      md-items="category in $parent.categories | filter:TravelDestinationSearch.category_search | orderBy: 'category'"
+                      md-item-text="category"
+                      md-min-length="0"
+                      placeholder="Kategori"
+                      md-floating-label="Kategori"
+                      class="animated fadeIn dest-search-row category-search"
+                      flex>
+                <md-item-template>
+                  <span class="animated fadeIn" md-highlight-text="TravelDestinationSearch.category_search" md-highlight-flags="^i">{$category$}</span>
+                </md-item-template>
+                <md-not-found>
+                </md-not-found>
+              </md-autocomplete>
+            </div>
+            <div layout="row">
+              <ng-md-icon icon="place" style="position: relative; margin-left: 5px; margin-right: 5px;"></ng-md-icon>
+              <md-autocomplete
+                      md-search-text="TravelDestinationSearch.district_search"
+                      md-items="district in $parent.districts.results | filter:TravelDestinationSearch.district_search | orderBy: 'name'"
+                      md-item-text="district.name"
+                      md-min-length="0"
+                      placeholder="Kabupaten"
+                      md-floating-label="Kabupaten"
+                      class="animated fadeIn dest-search-row district-search"
+                      flex>
+                <md-item-template>
+                  <span class="animated fadeIn" md-highlight-text="TravelDestinationSearch.district_search" md-highlight-flags="^i">{$district.name$}</span>
+                </md-item-template>
+                <md-not-found>
+                </md-not-found>
+              </md-autocomplete>
+            </div>
+            <div layout="row">
+              <ng-md-icon icon="layers" style="position: relative; margin-left: 5px; margin-right: 5px;"></ng-md-icon>
+              <md-autocomplete
+                      md-search-text="TravelDestinationSearch.province_search"
+                      md-items="province in $parent.provinces.results | filter:TravelDestinationSearch.province_search | orderBy: 'name'"
+                      md-item-text="province.name"
+                      md-min-length="0"
+                      md-floating-label="Provinsi"
+                      placeholder="Provinsi"
+                      class="animated fadeIn dest-search-row province-search"
+                      flex>
+                <md-item-template>
+                  <span class="animated fadeIn" md-highlight-text="TravelDestinationSearch.province_search" md-highlight-flags="^i">{$province.name$}</span>
+                </md-item-template>
+                <md-not-found>
+                </md-not-found>
+              </md-autocomplete>
+            </div>
+            <div layout="row">
+              <ng-md-icon icon="blur_on" style="position: relative; margin-left: 5px; margin-right: 5px;"></ng-md-icon>
+              <md-autocomplete
+                      md-search-text="TravelDestinationSearch.region_search"
+                      md-items="region in $parent.regions.results | filter:TravelDestinationSearch.region_search | orderBy: 'name'"
+                      md-item-text="region.name"
+                      md-min-length="0"
+                      md-floating-label="Wilayah"
+                      placeholder="Wilayah"
+                      class="animated fadeIn dest-search-row region-search"
+                      flex>
+                <md-item-template>
+                  <span class="animated fadeIn" md-highlight-text="TravelDestinationSearch.region_search" md-highlight-flags="^i">{$region.name$}</span>
+                </md-item-template>
+                <md-not-found>
+                </md-not-found>
+              </md-autocomplete>
+            </div>
+          </div>
+          <div layout="row" layout-align="center center">
+            <md-button class="md-raised md-accent" ng-disabled="allowDestClear()" ng-click="clearAllDestSearch()">
+              Bersihkan Pencarian&nbsp;&nbsp; <ng-md-icon icon="backspace"></ng-md-icon>&nbsp;&nbsp;
+            </md-button>
+          </div>
 
-					<div ng-if="show_sidenav" class="animated fadeIn" layout="column" layout-wrap layout-fill>
-						<div layout="row" layout-align="center center" class="light-blue-border-right pad-right">
-							<ng-md-icon icon="place" style="position: relative; margin-left: 5px; margin-right: 5px;">
-							</ng-md-icon>
-							<md-autocomplete
-											md-search-text="district_search"
-											md-items="district in $parent.districts.results | filter: district_search | orderBy: 'name'"
-											md-item-text="district.name"
-											md-selected-item-change="searchSelectedChange(district)"
-											md-search-text-change="searchTextChange(district_search)"
-											md-min-length="0"
-											placeholder="Lokasi anda sekarang"
-											md-floating-label="Lokasi anda"
-											class="dest-side-row"
-											flex
-											ng-disabled="authenticated">
-								<md-item-template>
-									<span class="animated fadeIn" md-highlight-text="current_location" md-highlight-flags="^i">{$district.name$}</span>
-								</md-item-template>
-								<md-not-found>
-								</md-not-found>
-							</md-autocomplete>
-						</div>
-						<md-checkbox ng-model="distance_toggle_auth"
-												 aria-label="Checkbox 1"
-												 ng-click="orderByDistance(distance_toggle_auth)"
-												 flex="100"
-												 ng-hide="!authenticated"
-												 class="md-body-1 checkbox-dest">
-							Urutkan berdasarkan lokasi terdekat
-						</md-checkbox>
-						<div>
-						</div>
-						<md-checkbox ng-model="distance_toggle"
-												 aria-label="Checkbox 1"
-												 ng-click="orderByDistance(distance_toggle)"
-												 flex="100"
-												 ng-hide="authenticated"
-												 ng-disabled="!current_district"
-												 class="md-body-1 checkbox-dest">
-							Urutkan berdasarkan lokasi terdekat
-						</md-checkbox>
-						<div>
-							<md-checkbox ng-if="authenticated"
-													 class="animated fadeIn md-body-1 checkbox-dest"
-													 ng-model="visited_toggle" aria-label="Checkbox 2"
-													 ng-click="visitToggle(visited_toggle)">
-								Sembunyikan lokasi wisata yang sudah dikunjugi
-							</md-checkbox>
-						</div>
-					</div>
-				</div>
+          <div ng-if="show_sidenav" class="animated fadeIn" layout="column" layout-fill>
+            <div layout="row" layout-align="center center" class="light-blue-border-right pad-right">
+              <ng-md-icon icon="place" style="position: relative; margin-left: 5px; margin-right: 5px;">
+              </ng-md-icon>
+              <md-autocomplete
+                      md-search-text="district_search"
+                      md-items="district in $parent.districts.results | filter: district_search | orderBy: 'name'"
+                      md-item-text="district.name"
+                      md-selected-item-change="searchSelectedChange(district)"
+                      md-search-text-change="searchTextChange(district_search)"
+                      md-min-length="0"
+                      placeholder="Lokasi anda sekarang"
+                      md-floating-label="Lokasi anda"
+                      class="dest-side-row"
+                      flex
+                      ng-disabled="authenticated">
+                <md-item-template>
+                  <span class="animated fadeIn" md-highlight-text="current_location" md-highlight-flags="^i">{$district.name$}</span>
+                </md-item-template>
+                <md-not-found>
+                </md-not-found>
+              </md-autocomplete>
+            </div>
+            <div layout="row">
+              <md-checkbox ng-model="distance_toggle_auth"
+                         aria-label="Checkbox 1"
+                         ng-click="orderByDistance(distance_toggle_auth)"
+                         ng-hide="!authenticated"
+                         class="md-body-1 checkbox-dest">
+              Urutkan berdasarkan lokasi terdekat
+            </md-checkbox>
+            </div>
+            <div layout="row">
+              <md-checkbox ng-model="distance_toggle"
+                         aria-label="Checkbox 1"
+                         ng-click="orderByDistance(distance_toggle)"
+                         flex="100"
+                         ng-hide="authenticated"
+                         ng-disabled="!current_district"
+                         class="md-body-1 checkbox-dest">
+              Urutkan berdasarkan lokasi terdekat
+            </md-checkbox>
+            </div>
+            <div flex="100">
+              <md-checkbox ng-if="authenticated"
+                           class="animated fadeIn md-body-1 checkbox-dest"
+                           ng-model="visited_toggle" aria-label="Checkbox 2"
+                           ng-click="visitToggle(visited_toggle)">
+                Sembunyikan lokasi wisata yang sudah dikunjugi
+              </md-checkbox>
+            </div>
+          </div>
+        </div>
 
-				<div layout="row" layout-wrap flex="80" flex-sm="100" flex-md="100" ng-if="hide_visited">
-					<div ng-cloak
-							 dir-paginate="travel_destination in travel_destinations.results |
+        <div layout="row" layout-wrap flex="80" flex-sm="100" flex-md="100" ng-if="hide_visited">
+          <div dir-paginate="travel_destination in travel_destinations.results |
 							 filter: TravelDestinationSearch.search |
 							 filter: TravelDestinationSearch.district_search |
 							 filter: TravelDestinationSearch.category_search |
@@ -174,100 +173,98 @@
 							 filter: TravelDestinationSearch.region_search |
 							 filter: search|
 							 itemsPerPage: 9"
-							 flex="33"
-							 flex-sm="100"
-							 flex-md="50"
-							 ng-show="!travel_destination.visited">
-						<div ng-controller="TravelDestinationRepeatCtrl">
-							<div>
-								<md-card id="posts">
-									<a ng-href="/lokasi-wisata/{$ slugify(travel_destination.name) $}">
-										<span class="md-title article-list-title">{$ travel_destination.name $}</span>
-										<div class="article-image"><img ng-show="thumbnail.image != null" ng-src="{$thumbnail.image$}" class="md-card-image animated fadeIn" alt="Washed Out"></div>
-									</a>
-									<div style="height: 0" ng-if="travel_destination.visited" class="animated fadeIn">
+               flex="33"
+               flex-sm="100"
+               flex-md="50"
+               ng-show="!travel_destination.visited">
+            <div ng-controller="TravelDestinationRepeatCtrl">
+              <div>
+                <md-card id="posts">
+                  <a ng-href="/lokasi-wisata/{$ slugify(travel_destination.name) $}">
+                    <span class="md-title article-list-title">{$ travel_destination.name $}</span>
+                    <div class="article-image"><img ng-show="thumbnail.image != null" ng-src="{$thumbnail.image$}" class="md-card-image animated fadeIn" alt=""></div>
+                  </a>
+                  <div style="height: 0" ng-if="travel_destination.visited" class="animated fadeIn">
 									<span class="visited">
 										<ng-md-icon icon="check" style="fill: white">
-										</ng-md-icon> sudah dikunjungi
+                    </ng-md-icon> sudah dikunjungi
 									</span>
-									</div>
-									<md-card-content>
+                  </div>
+                  <md-card-content>
 								<span class="md-body-2" layout="row" layout-wrap>
 									<span flex="100" flex-gt-lg="60">
 										<ng-md-icon icon="sort" size="20" aria-label="tanggal"></ng-md-icon>
 										<a ng-click="TravelDestinationSearch.setCategorySearch(travel_destination.type)">
-											<span class="animated fadeIn">{$ travel_destination.type $}</span>
-										</a>
+                      <span class="animated fadeIn">{$ travel_destination.type $}</span>
+                    </a>
 									</span>
 									<span flex="100" flex-gt-lg="40" ng-show="district.name != null" class="animated fadeIn">
 										<ng-md-icon icon="place" size="20" aria-label="tempat"></ng-md-icon>
 										<a ng-click="TravelDestinationSearch.setDistrictSearch(district.name)">
-											{$ district.name $}
-										</a>
+                      {$ district.name $}
+                    </a>
 									</span>
 								</span>
-										<p class="md-body-1">
-											{$ travel_destination_short_description $}
-										</p>
-									</md-card-content>
-								</md-card>
-							</div>
-							<br/>
-						</div>
-					</div>
-				</div>
+                    <p class="md-body-1">
+                      {$ travel_destination_short_description $}
+                    </p>
+                  </md-card-content>
+                </md-card>
+              </div>
+              <br/>
+            </div>
+          </div>
+        </div>
 
-				<div layout="row" layout-wrap flex="80" flex-sm="100" flex-md="100" ng-if="!hide_visited">
-					<div ng-cloak dir-paginate="travel_destination in travel_destinations.results | filter: TravelDestinationSearch.search | filter: TravelDestinationSearch.district_search
+        <div layout="row" layout-wrap flex="80" flex-sm="100" flex-md="100" ng-if="!hide_visited">
+          <div dir-paginate="travel_destination in travel_destinations.results | filter: TravelDestinationSearch.search | filter: TravelDestinationSearch.district_search
 					| filter: TravelDestinationSearch.category_search | filter: TravelDestinationSearch.province_search | filter: TravelDestinationSearch.region_search | filter: search
 					| itemsPerPage: 9"
-							 flex="33" flex-sm="100" flex-md="50">
-						<div ng-controller="TravelDestinationRepeatCtrl">
-							<div>
-								<md-card id="posts">
-									<a ng-href="/lokasi-wisata/{$ slugify(travel_destination.name) $}">
-										<span class="md-title article-list-title">{$ travel_destination.name $}</span>
-										<div class="article-image"><img ng-show="thumbnail.image != null" ng-src="{$thumbnail.image$}" class="md-card-image animated fadeIn" alt="Washed Out"></div>
-									</a>
-									<div style="height: 0" ng-if="travel_destination.visited" class="animated fadeIn">
+               flex="33" flex-sm="100" flex-md="50">
+            <div ng-controller="TravelDestinationRepeatCtrl">
+              <div>
+                <md-card id="posts">
+                  <a ng-href="/lokasi-wisata/{$ slugify(travel_destination.name) $}">
+                    <span class="md-title article-list-title">{$ travel_destination.name $}</span>
+                    <div class="article-image"><img ng-show="thumbnail.image != null" ng-src="{$thumbnail.image$}" class="md-card-image animated fadeIn" alt=""></div>
+                  </a>
+                  <div style="height: 0" ng-if="travel_destination.visited" class="animated fadeIn">
 									<span class="visited">
 										<ng-md-icon icon="check" style="fill: white">
-										</ng-md-icon> sudah dikunjungi
+                    </ng-md-icon> sudah dikunjungi
 									</span>
-									</div>
-									<md-card-content>
+                  </div>
+                  <md-card-content>
 								<span class="md-body-2" layout="row" layout-wrap>
 									<span flex="100" flex-gt-lg="60">
 										<ng-md-icon icon="sort" size="20" aria-label="tanggal"></ng-md-icon>
 										<a ng-click="TravelDestinationSearch.setCategorySearch(travel_destination.type)">
-											<span class="animated fadeIn">{$ travel_destination.type $}</span>
-										</a>
+                      <span class="animated fadeIn">{$ travel_destination.type $}</span>
+                    </a>
 									</span>
 									<span flex="100" flex-gt-lg="40" ng-show="district.name != null" class="animated fadeIn">
 										<ng-md-icon icon="place" size="20" aria-label="tempat"></ng-md-icon>
 										<a ng-click="TravelDestinationSearch.setDistrictSearch(district.name)">
-											{$ district.name $}
-										</a>
+                      {$ district.name $}
+                    </a>
 									</span>
 								</span>
-										<p class="md-body-1">
-											{$ travel_destination_short_description $}
-										</p>
-									</md-card-content>
-								</md-card>
-							</div>
-							<br/>
-						</div>
-					</div>
-				</div>
+                    <p class="md-body-1">
+                      {$ travel_destination_short_description $}
+                    </p>
+                  </md-card-content>
+                </md-card>
+              </div>
+              <br/>
+            </div>
+          </div>
+        </div>
 
-			</div>
-			<div layout="row" layout-align="center center">
-				<div flex-offset="10">
-					<dir-pagination-controls></dir-pagination-controls>
-				</div>
-			</div>
-
-		</md-content>
-	</div>
+      </div>
+      <div layout="row" layout-align="center center">
+        <div flex-offset="10">
+          <dir-pagination-controls></dir-pagination-controls>
+        </div>
+      </div>
+  </div>
 </div>

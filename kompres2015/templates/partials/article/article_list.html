@@ -1,10 +1,10 @@
 <div ng-controller="ArticleListCtrl">
 
-	<div ng-show="show_loading == true" class="loading">
+	<div ng-if="show_loading" class="loading">
 		<md-progress-circular md-mode="indeterminate"></md-progress-circular>
 	</div>
 
-	<div ng-show="show_loading == false" ng-controller="SearchCtrl" class="animated fadeIn">
+	<div ng-if="!show_loading" ng-controller="SearchCtrl" class="animated fadeIn">
 		<div ng-controller="PageCtrl" hide-sm hide-md>
 			<div class="faux-image-container">
 				<input ng-show="search_opened" class="search-input" ng-model="$parent.ArticleSearch.search" flex="grow" flex-offset="5" autofocus spellcheck="false">
@@ -71,7 +71,7 @@
 								<md-card id="posts">
 									<a ng-href="/artikel/{$ slugify(article.title) $}">
 										<span class="md-title article-list-title">{$ article.title $}</span>
-										<div class="article-image"><img ng-show="thumbnail.image != null" ng-src="{$thumbnail.image$}" class="md-card-image animated fadeIn" alt="Washed Out"></div>
+										<div class="article-image"><img ng-src="{$thumbnail.image$}" class="md-card-image" alt=""></div>
 
 									</a>
 									<md-card-content>

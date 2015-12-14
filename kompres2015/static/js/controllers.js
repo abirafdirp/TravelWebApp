@@ -181,6 +181,8 @@ kompresControllers.controller('TransportationListCtrl', ['$scope', 'Transportati
             transportation.districts_resolved.push(response);
           });
         });
+        // should have used $q
+        $scope.show_loading = false;
       });
     });
   }
@@ -203,9 +205,9 @@ kompresControllers.controller('TransportationRepeatCtrl', ['$scope', 'cachedReso
 kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', '$routeParams', 'cachedResource', '$rootScope', 'TravelDestinations', 'Districts',
   'Provinces', 'Regions', 'Marker', 'djangoAuth', '$filter', 'Visits',
   function($scope, $route, $routeParams, cachedResource, $rootScope, TravelDestinations, Districts, Provinces, Regions, Marker, djangoAuth, $filter, Visits) {
+    $scope.show_loading = true;
     $scope.$route = $route;
     $scope.params = $routeParams;
-    $scope.show_loading = true;
     $scope.travel_destination_name = $scope.params.travel_destination_name;
     $scope.search = $scope.params.search;
     $scope.categories = [];
