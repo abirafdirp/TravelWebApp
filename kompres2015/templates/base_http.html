@@ -91,56 +91,56 @@
 		<md-toolbar>
 			<h3 class='md-toolbar-tools'>Menu</h3>
 		</md-toolbar>
-		<md-content flex layout="column">
-			<md-button href="/lokasi-wisata" ng-mouseleave="traveldestination_icon = 'terrain'"
+		<md-content flex layout="column" layout-margin layout-padding>
+			<a href="/lokasi-wisata" ng-mouseleave="traveldestination_icon = 'terrain'"
 								 ng-mouseenter="traveldestination_icon = 'satellite'"
 								 ng-click="TravelDestinationSearch.clearAllSearch(); TravelDestinationSearch.resetIcon(); toggleMenu()">
 				<ng-md-icon icon="{$traveldestination_icon$}" aria-label="article" options='{"rotation": "none"}'></ng-md-icon> Lokasi Wisata
-			</md-button>
-			<md-button href="/artikel"
+			</a>
+			<a href="/artikel"
 								 ng-mouseleave="article_icon = 'my_library_books'"
 								 ng-mouseenter="article_icon = 'format_align_left'"
 								 ng-click="ArticleSearch.clearAllSearch(); ArticleSearch.resetIcon(); toggleMenu()">
 				<ng-md-icon icon="{$article_icon$}" aria-label="article" options='{"rotation": "none"}'></ng-md-icon> Artikel
-			</md-button>
-			<md-button href="/peta"
+			</a>
+			<a href="/peta"
 								 ng-mouseleave="map_icon = 'directions'"
 								 ng-mouseenter="map_icon = 'navigation'"
 								 ng-click="toggleMenu()">
 				<ng-md-icon icon="{$map_icon$}" aria-label="article" options='{"rotation": "none"}'></ng-md-icon> Peta
-			</md-button>
-			<md-button href="/metoda-transportasi"
+			</a>
+			<a href="/metoda-transportasi"
 								 ng-mouseleave="transportation_icon = 'directions_bus'"
 								 ng-mouseenter="transportation_icon = 'local_taxi'"
 								 ng-click="toggleMenu()">
 				<ng-md-icon icon="{$transportation_icon$}" aria-label="article" options='{"rotation": "none"}'></ng-md-icon> Metoda Transportasi
-			</md-button>
-			<md-button href="/info-kontak" ng-mouseleave="info_icon = 'info'"
+			</a>
+			<a href="/info-kontak" ng-mouseleave="info_icon = 'info'"
 								 ng-mouseenter="info_icon = 'info_outline'"
 								 ng-click="toggleMenu()">
 				<ng-md-icon icon="{$info_icon$}" aria-label="article" options='{"rotation": "none"}'></ng-md-icon> Info dan Kontak
-			</md-button>
-			<md-button ng-show="authenticated"
+			</a>
+			<a ng-show="authenticated"
 								 ng-click="showProfile($event); toggleMenu()"
 								 class="lowercase user-nav">
 				<ng-md-icon icon="account_box" size="22" aria-label="user"></ng-md-icon> <span>Profil</span>
-			</md-button>
-			<md-button ng-show="authenticated"
+			</a>
+			<a ng-show="authenticated"
 								 ng-click="logout_clicked = true; toggleMenu()"
 								 class="lowercase user-nav">
 				<ng-md-icon icon="logout" size="22" aria-label="user"></ng-md-icon> <span>Keluar</span>
-			</md-button>
+			</a>
 					<span ng-if="logout_clicked == true">
 						<span ng-controller="LogoutCtrl">
 							{$ reset_logout_clicked() $}
 						</span>
 					</span>
-			<md-button ng-hide="authenticated" ng-click="showLogin($event); toggleMenu()" class="lowercase user-nav">
+			<a ng-hide="authenticated" href="javascript:void(0)" ng-click="showLogin($event); toggleMenu()">
 				<ng-md-icon icon="login" size="22" aria-label="user"></ng-md-icon> <span>Masuk</span>
-			</md-button>
-			<md-button ng-hide="authenticated" ng-click="showRegister($event); toggleMenu()" class="lowercase user-nav">
+			</a>
+			<a ng-hide="authenticated" href="javascript:void(0)" ng-click="showRegister($event); toggleMenu()">
 				<ng-md-icon icon="account_box" size="22" aria-label="user"></ng-md-icon> <span>Daftar</span>
-			</md-button>
+			</a>
 			<md-content>
 				</md-sidenav>
 				<main ng-view flex></main>
@@ -158,7 +158,7 @@
 						<a href="/lokasi-wisata" class="md-body-1">Lokasi Wisata</a>
 					</li>
 					<li>
-						<a href="/lokasi-wisata" class="md-body-1">Peta</a>
+						<a href="/peta" class="md-body-1">Peta</a>
 					</li>
 					<li>
 						<a href="javascript:void(0)" ng-click="showLogin($event)" class="md-body-1">Masuk</a>
@@ -173,7 +173,7 @@
 				<h4 class="md-subheading">Artikel</h4>
 				<ul>
 					<li>
-						<a href="/lokasi-wisata" class="md-body-1">Artikel</a>
+						<a href="/artikel" class="md-body-1">Artikel</a>
 					</li>
 				</ul>
 			</div>

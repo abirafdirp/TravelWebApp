@@ -6,16 +6,16 @@
     </div>
 
     <div layout="row" flex>
-      <div flex="20"></div>
+      <div flex="5" flex-md="20" flex-lg="20" flex-gt-lg="20"></div>
       <div layout="row" flex>
         <ng-md-icon icon="search" size="20" aria-label="tanggal"></ng-md-icon> <md-input-container class="md-block" flex>
         <input type="text" ng-model="search" placeholder="Metoda transportasi, kabupaten ....."/>
       </md-input-container>
       </div>
-      <div flex="20"></div>
+      <div flex="5" flex-md="20" flex-lg="20" flex-gt-lg="20"></div>
     </div>
-    <div layout="row" layout-margin layout-padding>
-      <md-list flex="100">
+    <div layout="row">
+      <md-list flex="100" flex-md="80" flex-lg="80" flex-gt-lg="80" flex-offset="0" flex-offset-md="10" flex-offset-lg="10" flex-offset-gt-lg="10">
         <div dir-paginate="transportation in transportations.results | filter: search | itemsPerPage: 9">
           <md-list-item class="md-3-line md-long-text" flex>
             <img ng-src="{$transportation.image$}" class="md-avatar" alt=""/>

@@ -593,6 +593,11 @@ md-autocomplete[md-floating-label] md-input-container{
     width: 100%;
 }
 
+md-sidenav a {
+    color: rgb(30,30,30);
+    text-decoration: none;
+}
+
 .video-content {
     top: 80px;
     position: absolute;
