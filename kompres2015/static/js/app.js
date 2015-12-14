@@ -291,7 +291,7 @@ kompresApp.run(function($rootScope, ArticleSearch, TravelDestinationSearch, Mark
       array[index] = temp;
     }
     return array;
-  }
+  };
 });
 
 kompresApp.filter('trustAsHtml', function($sce) { return $sce.trustAsHtml; });

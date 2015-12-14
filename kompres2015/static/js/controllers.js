@@ -26,8 +26,9 @@ kompresControllers.controller('NavCtrl', ['$scope', '$route', '$mdDialog', 'Arti
         targetEvent: ev,
         clickOutsideToClose:true,
       });
-      function DialogController($scope, $mdDialog, djangoAuth) {
+      function DialogController($scope, $mdDialog, djangoAuth, $auth) {
         $scope.closeDialog = function() {
+          $auth.logout();
           $mdDialog.hide();
         };
         $scope.logout = function(){
@@ -391,6 +392,7 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
         $scope.user = data;
         $resource($scope.user.district+'?format=json').get(function(data) {
           $scope.user.district = data;
+          console.log(data);
           angular.forEach($scope.travel_destinations.results, function(item){
             item['district_resolved'] = cachedResource(item.district).get(function(){
               item['distance'] = $rootScope.distance($scope.user.district.latitude, $scope.user.district.longitude, item.district_resolved.latitude, item.district_resolved.longitude);

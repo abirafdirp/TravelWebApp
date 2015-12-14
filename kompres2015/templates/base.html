@@ -280,6 +280,9 @@
 				url: "/api/login/facebook/",
 				clientId: '{% fb_clientid %}',
 			});
+			$authProvider.tokenName = 'key';
+			$authProvider.authHeader = 'Satellizer';
+			$authProvider.authToken = 'Token';
 		});
 	</script>
 	{% endcompress %}

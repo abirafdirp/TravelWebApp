@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularDjangoRegistrationAuthApp')
-  .service('djangoAuth', function djangoAuth($q, $http, $cookies, $rootScope) {
+  .service('djangoAuth', function djangoAuth($q, $http, $cookies, $rootScope, SatellizerStorage) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var service = {
         /* START CUSTOMIZATION HERE */
@@ -16,8 +16,14 @@ angular.module('angularDjangoRegistrationAuthApp')
         'authPromise': null,
         'request': function(args) {
             // Let's retrieve the token from the cookie, if available
-            if($cookies.get('token')){
-                $http.defaults.headers.common.Authorization = 'Token ' + $cookies.get('token');
+            console.log(SatellizerStorage.get('satellizer_key'));
+            if (SatellizerStorage.get('satellizer_key')){
+                $http.defaults.headers.common.Authorization = 'Token ' + SatellizerStorage.get('satellizer_key');
+            }
+            else {
+                if ($cookies.get('token')){
+                    $http.defaults.headers.common.Authorization = 'Token ' + $cookies.get('token');
+                }
             }
             // Continue
             params = args.params || {}
