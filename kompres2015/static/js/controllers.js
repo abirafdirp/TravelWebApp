@@ -392,7 +392,7 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
         $scope.user = data;
         $resource($scope.user.district+'?format=json').get(function(data) {
           $scope.user.district = data;
-          console.log(data);
+          $scope.district_search = data.name;
           angular.forEach($scope.travel_destinations.results, function(item){
             item['district_resolved'] = cachedResource(item.district).get(function(){
               item['distance'] = $rootScope.distance($scope.user.district.latitude, $scope.user.district.longitude, item.district_resolved.latitude, item.district_resolved.longitude);

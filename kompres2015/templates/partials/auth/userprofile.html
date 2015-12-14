@@ -42,13 +42,15 @@
 								<p class="md-body-1" ng-repeat="error in errors.non_field_errors">{$error$}</p>
 								<p class="md-body-1" ng-if="error">{$error$}</p>
 							</div>
-								<span ng-show="show_loading && errors.length == 0 && !complete">
+							<div layout="column" layout-align="center center">
+								<div ng-show="show_loading && errors.length == 0 && !complete">
 									<md-progress-circular md-mode="indeterminate"></md-progress-circular>
-								</span>
-							<div ng-if="complete == true" flex="100" layout="row" layout-align="center center">
-								<p class="md-body-1">Profil anda berhasil diperbaharui</p>
+								</div>
+								<div ng-if="complete == true" flex="100" layout="row" layout-align="center center">
+									<p class="md-body-1">Profil anda berhasil diperbaharui</p>
+								</div>
+								<md-button type="submit" ng-show="show_loading == false || errors" class="md-primary md-raised">Perbaharui profil</md-button>
 							</div>
-							<md-button type="submit" ng-show="show_loading == false || errors" class="md-primary md-raised">Perbaharui profil</md-button>
 						</div>
 					</form>
 					<p class="md-body-1" ng-if="authenticated == false">Anda harus masuk terlebih dahulu</p>
@@ -74,7 +76,7 @@
 									<div ng-message="required" ng-repeat="error in errors.new_password2">{$error$}</div>
 								</div>
 							</md-input-container>
-							<div layout="column">
+							<div layout="column" layout-align="center center">
 								<div ng-show="errors" class="animated fadeIn">
 									<p class="md-body-1" ng-repeat="error in errors.non_field_errors">{$error$}</p>
 									<div ng-if="errors.new_password2 != 'This field is required.'">
@@ -84,9 +86,9 @@
 								<div ng-if="complete == true">
 									<p class="md-body-1">Password berhasil diubah!</p>
 								</div>
-							<span ng-show="show_loading && !complete && errors.length == 0">
+							<div ng-show="show_loading && !complete && errors.length == 0">
 								<md-progress-circular md-mode="indeterminate"></md-progress-circular>
-							</span>
+							</div>
 								<md-button class="md-raised md-accent" type="submit">ubah password</md-button>
 							</div>
 						</div>

@@ -16,7 +16,6 @@ angular.module('angularDjangoRegistrationAuthApp')
         'authPromise': null,
         'request': function(args) {
             // Let's retrieve the token from the cookie, if available
-            console.log(SatellizerStorage.get('satellizer_key'));
             if (SatellizerStorage.get('satellizer_key')){
                 $http.defaults.headers.common.Authorization = 'Token ' + SatellizerStorage.get('satellizer_key');
             }
