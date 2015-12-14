@@ -203,8 +203,8 @@ kompresControllers.controller('TransportationRepeatCtrl', ['$scope', 'cachedReso
 
 
 kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', '$routeParams', 'cachedResource', '$rootScope', 'TravelDestinations', 'Districts',
-  'Provinces', 'Regions', 'Marker', 'djangoAuth', '$filter', 'Visits',
-  function($scope, $route, $routeParams, cachedResource, $rootScope, TravelDestinations, Districts, Provinces, Regions, Marker, djangoAuth, $filter, Visits) {
+  'Provinces', 'Regions', 'Marker', 'djangoAuth', '$filter', 'Visits', '$resource',
+  function($scope, $route, $routeParams, cachedResource, $rootScope, TravelDestinations, Districts, Provinces, Regions, Marker, djangoAuth, $filter, Visits, $resource) {
     $scope.show_loading = true;
     $scope.$route = $route;
     $scope.params = $routeParams;
@@ -339,7 +339,7 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
           $scope.orderByRandom();
           $scope.user = djangoAuth.profile().then(function(data){
                 $scope.user = data;
-                cachedResource($scope.user.district+'?format=json').get(function(data){
+                $resource($scope.user.district+'?format=json').get(function(data){
                   $scope.user.district = data;
                   $scope.district_search = $scope.user.district.name;
                   angular.forEach($scope.travel_destinations.results, function(item){
@@ -389,7 +389,7 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
     $scope.$on('djangoAuth.profile_updated', function() {
       djangoAuth.profile().then(function(data){
         $scope.user = data;
-        cachedResource($scope.user.district+'?format=json').get(function(data) {
+        $resource($scope.user.district+'?format=json').get(function(data) {
           $scope.user.district = data;
           angular.forEach($scope.travel_destinations.results, function(item){
             item['district_resolved'] = cachedResource(item.district).get(function(){
@@ -686,13 +686,13 @@ kompresControllers.controller('ReportCtrl', ['$scope', '$mdDialog',
   }
 ]);
 
-kompresControllers.controller('ReportListCtrl', ['$scope', 'Reports', 'djangoAuth', 'cachedResource', '$filter',
-  function($scope, Reports, djangoAuth, cachedResource, $filter) {
+kompresControllers.controller('ReportListCtrl', ['$scope', 'Reports', 'djangoAuth', 'cachedResource', '$filter', '$resource',
+  function($scope, Reports, djangoAuth, cachedResource, $filter, $resource) {
     $scope.user = djangoAuth.profile().then(function(data){
       $scope.user = data;
       $scope.reports_resolved = [];
       angular.forEach($scope.user.reports, function(report){
-        cachedResource(report + '?format=json').get(function(data){
+        $resource(report + '?format=json').get(function(data){
           $scope.reports_resolved.push(data);
           if ($scope.reports_resolved.length == $scope.user.reports.length){
             $scope.reports_resolved = $filter('orderBy')($scope.reports_resolved, '-created_date');

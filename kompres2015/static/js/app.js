@@ -235,6 +235,13 @@ kompresApp.config(function($mdThemingProvider) {
       .warnPalette('red');
 });
 
+kompresApp.config(function($mdThemingProvider) {
+  $mdThemingProvider.theme('dest-side')
+      .primaryPalette('teal')
+      .accentPalette('indigo')
+      .warnPalette('red');
+});
+
 // TODO change to angular-slugify
 kompresApp.run(function($rootScope, ArticleSearch, TravelDestinationSearch, Marker) {
   $rootScope.slugify = function (name) {
