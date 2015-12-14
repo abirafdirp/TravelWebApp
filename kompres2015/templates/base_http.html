@@ -92,42 +92,25 @@
 			<h3 class='md-toolbar-tools'>Menu</h3>
 		</md-toolbar>
 		<md-content flex layout="column" layout-margin layout-padding>
-			<a href="/lokasi-wisata" ng-mouseleave="traveldestination_icon = 'terrain'"
-								 ng-mouseenter="traveldestination_icon = 'satellite'"
-								 ng-click="TravelDestinationSearch.clearAllSearch(); TravelDestinationSearch.resetIcon(); toggleMenu()">
-				<ng-md-icon icon="{$traveldestination_icon$}" aria-label="article" options='{"rotation": "none"}'></ng-md-icon> Lokasi Wisata
+			<a href="/lokasi-wisata" ng-click="TravelDestinationSearch.clearAllSearch(); toggleMenu()">
+				<ng-md-icon icon="terrain" aria-label="article"></ng-md-icon> Lokasi Wisata
 			</a>
-			<a href="/artikel"
-								 ng-mouseleave="article_icon = 'my_library_books'"
-								 ng-mouseenter="article_icon = 'format_align_left'"
-								 ng-click="ArticleSearch.clearAllSearch(); ArticleSearch.resetIcon(); toggleMenu()">
-				<ng-md-icon icon="{$article_icon$}" aria-label="article" options='{"rotation": "none"}'></ng-md-icon> Artikel
+			<a href="/artikel" ng-click="ArticleSearch.clearAllSearch(); toggleMenu()">
+				<ng-md-icon icon="my_library_books" aria-label="article"></ng-md-icon> Artikel
 			</a>
-			<a href="/peta"
-								 ng-mouseleave="map_icon = 'directions'"
-								 ng-mouseenter="map_icon = 'navigation'"
-								 ng-click="toggleMenu()">
-				<ng-md-icon icon="{$map_icon$}" aria-label="article" options='{"rotation": "none"}'></ng-md-icon> Peta
+			<a href="/peta" ng-click="toggleMenu()">
+				<ng-md-icon icon="directions" aria-label="article"></ng-md-icon> Peta
 			</a>
-			<a href="/metoda-transportasi"
-								 ng-mouseleave="transportation_icon = 'directions_bus'"
-								 ng-mouseenter="transportation_icon = 'local_taxi'"
-								 ng-click="toggleMenu()">
-				<ng-md-icon icon="{$transportation_icon$}" aria-label="article" options='{"rotation": "none"}'></ng-md-icon> Metoda Transportasi
+			<a href="/metoda-transportasi" ng-click="toggleMenu()">
+				<ng-md-icon icon="directions_bus" aria-label="article"></ng-md-icon> Metoda Transportasi
 			</a>
-			<a href="/info-kontak" ng-mouseleave="info_icon = 'info'"
-								 ng-mouseenter="info_icon = 'info_outline'"
-								 ng-click="toggleMenu()">
-				<ng-md-icon icon="{$info_icon$}" aria-label="article" options='{"rotation": "none"}'></ng-md-icon> Info dan Kontak
+			<a href="/info-kontak" ng-click="toggleMenu()">
+				<ng-md-icon icon="info" aria-label="article"></ng-md-icon> Info dan Kontak
 			</a>
-			<a ng-show="authenticated"
-								 ng-click="showProfile($event); toggleMenu()"
-								 class="lowercase user-nav">
+			<a ng-show="authenticated" ng-click="showProfile($event); toggleMenu()">
 				<ng-md-icon icon="account_box" size="22" aria-label="user"></ng-md-icon> <span>Profil</span>
 			</a>
-			<a ng-show="authenticated"
-								 ng-click="logout_clicked = true; toggleMenu()"
-								 class="lowercase user-nav">
+			<a ng-show="authenticated" ng-click="logout_clicked = true; toggleMenu()"
 				<ng-md-icon icon="logout" size="22" aria-label="user"></ng-md-icon> <span>Keluar</span>
 			</a>
 					<span ng-if="logout_clicked == true">
