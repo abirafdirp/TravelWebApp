@@ -151,28 +151,14 @@ md-button {
 .home-header {
     background: url('../images/bg.jpg');
     background-repeat: repeat;
-    padding: 30px 20px 40px 20px;
+    padding: 30px 20px 30px 20px;
     margin: 0 0 0 0;
     -webkit-box-shadow: 0px 0px 17px 2px rgba(179,179,179,1);
     -moz-box-shadow: 0px 0px 17px 2px rgba(179,179,179,1);
     box-shadow: 0px 0px 17px 2px rgba(179,179,179,1);
 }
-
-@media (max-width: 1368px) {
-    .home-content {
-        margin-top: 40px;
-    }
-}
-
-@media (min-width: 1369px) {
-    .home-content {
-        margin-top: 70px;
-    }
-}
-@media (min-width: 1441px) {
-    .home-content {
-        margin-top: 285px;
-    }
+.home-content {
+    margin-top: 50px;
 }
 
 .home-content a{
@@ -231,9 +217,6 @@ md-button {
     z-index: 0;
     bottom: -17px;
     left: 31px;
-}
-
-.video-content-cards {
 }
 
 .video-content a {
@@ -606,26 +589,17 @@ md-autocomplete[md-floating-label] md-input-container{
 }
 
 .video-container {
-    position: absolute !important;
+    z-index: 100;
+    position: relative !important;
     top: 63px;
-    height: 83%;
+    height: 625px;
     width: 100%;
 }
 
-@media (max-width: 1440px) {
-    .video-content {
-        top: 80px;
-        position: relative;
-        z-index: 100;
-    }
-}
-
-@media (min-width: 1441px) {
-    .video-content {
-        top: 120px;
-        position: relative;
-        z-index: 100;
-    }
+.video-content {
+    top: 80px;
+    position: absolute;
+    z-index: 100;
 }
 
 .visited {
@@ -643,7 +617,11 @@ md-autocomplete[md-floating-label] md-input-container{
     padding: 5px 30px 5px 30px;
     margin-left: 18px;
     margin-bottom: 5px;
-    border-radius: 3%;
+    border-radius: 15px;
+}
+
+.home-tagline-container {
+    height: 400px;
 }
 
 md-card a {

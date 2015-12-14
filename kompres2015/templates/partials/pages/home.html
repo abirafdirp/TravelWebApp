@@ -10,8 +10,8 @@
 
   <div class="video-content" flex>
     <div layout="column">
-      <div layout="row" layout-align="left center" layout-wrap>
-        <div class="home-tagline" flex="45">
+      <div layout="row" layout-align="left center">
+        <div class="home-tagline" flex-gt-lg="55">
           <h2>Discover Indonesia</h2>
           <p>{$page.home_tagline$}</p>
           <div layout="row" layout-align="end center" layout-margin>
@@ -21,7 +21,7 @@
           </div>
         </div>
       </div>
-      <div ng-if="resolved" class="video-content-cards">
+      <div ng-if="resolved">
         <div layout="row" layout-wrap>
           <div  layout="row" layout-margin>
             <a ng-repeat="home_link in page.home_links | orderBy: 'id'"
