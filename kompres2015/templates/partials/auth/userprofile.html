@@ -74,19 +74,21 @@
 									<div ng-message="required" ng-repeat="error in errors.new_password2">{$error$}</div>
 								</div>
 							</md-input-container>
-							<div ng-show="errors" class="animated fadeIn">
-								<p class="md-body-1" ng-repeat="error in errors.non_field_errors">{$error$}</p>
-								<div ng-if="errors.new_password2 != 'This field is required.'">
-									<p class="md-body-1" ng-repeat="error in errors.new_password2">{$error$}</p>
+							<div layout="column">
+								<div ng-show="errors" class="animated fadeIn">
+									<p class="md-body-1" ng-repeat="error in errors.non_field_errors">{$error$}</p>
+									<div ng-if="errors.new_password2 != 'This field is required.'">
+										<p class="md-body-1" ng-repeat="error in errors.new_password2">{$error$}</p>
+									</div>
 								</div>
-							</div>
-							<div ng-if="complete == true">
-								<p class="md-body-1">Password berhasil diubah!</p>
-							</div>
+								<div ng-if="complete == true">
+									<p class="md-body-1">Password berhasil diubah!</p>
+								</div>
 							<span ng-show="show_loading && !complete && errors.length == 0">
 								<md-progress-circular md-mode="indeterminate"></md-progress-circular>
 							</span>
-							<md-button class="md-raised md-accent" type="submit">ubah password</md-button>
+								<md-button class="md-raised md-accent" type="submit">ubah password</md-button>
+							</div>
 						</div>
 					</form>
 				</md-content>
@@ -96,18 +98,18 @@
 					<h4 class="md-subheading">Tanda ceklis menandakan komplain anda sudah berhasil diverifikasi. Terima kasih atas kontribusinya.</h4>
 					<md-list flex="100">
 						<div dir-paginate="report in reports_resolved | itemsPerPage: 4" pagination-id="report">
-						<md-list-item class="md-3-line md-long-text" ng-controller="ReportListRepeatCtrl" flex>
-							<img ng-src="{$image.image$}" class="md-avatar" alt="" style="color: grey"/>
-							<div class="md-list-item-text">
-								<h3>{$ travel_destination.name $}</h3>
-								<p>
-									{$report.created_date | date:'d  MMMM  yyyy'$}<br>
-									{$report.report$}
-									<md-checkbox class="md-secondary" ng-model="report.approved" ng-disabled="true"></md-checkbox>
-								</p>
-							</div>
-						</md-list-item>
-							</div>
+							<md-list-item class="md-3-line md-long-text" ng-controller="ReportListRepeatCtrl" flex>
+								<img ng-src="{$image.image$}" class="md-avatar" alt="" style="color: grey"/>
+								<div class="md-list-item-text">
+									<h3>{$ travel_destination.name $}</h3>
+									<p>
+										{$report.created_date | date:'d  MMMM  yyyy'$}<br>
+										{$report.report$}
+										<md-checkbox class="md-secondary" ng-model="report.approved" ng-disabled="true"></md-checkbox>
+									</p>
+								</div>
+							</md-list-item>
+						</div>
 					</md-list>
 					<div max-size="5" flex="100" layout-align="center-center" layout="row">
 						<dir-pagination-controls pagination-id="report" layout="row" layout-align="center center"></dir-pagination-controls>

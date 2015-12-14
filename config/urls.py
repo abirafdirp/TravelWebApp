@@ -7,9 +7,13 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
+from django.contrib.sitemaps.views import sitemap
 
-from rest_framework import routers
 from rest_framework.urlpatterns import format_suffix_patterns
+
+from kompres2015.tourism.sitemap import TravelDestinationSitemap
+from kompres2015.article.sitemap import ArticleSitemap
+from kompres2015.util.static_sitemap import StaticViewSitemap
 
 from kompres2015.region.views import RegionViewSet
 from kompres2015.region.views import ProvinceViewSet
@@ -66,10 +70,18 @@ if settings.DEBUG:
         url(r'^500/$', default_views.server_error),
     ]
 
-# DRF api-auth and DRF swagger (docs)
 urlpatterns += [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/docs/', include('rest_framework_swagger.urls')),
+
+    url(r'^sitemap\.xml/$', sitemap, {
+        'sitemaps': {
+            'articles': ArticleSitemap,
+            'travel destinations': TravelDestinationSitemap,
+            'static': StaticViewSitemap,
+        }
+    },
+    name='django.contrib.sitemaps.views.sitemap'),
 
     # django-rest-auth will call internal django password reset and try to find
     # a url named password_reset_confirm, unlike email verification,
