@@ -1,7 +1,7 @@
 var kompresControllers = angular.module('kompresControllers', []);
 
-kompresControllers.controller('NavCtrl', ['$scope', '$route', '$mdDialog', 'ArticleSearch', 'TravelDestinationSearch', '$mdSidenav', 'djangoAuth',
-  function($scope, $route, $mdDialog, ArticleSearch, TravelDestinationSearch, $mdSidenav, djangoAuth) {
+kompresControllers.controller('NavCtrl', ['$scope', '$route', '$mdDialog', 'ArticleSearch', 'TravelDestinationSearch', '$mdSidenav', 'djangoAuth', '$location',
+  function($scope, $route, $mdDialog, ArticleSearch, TravelDestinationSearch, $mdSidenav, djangoAuth, $location) {
     $scope.$route = $route;
     $scope.logout_clicked = false;
     $scope.traveldestination_icon = 'terrain';
@@ -40,7 +40,10 @@ kompresControllers.controller('NavCtrl', ['$scope', '$route', '$mdDialog', 'Arti
       }
     };
 
-    $scope.toggleMenu = function() {
+    $scope.toggleMenu = function(url) {
+      if (url){
+        $location.path(url);
+      }
       $mdSidenav('left').toggle();
     };
 

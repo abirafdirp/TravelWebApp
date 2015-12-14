@@ -92,38 +92,38 @@
 			<h3 class='md-toolbar-tools'>Menu</h3>
 		</md-toolbar>
 		<md-content flex layout="column" layout-margin layout-padding>
-			<a href="/lokasi-wisata" ng-click="TravelDestinationSearch.clearAllSearch(); toggleMenu()">
+			<md-button ng-click="TravelDestinationSearch.clearAllSearch(); toggleMenu('/lokasi-wisata')">
 				<ng-md-icon icon="terrain" aria-label="article"></ng-md-icon> Lokasi Wisata
-			</a>
-			<a href="/artikel" ng-click="ArticleSearch.clearAllSearch(); toggleMenu()">
+			</md-button>
+			<md-button ng-click="ArticleSearch.clearAllSearch(); toggleMenu('/artikel')">
 				<ng-md-icon icon="my_library_books" aria-label="article"></ng-md-icon> Artikel
-			</a>
-			<a href="/peta" ng-click="toggleMenu()">
+			</md-button>
+			<md-button ng-click="toggleMenu('/peta')">
 				<ng-md-icon icon="directions" aria-label="article"></ng-md-icon> Peta
-			</a>
-			<a href="/metoda-transportasi" ng-click="toggleMenu()">
+			</md-button>
+			<md-button ng-click="toggleMenu('/metoda-transportasi')">
 				<ng-md-icon icon="directions_bus" aria-label="article"></ng-md-icon> Metoda Transportasi
-			</a>
-			<a href="/info-kontak" ng-click="toggleMenu()">
+			</md-button>
+			<md-button ng-click="toggleMenu('/info-kontak')">
 				<ng-md-icon icon="info" aria-label="article"></ng-md-icon> Info dan Kontak
-			</a>
-			<a ng-show="authenticated" ng-click="showProfile($event); toggleMenu()">
+			</md-button>
+			<md-button ng-show="authenticated" ng-click="showProfile($event); toggleMenu()">
 				<ng-md-icon icon="account_box" size="22" aria-label="user"></ng-md-icon> <span>Profil</span>
-			</a>
-			<a ng-show="authenticated" ng-click="logout_clicked = true; toggleMenu()"
+			</md-button>
+			<md-button ng-show="authenticated" ng-click="logout_clicked = true; toggleMenu()">
 				<ng-md-icon icon="logout" size="22" aria-label="user"></ng-md-icon> <span>Keluar</span>
-			</a>
+			</md-button>
 					<span ng-if="logout_clicked == true">
 						<span ng-controller="LogoutCtrl">
 							{$ reset_logout_clicked() $}
 						</span>
 					</span>
-			<a ng-hide="authenticated" href="javascript:void(0)" ng-click="showLogin($event); toggleMenu()">
+			<md-button ng-hide="authenticated" href="javascript:void(0)" ng-click="showLogin($event); toggleMenu()">
 				<ng-md-icon icon="login" size="22" aria-label="user"></ng-md-icon> <span>Masuk</span>
-			</a>
-			<a ng-hide="authenticated" href="javascript:void(0)" ng-click="showRegister($event); toggleMenu()">
+			</md-button>
+			<md-button ng-hide="authenticated" href="javascript:void(0)" ng-click="showRegister($event); toggleMenu()">
 				<ng-md-icon icon="account_box" size="22" aria-label="user"></ng-md-icon> <span>Daftar</span>
-			</a>
+			</md-button>
 			<md-content>
 				</md-sidenav>
 				<main ng-view flex></main>
