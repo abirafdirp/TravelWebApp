@@ -490,6 +490,7 @@ kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route'
           $scope.newVisit.travel_destination = '/api/traveldestinations/' + travel_destination_local.id +'/';
           $scope.save = function() {
             $scope.newVisit.date = $filter('date')($scope.date, 'yyyy-MM-dd');
+            $scope.newVisit.message = $scope.message;
             $scope.show_loading = true;
             $scope.newVisit.$save().then(function() {
                   $scope.complete = true;

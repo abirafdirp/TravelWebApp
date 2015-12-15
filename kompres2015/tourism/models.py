@@ -89,6 +89,7 @@ class Visit(TimeStampedModel):
     )
     user = models.ForeignKey(User)
     date = models.DateField(verbose_name='tanggal', blank=True, null=True)
+    message = models.TextField(verbose_name='pesan', blank=True, null=True)
 
     # TODO change unique togther to date
     class Meta:

@@ -51,7 +51,7 @@ class VisitSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Visit
-        fields = ('id', 'travel_destination', 'date')
+        fields = ('id', 'travel_destination', 'date', 'message')
 
         validators = [
             UniqueTogetherValidator(
