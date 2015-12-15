@@ -470,7 +470,7 @@ kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route'
           controller: DialogController,
           templateUrl: '/partials/visit/',
           parent: angular.element(document.body),
-          clickOutsideToClose:true,
+          clickOutsideToClose:false,
         });
         function DialogController($scope, $mdDialog, Visits, $filter, travel_destination_local) {
           $scope.complete = false;
@@ -600,7 +600,7 @@ kompresControllers.controller('ReportCtrl', ['$scope', '$mdDialog',
         controller: DialogController,
         templateUrl: '/partials/report/',
         parent: angular.element(document.body),
-        clickOutsideToClose:true,
+        clickOutsideToClose:false,
       });
       function DialogController($scope, $mdDialog, Districts, Reports, TravelDestinations, $rootScope, Upload, travel_destination_local) {
         $scope.uploadCount = 0;
