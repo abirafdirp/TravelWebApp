@@ -31,4 +31,12 @@ def api_root(request, format=None):
         'travel destination contents': reverse('travel-destination-content-list', request=request, format=None),
         'home links': reverse('home-link-list', request=request, format=None),
         'transportations': reverse('transportation-list', request=request, format=None),
+        'registration': reverse('rest_register', request=request, format=None),
+        'verify email': reverse('rest_verify_email', request=request, format=None),
+        'password reset': reverse('rest_password_reset', request=request, format=None),
+        'password reset confirm': reverse('rest_password_reset_confirm', request=request, format=None),
+        'login': reverse('rest_login', request=request, format=None),
+        'logout': reverse('rest_logout', request=request, format=None),
+        'user': reverse('rest_user_details', request=request, format=None),
+        'password change': reverse('rest_password_change', request=request, format=None),
     })
