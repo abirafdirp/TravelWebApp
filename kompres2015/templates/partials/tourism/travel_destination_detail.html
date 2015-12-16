@@ -23,8 +23,8 @@
 		</md-toolbar>
 		<div layout="column" layout-md="row" layout-lg="row" layout-gt-lg="row" layout-wrap md-theme="destination">
 			<div flex="5"></div>
-			<md-tabs flex="65" md-dynamic-height>
-				<md-tab label="{$travel_destination.name$}">
+			<md-tabs flex="65" md-dynamic-height layout="column" layout-fill>
+				<md-tab label="{$travel_destination.name$}" flex>
 					<div ng-bind-html="travel_destination.full_description | trustAsHtml"></div>
 				</md-tab>
 				<md-tab ng-repeat="travel_destination_content in travel_destination_contents">
@@ -37,8 +37,6 @@
 				</md-tab>
 				<md-tab label="metoda transportasi" ng-if="transportations.results.length > 0">
 					<div class='md-padding'>
-
-
 						<div layout="column">
 							<div layout="row" layout-margin layout-padding layout-wrap flex="75">
 								<md-list flex="100">
@@ -65,22 +63,20 @@
 						<div layout="row" layout-align="center" layout-margin layout-padding>
 							<dir-pagination-controls></dir-pagination-controls>
 						</div>
-
-
 					</div>
 				</md-tab>
 				<md-tab label="galeri" ng-if="gallery_images.length > 0 ">
-					<div class='md-padding'>
-						<div layout="row" layout-wrap>
-							<div ng-repeat="image in gallery_images" flex="33" layout="row" style="margin-top: 10px">
-								<a ng-click="showImage(image.image)" class="pointer">
-									<img ng-src="{$image.image$}" class="gallery-thumbnail" flex>
-								</a>
-								<span flex="10"></span>
-							</div>
+					<div layout="row" layout-wrap>
+						<div ng-repeat="image in gallery_images" flex="100" flex-md="100" flex-lg="33" flex-gt-lg="33" style="margin-top: 10px" layout="row">
+							<a ng-click="showImage(image.image)" class="pointer" flex layout="row" layout-align="center center">
+								<img ng-src="{$image.image$}" class="gallery-thumbnail">
+							</a>
+							<div flex="10"></div>
 						</div>
 					</div>
 				</md-tab>
+
+
 			</md-tabs>
 			<div flex="5"></div>
 			<div flex="25" class="dest-side" layout="column" md-theme="dest-side">
