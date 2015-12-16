@@ -49,11 +49,11 @@ angular.module('angularDjangoRegistrationAuthApp')
         });
         $scope.updateProfile = function(formData, model){
           console.log($scope.current_district);
-          if ($scope.current_district != ''){
-            $scope.model.district = '/api/districts/' + $scope.current_district.id + '/';
+          if (($scope.current_district == '') || (typeof $scope.current_district === 'undefined')){
+            $scope.model.district = '';
           }
           else {
-            $scope.model.district = '';
+            $scope.model.district = '/api/districts/' + $scope.current_district.id + '/';
           }
           $scope.errors = [];
           $scope.show_loading = true;
