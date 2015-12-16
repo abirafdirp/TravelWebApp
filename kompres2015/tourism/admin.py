@@ -97,7 +97,29 @@ class TravelDestinationAdmin(admin.ModelAdmin):
 
 
 class VisitAdmin(admin.ModelAdmin):
-    pass
+    readonly_fields = ('modified_date',)
+    search_fields = ['message']
+
+    list_display = ['get_travel_destination', 'get_user', 'date',
+                    'message']
+
+    list_filter = (
+        ('travel_destination', RelatedFieldAjaxListFilter),
+        ('user', RelatedFieldAjaxListFilter),
+        'date',
+    )
+
+    def get_user(self, obj):
+        return obj.user.username
+
+    get_user.admin_order_field = 'travel_destination'
+    get_user.short_description = 'Username'
+
+    def get_travel_destination(self, obj):
+        return obj.travel_destination
+
+    get_travel_destination.short_description = 'Lokasi Wisata'
+
 
 admin.site.register(TravelDestination, TravelDestinationAdmin)
 admin.site.register(Visit, VisitAdmin)
