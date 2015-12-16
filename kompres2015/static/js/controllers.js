@@ -261,6 +261,7 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
     $scope.searchTextChange = function(search){
       if (search) {
         search = search.toLowerCase();
+        return;
       }
       else {
         $scope.current_district = '';
@@ -1198,8 +1199,7 @@ var logout_template = `
 </md-dialog>
 `;
 
-var userprofile_template = `
-<md-dialog aria-label="Mango (Fruit)" flex="grow" flex-gt-lg="30">
+var userprofile_template = `<md-dialog flex="grow" flex-gt-lg="30">
 	<md-toolbar>
 		<div class="md-toolbar-tools">
 			<h2>Profil</h2>
@@ -1228,7 +1228,8 @@ var userprofile_template = `
 															 md-search-text="district_search"
 															 md-items="district in districts.results | filter:district_search | orderBy: 'name'"
 															 md-item-text="district.name"
-															 md-selected-item-change="hyperlinkedIt(district)"
+															 md-selected-item-change="searchSelectedChange(district)"
+															 md-search-text-change="searchTextChange(district_search)"
 															 md-min-length="0"
 															 placeholder="Kabupaten"
 															 md-floating-label="Kabupaten"
@@ -1322,7 +1323,6 @@ var userprofile_template = `
 		</md-tabs>
 	</md-dialog-content>
 </md-dialog>
-
 `;
 
 var register_template = `

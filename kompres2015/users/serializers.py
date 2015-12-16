@@ -20,12 +20,13 @@ class UserRestSerializer(UserDetailsSerializer):
     district = serializers.HyperlinkedRelatedField(
         source="userprofile.district",
         view_name='district-detail',
+        allow_null=True,
         queryset=District.objects.all()
     )
     reports = serializers.HyperlinkedRelatedField(
         view_name='report-detail',
         many=True,
-        read_only=True
+        read_only=True,
     )
 
     class Meta(UserDetailsSerializer.Meta):
@@ -41,5 +42,8 @@ class UserRestSerializer(UserDetailsSerializer):
         profile = instance.userprofile
         if profile_data and district:
             profile.district = district
+            profile.save()
+        if profile_data and district is None:
+            profile.district = None
             profile.save()
         return instance
