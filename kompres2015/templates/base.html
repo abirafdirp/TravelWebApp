@@ -85,7 +85,7 @@
 
 	</header>
 
-	<div layout="row" flex="grow">
+	<div layout="row" flex="auto">
 		<md-sidenav md-component-id='left' flex ng-cloak
 								class='fixed-nav md-sidenav-left md-whiteframe-z2'
 		<md-toolbar>
@@ -126,7 +126,7 @@
 			</md-button>
 			<md-content>
 				</md-sidenav>
-				<main ng-view flex></main>
+				<main ng-view autoscroll="true"></main>
 	</div>
 
 	<footer ng-cloak layout="column" hide show-gt-lg>
