@@ -607,7 +607,7 @@ kompresControllers.controller('ReportCtrl', ['$scope', '$mdDialog',
         $scope.travel_destination_local = travel_destination_local;
         $scope.upload = function (file, report) {
           Upload.upload({
-            url: '/api/reportimages/',
+            url: '/api/user/reportimages/',
             data: {'image': file, 'name': file.name, 'tag': 'report', 'report': report}
           }).then(function (resp) {
             $scope.uploadCount = $scope.uploadCount + 1;
@@ -675,7 +675,7 @@ kompresControllers.controller('ReportCtrl', ['$scope', '$mdDialog',
         $scope.save = function() {
           $scope.show_loading = true;
           $scope.newReport.$save().then(function(result) {
-                $scope.report = '/api/reports/' + result.id + '/';
+                $scope.report = '/api/user/reports/' + result.resource.id + '/';
                 if ($scope.files){
                   $scope.uploadImages();
                 }
