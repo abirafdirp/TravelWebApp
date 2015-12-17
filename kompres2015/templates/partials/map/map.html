@@ -21,8 +21,7 @@
 </div>
 
 <div class="map-search">
-	<md-content layout="row" layout-align="left center">
-		<ng-md-icon icon="search" aria-label="search" flex="5"></ng-md-icon>
+	<div layout="row" layout-align="left center">
 		<md-autocomplete flex
 										 md-search-text="search"
 										 md-items="travel_destination in travel_destinations.results | filter:search | orderBy: 'name'"
@@ -30,16 +29,16 @@
 										 md-selected-item-change="searchSelectedChange(travel_destination)"
 										 md-search-text-change="searchTextChange(search)"
 										 md-min-length="0"
-										 placeholder="lokasi wisata"
-										 md-floating-label="lokasi wisata"
+										 placeholder="Cari lokasi wisata ..."
 										 class="animated fadeIn">
+			<ng-md-icon icon="search" aria-label="search" style="padding-top: 7px"></ng-md-icon>
 			<md-item-template>
 				<span class="animated fadeIn" md-highlight-text="search" md-highlight-flags="^i">{$travel_destination.name$}</span>
 			</md-item-template>
 			<md-not-found>
 			</md-not-found>
 		</md-autocomplete>
-	</md-content>
+	</div>
 </div>
 
 <div class="legend" hide-sm>
