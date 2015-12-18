@@ -9,9 +9,9 @@
 			<ul rn-carousel rn-carousel-auto-slide="10">
 				<li ng-repeat="image in main_images">
 					<img class="faux-image" ng-src="{$ image.image $}">
-					<h2 hide-sm hide-md class="tagline md-headline" flex="60" ng-show="image.tag">{$image.tag$}</h2>
+					<h2 hide-sm hide-md hide-xs class="tagline md-headline" flex="60" ng-show="image.tag">{$image.tag$}</h2>
 					<h2 hide-md hide-lg hide-gt-lg class="tagline-mobile md-subhead" flex="100" ng-show="image.tag">{$image.tag$}</h2>
-					<h2 hide-sm hide-lg hide-gt-lg class="tagline-medium md-subhead" flex="100" ng-show="image.tag">{$image.tag$}</h2>
+					<h2 hide-xs hide-sm hide-lg hide-gt-lg class="tagline-medium md-subhead" flex="100" ng-show="image.tag">{$image.tag$}</h2>
 				</li>
 			</ul>
 		</div>

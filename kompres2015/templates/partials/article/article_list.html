@@ -5,11 +5,11 @@
 	</div>
 
 	<div ng-if="!show_loading" ng-controller="SearchCtrl" class="animated fadeIn">
-		<div ng-controller="PageCtrl" hide-sm hide-md>
+		<div ng-controller="PageCtrl" hide-sm hide-md hide-xs>
 			<div class="faux-image-container">
 				<input ng-show="search_opened" class="search-input" ng-model="$parent.ArticleSearch.search" flex="grow" flex-offset="5" autofocus spellcheck="false">
 				<img id="faux-image" ng-src="{$ page.results[0].article_list_image $}">
-				<h3 class="md-display-1 article-title" flex>{$ page.results[0].article_list_tagline $}</h3>
+				<h3 class="md-display-1 article-title" ng-if="page.results[0].article_list_tagline" flex>{$ page.results[0].article_list_tagline $}</h3>
 			</div>
 		</div>
 
@@ -28,7 +28,7 @@
 			<div layout="column">
 				<div layout="row" layout-no-wrap>
 
-					<div flex="20" hide-sm hide-md id="article-left-nav" layout-padding layout="column">
+					<div flex="20" hide-xs hide-sm hide-md id="article-left-nav" layout-padding layout="column">
 						<md-content id="art-search-box">
 							<div class="md-headline animated fadeIn" id="art-search-box-title" flex="75">Kategori</div>
 

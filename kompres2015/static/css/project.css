@@ -632,13 +632,26 @@ md-card a {
 
 .home-link-title {
     position: relative;
-    top: -40px;
+    top: -15px;
     padding: 10px 10px 10px 15px;
     color: white;
 }
 
 .remove-height{
     height: 0;
+}
+
+.no-padding {
+    padding: 0 0 0 0 !important;
+}
+
+.no-outline {
+    outline: 0;
+}
+
+.home-card-video-content {
+    margin-top: -25px;
+    padding: 0 10px 0 0 !important;
 }
 
 #dest-search-box-title{
@@ -732,14 +745,18 @@ md-card a {
 
 .legend {
     position: absolute;
-    top: 15%;
+    top: 25%;
     z-index: 2000;
-    right: 0%;
+    right: 0;
+    border: solid 1px rgb(220,220,220);
+    -webkit-box-shadow: 0px 0px 3px 1px rgba(180,180,180,1);
+    -moz-box-shadow: 0px 0px 3px 1px rgba(180,180,180,1);
+    box-shadow: 0px 0px 3px 1px rgba(180,180,180,1);
 }
 
 .legend md-content{
     padding: 10px 10px 10px 10px;
-    background-color: rgba(255,255,255,0.7);
+    background-color: rgba(255,255,255,0.9);
 }
 
 .legend md-content div {
@@ -819,8 +836,8 @@ canvas {
 
 .map-info-img{
     display: block;
-    max-width:300px;
-    max-height:180px;
+    max-width:130px;
+    max-height:130px;
     width: auto;
     height: auto;
 }
