@@ -1,0 +1,22 @@
+sudo ./install_os_dependencies.sh install
+sudo pip install virtualenvwrapper
+
+gedit ~/.bashrc
+
+append at bottom
+export WORKON_HOME=$HOME/.virtualenvs
+source /usr/local/bin/virtualenvwrapper.sh
+
+save
+
+source ~/.bashrc
+
+mkvirtualenv kompres_local (notice virtualenv name before user)
+
+pip install -r requirements/local.txt
+
+navigate to your envs ~/.virtualenvs/kompres_local/bin
+
+add to postactivate
+
+
