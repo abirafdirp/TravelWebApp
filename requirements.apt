@@ -20,6 +20,8 @@ liblcms1-dev
 libwebp-dev
 
 ##mysql dependencies
+mysql-server
+mysql-client
 libmysqlclient-dev
 
 
@@ -31,7 +33,6 @@ python-setuptools
 python3-dev
 python-virtualenv
 python-pip
-firefox
 automake
 libtool
 libreadline6
