@@ -87,7 +87,7 @@
 
 	<div layout="row" flex="auto">
 		<md-sidenav md-component-id='left' flex ng-cloak
-								class='fixed-nav md-sidenav-left md-whiteframe-z2'
+								class='fixed-nav md-sidenav-left md-whiteframe-z2'>
 		<md-toolbar>
 			<h3 class='md-toolbar-tools'>Menu</h3>
 		</md-toolbar>
@@ -118,10 +118,10 @@
 							{$ reset_logout_clicked() $}
 						</span>
 					</span>
-			<md-button ng-hide="authenticated" href="javascript:void(0)" ng-click="showLogin($event); toggleMenu()">
+			<md-button ng-hide="authenticated" ng-click="showLogin($event); toggleMenu()">
 				<ng-md-icon icon="login" size="22" aria-label="user"></ng-md-icon> <span>Masuk</span>
 			</md-button>
-			<md-button ng-hide="authenticated" href="javascript:void(0)" ng-click="showRegister($event); toggleMenu()">
+			<md-button ng-hide="authenticated" ng-click="showRegister($event); toggleMenu()">
 				<ng-md-icon icon="account_box" size="22" aria-label="user"></ng-md-icon> <span>Daftar</span>
 			</md-button>
 			<md-content>
@@ -144,10 +144,10 @@
 						<a href="/peta" class="md-body-1">Peta</a>
 					</li>
 					<li>
-						<a href="javascript:void(0)" ng-click="showLogin($event)" class="md-body-1">Masuk</a>
+						<a href="" ng-click="showLogin($event)" class="md-body-1">Masuk</a>
 					</li>
 					<li>
-						<a href="javascript:void(0)" ng-click="showRegister($event)" class="md-body-1">Daftar</a>
+						<a href="" ng-click="showRegister($event)" class="md-body-1">Daftar</a>
 					</li>
 				</ul>
 			</div>

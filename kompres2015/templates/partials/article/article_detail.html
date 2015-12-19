@@ -1,66 +1,43 @@
-<div ng-controller="ArticleDetailCtrl" md-theme="article">
+<div ng-controller="ArticleDetailCtrl" md-theme="article" layout="column">
 
-	<div ng-show="show_loading == true" class="loading">
-		<md-progress-circular md-mode="indeterminate"></md-progress-circular>
-	</div>
+  <div ng-show="show_loading == true" class="loading">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+  </div>
 
-	<div ng-show="show_loading == false" ng-repeat="article in article.results" class="animated fadeIn">
-		<div class="article-image-container">
-			<img id="faux-image" ng-src="{$ main_image.image $}">
-		</div>
-		<md-toolbar id="article-post-title" class="md-theme-light">
-			<div class="md-toolbar-tools">
-				<span flex="5"></span>
-				<h2>{$ article.title $}</h2>
-			</div>
-		</md-toolbar>
-		<md-content layout="row" layout-sm="column" layout-md="column" layout-margin layout-padding>
-			<span flex="5"></span>
-			<md-list flex="65" flex-sm="95" flex-md="95" flex-order-sm="1" flex-order-md="1">
-				<md-list-item layout="column">
-					<div class="md-list-item-text">
-						<div ng-bind-html="article.article | trustAsHtml"></div>
-					</div>
-					<md-divider></md-divider>
-				</md-list-item>
-			</md-list>
-			<div id="article-nav" flex="25" layout="column" hide-md hide-sm hide-xs>
-				<div layout="column">
-					<div class="dest-side-row">
-						<ng-md-icon icon="access_time" size="20" aria-label="tanggal"></ng-md-icon>
-						<span>{$article.date | date:'d  MMMM  yyyy' $}</span>
-					</div>
-					<div class="dest-side-row">
-						<span flex="5"></span>
-						<ng-md-icon icon="account_circle" size="20" aria-label="author"></ng-md-icon>
-						<span>{$article.author $}</span>
-					</div>
-					<div class="dest-side-row">
-						<ng-md-icon icon="sort" size="20" aria-label="tanggal"></ng-md-icon>
-						<a href="/artikel/?artikel_kategori={$ article.category $}"> {$ article.category $}</a>
-					</div>
-				</div>
-			</div>
-			<div layout="row" flex-order-sm="0" flex-order-md="0" hide-lg hide-gt-lg>
-				<div flex="5"></div>
-				<div layout="column">
-					<div class="dest-side-row">
-						<ng-md-icon icon="access_time" size="20" aria-label="tanggal"></ng-md-icon>
-						<span>{$article.date | date:'d  MMMM  yyyy' $}</span>
-					</div>
-					<div class="dest-side-row">
-						<span flex="5"></span>
-						<ng-md-icon icon="account_circle" size="20" aria-label="author"></ng-md-icon>
-						<span>{$article.author $}</span>
-					</div>
-					<div class="dest-side-row">
-						<ng-md-icon icon="sort" size="20" aria-label="tanggal"></ng-md-icon>
-						<a href="/artikel/?search=info"> {$ article.category $}</a>
-					</div>
-				</div>
-			</div>
-	</div>
-	</md-content>
+  <div ng-show="show_loading == false" ng-repeat="article in article.results" class="animated fadeIn" layout="column">
+    <div class="article-image-container">
+      <img id="faux-image" ng-src="{$ main_image.image $}">
+    </div>
+    <md-toolbar id="article-post-title" class="md-theme-light">
+      <div class="md-toolbar-tools">
+        <h2 style="margin-left: 15px">{$ article.title $}</h2>
+      </div>
+    </md-toolbar>
+    <div layout="row" layout-sm="column" layout-md="column" layout-xs="column" layout-margin layout-padding>
+      <div flex="65" flex-sm="95" flex-md="95" flex-xs="95" flex-order-xs="1" flex-order-sm="1" flex-order-md="1">
+        <div class="md-list-item-text">
+          <div ng-bind-html="article.article | trustAsHtml"></div>
+        </div>
+      </div>
+      <div id="article-nav" flex="25" flex-xs="100" flex-sm="100" layout="column" flex-order-sm="0" flex-order-xs="0">
+        <div layout="column">
+          <div class="dest-side-row">
+            <ng-md-icon icon="access_time" size="20" aria-label="tanggal"></ng-md-icon>
+            <span>{$article.date | date:'d  MMMM  yyyy' $}</span>
+          </div>
+          <div class="dest-side-row">
+            <span flex="5"></span>
+            <ng-md-icon icon="account_circle" size="20" aria-label="author"></ng-md-icon>
+            <span>{$article.author $}</span>
+          </div>
+          <div class="dest-side-row">
+            <ng-md-icon icon="sort" size="20" aria-label="tanggal"></ng-md-icon>
+            <a href="/artikel/?artikel_kategori={$ article.category $}"> {$ article.category $}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 
