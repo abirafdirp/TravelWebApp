@@ -172,11 +172,11 @@ kompresControllers.controller('DistrictsCtrl', ['$scope', 'Districts',
   }
 ]);
 
-kompresControllers.controller('TransportationListCtrl', ['$scope', 'Transportations', '$routeParams', 'cachedResource',
-  function($scope, Transportations, $routeParams, cachedResource) {
-    $scope.params = $routeParams;
+kompresControllers.controller('TransportationListCtrl', ['$scope', 'Transportations', 'cachedResource', 'Districts',
+  function($scope, Transportations, cachedResource, Districts) {
+    $scope.district_search = '';
+    $scope.districts = Districts.list.query();
     $scope.transportation_search = '';
-    $scope.search = $scope.params.search;
     $scope.transportations = Transportations.list.query(function(response){
       angular.forEach(response.results, function(transportation){
         transportation['districts_resolved'] = [];

@@ -6,7 +6,7 @@
 
 
   <div ng-controller="SearchCtrl" ng-show="!show_loading" class="animated fadeIn">
-    <div ng-controller="PageCtrl" hide-sm hide-md>
+    <div ng-controller="PageCtrl" hide-sm hide-md hide-xs>
       <div class="faux-image-container">
         <input ng-show="search_opened" class="search-input" ng-model="$parent.TravelDestinationSearch.search" flex="grow"
                flex-offset="5" autofocus spellcheck="false">
@@ -28,11 +28,11 @@
     <div hide-gt-md style="margin-top: 70px;"></div>
 
       <div layout="row" layout-no-wrap class="md-padding animated fadeIn" ng-show="show_loading == false">
-        <div flex="20" hide-sm hide-md layout-padding layout="column" layout-sm="column">
+        <div flex="20" hide-xs hide-sm hide-md layout-padding layout="column" layout-sm="column">
           <div class="sidenav-dest">
             <span class="md-headline animated fadeIn" id="dest-search-box-title">Cari</span>
             <div layout="row">
-              <ng-md-icon icon="sort" style="position: relative; margin-left: 5px; margin-right: 5px;"></ng-md-icon>
+              <ng-md-icon icon="sort" style="position: relative; margin: 15px 5px 5px 5px"></ng-md-icon>
               <md-autocomplete
                       md-search-text="TravelDestinationSearch.category_search"
                       md-items="category in $parent.categories | filter:TravelDestinationSearch.category_search | orderBy: 'category'"
@@ -50,7 +50,7 @@
               </md-autocomplete>
             </div>
             <div layout="row">
-              <ng-md-icon icon="place" style="position: relative; margin-left: 5px; margin-right: 5px;"></ng-md-icon>
+              <ng-md-icon icon="place" style="position: relative; margin: 15px 5px 5px 5px"></ng-md-icon>
               <md-autocomplete
                       md-search-text="TravelDestinationSearch.district_search"
                       md-items="district in $parent.districts.results | filter:TravelDestinationSearch.district_search | orderBy: 'name'"
@@ -68,7 +68,7 @@
               </md-autocomplete>
             </div>
             <div layout="row">
-              <ng-md-icon icon="layers" style="position: relative; margin-left: 5px; margin-right: 5px;"></ng-md-icon>
+              <ng-md-icon icon="layers" style="position: relative; margin: 15px 5px 5px 5px"></ng-md-icon>
               <md-autocomplete
                       md-search-text="TravelDestinationSearch.province_search"
                       md-items="province in $parent.provinces.results | filter:TravelDestinationSearch.province_search | orderBy: 'name'"
@@ -86,7 +86,7 @@
               </md-autocomplete>
             </div>
             <div layout="row">
-              <ng-md-icon icon="blur_on" style="position: relative; margin-left: 5px; margin-right: 5px;"></ng-md-icon>
+              <ng-md-icon icon="blur_on" style="position: relative; margin: 15px 5px 5px 5px"></ng-md-icon>
               <md-autocomplete
                       md-search-text="TravelDestinationSearch.region_search"
                       md-items="region in $parent.regions.results | filter:TravelDestinationSearch.region_search | orderBy: 'name'"
@@ -112,7 +112,7 @@
 
           <div ng-if="show_sidenav" class="animated fadeIn" layout="column" layout-fill>
             <div layout="row" layout-align="center center" class="light-blue-border-right pad-right">
-              <ng-md-icon icon="place" style="position: relative; margin-left: 5px; margin-right: 5px;">
+              <ng-md-icon icon="place" style="position: relative; margin: 0 5px 20px 5px">
               </ng-md-icon>
               <md-autocomplete
                       md-search-text="district_search"
@@ -164,7 +164,7 @@
           </div>
         </div>
 
-        <div layout="row" layout-wrap flex="80" flex-sm="100" flex-md="100" ng-if="hide_visited">
+        <div layout="row" layout-wrap flex="80" flex-sm="100" flex-md="100" flex-xs="100" ng-if="hide_visited">
           <div dir-paginate="travel_destination in travel_destinations.results |
 							 filter: TravelDestinationSearch.search |
 							 filter: TravelDestinationSearch.district_search |
@@ -216,11 +216,11 @@
           </div>
         </div>
 
-        <div layout="row" layout-wrap flex="80" flex-sm="100" flex-md="100" ng-if="!hide_visited">
+        <div layout="row" layout-wrap flex="80" flex-sm="100" flex-md="100" flex-xs="100" ng-if="!hide_visited">
           <div dir-paginate="travel_destination in travel_destinations.results | filter: TravelDestinationSearch.search | filter: TravelDestinationSearch.district_search
 					| filter: TravelDestinationSearch.category_search | filter: TravelDestinationSearch.province_search | filter: TravelDestinationSearch.region_search | filter: search
 					| itemsPerPage: 9"
-               flex="33" flex-sm="100" flex-md="50">
+               flex="33" flex-sm="100" flex-md="50" flex-xs="100">
             <div ng-controller="TravelDestinationRepeatCtrl">
               <div>
                 <md-card id="posts">
