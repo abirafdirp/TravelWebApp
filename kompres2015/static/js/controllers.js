@@ -898,14 +898,16 @@ kompresControllers.controller('SearchCtrl', ['$scope', 'ArticleSearch', '$timeou
 ]);
 
 kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$routeParams', 'cachedResource', '$route',
-  'travel_destinations', 'Marker', 'uiGmapGoogleMapApi', '$rootScope',
-  function($scope, TravelDestinations, $routeParams, cachedResource, $route, travel_destinations, Marker, uiGmapGoogleMapApi, $rootScope) {
+  'travel_destinations', 'Marker', 'uiGmapGoogleMapApi', '$rootScope', '$timeout',
+  function($scope, TravelDestinations, $routeParams, cachedResource, $route, travel_destinations, Marker, uiGmapGoogleMapApi, $rootScope, $timeout) {
+    $scope.googlemap = {};
     $scope.map = {
       "center": {
         "latitude": -4.6111678,
         "longitude": 118.6796369
       },
-      "zoom": 5
+      "zoom": 5,
+      "control": {}
     };
 
     $scope.show_loading = true;
@@ -950,8 +952,23 @@ kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$rout
     };
 
     $scope.markers = Marker.getMarkers();
-    $scope.travel_destinations = travel_destinations;
+    $scope.$watch('markers', function(newvalue, oldvalue){
+      $timeout(function(){
+        angular.forEach($scope.markers, function(marker){
+          marker.events =  {
+            click: function(e){
+              var windows = $scope.googlemap.getChildWindows();
 
+              for (var i = 0; i < windows.length; i++){
+                windows[i].hideWindow()
+              }
+            }
+          };
+        });
+        console.log($scope.markers);
+      }, 0);
+    });
+    $scope.travel_destinations = travel_destinations;
   }
 ]);
 

@@ -113,7 +113,15 @@ kompresServices.service('Marker', ['cachedResource', '$rootScope',
     };
 
     this.addMarker = function(obj){
-      this.markers.push(new Marker(obj.id, obj.latitude, obj.longitude, obj.thumbnail_image, obj.short_description, obj.name, obj.type));
+      this.markers.push(new Marker(
+          obj.id,
+          obj.latitude,
+          obj.longitude,
+          obj.thumbnail_image,
+          obj.short_description,
+          obj.name,
+          obj.type
+      ));
     };
 
     this.clearMarkers = function() {
