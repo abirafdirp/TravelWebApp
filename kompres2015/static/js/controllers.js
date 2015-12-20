@@ -27,11 +27,13 @@ kompresControllers.controller('NavCtrl', ['$scope', '$route', '$mdDialog', 'Arti
         clickOutsideToClose:true,
       });
       function DialogController($scope, $mdDialog, djangoAuth, $auth) {
+        $scope.show_loading = false;
         $scope.closeDialog = function() {
           $auth.logout();
           $mdDialog.hide();
         };
         $scope.logout = function(){
+          $scope.show_loading = true;
           djangoAuth.logout().then(function(){
             $scope.authenticated = false;
             $scope.closeDialog();
@@ -344,42 +346,44 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
           $scope.orderByRandom();
           $scope.user = djangoAuth.profile().then(function(data){
                 $scope.user = data;
-                $resource($scope.user.district+'?format=json').get(function(data){
-                  $scope.user.district = data;
-                  $scope.district_search = $scope.user.district.name;
-                  angular.forEach($scope.travel_destinations.results, function(item){
-                    if ($rootScope.arrayContains($scope.categories, item.type) == false){
-                      $scope.categories.push(String(item.type));
-                    }
-                    if ($rootScope.arrayContains($scope.visits, item.id) == true){
-                      item['visited'] = true;
-                    }
-                    item['distance'] = $rootScope.distance($scope.user.district.latitude, $scope.user.district.longitude, item.latitude, item.longitude);
+                if ($scope.user.district){
+                  cachedResource($scope.user.district+'?format=json').get(function(data){
+                    $scope.user.district = data;
+                    $scope.district_search = $scope.user.district.name;
+                    angular.forEach($scope.travel_destinations.results, function(item){
+                      if ($rootScope.arrayContains($scope.categories, item.type) == false){
+                        $scope.categories.push(String(item.type));
+                      }
+                      if ($rootScope.arrayContains($scope.visits, item.id) == true){
+                        item['visited'] = true;
+                      }
+                      item['distance'] = $rootScope.distance($scope.user.district.latitude, $scope.user.district.longitude, item.latitude, item.longitude);
 
-                    // this is bad, should have use $q
-                    $scope.deffered_distances += 1;
-                    if ($scope.deffered_distances.length == $scope.travel_destinations.results.length){
-                      $scope.deffered_distances = 0;
-                      $scope.show_sidenav = true;
-                      // instant orderby
-                      //$scope.distance_toggle_auth = true;
-                    }
-                    item['district_resolved'] = cachedResource(item.district).get(function(){
-                      item['province'] = cachedResource(item.district_resolved.province).get(function(){
-                        item['region'] = cachedResource(item.province.region).get();
+                      // this is bad, should have use $q
+                      $scope.deffered_distances += 1;
+                      if ($scope.deffered_distances.length == $scope.travel_destinations.results.length){
+                        $scope.deffered_distances = 0;
+                        $scope.show_sidenav = true;
+                        // instant orderby
+                        //$scope.distance_toggle_auth = true;
+                      }
+                      item['district_resolved'] = cachedResource(item.district).get(function(){
+                        item['province'] = cachedResource(item.district_resolved.province).get(function(){
+                          item['region'] = cachedResource(item.province.region).get();
+                        });
                       });
                     });
-                  });
-                });
+                  })
+                }
               },angular.forEach($scope.travel_destinations.results, function(item){
                 $scope.show_sidenav = true;
                 $scope.sidenav_disabled = true;
                 if ($rootScope.arrayContains($scope.categories, item.type) == false){
                   $scope.categories.push(String(item.type));
                 }
-                item['district_resolved'] = cachedResource(item.district).get(function(){
-                  item['province'] = cachedResource(item.district_resolved.province).get(function(){
-                    item['region'] = cachedResource(item.province.region).get();
+                item['district_resolved'] = cachedResource(item.district).get(function(resp){
+                  item['province'] = cachedResource(resp.province).get(function(resp){
+                    item['region'] = cachedResource(resp.region).get();
                   });
                 });
               })
@@ -394,7 +398,7 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
     $scope.$on('djangoAuth.profile_updated', function() {
       djangoAuth.profile().then(function(data){
         $scope.user = data;
-        $resource($scope.user.district+'?format=json').get(function(data) {
+        cachedResource($scope.user.district+'?format=json').get(function(data) {
           $scope.user.district = data;
           $scope.district_search = data.name;
           angular.forEach($scope.travel_destinations.results, function(item){
@@ -693,13 +697,13 @@ kompresControllers.controller('ReportCtrl', ['$scope', '$mdDialog',
   }
 ]);
 
-kompresControllers.controller('ReportListCtrl', ['$scope', 'Reports', 'djangoAuth', 'cachedResource', '$filter', '$resource',
-  function($scope, Reports, djangoAuth, cachedResource, $filter, $resource) {
+kompresControllers.controller('ReportListCtrl', ['$scope', 'Reports', 'djangoAuth', 'cachedResource', '$filter',
+  function($scope, Reports, djangoAuth, cachedResource, $filter) {
     $scope.user = djangoAuth.profile().then(function(data){
       $scope.user = data;
       $scope.reports_resolved = [];
       angular.forEach($scope.user.reports, function(report){
-        $resource(report + '?format=json').get(function(data){
+        cachedResource(report + '?format=json').get(function(data){
           $scope.reports_resolved.push(data);
           if ($scope.reports_resolved.length == $scope.user.reports.length){
             $scope.reports_resolved = $filter('orderBy')($scope.reports_resolved, '-created_date');
@@ -727,12 +731,12 @@ kompresControllers.controller('ReportListRepeatCtrl', ['$scope', 'cachedResource
 ]);
 
 kompresControllers.controller('VisitsCtrl', ['$scope', 'Visits', 'cachedResource', '$rootScope',
-  function($scope, Visits, $resource, $rootScope) {
+  function($scope, Visits, cachedResource, $rootScope) {
     var init = function(){
       $scope.disabled = false;
       Visits.query(function(data){
             angular.forEach(data.results, function(visit){
-              $resource(visit.travel_destination).get(function(dest){
+              cachedResource(visit.travel_destination).get(function(dest){
                 if (dest.id == $scope.$parent.travel_destination.id){
                   $scope.visited = true;
                 }
@@ -986,18 +990,18 @@ var login_template = `
 					<p class="md-body-1" ng-repeat="error in errors.non_field_errors">{$error$}</p>
 					<p class="md-body-1" ng-if="error">{$error$}</p>
 				</div>
-				<span ng-show="show_loading && !errors.length > 0">
+				<span ng-show="show_loading && !errors.length > 0 && !complete">
 					<md-progress-circular md-mode="indeterminate"></md-progress-circular>
 				</span>
-				<md-button ng-show="show_loading == false || errors" type="submit" class="md-raised md-primary">masuk</md-button>
+				<md-button ng-show="!show_loading" type="submit" class="md-raised md-primary">masuk</md-button>
 
 				<div ng-controller="FacebookTokenCtrl">
-					<md-button class="md-raised md-warn" ng-click="authenticate('facebook')">
+					<md-button ng-show="!show_loading" class="md-raised md-warn" ng-click="authenticate('facebook'); $parent.show_loading = true">
 						<ng-md-icon icon="facebook" size="22" aria-label="user"></ng-md-icon>Masuk Dengan Facebook
 					</md-button>
 				</div>
 
-				<md-button class="md-raised md-accent" ng-click="setTab('Lupa Password')">lupa password</md-button>
+				<md-button class="md-raised md-accent" ng-show="!show_loading" ng-click="setTab('Lupa Password')">lupa password</md-button>
 			</div>
 			<div ng-if="authenticated">{$ closeDialogDelayed() $}</div>
 		</form>
@@ -1033,7 +1037,10 @@ var login_template = `
 		</form>
 	</md-dialog-content>
 
-</md-dialog>`;
+</md-dialog>
+
+
+`;
 
 var report_template = `
 <md-dialog aria-label="komplain">
@@ -1183,11 +1190,11 @@ var logout_template = `
       </md-button>
     </div>
   </md-toolbar>
-  <md-dialog-content layout="row" layout-align="center center" layout-margin layout-padding layout-wrap>
+  <md-dialog-content layout="column" layout-align="center center" layout-margin layout-padding layout-wrap>
     <div flex="100">
       Anda yakin ingin keluar?
     </div>
-    <div layout="row">
+    <div layout="row" ng-show="!show_loading">
       <md-button ng-click="closeDialog()" class="md-raised md-primary">
         tidak
       </md-button>
@@ -1195,8 +1202,13 @@ var logout_template = `
         ya
       </md-button>
     </div>
+    <span ng-show="show_loading">
+      <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </span>
   </md-dialog-content>
 </md-dialog>
+
+
 `;
 
 var userprofile_template = `<md-dialog flex="grow" flex-gt-lg="30">
@@ -1349,15 +1361,15 @@ var register_template = `
 					</div>
 				</md-input-container>
 				<md-input-container class="md-block">
-					<label for="id_password">Password</label>
+					<label for="id_password1">Password</label>
 					<input name="password1" id="id_password1" class="form-control" type="password" ng-model="model.password1" placeholder="Password" required />
 					<div ng-messages="registerForm.password1.$error">
 						<div ng-message="required" ng-repeat="error in errors.password1">{$error$}</div>
 					</div>
 				</md-input-container>
 				<md-input-container class="md-block">
-					<label for="id_password">Ulangi Password</label>
-					<input name="password" id="id_password2" class="form-control" type="password" ng-model="model.password2" placeholder="Ulangi Password" required />
+					<label for="id_password2">Ulangi Password</label>
+					<input name="password2" id="id_password2" class="form-control" type="password" ng-model="model.password2" placeholder="Ulangi Password" required />
 					<div ng-messages="registerForm.password.$error">
 						<div ng-message="required" ng-repeat="error in errors.password">{$error$}</div>
 					</div>
@@ -1376,8 +1388,14 @@ var register_template = `
 					<div ng-if="errors.username != 'This field is required.'">
 						<p class="md-body-1" ng-repeat="error in errors.username">{$error$}</p>
 					</div>
-					<div ng-if="errors.email != 'This field is required.'">
+					<div ng-if="errors.email != 'This field is required.' || errors.email[0] != 'A properly formatted email address is required.'">
 						<p class="md-body-1" ng-repeat="error in errors.email">{$error$}</p>
+					</div>
+          <div ng-if="errors.password1 != 'This field is required.'">
+						<p class="md-body-1" ng-repeat="error in errors.password1">{$error$}</p>
+					</div>
+          <div ng-if="errors.password2 != 'This field is required.'">
+						<p class="md-body-1" ng-repeat="error in errors.password2">{$error$}</p>
 					</div>
 				</div>
 				<div ng-if="complete == true">
@@ -1392,5 +1410,7 @@ var register_template = `
 	</md-dialog-content>
 
 </md-dialog>
+
+
 `;
 

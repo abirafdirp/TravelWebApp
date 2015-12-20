@@ -26,7 +26,7 @@ djangorestframework==3.2.4
 markdown==2.6.2
 django-filter==0.11.0
 django-rest-swagger==0.3.4
-django-rest-auth==0.6.0
+git+git://github.com/abirafdirp/django-rest-auth.git
 
 # mysql
 wheel==0.26.0

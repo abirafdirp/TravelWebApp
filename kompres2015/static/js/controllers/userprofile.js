@@ -41,11 +41,11 @@ angular.module('angularDjangoRegistrationAuthApp')
 
         djangoAuth.profile().then(function(data){
           $scope.model = data;
-          $scope.model.district_name = cachedResource(data.district+'?format=json').get(function(){
-            if ($scope.model.district_name.name){
+          if (data.district){
+            $scope.model.district_name = cachedResource(data.district+'?format=json').get(function(){
               $scope.district_search = $scope.model.district_name.name;
-            }
-          });
+            });
+          }
         });
         $scope.updateProfile = function(formData, model){
           console.log($scope.current_district);

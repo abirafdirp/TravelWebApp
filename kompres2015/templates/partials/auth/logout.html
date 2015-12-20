@@ -8,11 +8,11 @@
       </md-button>
     </div>
   </md-toolbar>
-  <md-dialog-content layout="row" layout-align="center center" layout-margin layout-padding layout-wrap>
+  <md-dialog-content layout="column" layout-align="center center" layout-margin layout-padding layout-wrap>
     <div flex="100">
       Anda yakin ingin keluar?
     </div>
-    <div layout="row">
+    <div layout="row" ng-show="!show_loading">
       <md-button ng-click="closeDialog()" class="md-raised md-primary">
         tidak
       </md-button>
@@ -20,6 +20,9 @@
         ya
       </md-button>
     </div>
+    <span ng-show="show_loading">
+      <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </span>
   </md-dialog-content>
 </md-dialog>
 
