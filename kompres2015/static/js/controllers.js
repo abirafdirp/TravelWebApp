@@ -958,14 +958,12 @@ kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$rout
           marker.events =  {
             click: function(e){
               var windows = $scope.googlemap.getChildWindows();
-
-              for (var i = 0; i < windows.length; i++){
-                windows[i].hideWindow()
+              for (var i = 0; i < windows.allVals.length; i++){
+                windows.allVals[i].remove();
               }
             }
           };
         });
-        console.log($scope.markers);
       }, 0);
     });
     $scope.travel_destinations = travel_destinations;

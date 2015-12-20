@@ -92,7 +92,7 @@ kompresServices.service('Marker', ['cachedResource', '$rootScope',
         this.icon = 'https://maps.gstatic.com/mapfiles/ms2/micons/blue-dot.png'
       }
       if (type.toLowerCase() == 'taman nasional'){
-        this.icon = 'http://maps.google.com/mapfiles/ms/micons/tree.png'
+        this.icon = 'https://maps.google.com/mapfiles/ms/micons/tree.png'
       }
       if (type.toLowerCase() == 'aktifitas'){
         this.icon = 'https://maps.gstatic.com/mapfiles/ms2/micons/cycling.png'
