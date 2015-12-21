@@ -900,14 +900,21 @@ kompresControllers.controller('SearchCtrl', ['$scope', 'ArticleSearch', '$timeou
 kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$routeParams', 'cachedResource', '$route',
   'travel_destinations', 'Marker', 'uiGmapGoogleMapApi', '$rootScope', '$timeout',
   function($scope, TravelDestinations, $routeParams, cachedResource, $route, travel_destinations, Marker, uiGmapGoogleMapApi, $rootScope, $timeout) {
-    $scope.googlemap = {};
+    var map_options = {
+      "panControl": false,
+      "scaleControl": false
+    };
+
+    $scope.windows_options = {};
+
     $scope.map = {
       "center": {
         "latitude": -4.6111678,
         "longitude": 118.6796369
       },
       "zoom": 5,
-      "control": {}
+      "control": {},
+      "options": map_options
     };
 
     $scope.show_loading = true;
@@ -917,7 +924,22 @@ kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$rout
       angular.forEach($scope.travel_destinations.results, function (item) {
         $scope.travel_destination_names.push(item.name.toLowerCase());
       });
+      $scope.windows_options= {
+          'zIndex': 10000
+          };
     });
+
+    $scope.prev_marker = null;
+    $scope.onClick = function(google_object_marker, e, marker){
+      $timeout(function(){
+        if ($scope.prev_marker){
+          $scope.prev_marker.show = false;
+        }
+        $scope.prev_marker = marker;
+        $scope.active_marker = marker;
+        $scope.$apply();
+      }, 0);
+    };
 
     $scope.search = '';
 
@@ -952,20 +974,6 @@ kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$rout
     };
 
     $scope.markers = Marker.getMarkers();
-    $scope.$watch('markers', function(newvalue, oldvalue){
-      $timeout(function(){
-        angular.forEach($scope.markers, function(marker){
-          marker.events =  {
-            click: function(e){
-              var windows = $scope.googlemap.getChildWindows();
-              for (var i = 0; i < windows.allVals.length; i++){
-                windows.allVals[i].remove();
-              }
-            }
-          };
-        });
-      }, 0);
-    });
     $scope.travel_destinations = travel_destinations;
   }
 ]);
