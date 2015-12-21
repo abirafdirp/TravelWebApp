@@ -1,10 +1,14 @@
-<div id="verifyEmail_view" ng-controller="VerifyemailCtrl" style="margin-top: 200px" layout="column" layout-align="center center">
-	<div ng-if="success" class="alert alert-success" layout="row" layout-align="center center" flex>
-		<p class="md-body-1" layout="row" layout-align="center center">
-			Kamu berhasil verifikasi, sekarang anda sudah bisa masuk.
-		</p>
-	</div>
-	<div ng-if="failure" class="alert alert-warning">
-		Sorry, there's been an error.
-	</div>
+<div id="verifyEmail_view" ng-controller="VerifyemailCtrl" style="margin-top: 200px" layout="row" layout-wrap layout-align="center center">
+
+  <div ng-show="show_loading" class="loading">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+  </div>
+  <div ng-if="success" class="alert alert-success" layout="row" layout-align="center center" flex="100">
+    <p class="md-body-1" layout="row" layout-align="center center">
+      Kamu berhasil verifikasi, sekarang anda sudah bisa masuk.
+    </p>
+  </div>
+  <div ng-if="failure" class="alert alert-warning">
+    Sorry, there's been an error.
+  </div>
 </div>
