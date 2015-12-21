@@ -250,6 +250,9 @@ kompresApp.config(['$routeProvider', '$locationProvider',
           templateUrl: '/partials/contact-info/',
           title: 'Discover Indonesia - Info dan Kontak'
         }).
+      when('/disclaimer', {
+          templateUrl: '/disclaimer/',
+        }).
         otherwise({
           redirectTo: '/'
         });

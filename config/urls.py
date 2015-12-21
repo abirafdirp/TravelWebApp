@@ -91,6 +91,8 @@ urlpatterns += [
 
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 
+    url(r'^disclaimer/$', TemplateView.as_view(template_name='pages/disclaimer.html')),
+
     # User management
     url(r'^accounts/', include('allauth.urls')),
 
