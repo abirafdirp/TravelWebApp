@@ -4,274 +4,277 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="kompres">
 <head>
-	<title ng-bind="title"></title>
-	<meta charset="UTF-8">
-	<meta name=description content="">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title ng-bind="title"></title>
+  <meta charset="UTF-8">
+  <meta name=description content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<link href='https://fonts.googleapis.com/css?family=Roboto:400italic,300,400,700,500' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400italic,300,400,700,500' rel='stylesheet' type='text/css'>
 
-	<!-- Angular-material CSS -->
-	{% compress css %}
-	<link rel="stylesheet" type="text/css" href="{% static 'css/angular-material.min.css' %}">
+  <!-- Angular-material CSS -->
+  {% compress css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/angular-material.min.css' %}">
 
-	<link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/auth.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/angular-material-icons.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/angular-social-share.min.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/angular-carousel.min.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/project.css' %}">
-	{% endcompress %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/auth.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/angular-material-icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/angular-social-share.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/angular-carousel.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/project.css' %}">
+  {% endcompress %}
 
-	<!-- Main CSS -->
-	<base href="/">
-	<meta name="google-site-verification" content="3XIlrF3EbwJMvjzEbh6NV3dXCiG5vcyeH0Y_HKwIoBs" />
+  <!-- Main CSS -->
+  <base href="/">
+  <meta name="google-site-verification" content="3XIlrF3EbwJMvjzEbh6NV3dXCiG5vcyeH0Y_HKwIoBs" />
 </head>
 
 <body ng-controller="MasterCtrl" ng-cloak>
 
 <div ng-controller="NavCtrl" layout="column" layout-fill>
-	<header>
-		<md-toolbar class="md-primary navbar" ng-cloak>
-			<div class="md-toolbar-tools" layout="row" layout-wrap>
-				<div flex="20" >
-					<md-button href="/" aria-label="home">
-						<img src="/static/images/lambang.png" style="position: relative; top: 6px;">
-					</md-button>
-				</div>
-				<div flex="60" layout-align="center center" layout="row" flex-md="50" hide-sm hide-md hide-xs>
-					<md-button href="/lokasi-wisata" ng-mouseleave="traveldestination_icon = 'terrain'" ng-mouseenter="traveldestination_icon = 'satellite'"ng-click="TravelDestinationSearch.clearAllSearch(); TravelDestinationSearch.resetIcon()">
-						<md-tooltip md-direction="down" class="tooltip"><span class="md-body-2">lokasi wisata</span></md-tooltip>
-						<ng-md-icon icon="{$traveldestination_icon$}" aria-label="article" options='{"rotation": "none"}'></ng-md-icon>
-					</md-button>
-					<md-button href="/artikel" ng-mouseleave="article_icon = 'my_library_books'" ng-mouseenter="article_icon = 'format_align_left'" ng-click="ArticleSearch.clearAllSearch(); ArticleSearch.resetIcon()">
-						<md-tooltip md-direction="down" class="tooltip"><span class="md-body-2">artikel</span></md-tooltip>
-						<ng-md-icon icon="{$article_icon$}" aria-label="article" options='{"rotation": "none"}'></ng-md-icon>
-					</md-button>
-					<md-button href="/peta" ng-mouseleave="map_icon = 'directions'" ng-mouseenter="map_icon = 'navigation'">
-						<md-tooltip md-direction="down" class="tooltip"><span class="md-body-2">peta</span></md-tooltip>
-						<ng-md-icon icon="{$map_icon$}" aria-label="article" options='{"rotation": "none"}'></ng-md-icon>
-					</md-button>
-					<md-button href="/metoda-transportasi" ng-mouseleave="transportation_icon = 'directions_bus'" ng-mouseenter="transportation_icon = 'local_taxi'">
-						<md-tooltip md-direction="down" class="tooltip"><span class="md-body-2">metoda transportasi</span></md-tooltip>
-						<ng-md-icon icon="{$transportation_icon$}" aria-label="transportation" options='{"rotation": "none"}'></ng-md-icon>
-					</md-button>
-					<md-button href="/info-kontak" ng-mouseleave="info_icon = 'info'" ng-mouseenter="info_icon = 'info_outline'">
-						<md-tooltip md-direction="down" class="tooltip"><span class="md-body-2">info dan kontak</span></md-tooltip>
-						<ng-md-icon icon="{$info_icon$}" aria-label="article" options='{"rotation": "none"}'></ng-md-icon>
-					</md-button>
+  <header>
+    <md-toolbar class="md-primary navbar" ng-cloak>
+      <div class="md-toolbar-tools" layout="row" layout-wrap>
+        <div flex="20" >
+          <md-button href="/" aria-label="home">
+            <img src="/static/images/lambang.png" style="position: relative; top: 6px;">
+          </md-button>
+        </div>
+        <div flex="60" layout-align="center center" layout="row" flex-md="50" hide-sm hide-md hide-xs>
+          <md-button href="/lokasi-wisata" ng-mouseleave="traveldestination_icon = 'terrain'" ng-mouseenter="traveldestination_icon = 'satellite'"ng-click="TravelDestinationSearch.clearAllSearch(); TravelDestinationSearch.resetIcon()">
+            <md-tooltip md-direction="down" class="tooltip"><span class="md-body-2">lokasi wisata</span></md-tooltip>
+            <ng-md-icon icon="{$traveldestination_icon$}" aria-label="article" options='{"rotation": "none"}'></ng-md-icon>
+          </md-button>
+          <md-button href="/artikel" ng-mouseleave="article_icon = 'my_library_books'" ng-mouseenter="article_icon = 'format_align_left'" ng-click="ArticleSearch.clearAllSearch(); ArticleSearch.resetIcon()">
+            <md-tooltip md-direction="down" class="tooltip"><span class="md-body-2">artikel</span></md-tooltip>
+            <ng-md-icon icon="{$article_icon$}" aria-label="article" options='{"rotation": "none"}'></ng-md-icon>
+          </md-button>
+          <md-button href="/peta" ng-mouseleave="map_icon = 'directions'" ng-mouseenter="map_icon = 'navigation'">
+            <md-tooltip md-direction="down" class="tooltip"><span class="md-body-2">peta</span></md-tooltip>
+            <ng-md-icon icon="{$map_icon$}" aria-label="article" options='{"rotation": "none"}'></ng-md-icon>
+          </md-button>
+          <md-button href="/metoda-transportasi" ng-mouseleave="transportation_icon = 'directions_bus'" ng-mouseenter="transportation_icon = 'local_taxi'">
+            <md-tooltip md-direction="down" class="tooltip"><span class="md-body-2">metoda transportasi</span></md-tooltip>
+            <ng-md-icon icon="{$transportation_icon$}" aria-label="transportation" options='{"rotation": "none"}'></ng-md-icon>
+          </md-button>
+          <md-button href="/info-kontak" ng-mouseleave="info_icon = 'info'" ng-mouseenter="info_icon = 'info_outline'">
+            <md-tooltip md-direction="down" class="tooltip"><span class="md-body-2">info dan kontak</span></md-tooltip>
+            <ng-md-icon icon="{$info_icon$}" aria-label="article" options='{"rotation": "none"}'></ng-md-icon>
+          </md-button>
 
-				</div>
-				<div flex layout="row" layout-align="end center" hide-sm hide-md hide-xs ng-if="show" ng-cloak class="animated fadeIn">
-					<md-button ng-show="authenticated" ng-click="showProfile($event)" class="lowercase user-nav">
-						<span ng-if="user.username" class="animated fadeIn">{$user.username$}</span> <ng-md-icon icon="account_box" size="22" aria-label="user"></ng-md-icon> <span>Profil</span>
-					</md-button>
-					<md-button ng-show="authenticated" ng-click="showConfirmLogout()" class="lowercase user-nav">
-						<ng-md-icon icon="logout" size="22" aria-label="user"></ng-md-icon> <span>Keluar</span>
-					</md-button>
-					<md-button ng-hide="authenticated" ng-click="showLogin($event)" class="lowercase user-nav">
-						<ng-md-icon icon="login" size="22" aria-label="user"></ng-md-icon> <span>Masuk</span>
-					</md-button>
-					<md-button ng-hide="authenticated" ng-click="showRegister($event)" class="lowercase user-nav">
-						<ng-md-icon icon="account_box" size="22" aria-label="user"></ng-md-icon> <span>Daftar</span>
-					</md-button>
-				</div>
-				<div hide-lg hide-gt-lg flex></div>
-				<md-button ng-click="toggleMenu()" class="lowercase user-nav" hide-lg hide-gt-lg flex-offset="90">
-					<ng-md-icon icon="menu" size="22" aria-label="user"></ng-md-icon>
-				</md-button>
-			</div>
-		</md-toolbar>
+        </div>
+        <div flex layout="row" layout-align="end center" hide-sm hide-md hide-xs ng-if="show" ng-cloak class="animated fadeIn">
+          <md-button ng-show="authenticated" ng-click="showProfile($event)" class="lowercase user-nav">
+            <span ng-if="user.username" class="animated fadeIn">{$user.username$}</span> <ng-md-icon icon="account_box" size="22" aria-label="user"></ng-md-icon> <span>Profil</span>
+          </md-button>
+          <md-button ng-show="authenticated" ng-click="showConfirmLogout()" class="lowercase user-nav">
+            <ng-md-icon icon="logout" size="22" aria-label="user"></ng-md-icon> <span>Keluar</span>
+          </md-button>
+          <md-button ng-hide="authenticated" ng-click="showLogin($event)" class="lowercase user-nav">
+            <ng-md-icon icon="login" size="22" aria-label="user"></ng-md-icon> <span>Masuk</span>
+          </md-button>
+          <md-button ng-hide="authenticated" ng-click="showRegister($event)" class="lowercase user-nav">
+            <ng-md-icon icon="account_box" size="22" aria-label="user"></ng-md-icon> <span>Daftar</span>
+          </md-button>
+        </div>
+        <div hide-lg hide-gt-lg flex></div>
+        <md-button ng-click="toggleMenu()" class="lowercase user-nav" hide-lg hide-gt-lg flex-offset="90">
+          <ng-md-icon icon="menu" size="22" aria-label="user"></ng-md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
 
-	</header>
+  </header>
 
-	<div layout="row" flex="auto">
-		<md-sidenav md-component-id='left' flex ng-cloak
-								class='fixed-nav md-sidenav-left md-whiteframe-z2'>
-		<md-toolbar>
-			<h3 class='md-toolbar-tools' layout="row" layout-align="center">DiscoverIndonesia</h3>
-		</md-toolbar>
-		<md-content flex layout="column" layout-margin layout-padding>
-			<md-button ng-click="TravelDestinationSearch.clearAllSearch(); toggleMenu('/lokasi-wisata')">
-				<ng-md-icon icon="terrain" aria-label="article"></ng-md-icon> Lokasi Wisata
-			</md-button>
-			<md-button ng-click="ArticleSearch.clearAllSearch(); toggleMenu('/artikel')">
-				<ng-md-icon icon="my_library_books" aria-label="article"></ng-md-icon> Artikel
-			</md-button>
-			<md-button ng-click="toggleMenu('/peta')">
-				<ng-md-icon icon="directions" aria-label="article"></ng-md-icon> Peta
-			</md-button>
-			<md-button ng-click="toggleMenu('/metoda-transportasi')">
-				<ng-md-icon icon="directions_bus" aria-label="article"></ng-md-icon> Metoda Transportasi
-			</md-button>
-			<md-button ng-click="toggleMenu('/info-kontak')">
-				<ng-md-icon icon="info" aria-label="article"></ng-md-icon> Info dan Kontak
-			</md-button>
-			<md-button ng-show="authenticated" ng-click="showProfile($event); toggleMenu()">
-				<ng-md-icon icon="account_box" size="22" aria-label="user"></ng-md-icon> <span>Profil</span>
-			</md-button>
-			<md-button ng-show="authenticated" ng-click="logout_clicked = true; toggleMenu()">
-				<ng-md-icon icon="logout" size="22" aria-label="user"></ng-md-icon> <span>Keluar</span>
-			</md-button>
+  <div layout="row" flex="auto">
+    <md-sidenav md-component-id='left' flex ng-cloak
+                class='fixed-nav md-sidenav-left md-whiteframe-z2'>
+      <md-toolbar>
+        <h3 class='md-toolbar-tools' layout="row" layout-align="center">DiscoverIndonesia</h3>
+      </md-toolbar>
+      <md-content flex layout="column" layout-margin layout-padding>
+        <md-button ng-click="TravelDestinationSearch.clearAllSearch(); toggleMenu('/lokasi-wisata')">
+          <ng-md-icon icon="terrain" aria-label="article"></ng-md-icon> Lokasi Wisata
+        </md-button>
+        <md-button ng-click="ArticleSearch.clearAllSearch(); toggleMenu('/artikel')">
+          <ng-md-icon icon="my_library_books" aria-label="article"></ng-md-icon> Artikel
+        </md-button>
+        <md-button ng-click="toggleMenu('/peta')">
+          <ng-md-icon icon="directions" aria-label="article"></ng-md-icon> Peta
+        </md-button>
+        <md-button ng-click="toggleMenu('/metoda-transportasi')">
+          <ng-md-icon icon="directions_bus" aria-label="article"></ng-md-icon> Metoda Transportasi
+        </md-button>
+        <md-button ng-click="toggleMenu('/info-kontak')">
+          <ng-md-icon icon="info" aria-label="article"></ng-md-icon> Info dan Kontak
+        </md-button>
+        <md-button ng-show="authenticated" ng-click="showProfile($event); toggleMenu()">
+          <ng-md-icon icon="account_box" size="22" aria-label="user"></ng-md-icon> <span>Profil</span>
+        </md-button>
+        <md-button ng-show="authenticated" ng-click="logout_clicked = true; toggleMenu()">
+          <ng-md-icon icon="logout" size="22" aria-label="user"></ng-md-icon> <span>Keluar</span>
+        </md-button>
 					<span ng-if="logout_clicked == true">
 						<span ng-controller="LogoutCtrl">
 							{$ reset_logout_clicked() $}
 						</span>
 					</span>
-			<md-button ng-hide="authenticated" ng-click="showLogin($event); toggleMenu()">
-				<ng-md-icon icon="login" size="22" aria-label="user"></ng-md-icon> <span>Masuk</span>
-			</md-button>
-			<md-button ng-hide="authenticated" ng-click="showRegister($event); toggleMenu()">
-				<ng-md-icon icon="account_box" size="22" aria-label="user"></ng-md-icon> <span>Daftar</span>
-			</md-button>
-			<md-content>
-				</md-sidenav>
-				<main ng-view flex="grow"></main>
-	</div>
+        <md-button ng-hide="authenticated" ng-click="showLogin($event); toggleMenu()">
+          <ng-md-icon icon="login" size="22" aria-label="user"></ng-md-icon> <span>Masuk</span>
+        </md-button>
+        <md-button ng-hide="authenticated" ng-click="showRegister($event); toggleMenu()">
+          <ng-md-icon icon="account_box" size="22" aria-label="user"></ng-md-icon> <span>Daftar</span>
+        </md-button>
+        <md-content>
+    </md-sidenav>
+    <main ng-view flex="grow"></main>
+  </div>
 
-	<footer ng-cloak layout="column" hide show-lg show-gt-lg>
-		<div class="material-blue" flex="100" layout="row" layout-align="center center">
-			<h4 class="md-subheading">Temukan Berbagai Keindahan dan Lokasi Wisata di Indonesia - Discover Indonesia</h4>
-		</div>
-		<div class="material-teal" flex="100" layout="row" layout-align="center start">
-			<div>
-				<h4 class="md-subheading">Discover Indonesia</h4>
-				<ul>
-					<li>
-						<a href="/lokasi-wisata" class="md-body-1">Lokasi Wisata</a>
-					</li>
-					<li>
-						<a href="/peta" class="md-body-1">Peta</a>
-					</li>
-					<li>
-						<a href="" ng-click="showLogin($event)" class="md-body-1">Masuk</a>
-					</li>
-					<li>
-						<a href="" ng-click="showRegister($event)" class="md-body-1">Daftar</a>
-					</li>
-				</ul>
-			</div>
-			<div flex="5"></div>
-			<div>
-				<h4 class="md-subheading">Artikel</h4>
-				<ul>
-					<li>
-						<a href="/artikel" class="md-body-1">Artikel</a>
-					</li>
-				</ul>
-			</div>
-			<div flex="5"></div>
-			<div>
-				<h4 class="md-subheading">Info dan Kontak</h4>
-				<ul>
-					<li>
-						<a href="/info-kontak" class="md-body-1">Info dan Kontak</a>
-					</li>
-					<li>
-						<a href="/metoda-transportasi" class="md-body-1">Transportasi</a>
-					</li>
-				</ul>
-			</div>
-			<div flex="5"></div>
-			<div>
-				<h4 class="md-subheading">Peta Situs</h4>
-				<ul>
-					<li>
-						<a href="/sitemap.xml/" class="md-body-1">Peta Situs</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-		<div class="material-teal" layout="row" layout-align="center">
-			<h6>Created with the help from open source communities around the world.</h6>
-		</div>
-	</footer>
+  <footer ng-cloak layout="column" hide show-lg show-gt-lg>
+    <div class="material-blue" flex="100" layout="row" layout-align="center center">
+      <h4 class="md-subheading">Temukan Berbagai Keindahan dan Lokasi Wisata di Indonesia - Discover Indonesia</h4>
+    </div>
+    <div class="material-teal" flex="100" layout="row" layout-align="center start">
+      <div>
+        <h4 class="md-subheading">Discover Indonesia</h4>
+        <ul>
+          <li>
+            <a href="/lokasi-wisata" class="md-body-1">Lokasi Wisata</a>
+          </li>
+          <li>
+            <a href="/peta" class="md-body-1">Peta</a>
+          </li>
+          <li>
+            <a href="" ng-click="showLogin($event)" class="md-body-1">Masuk</a>
+          </li>
+          <li>
+            <a href="" ng-click="showRegister($event)" class="md-body-1">Daftar</a>
+          </li>
+        </ul>
+      </div>
+      <div flex="5"></div>
+      <div>
+        <h4 class="md-subheading">Artikel</h4>
+        <ul>
+          <li>
+            <a href="/artikel" class="md-body-1">Artikel</a>
+          </li>
+        </ul>
+      </div>
+      <div flex="5"></div>
+      <div>
+        <h4 class="md-subheading">Info dan Kontak</h4>
+        <ul>
+          <li>
+            <a href="/info-kontak" class="md-body-1">Info dan Kontak</a>
+          </li>
+          <li>
+            <a href="/metoda-transportasi" class="md-body-1">Transportasi</a>
+          </li>
+        </ul>
+      </div>
+      <div flex="5"></div>
+      <div>
+        <h4 class="md-subheading">Peta Situs</h4>
+        <ul>
+          <li>
+            <a href="/sitemap.xml/" class="md-body-1">Peta Situs</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="material-teal" layout="row" layout-align="center">
+      <h6>Created with the help from open source communities around the world.</h6>
+    </div>
+  </footer>
 
 
-	<script src="{% static 'js/three.min.js' %}" type="application/javascript"></script>
-	<script src="{% static 'js/AssimpJSONLoader.js' %}" type="application/javascript"></script>
+  <script src="{% static 'js/three.min.js' %}" type="application/javascript"></script>
+  <script src="{% static 'js/AssimpJSONLoader.js' %}" type="application/javascript"></script>
 
-	{% compress js %}
-	<!-- angular v1.4.2 -->
-	<script src="{% static 'js/angular.js' %}" type="application/javascript"></script>
-	<script src="{% static 'js/angular-route.js' %}" type="application/javascript"></script>
-	<script src="{% static 'js/angular-resource.js' %}" type="application/javascript"></script>
-	<script src="{% static 'js/angular-messages.js' %}" type="application/javascript"></script>
-	<script src="{% static 'js/angular-touch.min.js'%}" type="application/javascript"></script>
+  {% compress js %}
+    <!-- angular v1.4.2 -->
+    <script src="{% static 'js/angular.js' %}" type="application/javascript"></script>
+    <script src="{% static 'js/angular-route.js' %}" type="application/javascript"></script>
+    <script src="{% static 'js/angular-resource.js' %}" type="application/javascript"></script>
+    <script src="{% static 'js/angular-messages.js' %}" type="application/javascript"></script>
+    <script src="{% static 'js/angular-touch.min.js'%}" type="application/javascript"></script>
 
-	<!-- localization -->
-	<script src="{% static 'js/locales/angular-locale_id-id.js' %}" type="application/javascript"></script>
+    <!-- localization -->
+    <script src="{% static 'js/locales/angular-locale_id-id.js' %}" type="application/javascript"></script>
 
-	<!-- angular-material dependencies -->
-	<script src="{% static 'js/angular-animate.min.js' %}" type="application/javascript"></script>
-	<script src="{% static 'js/angular-aria.min.js' %}" type="application/javascript"></script>
-	<script src="{% static 'js/angular-material.min.js' %}" type="application/javascript"></script>
+    <!-- angular-material dependencies -->
+    <script src="{% static 'js/angular-animate.min.js' %}" type="application/javascript"></script>
+    <script src="{% static 'js/angular-aria.min.js' %}" type="application/javascript"></script>
+    <script src="{% static 'js/angular-material.min.js' %}" type="application/javascript"></script>
 
-	<!-- 3rd party angular libs -->
-	<script src="{% static 'js/angular-carousel.min.js'%}" type="application/javascript"></script>
-	<script src="{% static 'js/angular-material-icons.min.js'%}" type="application/javascript"></script>
-	<script src="{% static 'js/ng-file-upload.min.js'%}" type="application/javascript"></script>
-	<script src="{% static 'js/angular-video-bg-http.min.js'%}" type="application/javascript"></script>
-	<script src="{% static 'js/dirPagination.js'%}" type="application/javascript"></script>
-	<script src="{% static 'js/satellizer.min.js'%}" type="application/javascript"></script>
-	<script src="{% static 'js/angular-social-share.min.js'%}" type="application/javascript" ></script>
+    <!-- 3rd party angular libs -->
+    <script src="{% static 'js/angular-carousel.min.js'%}" type="application/javascript"></script>
+    <script src="{% static 'js/angular-material-icons.min.js'%}" type="application/javascript"></script>
+    <script src="{% static 'js/ng-file-upload.min.js'%}" type="application/javascript"></script>
+    <script src="{% static 'js/angular-video-bg-http.min.js'%}" type="application/javascript"></script>
+    <script src="{% static 'js/dirPagination.js'%}" type="application/javascript"></script>
+    <script src="{% static 'js/satellizer.min.js'%}" type="application/javascript"></script>
+    <script src="{% static 'js/angular-social-share.min.js'%}" type="application/javascript" ></script>
 
-	<!-- angular google maps -->
-	<script src="{% static 'js/angular-simple-logger.min.js'%}" type="application/javascript"></script>
-	<script src="{% static 'js/lodash.min.js'%}" type="application/javascript"></script>
-	<script src="{% static 'js/angular-google-maps.min.js'%}" type="application/javascript"></script>
+    <!-- angular google maps -->
+    <script src="{% static 'js/angular-simple-logger.min.js'%}" type="application/javascript"></script>
+    <script src="{% static 'js/lodash.min.js'%}" type="application/javascript"></script>
+    <script src="{% static 'js/angular-google-maps.min.js'%}" type="application/javascript"></script>
 
-	<!-- angular-django-registration-auth dependencies -->
-	<script src="{% static 'js/angular-cookies.min.js' %}" type="application/javascript"></script>
-	<script src="{% static 'js/angular-sanitize.min.js' %}" type="application/javascript"></script>
+    <!-- angular-django-registration-auth dependencies -->
+    <script src="{% static 'js/angular-cookies.min.js' %}" type="application/javascript"></script>
+    <script src="{% static 'js/angular-sanitize.min.js' %}" type="application/javascript"></script>
 
-	<!-- my stuff -->
-	<script src="{% static 'js/app.js' %}" type="application/javascript"></script>
-	<script src="{% static 'js/controllers.js' %}" type="application/javascript"></script>
-	<script src="{% static 'js/services.js' %}" type="application/javascript"></script>
+    <!-- my stuff -->
+    <script src="{% static 'js/app.js' %}" type="application/javascript"></script>
+    <script src="{% static 'js/controllers.js' %}" type="application/javascript"></script>
+    <script src="{% static 'js/services.js' %}" type="application/javascript"></script>
 
-	<!-- directive for threejs -->
-	<script src="{% static 'js/tjsModelViewer.js' %}" type="application/javascript"></script>
+    <!-- directive for threejs -->
+    <script src="{% static 'js/tjsModelViewer.js' %}" type="application/javascript"></script>
 
-	<!-- angular-django-registration auth -->
-	<script src="{% static 'js/controllers/main.js' %}" type="application/javascript"></script>
-	<script src="{% static 'js/controllers/register.js' %}" type="application/javascript"></script>
-	<script src="{% static 'js/controllers/passwordreset.js' %}" type="application/javascript"></script>
-	<script src="{% static 'js/controllers/passwordresetconfirm.js' %}" type="application/javascript"></script>
-	<script src="{% static 'js/controllers/login.js' %}" type="application/javascript"></script>
-	<script src="{% static 'js/controllers/verifyemail.js' %}" type="application/javascript"></script>
-	<script src="{% static 'js/controllers/logout.js' %}" type="application/javascript"></script>
-	<script src="{% static 'js/controllers/userprofile.js' %}" type="application/javascript"></script>
-	<script src="{% static 'js/controllers/passwordchange.js' %}" type="application/javascript"></script>
-	<script src="{% static 'js/services/djangoAuth.js' %}" type="application/javascript"></script>
-	<script src="{% static 'js/services/validate.js' %}" type="application/javascript"></script>
-	<script src="{% static 'js/controllers/master.js' %}" type="application/javascript"></script>
-	<script src="{% static 'js/controllers/restricted.js' %}" type="application/javascript"></script>
-	<script src="{% static 'js/controllers/authrequired.js' %}" type="application/javascript"></script>
+    <!-- angular-django-registration auth -->
+    <script src="{% static 'js/controllers/main.js' %}" type="application/javascript"></script>
+    <script src="{% static 'js/controllers/register.js' %}" type="application/javascript"></script>
+    <script src="{% static 'js/controllers/passwordreset.js' %}" type="application/javascript"></script>
+    <script src="{% static 'js/controllers/passwordresetconfirm.js' %}" type="application/javascript"></script>
+    <script src="{% static 'js/controllers/login.js' %}" type="application/javascript"></script>
+    <script src="{% static 'js/controllers/verifyemail.js' %}" type="application/javascript"></script>
+    <script src="{% static 'js/controllers/logout.js' %}" type="application/javascript"></script>
+    <script src="{% static 'js/controllers/userprofile.js' %}" type="application/javascript"></script>
+    <script src="{% static 'js/controllers/passwordchange.js' %}" type="application/javascript"></script>
+    <script src="{% static 'js/services/djangoAuth.js' %}" type="application/javascript"></script>
+    <script src="{% static 'js/services/validate.js' %}" type="application/javascript"></script>
+    <script src="{% static 'js/controllers/master.js' %}" type="application/javascript"></script>
+    <script src="{% static 'js/controllers/restricted.js' %}" type="application/javascript"></script>
+    <script src="{% static 'js/controllers/authrequired.js' %}" type="application/javascript"></script>
 
-	<!-- secret keys stuff -->
-	<script type="application/javascript">
-		kompresApp.config(function(uiGmapGoogleMapApiProvider) {
-			uiGmapGoogleMapApiProvider.configure({
-				key: '{%gmaps_token%}',
-				v: '3.20', //defaults to latest 3.X anyhow
-				libraries: 'weather,geometry,visualization'
-			});
-		});
-		kompresApp.config(function($authProvider) {
-			$authProvider.facebook({
-				url: "/api/login/facebook/",
-				clientId: '{% fb_clientid %}',
-			});
-			$authProvider.tokenName = 'key';
-			$authProvider.authHeader = 'Satellizer';
-			$authProvider.authToken = 'Token';
-		});
-	</script>
-	{% endcompress %}
+    <!-- secret keys stuff -->
+    <script type="application/javascript">
+      kompresApp.config(function(uiGmapGoogleMapApiProvider) {
+        uiGmapGoogleMapApiProvider.configure({
+          key: '{%gmaps_token%}',
+          v: '3.20', //defaults to latest 3.X anyhow
+          libraries: 'weather,geometry,visualization'
+        });
+      });
+      kompresApp.config(function($authProvider) {
+        $authProvider.facebook({
+          url: "/api/login/facebook/",
+          clientId: '{% fb_clientid %}'
+        });
+        $authProvider.tokenName = 'key';
+        $authProvider.authHeader = 'Satellizer';
+        $authProvider.authToken = 'Token';
+      });
+      kompresApp.run(function($FB){
+        $FB.init('{% fb_clientid %}');
+      });
+    </script>
+  {% endcompress %}
 
-	<script src="//cdnjs.cloudflare.com/ajax/libs/SVG-Morpheus/0.1.8/svg-morpheus.js"></script>
-	<script src="//platform.twitter.com/widgets.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/SVG-Morpheus/0.1.8/svg-morpheus.js"></script>
+  <script src="//platform.twitter.com/widgets.js"></script>
 
 </div>
 </body>
