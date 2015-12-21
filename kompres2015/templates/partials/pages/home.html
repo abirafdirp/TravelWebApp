@@ -39,7 +39,7 @@
 								 flex-xs="90"
 								 flex-sm="90">
 					<a href="{$home_link.link$}">
-						<img ng-show="home_link.image != null" ng-src="{$home_link.image$}" class="md-card-image animated fadeIn homelink-image-video">
+						<img ng-show="home_link.image != null" ng-src="{$home_link.image$}" class="md-card-image animated fadeIn homelink-image-video" alt="">
 						<md-card-content class="home-card-video-content">
 							<span class="md-headline home-link-title remove-height" style="background-color: {$home_link.color$}">{$home_link.title$}</span>
 							<div layout="row" layout-align="start center" layout-margin>
@@ -70,7 +70,7 @@
 					 flex-sm="100">
 				<a ng-repeat="home_link in page.home_links" ng-if="home_link.type == 'main 1'" flex href="{$home_link.link$}">
 					<md-card class="video-shadow">
-						<img ng-show="home_link.image != null" ng-src="{$home_link.image$}" class="md-card-image animated fadeIn">
+						<img ng-show="home_link.image != null" ng-src="{$home_link.image$}" class="md-card-image animated fadeIn" alt="">
 						<md-card-content>
 							<div layout="row" layout-align="start center" layout-margin>
 								<span class="md-title">{$home_link.description$}</span>
@@ -90,7 +90,7 @@
 						 flex-md="45"
 						 flex-sm="90">
 						<md-card class="video-shadow">
-							<img ng-show="home_link.image != null" ng-src="{$home_link.image$}" class="md-card-image animated fadeIn">
+							<img ng-show="home_link.image != null" ng-src="{$home_link.image$}" class="md-card-image animated fadeIn" alt="">
 							<md-card-content>
 								<div layout="row" layout-align="start center">
 									<span class="md-body-1">{$home_link.description$}</span>
