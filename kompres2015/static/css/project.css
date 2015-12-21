@@ -614,7 +614,7 @@ md-sidenav{
 .video-content {
     top: 80px;
     position: absolute;
-    z-index: 100;
+    z-index: 1;
 }
 
 .visited {
