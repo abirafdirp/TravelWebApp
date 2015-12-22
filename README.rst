@@ -4,14 +4,12 @@ kompres2015
 This project will not get pushed to public repos until its release which is approximately December of 2015.
 
 
-LICENSE: BSD
+LICENSE: GPLv2 to comply to django-jet, this might change later down the road (use another library)
 
 Settings
 ------------
 
-Moved to settings_.
-
-.. _settings: http://cookiecutter-django.readthedocs.org/en/latest/settings.html
+In construction ....
 
 Basic Commands
 --------------
