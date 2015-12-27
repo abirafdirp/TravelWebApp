@@ -196,7 +196,7 @@
 
   {% compress js %}
     <!-- angular v1.4.2 -->
-    <script src="{% static 'js/angular.js' %}" type="application/javascript"></script>
+    <script src="{% static 'js/angular.min.js' %}" type="application/javascript"></script>
     <script src="{% static 'js/angular-route.js' %}" type="application/javascript"></script>
     <script src="{% static 'js/angular-resource.js' %}" type="application/javascript"></script>
     <script src="{% static 'js/angular-messages.js' %}" type="application/javascript"></script>
@@ -1544,9 +1544,9 @@
 
   <script type="text/ng-template" id="transportation_list.html">
 
-    <div ng-controller="TransportationListCtrl" layout="row" layout-wrap id="transportation-list" ng-if="!show_loading">
+    <div ng-controller="TransportationListCtrl" layout="row" layout-wrap id="transportation-list">
 
-      <div ng-if="show_loading" class="loading" flex="100">
+      <div ng-if="show_loading == true" class="loading" flex="100">
         <md-progress-circular md-mode="indeterminate"></md-progress-circular>
       </div>
 

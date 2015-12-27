@@ -179,7 +179,9 @@ kompresControllers.controller('TransportationListCtrl', ['$scope', 'Transportati
     $scope.district_search = '';
     $scope.districts = Districts.list.query();
     $scope.transportation_search = '';
+    $scope.show_loading = true;
     $scope.transportations = Transportations.list.query(function(response){
+      $scope.show_loading = false;
       angular.forEach(response.results, function(transportation){
         transportation['districts_resolved'] = [];
         angular.forEach(transportation.districts, function(district){
@@ -187,8 +189,6 @@ kompresControllers.controller('TransportationListCtrl', ['$scope', 'Transportati
             transportation.districts_resolved.push(response);
           });
         });
-        // should have used $q
-        $scope.show_loading = false;
       });
     });
   }
