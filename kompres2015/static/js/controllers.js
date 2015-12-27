@@ -21,7 +21,7 @@ kompresControllers.controller('NavCtrl', ['$scope', '$route', '$mdDialog', 'Arti
     $scope.showConfirmLogout = function(ev) {
       $mdDialog.show({
         controller: DialogController,
-        template: logout_template,
+        templateUrl: 'logout.html',
         parent: angular.element(document.body),
         targetEvent: ev,
         clickOutsideToClose:true,
@@ -55,7 +55,7 @@ kompresControllers.controller('NavCtrl', ['$scope', '$route', '$mdDialog', 'Arti
     $scope.showLogin = function(ev) {
       $mdDialog.show({
         controller: DialogController,
-        template: login_template,
+        templateUrl: 'login.html',
         parent: angular.element(document.body),
         targetEvent: ev,
         clickOutsideToClose:true,
@@ -80,7 +80,7 @@ kompresControllers.controller('NavCtrl', ['$scope', '$route', '$mdDialog', 'Arti
     $scope.showRegister = function(ev) {
       $mdDialog.show({
         controller: DialogController,
-        template: register_template,
+        templateUrl: 'register.html',
         parent: angular.element(document.body),
         targetEvent: ev,
         clickOutsideToClose:true,
@@ -104,7 +104,7 @@ kompresControllers.controller('NavCtrl', ['$scope', '$route', '$mdDialog', 'Arti
     $scope.showProfile = function(ev) {
       $mdDialog.show({
         controller: DialogController,
-        template: userprofile_template,
+        templateUrl: 'userprofile.html',
         parent: angular.element(document.body),
         targetEvent: ev,
         clickOutsideToClose:true,
@@ -473,7 +473,7 @@ kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route'
         $mdDialog.show({
           locals: {travel_destination_local: travel_destination},
           controller: DialogController,
-          template: visit_template,
+          templateUrl: 'visit.html',
           parent: angular.element(document.body),
           clickOutsideToClose:false,
         });
@@ -603,7 +603,7 @@ kompresControllers.controller('ReportCtrl', ['$scope', '$mdDialog',
       $mdDialog.show({
         locals: {travel_destination_local: travel_destination},
         controller: DialogController,
-        template: report_template,
+        templateUrl: 'report.html',
         parent: angular.element(document.body),
         clickOutsideToClose:false,
       });
@@ -977,463 +977,4 @@ kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$rout
     $scope.travel_destinations = travel_destinations;
   }
 ]);
-
-// todo find a better way to save template
-var login_template = `
-<md-dialog aria-label="masuk" ng-controller="LoginNavCtrl">
-	<md-toolbar>
-		<div class="md-toolbar-tools">
-			<h2>{$ tab $}</h2>
-			<span flex></span>
-			<md-button class="md-icon-button" ng-click="closeDialog()">
-				<ng-md-icon icon="close" aria-label="close dialog"></ng-md-icon>
-			</md-button>
-		</div>
-	</md-toolbar>
-	<md-dialog-content class="md-dialog-content-login">
-		<form role="form" ng-submit="login(loginForm)" ng-cloak ng-controller="LoginCtrl" name="loginForm" novalidate class="login" layout="column" layout-align="center center" ng-show="tab == 'Masuk'">
-
-			<div class="md-dialog-content" layout="column" layout-align="center center">
-
-				<md-input-container class="md-block">
-					<label for="id_username">Username</label>
-					<input auto-focus name="username" id="id_username" type="text" ng-model="model.username" placeholder="Username" class="form-control" required />
-					<div ng-messages="loginForm.username.$error">
-						<div ng-message="required" ng-repeat="error in errors.username">{$error$}</div>
-					</div>
-				</md-input-container>
-				<md-input-container class="md-block">
-					<label for="id_password">Password</label>
-					<input name="password" id="id_password" type="password" ng-model="model.password" placeholder="Password" class="form-control" required />
-					<div ng-messages="loginForm.password.$error">
-						<div ng-message="required" ng-repeat="error in errors.password">{$error$}</div>
-					</div>
-				</md-input-container>
-				<div ng-show="errors" class="animated fadeIn">
-					<p class="md-body-1" ng-repeat="error in errors.non_field_errors">{$error$}</p>
-					<p class="md-body-1" ng-if="error">{$error$}</p>
-				</div>
-				<span ng-show="show_loading && !errors.length > 0 && !complete">
-					<md-progress-circular md-mode="indeterminate"></md-progress-circular>
-				</span>
-				<md-button ng-show="!show_loading" type="submit" class="md-raised md-primary">masuk</md-button>
-
-				<div ng-controller="FacebookTokenCtrl">
-					<md-button ng-show="!show_loading" class="md-raised md-warn" ng-click="authenticate('facebook'); $parent.show_loading = true">
-						<ng-md-icon icon="facebook" size="22" aria-label="user"></ng-md-icon>Masuk Dengan Facebook
-					</md-button>
-				</div>
-
-				<md-button class="md-raised md-accent" ng-show="!show_loading" ng-click="setTab('Lupa Password')">lupa password</md-button>
-			</div>
-			<div ng-if="authenticated">{$ closeDialogDelayed() $}</div>
-		</form>
-
-		<form role="form" name="passwordResetForm" ng-submit="resetPassword(passwordResetForm)" novalidate ng-show="tab == 'Lupa Password'" ng-controller="PasswordresetCtrl">
-
-			<div class="md-dialog-content" layout="column" layout-align="center center">
-
-				<md-input-container class="md-block">
-					<label for="id_email">Email</label>
-					<input auto-focus name="email" id="id_email" class="form-control" type="text" ng-model="model.email" placeholder="Email" required/>
-					<div ng-messages="passwordResetForm.email.$error">
-						<div ng-message="required" ng-repeat="error in errors.email">{$error$}</div>
-						<div ng-message="email" ng-repeat="error in errors.email">{$error$}</div>
-					</div>
-				</md-input-container>
-
-				<div ng-show="errors" class="animated fadeIn">
-					<p class="md-body-1" ng-repeat="error in errors.non_field_errors">{$error$}</p>
-					<p class="md-body-1" ng-repeat="error in errors.__all__">{$error$}</p>
-					<p ng-show="errors.email != 'This field is required.'" class="md-body-1" ng-repeat="error in errors.email">{$error$}</p>
-				</div>
-				<span ng-show="show_loading && errors.length == 0 && !complete">
-					<md-progress-circular md-mode="indeterminate" style="margin: 0;"></md-progress-circular>
-				</span>
-				<div ng-if="complete == true">
-					<p class="md-body-1">Cek email anda untuk instruksi reset password anda!</p>
-				</div>
-				<md-button ng-show="show_loading == false" type="submit" class="md-raised md-primary">reset password</md-button>
-				<md-button class="md-raised md-accent" ng-click="setTab('Masuk')">login</md-button>
-
-			</div>
-		</form>
-	</md-dialog-content>
-
-</md-dialog>
-
-
-`;
-
-var report_template = `
-<md-dialog aria-label="komplain">
-	<md-toolbar>
-		<div class="md-toolbar-tools">
-			<h2>komplain</h2>
-			<span flex></span>
-			<md-button class="md-icon-button" ng-click="closeDialog()">
-				<ng-md-icon icon="close" aria-label="close dialog"></ng-md-icon>
-			</md-button>
-		</div>
-	</md-toolbar>
-	<md-dialog-content id="report_view">
-		<div class="md-dialog-content" layout="column" layout-align="center center">
-			<form role="form" name="reportForm" ng-submit="save()" novalidate>
-				<div layout="row" style="min-width: 400px" layout-align="left center">
-					<md-autocomplete
-								md-search-text="travel_destination_search"
-								md-items="travel_destination in travel_destinations.results | filter: travel_destination_search | orderBy: 'name'"
-								md-item-text="travel_destination.name"
-								md-min-length="0"
-								md-floating-label="Lokasi Wisata"
-								md-selected-item-change="searchSelectedChange(travel_destination)"
-								md-selected-item ="travel_destination_local"
-								md-search-text-change="searchTextChange(travel_destination_search)"
-								placeholder="Lokasi Wisata"
-								class="animated fadeIn"
-								name="travel_destination"
-								md-input-name="travel_destination"
-								id="id_travel_destination"
-								class="form-control"
-								type="text"
-								required
-								flex="60">
-					<md-item-template>
-						<span class="animated fadeIn" md-highlight-text="travel_destination_search" md-highlight-flags="^i">{$travel_destination.name$}</span>
-					</md-item-template>
-					<md-not-found>
-					</md-not-found>
-					<div ng-messages="reportForm.travel_destination.$error">
-						<div ng-message="required" ng-repeat="error in errors.travel_destination">{$error$}</div>
-					</div>
-				</md-autocomplete>
-					<md-input-container flex class="report-category">
-					<label for="id_category">Kategori</label>
-					<md-select ng-model="newReport.category" name="category" id="id_category" class="form-control" required>
-						<md-option ng-repeat="category in categories" value="{$category$}">
-							{$category$}
-						</md-option>
-					</md-select>
-					<div ng-messages="reportForm.category.$error">
-						<div ng-message="required" ng-repeat="error in errors.category">{$error$}</div>
-					</div>
-				</md-input-container>
-				</div>
-
-
-
-				<md-input-container class="md-block">
-					<label for="id_report">Isi Komplain</label>
-					<textarea name="report" id="id_report" class="form-control" type="text" ng-model="newReport.report" placeholder="Isi Komplain" required></textarea>
-					<div ng-messages="reportForm.report.$error">
-						<div ng-message="required" ng-repeat="error in errors.report">{$error$}</div>
-					</div>
-				</md-input-container>
-				<div layout="column" layout-align="center center">
-					<md-button class="md-raised" ngf-select ng-model="files" ngf-multiple="true" flex>Unggah gambar</md-button>
-				</div>
-				<div layout="row" layout-align="center center" layout-wrap flex>
-					<div flex="33" ng-repeat="file in files" layout-align="center center">
-						<img ngf-thumbnail="file" class="upload-thumb">
-					</div>
-				</div>
-				<div flex></div>
-				<div layout="column" layout-align="center center">
-				<div ng-show="errors" class="animated fadeIn">
-					<p ng-show="errors.travel_destination" class="md-body-1">Harap masukan lokasi wisata yang tepat</p>
-				</div>
-				<div ng-if="complete == true">
-					<p class="md-body-1">Komplain berhasil dibuat, terima kasih atas laporannya.</p>
-				</div>
-				<span ng-show="show_loading && !complete && errors.length == 0">
-					<md-progress-circular md-mode="indeterminate"></md-progress-circular>
-				</span>
-				<div flex></div>
-				<div layout="column" layout-align="center center">
-					<md-button class="md-raised md-primary" ng-click="save()">Laporkan</md-button>
-				</div>
-					</div>
-			</form>
-		</div>
-	</md-dialog-content>
-
-</md-dialog>
-`;
-
-var visit_template = `
-<md-dialog aria-label="komplain">
-  <md-toolbar>
-    <div class="md-toolbar-tools">
-      <h2>Kunjungan</h2>
-      <span flex></span>
-      <md-button class="md-icon-button" ng-click="closeDialog()">
-        <ng-md-icon icon="close" aria-label="close dialog"></ng-md-icon>
-      </md-button>
-    </div>
-  </md-toolbar>
-  <md-dialog-content id="report_view">
-    <div class="md-dialog-content" layout="column" layout-align="center center">
-      <form role="form" name="visitForm" ng-submit="save()" novalidate>
-        <div layout="column" style="min-width: 400px" layout-align="center center" layout-margin>
-          <h4>Kapan anda mengunjungi {$travel_destination.name$} ?</h4>
-          <md-datepicker ng-model="date" md-placeholder="tanggal" md-max-date="max_date" flex></md-datepicker>
-        </div>
-        <md-input-container class="md-block">
-          <label for="id_message">Pesan</label>
-          <textarea name="message" id="id_message" type="text" ng-model="message" placeholder="opsional" class="form-control" required></textarea>
-        </md-input-container>
-        <div flex></div>
-        <div layout="column" layout-align="center center">
-          <div ng-if="complete == true">
-            <p class="md-body-1">Terima kasih</p>
-          </div>
-				<span ng-show="show_loading && !complete && errors.length == 0">
-					<md-progress-circular md-mode="indeterminate"></md-progress-circular>
-				</span>
-          <div flex></div>
-          <div layout="column" layout-align="center center">
-            <md-button class="md-raised md-primary" ng-click="save()">Ok</md-button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </md-dialog-content>
-
-</md-dialog>
-`;
-
-var logout_template = `
-<md-dialog aria-label="daftar">
-  <md-toolbar>
-    <div class="md-toolbar-tools">
-      <h2>Peringatan</h2>
-      <span flex></span>
-      <md-button class="md-icon-button" ng-click="closeDialog()">
-        <ng-md-icon icon="close" aria-label="close dialog"></ng-md-icon>
-      </md-button>
-    </div>
-  </md-toolbar>
-  <md-dialog-content layout="column" layout-align="center center" layout-margin layout-padding layout-wrap>
-    <div flex="100">
-      Anda yakin ingin keluar?
-    </div>
-    <div layout="row" ng-show="!show_loading">
-      <md-button ng-click="closeDialog()" class="md-raised md-primary">
-        tidak
-      </md-button>
-      <md-button ng-click="logout()" class="md-raised md-accent">
-        ya
-      </md-button>
-    </div>
-    <span ng-show="show_loading">
-      <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-    </span>
-  </md-dialog-content>
-</md-dialog>
-
-
-`;
-
-var userprofile_template = `<md-dialog flex="grow" flex-gt-lg="30">
-	<md-toolbar>
-		<div class="md-toolbar-tools">
-			<h2>Profil</h2>
-			<span flex></span>
-			<md-button class="md-icon-button" ng-click="closeDialog()">
-				<ng-md-icon icon="close" aria-label="close dialog"></ng-md-icon>
-			</md-button>
-		</div>
-	</md-toolbar>
-	<md-dialog-content>
-		<md-tabs md-dynamic-height md-border-bottom>
-			<md-tab label="profil">
-				<md-content class="md-padding" ng-controller="UserprofileCtrl">
-					<form role="form" name="userProfileForm" ng-submit="updateProfile(userProfileForm, model)" novalidate>
-
-						<div class="md-dialog-content" layout="row" layout-wrap layout-align="center center">
-
-							<md-input-container flex="100">
-								<label for="id_first_name">Nama</label>
-								<input name="first_name" id="id_first_name" class="form-control" type="text" ng-model="model.first_name" placeholder="Nama" />
-								<div ng-messages="userProfileForm.first_name.$error">
-									<div ng-message="required" ng-repeat="error in errors.first_name">{$error$}</div>
-								</div>
-							</md-input-container>
-							<md-autocomplete flex="100"
-															 md-search-text="district_search"
-															 md-items="district in districts.results | filter:district_search | orderBy: 'name'"
-															 md-item-text="district.name"
-															 md-selected-item-change="searchSelectedChange(district)"
-															 md-search-text-change="searchTextChange(district_search)"
-															 md-min-length="0"
-															 placeholder="Kabupaten"
-															 md-floating-label="Kabupaten"
-															 class="animated fadeIn">
-								<md-item-template>
-									<span class="animated fadeIn" md-highlight-text="district_search" md-highlight-flags="^i">{$district.name$}</span>
-								</md-item-template>
-								<md-not-found>
-								</md-not-found>
-							</md-autocomplete>
-							<div ng-show="errors" class="animated fadeIn">
-								<p class="md-body-1" ng-repeat="error in errors.non_field_errors">{$error$}</p>
-								<p class="md-body-1" ng-if="error">{$error$}</p>
-							</div>
-							<div layout="column" layout-align="center center">
-								<div ng-show="show_loading && errors.length == 0 && !complete">
-									<md-progress-circular md-mode="indeterminate"></md-progress-circular>
-								</div>
-								<div ng-if="complete == true" flex="100" layout="row" layout-align="center center">
-									<p class="md-body-1">Profil anda berhasil diperbaharui</p>
-								</div>
-								<md-button type="submit" ng-show="show_loading == false || errors" class="md-primary md-raised">Perbaharui profil</md-button>
-							</div>
-						</div>
-					</form>
-					<p class="md-body-1" ng-if="authenticated == false">Anda harus masuk terlebih dahulu</p>
-				</md-content>
-			</md-tab>
-			<md-tab label="ubah password">
-				<md-content class="md-padding" ng-controller="PasswordchangeCtrl">
-					<form role="form" ng-submit="changePassword(changePasswordForm)" name="changePasswordForm" ng-if="authenticated" novalidate>
-
-						<div class="md-dialog-content" layout="row" layout-wrap layout-align="center center">
-
-							<md-input-container class="md-block" flex="100">
-								<label for="id_password1">Password Baru</label>
-								<input name="new_password1" id="id_password1" type="password" ng-model="model.new_password1" placeholder="Password Baru" class="form-control" required />
-								<div ng-messages="changePasswordForm.new_password1.$error">
-									<div ng-message="required" ng-repeat="error in errors.new_password1">{$error$}</div>
-								</div>
-							</md-input-container>
-							<md-input-container class="md-block" flex="100">
-								<label for="id_password2">Ulangi Password</label>
-								<input name="new_password2" id="id_password2" type="password" ng-model="model.new_password2" placeholder="Ulangi Password" class="form-control" required />
-								<div ng-messages="changePasswordForm.new_password2.$error">
-									<div ng-message="required" ng-repeat="error in errors.new_password2">{$error$}</div>
-								</div>
-							</md-input-container>
-							<div layout="column" layout-align="center center">
-								<div ng-show="errors" class="animated fadeIn">
-									<p class="md-body-1" ng-repeat="error in errors.non_field_errors">{$error$}</p>
-									<div ng-if="errors.new_password2 != 'This field is required.'">
-										<p class="md-body-1" ng-repeat="error in errors.new_password2">{$error$}</p>
-									</div>
-								</div>
-								<div ng-if="complete == true">
-									<p class="md-body-1">Password berhasil diubah!</p>
-								</div>
-							<div ng-show="show_loading && !complete && errors.length == 0">
-								<md-progress-circular md-mode="indeterminate"></md-progress-circular>
-							</div>
-								<md-button class="md-raised md-accent" type="submit">ubah password</md-button>
-							</div>
-						</div>
-					</form>
-				</md-content>
-			</md-tab>
-			<md-tab label="Komplain">
-				<md-content class="md-padding" ng-controller="ReportListCtrl" layout="row" layout-align="center center" layout-wrap>
-					<h4 class="md-subheading">Tanda ceklis menandakan komplain anda sudah berhasil diverifikasi. Terima kasih atas kontribusinya.</h4>
-					<md-list flex="100">
-						<div dir-paginate="report in reports_resolved | itemsPerPage: 4" pagination-id="report">
-							<md-list-item class="md-3-line md-long-text" ng-controller="ReportListRepeatCtrl" flex>
-								<img ng-src="{$image.image$}" class="md-avatar" alt="" style="color: grey"/>
-								<div class="md-list-item-text">
-									<h3>{$ travel_destination.name $}</h3>
-									<p>
-										{$report.created_date | date:'d  MMMM  yyyy'$}<br>
-										{$report.report$}
-										<md-checkbox class="md-secondary" ng-model="report.approved" ng-disabled="true"></md-checkbox>
-									</p>
-								</div>
-							</md-list-item>
-						</div>
-					</md-list>
-					<div max-size="5" flex="100" layout-align="center-center" layout="row">
-						<dir-pagination-controls pagination-id="report" layout="row" layout-align="center center"></dir-pagination-controls>
-					</div>
-				</md-content>
-			</md-tab>
-		</md-tabs>
-	</md-dialog-content>
-</md-dialog>
-`;
-
-var register_template = `
-<md-dialog aria-label="daftar">
-	<md-toolbar>
-		<div class="md-toolbar-tools">
-			<h2>Registrasi</h2>
-			<span flex></span>
-			<md-button class="md-icon-button" ng-click="closeDialog()">
-				<ng-md-icon icon="close" aria-label="close dialog"></ng-md-icon>
-			</md-button>
-		</div>
-	</md-toolbar>
-	<md-dialog-content class="md-dialog-content-register" id="register_view" ng-controller="RegisterCtrl">
-		<form role="form" ng-if="authenticated != true" name="registerForm" ng-submit="register(registerForm)" novalidate>
-
-			<div class="md-dialog-content" layout="column" layout-align="center center">
-
-				<md-input-container class="md-block">
-					<label for="id_username">Username</label>
-					<input name="username" id="id_username" class="form-control" type="text" ng-model="model.username" placeholder="Username" required auto-focus/>
-					<div ng-messages="registerForm.username.$error">
-						<div ng-message="required" ng-repeat="error in errors.username">{$error$}</div>
-					</div>
-				</md-input-container>
-				<md-input-container class="md-block">
-					<label for="id_password1">Password</label>
-					<input name="password1" id="id_password1" class="form-control" type="password" ng-model="model.password1" placeholder="Password" required />
-					<div ng-messages="registerForm.password1.$error">
-						<div ng-message="required" ng-repeat="error in errors.password1">{$error$}</div>
-					</div>
-				</md-input-container>
-				<md-input-container class="md-block">
-					<label for="id_password2">Ulangi Password</label>
-					<input name="password2" id="id_password2" class="form-control" type="password" ng-model="model.password2" placeholder="Ulangi Password" required />
-					<div ng-messages="registerForm.password.$error">
-						<div ng-message="required" ng-repeat="error in errors.password">{$error$}</div>
-					</div>
-				</md-input-container>
-				<md-input-container class="md-block">
-					<label for="id_email">Email</label>
-					<input name="email" id="id_email" class="form-control" type="email" ng-model="model.email" placeholder="Email" required />
-					<div ng-messages="registerForm.email.$error">
-						<div ng-message="required" ng-repeat="error in errors.email">{$error$}</div>
-						<div ng-message="email" ng-repeat="error in errors.email">{$error$}</div>
-					</div>
-				</md-input-container>
-				<div ng-show="errors" class="animated fadeIn">
-					<p class="md-body-1" ng-repeat="error in errors.non_field_errors">{$error$}</p>
-					<p class="md-body-1" ng-repeat="error in errors.__all__">{$error$}</p>
-					<div ng-if="errors.username != 'This field is required.'">
-						<p class="md-body-1" ng-repeat="error in errors.username">{$error$}</p>
-					</div>
-					<div ng-if="errors.email != 'This field is required.' || errors.email[0] != 'A properly formatted email address is required.'">
-						<p class="md-body-1" ng-repeat="error in errors.email">{$error$}</p>
-					</div>
-          <div ng-if="errors.password1 != 'This field is required.'">
-						<p class="md-body-1" ng-repeat="error in errors.password1">{$error$}</p>
-					</div>
-          <div ng-if="errors.password2 != 'This field is required.'">
-						<p class="md-body-1" ng-repeat="error in errors.password2">{$error$}</p>
-					</div>
-				</div>
-				<div ng-if="complete == true">
-						<p class="md-body-1">Cek email untuk aktivasi akun anda!</p>
-				</div>
-				<span ng-show="show_loading && !complete && errors.length == 0">
-					<md-progress-circular md-mode="indeterminate"></md-progress-circular>
-				</span>
-				<md-button class="md-raised md-primary" type="submit">daftar</md-button>
-			</div>
-		</form>
-	</md-dialog-content>
-
-</md-dialog>
-
-
-`;
 

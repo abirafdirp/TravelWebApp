@@ -170,7 +170,7 @@
           <li>
             <a href="/metoda-transportasi" class="md-body-1">Transportasi</a>
           </li>
-					<li>
+          <li>
             <a href="/disclaimer" class="md-body-1">Disclaimer</a>
           </li>
         </ul>
@@ -278,6 +278,1330 @@
 
   <script src="//cdnjs.cloudflare.com/ajax/libs/SVG-Morpheus/0.1.8/svg-morpheus.js"></script>
   <script src="//platform.twitter.com/widgets.js"></script>
+
+  <script type="text/ng-template" id="article_list.html">
+    <div ng-controller="ArticleListCtrl">
+
+      <div ng-if="show_loading" class="loading">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+      </div>
+
+      <div ng-if="!show_loading" ng-controller="SearchCtrl" class="animated fadeIn">
+        <div ng-controller="PageCtrl" hide-sm hide-md hide-xs>
+          <div class="faux-image-container">
+            <input ng-show="search_opened" class="search-input" ng-model="$parent.ArticleSearch.search" flex="grow" flex-offset="5" autofocus spellcheck="false">
+            <img id="faux-image" ng-src="{$ page.results[0].article_list_image $}">
+            <h3 class="md-display-1 article-title" ng-if="page.results[0].article_list_tagline" flex>{$ page.results[0].article_list_tagline $}</h3>
+          </div>
+        </div>
+
+        <div>
+          <div ng-class="{'search-area': search_opened == true, 'search-not-activated': search_opened == false}">
+          </div>
+
+          <a class="search-btn material-teal" ng-click="toggleSearch(); ArticleSearch.clearAllSearch()" flex flex-offset="5">
+            <ng-md-icon icon="{$search_icon$}" aria-label="article"></ng-md-icon>
+          </a>
+        </div>
+        <div hide-gt-md style="margin-top: 70px;"></div>
+
+
+        <md-content ng-cloak class="md-padding article-list" ng-show="show_loading == false">
+          <div layout="column">
+            <div layout="row" layout-no-wrap>
+
+              <div flex="20" hide-xs hide-sm hide-md id="article-left-nav" layout-padding layout="column">
+                <md-content id="art-search-box">
+                  <div class="md-headline animated fadeIn" id="art-search-box-title" flex="75">Kategori</div>
+
+
+                  <a href="javascript:void(0)" ng-click="ArticleSearch.clearCategorySearch()">
+                    <div layout="row" layout-align="start center">
+                      <div flex="50" class="md-subhead">Semua</div>
+                      <md-button class="md-icon-button" aria-label="Favorite">
+                        <ng-md-icon icon="{$ArticleSearch.getCategoryIcon('')$}" size="26" style="fill: rgba(255, 179, 15, 0.96)" aria-label="user"></ng-md-icon>
+                      </md-button>
+                    </div>
+                  </a>
+                  <div ng-repeat="category in categories">
+
+                    <a href="javascript:void(0)" ng-click="ArticleSearch.setCategorySearch(category)">
+                      <div layout="row" layout-align="start center">
+                        <span class="md-subhead" flex="50">{$ category $}</span>
+                        <md-button class="md-icon-button" aria-label="Favorite">
+                          <ng-md-icon icon="{$ArticleSearch.getCategoryIcon(category)$}" size="26" style="fill: {$ categories_colors[$index] $}" aria-label="user"></ng-md-icon>
+                        </md-button>
+                      </div>
+                    </a>
+
+                  </div>
+                </md-content>
+              </div>
+
+              <div layout="row" layout-wrap flex="70" flex-sm="100" flex-md="100" flex-xs="100">
+
+                <div ng-show="show_loading == true" class="loading">
+                  <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                </div>
+
+                <div ng-cloak ng-show="show_loading == false"
+                     dir-paginate="article in articles.results |
+								 filter: ArticleSearch.search |
+								 filter: ArticleSearch.category_search |
+								 itemsPerPage: 5 ">
+                  <div ng-controller="ArticleRepeatCtrl">
+                    <md-card id="posts">
+                      <a ng-href="/artikel/{$ slugify(article.title) $}">
+                        <span class="md-title article-list-title">{$ article.title $}</span>
+                        <div class="article-image"><img ng-src="{$thumbnail.image$}" class="md-card-image" alt=""></div>
+
+                      </a>
+                      <md-card-content>
+										<span class="md-body-2">
+												<ng-md-icon icon="access_time" size="20" aria-label="tanggal"></ng-md-icon>
+												{$ article.date $}&nbsp;&nbsp;
+												<ng-md-icon icon="sort" size="20" aria-label="tanggal"></ng-md-icon>
+												<a href="javascript:void(0)" ng-click="ArticleSearch.setCategorySearch(article.category)"> {$ article.category $}</a>
+										</span>
+                        <p class="md-body-1">
+                          {$ article_short_description $}
+                        </p>
+                      </md-card-content>
+                    </md-card>
+                    <br/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div layout="row" layout-align="center center">
+            <div flex-offset="5">
+              <dir-pagination-controls></dir-pagination-controls>
+            </div>
+          </div>
+        </md-content>
+      </div>
+    </div>
+
+  </script>
+
+  <script type="text/ng-template" id="article_detail.html">
+    <div ng-controller="ArticleDetailCtrl" md-theme="article" layout="column">
+
+      <div ng-show="show_loading == true" class="loading">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+      </div>
+
+      <div ng-show="show_loading == false" ng-repeat="article in article.results" class="animated fadeIn" layout="column">
+        <div class="article-image-container">
+          <img id="faux-image" ng-src="{$ main_image.image $}">
+        </div>
+        <md-toolbar id="article-post-title" class="md-theme-light">
+          <div class="md-toolbar-tools">
+            <h2 style="margin-left: 15px">{$ article.title $}</h2>
+          </div>
+        </md-toolbar>
+        <div layout="row" layout-sm="column" layout-md="column" layout-xs="column" layout-margin layout-padding>
+          <div flex="65" flex-sm="95" flex-md="95" flex-xs="95" flex-order-xs="1" flex-order-sm="1" flex-order-md="1">
+            <div class="md-list-item-text">
+              <div ng-bind-html="article.article | trustAsHtml"></div>
+            </div>
+          </div>
+          <div id="article-nav" flex="25" flex-xs="100" flex-sm="100" layout="column" flex-order-sm="0" flex-order-xs="0">
+            <div layout="column">
+              <div class="dest-side-row">
+                <ng-md-icon icon="access_time" size="20" aria-label="tanggal"></ng-md-icon>
+                <span>{$article.date | date:'d  MMMM  yyyy' $}</span>
+              </div>
+              <div class="dest-side-row">
+                <span flex="5"></span>
+                <ng-md-icon icon="account_circle" size="20" aria-label="author"></ng-md-icon>
+                <span>{$article.author $}</span>
+              </div>
+              <div class="dest-side-row">
+                <ng-md-icon icon="sort" size="20" aria-label="tanggal"></ng-md-icon>
+                <a href="/artikel/?artikel_kategori={$ article.category $}"> {$ article.category $}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    </div>
+
+
+  </script>
+  <script type="text/ng-template" id="login.html">
+    <md-dialog aria-label="masuk" ng-controller="LoginNavCtrl">
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <h2>{$ tab $}</h2>
+          <span flex></span>
+          <md-button class="md-icon-button" ng-click="closeDialog()">
+            <ng-md-icon icon="close" aria-label="close dialog"></ng-md-icon>
+          </md-button>
+        </div>
+      </md-toolbar>
+      <md-dialog-content class="md-dialog-content-login">
+        <form role="form" ng-submit="login(loginForm)" ng-cloak ng-controller="LoginCtrl" name="loginForm" novalidate class="login" layout="column" layout-align="center center" ng-show="tab == 'Masuk'">
+
+          <div class="md-dialog-content" layout="column" layout-align="center center">
+
+            <md-input-container class="md-block">
+              <label for="id_username">Username</label>
+              <input auto-focus name="username" id="id_username" type="text" ng-model="model.username" placeholder="Username" class="form-control" required />
+              <div ng-messages="loginForm.username.$error">
+                <div ng-message="required" ng-repeat="error in errors.username">{$error$}</div>
+              </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+              <label for="id_password">Password</label>
+              <input name="password" id="id_password" type="password" ng-model="model.password" placeholder="Password" class="form-control" required />
+              <div ng-messages="loginForm.password.$error">
+                <div ng-message="required" ng-repeat="error in errors.password">{$error$}</div>
+              </div>
+            </md-input-container>
+            <div ng-show="errors" class="animated fadeIn">
+              <p class="md-body-1" ng-repeat="error in errors.non_field_errors">{$error$}</p>
+              <p class="md-body-1" ng-if="error">{$error$}</p>
+            </div>
+				<span ng-show="show_loading && !errors.length > 0 && !complete">
+					<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+				</span>
+            <md-button ng-show="!show_loading" type="submit" class="md-raised md-primary">masuk</md-button>
+
+            <div ng-controller="FacebookTokenCtrl">
+              <md-button ng-show="!show_loading" class="md-raised md-warn" ng-click="authenticate('facebook'); $parent.show_loading = true">
+                <ng-md-icon icon="facebook" size="22" aria-label="user"></ng-md-icon>Masuk Dengan Facebook
+              </md-button>
+            </div>
+
+            <md-button class="md-raised md-accent" ng-show="!show_loading" ng-click="setTab('Lupa Password')">lupa password</md-button>
+          </div>
+          <div ng-if="authenticated">{$ closeDialogDelayed() $}</div>
+        </form>
+
+        <form role="form" name="passwordResetForm" ng-submit="resetPassword(passwordResetForm)" novalidate ng-show="tab == 'Lupa Password'" ng-controller="PasswordresetCtrl">
+
+          <div class="md-dialog-content" layout="column" layout-align="center center">
+
+            <md-input-container class="md-block">
+              <label for="id_email">Email</label>
+              <input auto-focus name="email" id="id_email" class="form-control" type="text" ng-model="model.email" placeholder="Email" required/>
+              <div ng-messages="passwordResetForm.email.$error">
+                <div ng-message="required" ng-repeat="error in errors.email">{$error$}</div>
+                <div ng-message="email" ng-repeat="error in errors.email">{$error$}</div>
+              </div>
+            </md-input-container>
+
+            <div ng-show="errors" class="animated fadeIn">
+              <p class="md-body-1" ng-repeat="error in errors.non_field_errors">{$error$}</p>
+              <p class="md-body-1" ng-repeat="error in errors.__all__">{$error$}</p>
+              <p ng-show="errors.email != 'This field is required.'" class="md-body-1" ng-repeat="error in errors.email">{$error$}</p>
+            </div>
+				<span ng-show="show_loading && errors.length == 0 && !complete">
+					<md-progress-circular md-mode="indeterminate" style="margin: 0;"></md-progress-circular>
+				</span>
+            <div ng-if="complete == true">
+              <p class="md-body-1">Cek email anda untuk instruksi reset password anda!</p>
+            </div>
+            <md-button ng-show="show_loading == false" type="submit" class="md-raised md-primary">reset password</md-button>
+            <md-button class="md-raised md-accent" ng-click="setTab('Masuk')">login</md-button>
+
+          </div>
+        </form>
+      </md-dialog-content>
+
+    </md-dialog>
+  </script>
+
+  <script type="text/ng-template" id="report.html">
+    <md-dialog aria-label="komplain">
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <h2>komplain</h2>
+          <span flex></span>
+          <md-button class="md-icon-button" ng-click="closeDialog()">
+            <ng-md-icon icon="close" aria-label="close dialog"></ng-md-icon>
+          </md-button>
+        </div>
+      </md-toolbar>
+      <md-dialog-content id="report_view">
+        <div class="md-dialog-content" layout="column" layout-align="center center">
+          <form role="form" name="reportForm" ng-submit="save()" novalidate>
+            <div layout="row" style="min-width: 400px" layout-align="left center">
+              <md-autocomplete
+                      md-search-text="travel_destination_search"
+                      md-items="travel_destination in travel_destinations.results | filter: travel_destination_search | orderBy: 'name'"
+                      md-item-text="travel_destination.name"
+                      md-min-length="0"
+                      md-floating-label="Lokasi Wisata"
+                      md-selected-item-change="searchSelectedChange(travel_destination)"
+                      md-selected-item ="travel_destination_local"
+                      md-search-text-change="searchTextChange(travel_destination_search)"
+                      placeholder="Lokasi Wisata"
+                      class="animated fadeIn"
+                      name="travel_destination"
+                      md-input-name="travel_destination"
+                      id="id_travel_destination"
+                      class="form-control"
+                      type="text"
+                      required
+                      flex="60">
+                <md-item-template>
+                  <span class="animated fadeIn" md-highlight-text="travel_destination_search" md-highlight-flags="^i">{$travel_destination.name$}</span>
+                </md-item-template>
+                <md-not-found>
+                </md-not-found>
+                <div ng-messages="reportForm.travel_destination.$error">
+                  <div ng-message="required" ng-repeat="error in errors.travel_destination">{$error$}</div>
+                </div>
+              </md-autocomplete>
+              <md-input-container flex class="report-category">
+                <label for="id_category">Kategori</label>
+                <md-select ng-model="newReport.category" name="category" id="id_category" class="form-control" required>
+                  <md-option ng-repeat="category in categories" value="{$category$}">
+                    {$category$}
+                  </md-option>
+                </md-select>
+                <div ng-messages="reportForm.category.$error">
+                  <div ng-message="required" ng-repeat="error in errors.category">{$error$}</div>
+                </div>
+              </md-input-container>
+            </div>
+
+
+
+            <md-input-container class="md-block">
+              <label for="id_report">Isi Komplain</label>
+              <textarea name="report" id="id_report" class="form-control" type="text" ng-model="newReport.report" placeholder="Isi Komplain" required></textarea>
+              <div ng-messages="reportForm.report.$error">
+                <div ng-message="required" ng-repeat="error in errors.report">{$error$}</div>
+              </div>
+            </md-input-container>
+            <div layout="column" layout-align="center center">
+              <md-button class="md-raised" ngf-select ng-model="files" ngf-multiple="true" flex>Unggah gambar</md-button>
+            </div>
+            <div layout="row" layout-align="center center" layout-wrap flex>
+              <div flex="33" ng-repeat="file in files" layout-align="center center">
+                <img ngf-thumbnail="file" class="upload-thumb">
+              </div>
+            </div>
+            <div flex></div>
+            <div layout="column" layout-align="center center">
+              <div ng-show="errors" class="animated fadeIn">
+                <p ng-show="errors.travel_destination" class="md-body-1">Harap masukan lokasi wisata yang tepat</p>
+              </div>
+              <div ng-if="complete == true">
+                <p class="md-body-1">Komplain berhasil dibuat, terima kasih atas laporannya.</p>
+              </div>
+				<span ng-show="show_loading && !complete && errors.length == 0">
+					<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+				</span>
+              <div flex></div>
+              <div layout="column" layout-align="center center">
+                <md-button class="md-raised md-primary" ng-click="save()">Laporkan</md-button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </md-dialog-content>
+
+    </md-dialog>
+  </script>
+
+  <script type="text/ng-template" id="visit.html">
+    <md-dialog aria-label="komplain">
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <h2>Kunjungan</h2>
+          <span flex></span>
+          <md-button class="md-icon-button" ng-click="closeDialog()">
+            <ng-md-icon icon="close" aria-label="close dialog"></ng-md-icon>
+          </md-button>
+        </div>
+      </md-toolbar>
+      <md-dialog-content id="report_view">
+        <div class="md-dialog-content" layout="column" layout-align="center center">
+          <form role="form" name="visitForm" ng-submit="save()" novalidate>
+            <div layout="column" style="min-width: 400px" layout-align="center center" layout-margin>
+              <h4>Kapan anda mengunjungi {$travel_destination.name$} ?</h4>
+              <md-datepicker ng-model="date" md-placeholder="tanggal" md-max-date="max_date" flex></md-datepicker>
+            </div>
+            <md-input-container class="md-block">
+              <label for="id_message">Pesan</label>
+              <textarea name="message" id="id_message" type="text" ng-model="message" placeholder="opsional" class="form-control" required></textarea>
+            </md-input-container>
+            <div flex></div>
+            <div layout="column" layout-align="center center">
+              <div ng-if="complete == true">
+                <p class="md-body-1">Terima kasih</p>
+              </div>
+				<span ng-show="show_loading && !complete && errors.length == 0">
+					<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+				</span>
+              <div flex></div>
+              <div layout="column" layout-align="center center">
+                <md-button class="md-raised md-primary" ng-click="save()">Ok</md-button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </md-dialog-content>
+
+    </md-dialog>
+  </script>
+
+  <script type="text/ng-template" id="logout.html">
+    <md-dialog aria-label="daftar">
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <h2>Peringatan</h2>
+          <span flex></span>
+          <md-button class="md-icon-button" ng-click="closeDialog()">
+            <ng-md-icon icon="close" aria-label="close dialog"></ng-md-icon>
+          </md-button>
+        </div>
+      </md-toolbar>
+      <md-dialog-content layout="column" layout-align="center center" layout-margin layout-padding layout-wrap>
+        <div flex="100">
+          Anda yakin ingin keluar?
+        </div>
+        <div layout="row" ng-show="!show_loading">
+          <md-button ng-click="closeDialog()" class="md-raised md-primary">
+            tidak
+          </md-button>
+          <md-button ng-click="logout()" class="md-raised md-accent">
+            ya
+          </md-button>
+        </div>
+    <span ng-show="show_loading">
+      <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </span>
+      </md-dialog-content>
+    </md-dialog>
+  </script>
+
+  <script type="text/ng-template" id="userprofile.html">
+    <md-dialog flex="grow" flex-gt-lg="30">
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <h2>Profil</h2>
+          <span flex></span>
+          <md-button class="md-icon-button" ng-click="closeDialog()">
+            <ng-md-icon icon="close" aria-label="close dialog"></ng-md-icon>
+          </md-button>
+        </div>
+      </md-toolbar>
+      <md-dialog-content>
+        <md-tabs md-dynamic-height md-border-bottom>
+          <md-tab label="profil">
+            <md-content class="md-padding" ng-controller="UserprofileCtrl">
+              <form role="form" name="userProfileForm" ng-submit="updateProfile(userProfileForm, model)" novalidate>
+
+                <div class="md-dialog-content" layout="row" layout-wrap layout-align="center center">
+
+                  <md-input-container flex="100">
+                    <label for="id_first_name">Nama</label>
+                    <input name="first_name" id="id_first_name" class="form-control" type="text" ng-model="model.first_name" placeholder="Nama" />
+                    <div ng-messages="userProfileForm.first_name.$error">
+                      <div ng-message="required" ng-repeat="error in errors.first_name">{$error$}</div>
+                    </div>
+                  </md-input-container>
+                  <md-autocomplete flex="100"
+                                   md-search-text="district_search"
+                                   md-items="district in districts.results | filter:district_search | orderBy: 'name'"
+                                   md-item-text="district.name"
+                                   md-selected-item-change="searchSelectedChange(district)"
+                                   md-search-text-change="searchTextChange(district_search)"
+                                   md-min-length="0"
+                                   placeholder="Kabupaten"
+                                   md-floating-label="Kabupaten"
+                                   class="animated fadeIn">
+                    <md-item-template>
+                      <span class="animated fadeIn" md-highlight-text="district_search" md-highlight-flags="^i">{$district.name$}</span>
+                    </md-item-template>
+                    <md-not-found>
+                    </md-not-found>
+                  </md-autocomplete>
+                  <div ng-show="errors" class="animated fadeIn">
+                    <p class="md-body-1" ng-repeat="error in errors.non_field_errors">{$error$}</p>
+                    <p class="md-body-1" ng-if="error">{$error$}</p>
+                  </div>
+                  <div layout="column" layout-align="center center">
+                    <div ng-show="show_loading && errors.length == 0 && !complete">
+                      <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                    </div>
+                    <div ng-if="complete == true" flex="100" layout="row" layout-align="center center">
+                      <p class="md-body-1">Profil anda berhasil diperbaharui</p>
+                    </div>
+                    <md-button type="submit" ng-show="show_loading == false || errors" class="md-primary md-raised">Perbaharui profil</md-button>
+                  </div>
+                </div>
+              </form>
+              <p class="md-body-1" ng-if="authenticated == false">Anda harus masuk terlebih dahulu</p>
+            </md-content>
+          </md-tab>
+          <md-tab label="ubah password">
+            <md-content class="md-padding" ng-controller="PasswordchangeCtrl">
+              <form role="form" ng-submit="changePassword(changePasswordForm)" name="changePasswordForm" ng-if="authenticated" novalidate>
+
+                <div class="md-dialog-content" layout="row" layout-wrap layout-align="center center">
+
+                  <md-input-container class="md-block" flex="100">
+                    <label for="id_password1">Password Baru</label>
+                    <input name="new_password1" id="id_password1" type="password" ng-model="model.new_password1" placeholder="Password Baru" class="form-control" required />
+                    <div ng-messages="changePasswordForm.new_password1.$error">
+                      <div ng-message="required" ng-repeat="error in errors.new_password1">{$error$}</div>
+                    </div>
+                  </md-input-container>
+                  <md-input-container class="md-block" flex="100">
+                    <label for="id_password2">Ulangi Password</label>
+                    <input name="new_password2" id="id_password2" type="password" ng-model="model.new_password2" placeholder="Ulangi Password" class="form-control" required />
+                    <div ng-messages="changePasswordForm.new_password2.$error">
+                      <div ng-message="required" ng-repeat="error in errors.new_password2">{$error$}</div>
+                    </div>
+                  </md-input-container>
+                  <div layout="column" layout-align="center center">
+                    <div ng-show="errors" class="animated fadeIn">
+                      <p class="md-body-1" ng-repeat="error in errors.non_field_errors">{$error$}</p>
+                      <div ng-if="errors.new_password2 != 'This field is required.'">
+                        <p class="md-body-1" ng-repeat="error in errors.new_password2">{$error$}</p>
+                      </div>
+                    </div>
+                    <div ng-if="complete == true">
+                      <p class="md-body-1">Password berhasil diubah!</p>
+                    </div>
+                    <div ng-show="show_loading && !complete && errors.length == 0">
+                      <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                    </div>
+                    <md-button class="md-raised md-accent" type="submit">ubah password</md-button>
+                  </div>
+                </div>
+              </form>
+            </md-content>
+          </md-tab>
+          <md-tab label="Komplain">
+            <md-content class="md-padding" ng-controller="ReportListCtrl" layout="row" layout-align="center center" layout-wrap>
+              <h4 class="md-subheading">Tanda ceklis menandakan komplain anda sudah berhasil diverifikasi. Terima kasih atas kontribusinya.</h4>
+              <md-list flex="100">
+                <div dir-paginate="report in reports_resolved | itemsPerPage: 4" pagination-id="report">
+                  <md-list-item class="md-3-line md-long-text" ng-controller="ReportListRepeatCtrl" flex>
+                    <img ng-src="{$image.image$}" class="md-avatar" alt="" style="color: grey"/>
+                    <div class="md-list-item-text">
+                      <h3>{$ travel_destination.name $}</h3>
+                      <p>
+                        {$report.created_date | date:'d  MMMM  yyyy'$}<br>
+                        {$report.report$}
+                        <md-checkbox class="md-secondary" ng-model="report.approved" ng-disabled="true"></md-checkbox>
+                      </p>
+                    </div>
+                  </md-list-item>
+                </div>
+              </md-list>
+              <div max-size="5" flex="100" layout-align="center-center" layout="row">
+                <dir-pagination-controls pagination-id="report" layout="row" layout-align="center center"></dir-pagination-controls>
+              </div>
+            </md-content>
+          </md-tab>
+        </md-tabs>
+      </md-dialog-content>
+    </md-dialog>
+  </script>
+
+  <script type="text/ng-template" id="register.html">
+    <md-dialog aria-label="daftar">
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <h2>Registrasi</h2>
+          <span flex></span>
+          <md-button class="md-icon-button" ng-click="closeDialog()">
+            <ng-md-icon icon="close" aria-label="close dialog"></ng-md-icon>
+          </md-button>
+        </div>
+      </md-toolbar>
+      <md-dialog-content class="md-dialog-content-register" id="register_view" ng-controller="RegisterCtrl">
+        <form role="form" ng-if="authenticated != true" name="registerForm" ng-submit="register(registerForm)" novalidate>
+
+          <div class="md-dialog-content" layout="column" layout-align="center center">
+
+            <md-input-container class="md-block">
+              <label for="id_username">Username</label>
+              <input name="username" id="id_username" class="form-control" type="text" ng-model="model.username" placeholder="Username" required auto-focus/>
+              <div ng-messages="registerForm.username.$error">
+                <div ng-message="required" ng-repeat="error in errors.username">{$error$}</div>
+              </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+              <label for="id_password1">Password</label>
+              <input name="password1" id="id_password1" class="form-control" type="password" ng-model="model.password1" placeholder="Password" required />
+              <div ng-messages="registerForm.password1.$error">
+                <div ng-message="required" ng-repeat="error in errors.password1">{$error$}</div>
+              </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+              <label for="id_password2">Ulangi Password</label>
+              <input name="password2" id="id_password2" class="form-control" type="password" ng-model="model.password2" placeholder="Ulangi Password" required />
+              <div ng-messages="registerForm.password.$error">
+                <div ng-message="required" ng-repeat="error in errors.password">{$error$}</div>
+              </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+              <label for="id_email">Email</label>
+              <input name="email" id="id_email" class="form-control" type="email" ng-model="model.email" placeholder="Email" required />
+              <div ng-messages="registerForm.email.$error">
+                <div ng-message="required" ng-repeat="error in errors.email">{$error$}</div>
+                <div ng-message="email" ng-repeat="error in errors.email">{$error$}</div>
+              </div>
+            </md-input-container>
+            <div ng-show="errors" class="animated fadeIn">
+              <p class="md-body-1" ng-repeat="error in errors.non_field_errors">{$error$}</p>
+              <p class="md-body-1" ng-repeat="error in errors.__all__">{$error$}</p>
+              <div ng-if="errors.username != 'This field is required.'">
+                <p class="md-body-1" ng-repeat="error in errors.username">{$error$}</p>
+              </div>
+              <div ng-if="errors.email != 'This field is required.' || errors.email[0] != 'A properly formatted email address is required.'">
+                <p class="md-body-1" ng-repeat="error in errors.email">{$error$}</p>
+              </div>
+              <div ng-if="errors.password1 != 'This field is required.'">
+                <p class="md-body-1" ng-repeat="error in errors.password1">{$error$}</p>
+              </div>
+              <div ng-if="errors.password2 != 'This field is required.'">
+                <p class="md-body-1" ng-repeat="error in errors.password2">{$error$}</p>
+              </div>
+            </div>
+            <div ng-if="complete == true">
+              <p class="md-body-1">Cek email untuk aktivasi akun anda!</p>
+            </div>
+				<span ng-show="show_loading && !complete && errors.length == 0">
+					<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+				</span>
+            <md-button class="md-raised md-primary" type="submit">daftar</md-button>
+          </div>
+        </form>
+      </md-dialog-content>
+
+    </md-dialog>
+  </script>
+
+  <script type="text/ng-template" id="map.html">
+    <div ng-show="show_loading" class="loading">
+      <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
+    <div ng-show="!show_loading">
+      <div>
+        <ui-gmap-google-map center="map.center"
+                            zoom="map.zoom" bounds="map.bounds" options="map.options">
+          <ui-gmap-markers models="markers" coords="'self'" icon="'icon'" click="onClick">
+            <ui-gmap-windows show="show" options="window_options">
+              <div ng-non-bindable>
+                <div layout="column" layout-align="center center" class="map-info-container">
+                  <img class="map-info-img" src="{$thumbnail_image.image$}" flex>
+                  <span><h2 class="md-heading"> <a href="/lokasi-wisata/{$name_slugified$}">{$name$} </a></h2></span>
+                  <p flex class="md-body-2">{$short_description$}</p>
+                </div>
+              </div>
+            </ui-gmap-windows>
+          </ui-gmap-markers>
+
+        </ui-gmap-google-map>
+      </div>
+
+      <div class="map-search">
+        <div layout="row" layout-align="left center">
+          <md-autocomplete flex
+                           md-search-text="search"
+                           md-items="travel_destination in travel_destinations.results | filter:search | orderBy: 'name'"
+                           md-item-text="travel_destination.name"
+                           md-selected-item-change="searchSelectedChange(travel_destination)"
+                           md-search-text-change="searchTextChange(search)"
+                           md-min-length="0"
+                           placeholder="Cari lokasi wisata ..."
+                           class="animated fadeIn">
+            <ng-md-icon icon="search" aria-label="search" style="padding-top: 7px"></ng-md-icon>
+            <md-item-template>
+              <span class="animated fadeIn" md-highlight-text="search" md-highlight-flags="^i">{$travel_destination.name$}</span>
+            </md-item-template>
+            <md-not-found>
+            </md-not-found>
+          </md-autocomplete>
+        </div>
+      </div>
+
+      <div class="legend" hide-sm hide-xs>
+        <md-content layout="column">
+          <div layout="row" layout-align="left center">
+            <img src="https://maps.gstatic.com/mapfiles/ms2/micons/blue-dot.png"> Wisata
+          </div>
+          <div layout="row">
+            <img src="http://maps.google.com/mapfiles/ms/micons/tree.png"> Taman Nasional
+          </div>
+          <div layout="row">
+            <img src="https://maps.gstatic.com/mapfiles/ms2/micons/cycling.png"> Aktifitas
+          </div>
+          <div layout="row">
+            <img src="https://maps.gstatic.com/mapfiles/ms2/micons/purple-dot.png"> Musem
+          </div>
+          <div layout="row">
+            <img src="https://maps.gstatic.com/mapfiles/ms2/micons/POI.png"> Point of Interest
+          </div>
+          <div layout="row">
+            <img src="https://maps.gstatic.com/mapfiles/ms2/micons/green-dot.png"> Monumen
+          </div>
+
+        </md-content>
+      </div>
+    </div>
+
+
+  </script>
+
+  <script type="text/ng-template" id="contact_info.html">
+    <div ng-controller="PageCtrl" class="info" layout="column">
+      <md-content>
+        <h2 class="md-display-1" layout="row" layout-align="center center">Info dan Kontak</h2>
+        <div layout="row">
+          <div flex="15"></div>
+          <div flex="70" ng-bind-html="page.results[0].info_and_contact_page | trustAsHtml"></div>
+        </div>
+      </md-content>
+    </div>
+  </script>
+
+  <script type="text/ng-template" id="home.html">
+    <div ng-show="!resolved" class="loading">
+      <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
+
+    <div layout="column" layout-fill ng-if="resolved" ng-cloak class="animated fadeIn">
+      <div hide show-lg show-gt-md show-gt-lg>
+        <div flex class="video-container">
+          <video-bg ng-if="page" video-id="page.video" start="page.video_start" flex>
+          </video-bg>
+        </div>
+      </div>
+
+      <div class="video-content">
+        <div layout="column">
+          <div layout="row" layout-align="left center">
+            <div class="home-tagline" flex="70" flex-gt-lg="55" flex-sm="90" flex-xs="90">
+              <h2>Discover Indonesia</h2>
+              <p class="md-body-2">{$page.home_tagline$}</p>
+              <div layout="row" layout-align="end center" layout-margin>
+                <md-button class="md-raised md-accent" ng-href="{$page.home_tagline_link$}">
+                  {$page.home_tagline_link_title$}&nbsp;&nbsp;<ng-md-icon icon="send" size="20"></ng-md-icon>
+                </md-button>
+              </div>
+            </div>
+          </div>
+          <div ng-if="resolved" layout="row" layout-xs="column" layout-sm="column" layout-padding flex="100">
+
+            <md-card ng-repeat="home_link in page.home_links | orderBy: 'id'"
+                     ng-if="home_link.type == 'at video'"
+                     ng-href="{$home_link.link$}"
+                     flex
+                     style="margin: 30px 20px 0 20px"
+                     class="no-outline no-padding"
+                     ng-mouseenter="icon = 'keyboard_tab'"
+                     ng-mouseleave="icon = 'keyboard_arrow_right'"
+                     flex-gt-lg="20"
+                     flex-lg="25"
+                     flex-md="45"
+                     flex-xs="90"
+                     flex-sm="90">
+              <a href="{$home_link.link$}">
+                <img ng-show="home_link.image != null" ng-src="{$home_link.image$}" class="md-card-image animated fadeIn homelink-image-video" alt="">
+                <md-card-content class="home-card-video-content">
+                  <span class="md-headline home-link-title remove-height" style="background-color: {$home_link.color$}">{$home_link.title$}</span>
+                  <div layout="row" layout-align="start center" layout-margin>
+                    <span class="md-body-2">{$home_link.description$}</span>
+                    <ng-md-icon icon="{$icon$}" size="42" style="fill: {$home_link.color2$}" aria-label="user" options='{"duration": 300, "rotation": "none"}'></ng-md-icon>
+                  </div>
+                </md-card-content>
+              </a>
+            </md-card>
+
+          </div>
+        </div>
+      </div>
+
+      <div ng-if="resolved" layout="row" layout-wrap class="home-content" hide show-lg show-gt-lg>
+        <div class="home-header" flex="100">
+          <div flex="20" layout="row" layout-align="left center">
+            <div class="bubble md-subhead" layout="row" layout-align="center center">
+              Discover Indonesia
+            </div>
+          </div>
+          <div flex="80"></div>
+        </div>
+        <div layout="row" layout-wrap layout-margin>
+          <div flex-gt-lg="50"
+               flex-lg="50"
+               flex-md="100"
+               flex-sm="100">
+            <a ng-repeat="home_link in page.home_links" ng-if="home_link.type == 'main 1'" flex href="{$home_link.link$}">
+              <md-card class="video-shadow">
+                <img ng-show="home_link.image != null" ng-src="{$home_link.image$}" class="md-card-image animated fadeIn" alt="">
+                <md-card-content>
+                  <div layout="row" layout-align="start center" layout-margin>
+                    <span class="md-title">{$home_link.description$}</span>
+                  </div>
+                </md-card-content>
+              </md-card>
+            </a>
+          </div>
+
+          <div flex layout="column">
+            <div layout="row" layout-wrap>
+              <a ng-repeat="home_link in page.home_links"
+                 ng-if="home_link.type == 'common'"
+                 href="{$home_link.link$}"
+                 flex-gt-lg="45"
+                 flex-lg="45"
+                 flex-md="45"
+                 flex-sm="90">
+                <md-card class="video-shadow">
+                  <img ng-show="home_link.image != null" ng-src="{$home_link.image$}" class="md-card-image animated fadeIn" alt="">
+                  <md-card-content>
+                    <div layout="row" layout-align="start center">
+                      <span class="md-body-1">{$home_link.description$}</span>
+                    </div>
+                  </md-card-content>
+                </md-card>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </script>
+
+  <script type="text/ng-template" id="3d_viewer.html">
+    <div ng-controller="ModelViewerCtrl" layout="column" layout-fill flex="initial">
+      <tjs-model-viewer assimp-url="assimpModelUrl"></tjs-model-viewer>
+    </div>
+  </script>
+
+  <script type="text/ng-template" id="travel_destination_detail.html">
+    <div ng-controller="TravelDestinationDetailCtrl">
+
+      <div ng-show="show_loading" class="loading">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+      </div>
+
+      <div ng-if="!show_loading" layout="column" layout-fill ng-repeat="travel_destination in travel_destination.results" class="animated fadeIn">
+        <div class="slider">
+          <ul rn-carousel rn-carousel-auto-slide="10">
+            <li ng-repeat="image in main_images">
+              <img class="faux-image" ng-src="{$ image.image $}">
+              <h2 hide-sm hide-md hide-xs class="tagline md-headline" flex="60" ng-show="image.tag">{$image.tag$}</h2>
+              <h2 hide-md hide-lg hide-gt-lg class="tagline-mobile md-subhead" flex="100" ng-show="image.tag">{$image.tag$}</h2>
+              <h2 hide-xs hide-sm hide-lg hide-gt-lg class="tagline-medium md-subhead" flex="100" ng-show="image.tag">{$image.tag$}</h2>
+            </li>
+          </ul>
+        </div>
+        <md-toolbar md-theme="destination" style="position: relative; top: -20px;">
+          <div class="md-toolbar-tools">
+            <span flex="5"></span>
+            <h2>{$ travel_destination.name $}</h2>
+          </div>
+        </md-toolbar>
+        <div layout="column">
+          <div layout="row" layout-sm="column" layout-xs="column" md-theme="destination">
+            <div flex="5"></div>
+            <md-tabs flex="65" md-dynamic-height layout="column" layout-fill flex-xs="100" flex-sm="100" layout-padding flex-order-sm="1" flex-order-xs="1">
+              <md-tab label="{$travel_destination.name$}" flex>
+                <div ng-bind-html="travel_destination.full_description | trustAsHtml"></div>
+              </md-tab>
+              <md-tab ng-repeat="travel_destination_content in travel_destination_contents">
+                <md-tab-label>
+                  {$travel_destination_content.name$}
+                </md-tab-label>
+                <md-tab-body>
+                  <div ng-bind-html="travel_destination_content.content | trustAsHtml"></div>
+                </md-tab-body>
+              </md-tab>
+              <md-tab label="metoda transportasi" ng-if="transportations.results.length > 0">
+                <md-tab-body>
+                  <div layout="column">
+                    <md-list flex="100">
+                      <md-list-item class="md-3-line md-long-text" dir-paginate="transportation in transportations.results | itemsPerPage: 5">
+                        <img ng-src="{$transportation.image$}" class="md-avatar" alt=""/>
+                        <div class="md-list-item-text">
+                          <h3>
+                            {$ transportation.name $} &nbsp;&nbsp;
+                          </h3>
+                          <p>&nbsp;</p>
+                          <p><ng-md-icon icon="link" size="20" aria-label="tanggal"></ng-md-icon> <a ng-href="{$transportation.website$}">{$transportation.website$}</a></p>
+                          <p>&nbsp;</p>
+                          <p>
+                            {$transportation.description$}<br>
+                          </p>
+                          <p>&nbsp;</p>
+                        </div>
+                        <md-divider ng-if="!$last"></md-divider>
+                      </md-list-item>
+                    </md-list>
+                    <div layout="row" layout-align="center" layout-margin layout-padding>
+                      <dir-pagination-controls></dir-pagination-controls>
+                    </div>
+                  </div>
+                </md-tab-body>
+              </md-tab>
+              <md-tab label="galeri" ng-if="gallery_images.length > 0 ">
+                <div layout="row" layout-wrap>
+                  <div ng-repeat="image in gallery_images" flex="100" flex-md="100" flex-lg="33" flex-gt-lg="33" style="margin-top: 10px" layout="row">
+                    <a ng-click="showImage(image.image)" class="pointer" flex layout="row" layout-align="center center">
+                      <img ng-src="{$image.image$}" class="gallery-thumbnail">
+                    </a>
+                    <div flex="10"></div>
+                  </div>
+                </div>
+              </md-tab>
+
+
+            </md-tabs>
+            <div flex="5"></div>
+            <div flex="25"
+                 flex-xs="100"
+                 flex-sm="100"
+                 class="dest-side"
+                 layout="column"
+                 md-theme="dest-side"
+                 layout-align-xs="center center"
+                 layout-align-sm="center center"
+                 flex-order-sm="0"
+                 flex-order-xs="0">
+              <div class="dest-side-row">
+                <ng-md-icon icon="place" size="20" aria-label="tanggal"></ng-md-icon>
+                <a ng-href="/lokasi-wisata?destinasi_kabupaten={$district.name$}" class="animated fadeIn" ng-if="district.name"><span>{$district.name $}</span></a>,
+                <a ng-href="/lokasi-wisata?destinasi_provinsi={$province.name$}" class="animated fadeIn" ng-if="province.name"><span>{$province.name $}</span></a>
+                <a ng-href="/lokasi-wisata?destinasi_wilayah={$region.name$}" class="animated fadeIn" ng-if="region.name"><span>{$region.name $}</span></a>
+              </div>
+              <div class="dest-side-row">
+                <ng-md-icon icon="sort" size="20" aria-label="tanggal"></ng-md-icon>
+                <a ng-href="/lokasi-wisata?destinasi_kategori={$travel_destination.type$}">
+                  <span class="animated fadeIn">{$ travel_destination.type $}</span>
+                </a>
+              </div>
+              <div class="dest-side-row" ng-if="travel_destination.website">
+                <ng-md-icon icon="link" size="20" aria-label="tanggal"></ng-md-icon>
+                <a ng-href="{$travel_destination.website$}">{$travel_destination.website$}</a>
+              </div>
+              <div class="dest-side-row" layout="row" layout-align="start">
+                <ng-md-icon icon="facebook-box" size="20" aria-label="tanggal"></ng-md-icon>
+                <a facebook class="facebookShare" data-url='{$current_url$}' data-shares='shares' style="margin-left: 5px">{$ shares $}</a>
+                <span flex></span>
+              </div>
+              <div class="dest-side-row-last" layout="row" layout-align="start">
+                <ng-md-icon icon="twitter" size="20" aria-label="tanggal"></ng-md-icon>
+                <a twitter data-lang="id"
+                   style="margin-left: 5px"
+                   data-count='horizontal'
+                   data-url='{$current_url$}'
+                   data-via='DiscoverIndonesia'
+                   data-size="medium"
+                   data-text='Saya telah mengunjungi {$travel_destination.name$}, kapan giliranmu?' ></a>
+                <span flex></span>
+              </div>
+              <div layout="row" ng-controller="VisitsCtrl" class="animated fadeIn" flex-xs="100">
+                <div flex="10" flex-md="0" flex-sm="0" flex-xs="0"></div>
+                <md-button ng-click="showVisit(travel_destination)" class="md-raised md-accent" flex ng-if="!visited && !disabled">
+                  <ng-md-icon icon="help" size="20" aria-label="tanggal"></ng-md-icon> Sudah Berkunjung
+                </md-button>
+                <md-button class="md-raised md-accent" flex ng-if="disabled">
+                  <md-tooltip md-direction="down">
+                    anda harus masuk terlebih dahulu
+                  </md-tooltip>
+                  <ng-md-icon icon="help" size="20" aria-label="tanggal"></ng-md-icon> Sudah Berkunjung
+                </md-button>
+                <md-button class="md-raised" flex ng-if="visited">
+                  <ng-md-icon icon="check" size="20" aria-label="tanggal"></ng-md-icon> Sudah Berkunjung&nbsp;
+                </md-button>
+                <div flex="20" flex-md="5" flex-sm="0" flex-xs="0"></div>
+              </div>
+              <div layout="row"  flex-xs="100">
+                <div flex="10" flex-md="0" flex-sm="0" flex-xs="0"></div>
+                <md-button ng-href="/peta?ltd={$travel_destination.latitude$}&lng={$travel_destination.longitude$}" class="md-raised md-primary" flex>
+                  <ng-md-icon icon="directions" size="20" aria-label="tanggal"></ng-md-icon> lihat di peta&nbsp;
+                </md-button>
+                <div flex="20" flex-md="5" flex-sm="0" flex-xs="0"></div>
+              </div>
+              <div layout="row" ng-show="travel_destination.model_3d"  flex-xs="100">
+                <div flex="10" flex-md="0" flex-sm="0" flex-xs="0"></div>
+                <md-button ng-href="{$current_url$}/3d" class="md-raised md-accent" flex>
+                  <ng-md-icon icon="3d_rotation" size="20" aria-label="tanggal"></ng-md-icon> Lihat Dalam 3d&nbsp;
+                </md-button>
+                <div flex="20" flex-md="5" flex-sm="0" flex-xs="0"></div>
+              </div>
+              <div layout="row" ng-show="!travel_destination.model_3d"  flex-xs="100">
+                <div flex="10" flex-md="0" flex-sm="0" flex-xs="0"></div>
+                <md-button class="md-raised md-accent" ng-disabled="true" flex>
+                  <ng-md-icon icon="3d_rotation" size="20" aria-label="tanggal"></ng-md-icon> Lihat Dalam 3d&nbsp;
+                </md-button>
+                <div flex="20" flex-md="5" flex-sm="0" flex-xs="0"></div>
+              </div>
+              <div ng-controller="ReportCtrl" ng-show="authenticated" layout="row"  flex-xs="100">
+                <div flex="10" flex-md="0" flex-sm="0" flex-xs="0"></div>
+                <md-button class="md-raised md-warn" ng-click="showReport(travel_destination)" flex>
+                  <ng-md-icon icon="report_problem" size="20" aria-label="tanggal"></ng-md-icon> komplain&nbsp;
+                </md-button>
+                <div flex="20" flex-md="5" flex-sm="0" flex-xs="0"></div>
+              </div>
+              <div layout="row" layout-align="center center"  flex-xs="100">
+                <div flex="10" flex-md="0" flex-sm="0" flex-xs="0"></div>
+                <md-button class="md-raised md-warn" ng-show="!authenticated" flex>
+                  <md-tooltip md-direction="down">
+                    anda harus masuk terlebih dahulu
+                  </md-tooltip>
+                  <ng-md-icon icon="report_problem" size="20" aria-label="tanggal"></ng-md-icon> komplain&nbsp;
+                </md-button>
+                <div flex="20" flex-md="5" flex-sm="0" flex-xs="0"></div>
+              </div>
+              <div flex></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </script>
+
+  <script type="text/ng-template" id="travel_destination_list.html">
+    <div ng-controller="TravelDestinationListCtrl">
+
+      <div ng-show="show_loading == true" class="loading">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+      </div>
+
+
+      <div ng-controller="SearchCtrl" ng-show="!show_loading" class="animated fadeIn">
+        <div ng-controller="PageCtrl" hide-sm hide-md hide-xs>
+          <div class="faux-image-container">
+            <input ng-show="search_opened" class="search-input" ng-model="$parent.TravelDestinationSearch.search" flex="grow"
+                   flex-offset="5" autofocus spellcheck="false">
+            <img id="faux-image" ng-src="{$ page.results[0].travel_destination_list_image $}">
+            <h3 class="md-display-1 article-title" flex>{$ page.results[0].travel_destination_list_tagline $}</h3>
+          </div>
+        </div>
+
+        <div>
+          <div ng-class="{'search-area': search_opened == true, 'search-not-activated': search_opened == false}">
+          </div>
+
+          <a class="search-btn material-teal"
+             ng-click="toggleSearch(); TravelDestinationSearch.clearAllSearch()"
+             flex flex-offset="5">
+            <ng-md-icon icon="{$search_icon$}" aria-label="article"></ng-md-icon>
+          </a>
+        </div>
+        <div hide-gt-md style="margin-top: 70px;"></div>
+
+        <div layout="row" layout-no-wrap class="md-padding animated fadeIn" ng-show="show_loading == false">
+          <div flex="20" hide-xs hide-sm hide-md layout-padding layout="column" layout-sm="column">
+            <div class="sidenav-dest">
+              <span class="md-headline animated fadeIn" id="dest-search-box-title">Cari</span>
+              <div layout="row">
+                <ng-md-icon icon="sort" style="position: relative; margin: 15px 5px 5px 5px"></ng-md-icon>
+                <md-autocomplete
+                        md-search-text="TravelDestinationSearch.category_search"
+                        md-items="category in $parent.categories | filter:TravelDestinationSearch.category_search | orderBy: 'category'"
+                        md-item-text="category"
+                        md-min-length="0"
+                        placeholder="Kategori"
+                        md-floating-label="Kategori"
+                        class="animated fadeIn dest-search-row category-search"
+                        flex>
+                  <md-item-template>
+                    <span class="animated fadeIn" md-highlight-text="TravelDestinationSearch.category_search" md-highlight-flags="^i">{$category$}</span>
+                  </md-item-template>
+                  <md-not-found>
+                  </md-not-found>
+                </md-autocomplete>
+              </div>
+              <div layout="row">
+                <ng-md-icon icon="place" style="position: relative; margin: 15px 5px 5px 5px"></ng-md-icon>
+                <md-autocomplete
+                        md-search-text="TravelDestinationSearch.district_search"
+                        md-items="district in $parent.districts.results | filter:TravelDestinationSearch.district_search | orderBy: 'name'"
+                        md-item-text="district.name"
+                        md-min-length="0"
+                        placeholder="Kabupaten"
+                        md-floating-label="Kabupaten"
+                        class="animated fadeIn dest-search-row district-search"
+                        flex>
+                  <md-item-template>
+                    <span class="animated fadeIn" md-highlight-text="TravelDestinationSearch.district_search" md-highlight-flags="^i">{$district.name$}</span>
+                  </md-item-template>
+                  <md-not-found>
+                  </md-not-found>
+                </md-autocomplete>
+              </div>
+              <div layout="row">
+                <ng-md-icon icon="layers" style="position: relative; margin: 15px 5px 5px 5px"></ng-md-icon>
+                <md-autocomplete
+                        md-search-text="TravelDestinationSearch.province_search"
+                        md-items="province in $parent.provinces.results | filter:TravelDestinationSearch.province_search | orderBy: 'name'"
+                        md-item-text="province.name"
+                        md-min-length="0"
+                        md-floating-label="Provinsi"
+                        placeholder="Provinsi"
+                        class="animated fadeIn dest-search-row province-search"
+                        flex>
+                  <md-item-template>
+                    <span class="animated fadeIn" md-highlight-text="TravelDestinationSearch.province_search" md-highlight-flags="^i">{$province.name$}</span>
+                  </md-item-template>
+                  <md-not-found>
+                  </md-not-found>
+                </md-autocomplete>
+              </div>
+              <div layout="row">
+                <ng-md-icon icon="blur_on" style="position: relative; margin: 15px 5px 5px 5px"></ng-md-icon>
+                <md-autocomplete
+                        md-search-text="TravelDestinationSearch.region_search"
+                        md-items="region in $parent.regions.results | filter:TravelDestinationSearch.region_search | orderBy: 'name'"
+                        md-item-text="region.name"
+                        md-min-length="0"
+                        md-floating-label="Wilayah"
+                        placeholder="Wilayah"
+                        class="animated fadeIn dest-search-row region-search"
+                        flex>
+                  <md-item-template>
+                    <span class="animated fadeIn" md-highlight-text="TravelDestinationSearch.region_search" md-highlight-flags="^i">{$region.name$}</span>
+                  </md-item-template>
+                  <md-not-found>
+                  </md-not-found>
+                </md-autocomplete>
+              </div>
+            </div>
+            <div layout="row" layout-align="center center">
+              <md-button class="md-raised md-accent" ng-disabled="allowDestClear()" ng-click="clearAllDestSearch()">
+                Bersihkan Pencarian&nbsp;&nbsp; <ng-md-icon icon="backspace"></ng-md-icon>&nbsp;&nbsp;
+              </md-button>
+            </div>
+
+            <div ng-if="show_sidenav" class="animated fadeIn" layout="column" layout-fill>
+              <div layout="row" layout-align="center center" class="light-blue-border-right pad-right">
+                <ng-md-icon icon="place" style="position: relative; margin: 0 5px 20px 5px">
+                </ng-md-icon>
+                <md-autocomplete
+                        md-search-text="district_search"
+                        md-items="district in $parent.districts.results | filter: district_search | orderBy: 'name'"
+                        md-item-text="district.name"
+                        md-selected-item-change="searchSelectedChange(district)"
+                        md-search-text-change="searchTextChange(district_search)"
+                        md-min-length="0"
+                        placeholder="Lokasi anda sekarang"
+                        md-floating-label="Lokasi anda"
+                        class="dest-side-row"
+                        flex
+                        ng-disabled="authenticated">
+                  <md-item-template>
+                    <span class="animated fadeIn" md-highlight-text="current_location" md-highlight-flags="^i">{$district.name$}</span>
+                  </md-item-template>
+                  <md-not-found>
+                  </md-not-found>
+                </md-autocomplete>
+              </div>
+              <div layout="row">
+                <md-checkbox ng-model="distance_toggle_auth"
+                             aria-label="Checkbox 1"
+                             ng-click="orderByDistance(distance_toggle_auth)"
+                             ng-hide="!authenticated"
+                             class="md-body-1 checkbox-dest">
+                  Urutkan berdasarkan lokasi terdekat
+                </md-checkbox>
+              </div>
+              <div layout="row">
+                <md-checkbox ng-model="distance_toggle"
+                             aria-label="Checkbox 1"
+                             ng-click="orderByDistance(distance_toggle)"
+                             flex="100"
+                             ng-hide="authenticated"
+                             ng-disabled="!current_district"
+                             class="md-body-1 checkbox-dest">
+                  Urutkan berdasarkan lokasi terdekat
+                </md-checkbox>
+              </div>
+              <div flex="100">
+                <md-checkbox ng-if="authenticated"
+                             class="animated fadeIn md-body-1 checkbox-dest"
+                             ng-model="visited_toggle" aria-label="Checkbox 2"
+                             ng-click="visitToggle(visited_toggle)">
+                  Sembunyikan lokasi wisata yang sudah dikunjugi
+                </md-checkbox>
+              </div>
+            </div>
+          </div>
+
+          <div layout="row" layout-wrap flex="80" flex-sm="100" flex-md="100" flex-xs="100" ng-if="hide_visited">
+            <div dir-paginate="travel_destination in travel_destinations.results |
+							 filter: TravelDestinationSearch.search |
+							 filter: TravelDestinationSearch.district_search |
+							 filter: TravelDestinationSearch.category_search |
+							 filter: TravelDestinationSearch.province_search |
+							 filter: TravelDestinationSearch.region_search |
+							 filter: search|
+							 itemsPerPage: 9"
+                 flex="33"
+                 flex-sm="100"
+                 flex-md="50"
+                 ng-show="!travel_destination.visited">
+              <div ng-controller="TravelDestinationRepeatCtrl">
+                <div>
+                  <md-card id="posts">
+                    <a ng-href="/lokasi-wisata/{$ slugify(travel_destination.name) $}">
+                      <span class="md-title article-list-title">{$ travel_destination.name $}</span>
+                      <div class="article-image"><img ng-show="thumbnail.image != null" ng-src="{$thumbnail.image$}" class="md-card-image animated fadeIn" alt=""></div>
+                    </a>
+                    <div style="height: 0" ng-if="travel_destination.visited" class="animated fadeIn">
+									<span class="visited">
+										<ng-md-icon icon="check" style="fill: white">
+                    </ng-md-icon> sudah dikunjungi
+									</span>
+                    </div>
+                    <md-card-content>
+								<span class="md-body-2" layout="row" layout-wrap>
+									<span flex="100" flex-gt-lg="60">
+										<ng-md-icon icon="sort" size="20" aria-label="tanggal"></ng-md-icon>
+										<a ng-click="TravelDestinationSearch.setCategorySearch(travel_destination.type)">
+                      <span class="animated fadeIn">{$ travel_destination.type $}</span>
+                    </a>
+									</span>
+									<span flex="100" flex-gt-lg="40" ng-show="district.name != null" class="animated fadeIn">
+										<ng-md-icon icon="place" size="20" aria-label="tempat"></ng-md-icon>
+										<a ng-click="TravelDestinationSearch.setDistrictSearch(district.name)">
+                      {$ district.name $}
+                    </a>
+									</span>
+								</span>
+                      <p class="md-body-1">
+                        {$ travel_destination_short_description $}
+                      </p>
+                    </md-card-content>
+                  </md-card>
+                </div>
+                <br/>
+              </div>
+            </div>
+          </div>
+
+          <div layout="row" layout-wrap flex="80" flex-sm="100" flex-md="100" flex-xs="100" ng-if="!hide_visited">
+            <div dir-paginate="travel_destination in travel_destinations.results | filter: TravelDestinationSearch.search | filter: TravelDestinationSearch.district_search
+					| filter: TravelDestinationSearch.category_search | filter: TravelDestinationSearch.province_search | filter: TravelDestinationSearch.region_search | filter: search
+					| itemsPerPage: 9"
+                 flex="33" flex-sm="100" flex-md="50" flex-xs="100">
+              <div ng-controller="TravelDestinationRepeatCtrl">
+                <div>
+                  <md-card id="posts">
+                    <a ng-href="/lokasi-wisata/{$ slugify(travel_destination.name) $}">
+                      <span class="md-title article-list-title">{$ travel_destination.name $}</span>
+                      <div class="article-image"><img ng-show="thumbnail.image != null" ng-src="{$thumbnail.image$}" class="md-card-image animated fadeIn" alt=""></div>
+                    </a>
+                    <div style="height: 0" ng-if="travel_destination.visited" class="animated fadeIn">
+									<span class="visited">
+										<ng-md-icon icon="check" style="fill: white">
+                    </ng-md-icon> sudah dikunjungi
+									</span>
+                    </div>
+                    <md-card-content>
+								<span class="md-body-2" layout="row" layout-wrap>
+									<span flex="100" flex-gt-lg="60">
+										<ng-md-icon icon="sort" size="20" aria-label="tanggal"></ng-md-icon>
+										<a ng-click="TravelDestinationSearch.setCategorySearch(travel_destination.type)">
+                      <span class="animated fadeIn">{$ travel_destination.type $}</span>
+                    </a>
+									</span>
+									<span flex="100" flex-gt-lg="40" ng-show="district.name != null" class="animated fadeIn">
+										<ng-md-icon icon="place" size="20" aria-label="tempat"></ng-md-icon>
+										<a ng-click="TravelDestinationSearch.setDistrictSearch(district.name)">
+                      {$ district.name $}
+                    </a>
+									</span>
+								</span>
+                      <p class="md-body-1">
+                        {$ travel_destination_short_description $}
+                      </p>
+                    </md-card-content>
+                  </md-card>
+                </div>
+                <br/>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div layout="row" layout-align="center center">
+          <div flex-offset="10">
+            <dir-pagination-controls></dir-pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </script>
+
+  <script type="text/ng-template" id="transportation_list.html">
+
+    <div ng-controller="TransportationListCtrl" layout="row" layout-wrap id="transportation-list" ng-if="!show_loading">
+
+      <div ng-if="show_loading" class="loading" flex="100">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+      </div>
+
+      <div layout="row" layout-align="center center" flex="100">
+        <md-autocomplete flex="65"
+                         md-search-text="district_search"
+                         md-items="district in districts.results | filter:search | orderBy: 'name'"
+                         md-item-text="district.name"
+                         md-min-length="0"
+                         placeholder="Cari berdasarkan kabupaten ..."
+                         class="animated fadeIn">
+          <ng-md-icon icon="search" aria-label="search" style="padding-top: 7px"></ng-md-icon>
+          <md-item-template>
+            <span class="animated fadeIn" md-highlight-text="search" md-highlight-flags="^i">{$district.name$}</span>
+          </md-item-template>
+          <md-not-found>
+          </md-not-found>
+        </md-autocomplete>
+      </div>
+
+      <div layout="row" flex="100">
+        <md-list flex="100" flex-md="80" flex-lg="80" flex-gt-lg="80" flex-offset="0" flex-offset-md="10" flex-offset-lg="10" flex-offset-gt-lg="10">
+          <md-list-item dir-paginate="transportation in transportations.results | filter: district_search | itemsPerPage: 5" class="md-3-line md-long-text" flex>
+            <img ng-src="{$transportation.image$}" class="md-avatar" alt=""/>
+            <div class="md-list-item-text">
+              <h3>
+                {$ transportation.name $} &nbsp;&nbsp;
+              </h3>
+              <p>&nbsp;</p>
+              <p><ng-md-icon icon="link" size="20" aria-label="tanggal"></ng-md-icon> <a ng-href="{$transportation.website$}">{$transportation.website$}</a></p>
+              <p>&nbsp;</p>
+              <p>
+                {$transportation.description$}<br>
+              </p>
+              <p>&nbsp;</p>
+              <p>
+                Beroperasi di daerah :
+              <span ng-repeat="district in transportation.districts_resolved" class="animated fadeIn">
+                <span ng-if="$index == 0">{$district.name$} </span>
+                <span ng-if="$index != 0">, {$district.name$} </span>
+              </span>
+              </p>
+              <p>&nbsp;</p>
+            </div>
+            <md-divider ng-if="!$last"></md-divider>
+          </md-list-item>
+        </md-list>
+      </div>
+      <div layout="row" flex="100" layout-align="center" layout-margin layout-padding style="margin-bottom: 20px">
+        <dir-pagination-controls></dir-pagination-controls>
+      </div>
+    </div>
+  </script>
+
+  <script type="text/ng-template"></script>
 
 </div>
 </body>

@@ -200,34 +200,34 @@ kompresApp.config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
     $routeProvider.
         when('/', {
-          templateUrl: '/partials/home/',
+          templateUrl: 'home.html',
           title: 'Discover Indonesia - Portal lengkap untuk semua kebutuhan pariwisata di Indonesia',
           controller: 'HomeCtrl'
         }).
         when('/artikel', {
-          templateUrl: '/partials/article-list/',
+          templateUrl: 'article_list.html',
           title: 'Discover Indonesia - Artikel'
         }).
         when('/artikel/:article_name', {
-          templateUrl: '/partials/article-detail/',
+          templateUrl: 'article_detail.html',
           title: '',
           article_name: function (params) {return params.article_name}
         }).
         when('/lokasi-wisata', {
-          templateUrl: '/partials/travel-destination-list/',
+          templateUrl: 'travel_destination_list.html',
           title: 'Discover Indonesia - Lokasi wisata'
         }).
         when('/lokasi-wisata/:travel_destination_name', {
-          templateUrl: '/partials/travel-destination-detail/',
+          templateUrl: 'travel_destination_detail.html',
           title: '',
           travel_destination_name: function (params) {return params.travel_destination_name}
         }).
         when('/metoda-transportasi', {
-          templateUrl: '/partials/transportation-list/',
+          templateUrl: 'transportation_list.html',
           title: 'Discover Indonesia - Metoda Transportasi'
         }).
         when('/peta', {
-          templateUrl: '/partials/map/',
+          templateUrl: 'map.html',
           title: 'Discover Indonesia - Peta',
           controller: 'MapCtrl',
           resolve: {
@@ -242,12 +242,12 @@ kompresApp.config(['$routeProvider', '$locationProvider',
           }
         }).
         when('/lokasi-wisata/:travel_destination_name/3d', {
-          templateUrl: '/partials/modelviewer/',
+          templateUrl: '3d_viewer.html',
           title:  '',
           travel_destination_name: function (params) {return params.travel_destination_name}
         }).
         when('/info-kontak', {
-          templateUrl: '/partials/contact-info/',
+          templateUrl: 'contact_info.html',
           title: 'Discover Indonesia - Info dan Kontak'
         }).
       when('/disclaimer', {
