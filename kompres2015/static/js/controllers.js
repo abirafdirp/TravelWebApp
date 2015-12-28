@@ -346,6 +346,11 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
           $scope.orderByRandom();
           $scope.user = djangoAuth.profile().then(function(data){
                 $scope.user = data;
+                angular.forEach($scope.travel_destinations.results, function(item){
+                  if ($rootScope.arrayContains($scope.visits, item.id) == true){
+                    item['visited'] = true;
+                  }
+                });
                 if ($scope.user.district){
                   cachedResource($scope.user.district+'?format=json').get(function(data){
                     $scope.user.district = data;
@@ -353,9 +358,6 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
                     angular.forEach($scope.travel_destinations.results, function(item){
                       if ($rootScope.arrayContains($scope.categories, item.type) == false){
                         $scope.categories.push(String(item.type));
-                      }
-                      if ($rootScope.arrayContains($scope.visits, item.id) == true){
-                        item['visited'] = true;
                       }
                       item['distance'] = $rootScope.distance($scope.user.district.latitude, $scope.user.district.longitude, item.latitude, item.longitude);
 
