@@ -209,8 +209,8 @@ kompresControllers.controller('TransportationRepeatCtrl', ['$scope', 'cachedReso
 
 
 kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', '$routeParams', 'cachedResource', '$rootScope', 'TravelDestinations', 'Districts',
-  'Provinces', 'Regions', 'Marker', 'djangoAuth', '$filter', 'Visits', '$resource',
-  function($scope, $route, $routeParams, cachedResource, $rootScope, TravelDestinations, Districts, Provinces, Regions, Marker, djangoAuth, $filter, Visits, $resource) {
+  'Provinces', 'Regions', 'Marker', 'djangoAuth', '$filter', 'Visits', '$resource', '$timeout',
+  function($scope, $route, $routeParams, cachedResource, $rootScope, TravelDestinations, Districts, Provinces, Regions, Marker, djangoAuth, $filter, Visits, $resource, $timeout) {
     $scope.show_loading = true;
     $scope.$route = $route;
     $scope.params = $routeParams;
@@ -330,73 +330,70 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
     };
 
     var init = function() {
-      $scope.visit = Visits.query(function(data){
-        $scope.visits = [];
-        angular.forEach(data.results, function(data){
-          $resource(data.travel_destination).get(function(dest){
-            $scope.visits.push(dest.id);
+      $scope.travel_destinations = TravelDestinations.list.query(function(){
+        angular.forEach($scope.travel_destinations.results, function(dest){
+          dest.visited = false;
+        });
+        $scope.visit = Visits.query(function(visits){
+          angular.forEach(visits.results, function(visit){
+            $resource(visit.travel_destination).get(function(visit_dest){
+              for(var i = 0; i < $scope.travel_destinations.results.length; i++){
+                if ($scope.travel_destinations.results[i].id == visit_dest.id){
+                  $scope.travel_destinations.results[i].visited = true;
+                  break;
+                }
+              }
+            });
           });
         });
-      });
+        $scope.deffered_distances = 0;
 
-      $scope.deffered_distances = 0;
-
-      $scope.visit.$promise.finally(function(){
-        $scope.travel_destinations = TravelDestinations.list.query();
-
-        $scope.travel_destinations.$promise.then(function(){
+        $scope.visit.$promise.finally(function(){
           $scope.orderByRandom();
           $scope.user = djangoAuth.profile().then(function(data){
-                $scope.user = data;
-                angular.forEach($scope.travel_destinations.results, function(item){
-                  if ($rootScope.arrayContains($scope.visits, item.id) == true){
-                    item['visited'] = true;
-                  }
-                  else {
-                    item['visited'] = false;
-                  }
-                });
-                if ($scope.user.district){
-                  cachedResource($scope.user.district+'?format=json').get(function(data){
-                    $scope.user.district = data;
-                    $scope.district_search = $scope.user.district.name;
-                    angular.forEach($scope.travel_destinations.results, function(item){
-                      if ($rootScope.arrayContains($scope.categories, item.type) == false){
-                        $scope.categories.push(String(item.type));
-                      }
-                      item['distance'] = $rootScope.distance($scope.user.district.latitude, $scope.user.district.longitude, item.latitude, item.longitude);
+              $scope.user = data;
+              if ($scope.user.district){
+                cachedResource($scope.user.district+'?format=json').get(function(data){
+                  $scope.user.district = data;
+                  $scope.district_search = $scope.user.district.name;
+                  angular.forEach($scope.travel_destinations.results, function(item){
+                    if ($rootScope.arrayContains($scope.categories, item.type) == false){
+                      $scope.categories.push(String(item.type));
+                    }
+                    item['distance'] = $rootScope.distance($scope.user.district.latitude, $scope.user.district.longitude, item.latitude, item.longitude);
 
-                      // this is bad, should have use $q
-                      $scope.deffered_distances += 1;
-                      if ($scope.deffered_distances.length == $scope.travel_destinations.results.length){
-                        $scope.deffered_distances = 0;
-                        $scope.show_sidenav = true;
-                        // instant orderby
-                        //$scope.distance_toggle_auth = true;
-                      }
-                      item['district_resolved'] = cachedResource(item.district).get(function(){
-                        item['province'] = cachedResource(item.district_resolved.province).get(function(){
-                          item['region'] = cachedResource(item.province.region).get();
-                        });
+                    // this is bad, should have use $q
+                    $scope.deffered_distances += 1;
+                    if ($scope.deffered_distances.length == $scope.travel_destinations.results.length){
+                      $scope.deffered_distances = 0;
+                      $scope.show_sidenav = true;
+                      // instant orderby
+                      //$scope.distance_toggle_auth = true;
+                    }
+                    item['district_resolved'] = cachedResource(item.district).get(function(){
+                      item['province'] = cachedResource(item.district_resolved.province).get(function(){
+                        item['region'] = cachedResource(item.province.region).get();
                       });
                     });
-                  })
-                }
-              },angular.forEach($scope.travel_destinations.results, function(item){
-                $scope.show_sidenav = true;
-                $scope.sidenav_disabled = true;
-                if ($rootScope.arrayContains($scope.categories, item.type) == false){
-                  $scope.categories.push(String(item.type));
-                }
-                item['district_resolved'] = cachedResource(item.district).get(function(resp){
-                  item['province'] = cachedResource(resp.province).get(function(resp){
-                    item['region'] = cachedResource(resp.region).get();
                   });
+                })
+              }
+            },angular.forEach($scope.travel_destinations.results, function(item){
+              $scope.show_sidenav = true;
+              $scope.sidenav_disabled = true;
+              if ($rootScope.arrayContains($scope.categories, item.type) == false){
+                $scope.categories.push(String(item.type));
+              }
+              item['district_resolved'] = cachedResource(item.district).get(function(resp){
+                item['province'] = cachedResource(resp.province).get(function(resp){
+                  item['region'] = cachedResource(resp.region).get();
                 });
-              })
+              });
+            })
           );
           $scope.show_loading = false;
         });
+
       });
     };
 
@@ -495,9 +492,9 @@ kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route'
           $scope.errors = [];
           $scope.date = new Date();
           $scope.max_date = new Date(
-              $scope.date.getFullYear(),
-              $scope.date.getMonth(),
-              $scope.date.getDate());
+            $scope.date.getFullYear(),
+            $scope.date.getMonth(),
+            $scope.date.getDate());
           $scope.newVisit = new Visits();
           $scope.newVisit.travel_destination = '/api/traveldestinations/' + travel_destination_local.id +'/';
           $scope.save = function() {
@@ -505,13 +502,13 @@ kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route'
             $scope.newVisit.message = $scope.message;
             $scope.show_loading = true;
             $scope.newVisit.$save().then(function() {
-                  $scope.complete = true;
-                  $scope.show_loading = false;
-                },
-                function(data){
-                  $scope.errors = data.data;
-                  $scope.show_loading = false;
-                })
+                $scope.complete = true;
+                $scope.show_loading = false;
+              },
+              function(data){
+                $scope.errors = data.data;
+                $scope.show_loading = false;
+              })
           };
         }
       };
@@ -687,17 +684,17 @@ kompresControllers.controller('ReportCtrl', ['$scope', '$mdDialog',
         $scope.save = function() {
           $scope.show_loading = true;
           $scope.newReport.$save().then(function(result) {
-                $scope.report = '/api/user/reports/' + result.resource.id + '/';
-                if ($scope.files){
-                  $scope.uploadImages();
-                }
-                $scope.complete = true;
-                $scope.show_loading = false;
-              },
-              function(data){
-                $scope.errors = data.data;
-                $scope.show_loading = false;
-              })
+              $scope.report = '/api/user/reports/' + result.resource.id + '/';
+              if ($scope.files){
+                $scope.uploadImages();
+              }
+              $scope.complete = true;
+              $scope.show_loading = false;
+            },
+            function(data){
+              $scope.errors = data.data;
+              $scope.show_loading = false;
+            })
         };
       }
     };
@@ -742,16 +739,16 @@ kompresControllers.controller('VisitsCtrl', ['$scope', 'Visits', 'cachedResource
     var init = function(){
       $scope.disabled = false;
       Visits.query(function(data){
-            angular.forEach(data.results, function(visit){
-              cachedResource(visit.travel_destination).get(function(dest){
-                if (dest.id == $scope.$parent.travel_destination.id){
-                  $scope.visited = true;
-                }
-              });
+          angular.forEach(data.results, function(visit){
+            cachedResource(visit.travel_destination).get(function(dest){
+              if (dest.id == $scope.$parent.travel_destination.id){
+                $scope.visited = true;
+              }
             });
-          }, function(){
-            $scope.disabled = true
-          }
+          });
+        }, function(){
+          $scope.disabled = true
+        }
       );
     };
     init();
