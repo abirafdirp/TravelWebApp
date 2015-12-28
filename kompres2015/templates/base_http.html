@@ -1444,11 +1444,11 @@
 							 filter: TravelDestinationSearch.province_search |
 							 filter: TravelDestinationSearch.region_search |
 							 filter: search|
+							 filter: {visited: false} |
 							 itemsPerPage: 9"
                  flex="33"
                  flex-sm="100"
-                 flex-md="50"
-                 ng-if="!travel_destination.visited">
+                 flex-md="50">
               <div ng-controller="TravelDestinationRepeatCtrl">
                 <div>
                   <md-card id="posts">

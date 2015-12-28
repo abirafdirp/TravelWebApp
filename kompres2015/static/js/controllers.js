@@ -209,8 +209,8 @@ kompresControllers.controller('TransportationRepeatCtrl', ['$scope', 'cachedReso
 
 
 kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', '$routeParams', 'cachedResource', '$rootScope', 'TravelDestinations', 'Districts',
-  'Provinces', 'Regions', 'Marker', 'djangoAuth', '$filter', 'Visits', '$timeout',
-  function($scope, $route, $routeParams, cachedResource, $rootScope, TravelDestinations, Districts, Provinces, Regions, Marker, djangoAuth, $filter, Visits, $timeout) {
+  'Provinces', 'Regions', 'Marker', 'djangoAuth', '$filter', 'Visits', '$resource',
+  function($scope, $route, $routeParams, cachedResource, $rootScope, TravelDestinations, Districts, Provinces, Regions, Marker, djangoAuth, $filter, Visits, $resource) {
     $scope.show_loading = true;
     $scope.$route = $route;
     $scope.params = $routeParams;
@@ -247,21 +247,9 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
     $scope.visitToggle = function(cond){
       if (cond == false){
         $scope.hide_visited = true;
-        $timeout(function(){
-          angular.forEach($scope.travel_destinations.results, function(destination, index){
-            if (destination.visited){
-              $scope.travel_destinations.results.splice( index, 1 );
-              $scope.visited_holder.push(destination);
-            }
-          })
-        }, 0);
       }
       else{
         $scope.hide_visited = false;
-        angular.forEach($scope.visited_holder, function(destination){
-          $scope.travel_destinations.results.push(destination);
-        });
-        $scope.visited_holder = [];
       }
     };
 
@@ -345,7 +333,7 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
       $scope.visit = Visits.query(function(data){
         $scope.visits = [];
         angular.forEach(data.results, function(data){
-          cachedResource(data.travel_destination).get(function(dest){
+          $resource(data.travel_destination).get(function(dest){
             $scope.visits.push(dest.id);
           });
         });
@@ -363,6 +351,9 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
                 angular.forEach($scope.travel_destinations.results, function(item){
                   if ($rootScope.arrayContains($scope.visits, item.id) == true){
                     item['visited'] = true;
+                  }
+                  else {
+                    item['visited'] = false;
                   }
                 });
                 if ($scope.user.district){
@@ -430,8 +421,8 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
 ]);
 
 kompresControllers.controller('TravelDestinationDetailCtrl', ['$scope', '$route', '$routeParams', 'TravelDestinations', 'cachedResource', '$interval', '$mdDialog',
-  'TravelDestinationSearch', '$location', 'Transportations', '$rootScope',
-  function($scope, $route, $routeParams, TravelDestinations, cachedResource, $interval, $mdDialog, TravelDestinationSearch, $location, Transportations, $rootScope) {
+  'TravelDestinationSearch', '$location', 'Transportations', '$rootScope', 'cachedResource',
+  function($scope, $route, $routeParams, TravelDestinations, cachedResource, $interval, $mdDialog, TravelDestinationSearch, $location, Transportations, $rootScope, cachedResource) {
     $scope.$route = $route;
     $scope.params = $routeParams;
     $scope.travel_destination_name = $scope.params.travel_destination_name.replace(/-/g,' ');
