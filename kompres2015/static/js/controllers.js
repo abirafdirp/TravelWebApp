@@ -209,8 +209,8 @@ kompresControllers.controller('TransportationRepeatCtrl', ['$scope', 'cachedReso
 
 
 kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', '$routeParams', 'cachedResource', '$rootScope', 'TravelDestinations', 'Districts',
-  'Provinces', 'Regions', 'Marker', 'djangoAuth', '$filter', 'Visits', '$resource',
-  function($scope, $route, $routeParams, cachedResource, $rootScope, TravelDestinations, Districts, Provinces, Regions, Marker, djangoAuth, $filter, Visits, $resource) {
+  'Provinces', 'Regions', 'Marker', 'djangoAuth', '$filter', 'Visits', '$timeout',
+  function($scope, $route, $routeParams, cachedResource, $rootScope, TravelDestinations, Districts, Provinces, Regions, Marker, djangoAuth, $filter, Visits, $timeout) {
     $scope.show_loading = true;
     $scope.$route = $route;
     $scope.params = $routeParams;
@@ -243,12 +243,25 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
     // toggle value is passed after the model change, that's why it's negated
     $scope.visited_toggle = false;
     $scope.hide_visited = false;
+    $scope.visited_holder = [];
     $scope.visitToggle = function(cond){
       if (cond == false){
         $scope.hide_visited = true;
+        $timeout(function(){
+          angular.forEach($scope.travel_destinations.results, function(destination, index){
+            if (destination.visited){
+              $scope.travel_destinations.results.splice( index, 1 );
+              $scope.visited_holder.push(destination);
+            }
+          })
+        }, 0);
       }
       else{
         $scope.hide_visited = false;
+        angular.forEach($scope.visited_holder, function(destination){
+          $scope.travel_destinations.results.push(destination);
+        });
+        $scope.visited_holder = [];
       }
     };
 
@@ -269,6 +282,7 @@ kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', 
         $scope.current_district = '';
       }
       if ($rootScope.arrayContains($scope.district_names, search)){
+
         angular.forEach($scope.districts.results, function(item){
           if (item.name.toLowerCase() == search){
             $scope.current_district = item;
