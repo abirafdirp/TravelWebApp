@@ -926,6 +926,7 @@ kompresControllers.controller('MapCtrl', ['$scope', '$routeParams', 'cachedResou
       Regions.query(function(response){
         angular.forEach(response.results, function(item){
           item.zoom = 7;
+          item.verbose_name = item.name + ' - Wilayah';
           $scope.places.push(item);
           $scope.place_names.push(item.name.toLowerCase());
         });
@@ -933,6 +934,7 @@ kompresControllers.controller('MapCtrl', ['$scope', '$routeParams', 'cachedResou
       Provinces.query(function(response){
         angular.forEach(response.results, function(item){
           item.zoom = 9;
+          item.verbose_name = item.name + ' - Provinsi';
           $scope.places.push(item);
           $scope.place_names.push(item.name.toLowerCase());
         });
@@ -940,8 +942,9 @@ kompresControllers.controller('MapCtrl', ['$scope', '$routeParams', 'cachedResou
       Districts.list.query(function(response){
         angular.forEach(response.results, function(item){
           item.zoom = 12;
-          $scope.places.push(item);
           $scope.place_names.push(item.name.toLowerCase());
+          item.verbose_name = item.name + ' - Kabupaten';
+          $scope.places.push(item);
         });
       });
       angular.forEach($scope.places, function (item) {

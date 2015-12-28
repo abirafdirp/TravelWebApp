@@ -235,6 +235,8 @@ kompresApp.config(['$routeProvider', '$locationProvider',
               var places = [];
               TravelDestinations.list.query(function(response){
                 angular.forEach(response.results, function(item){
+                  item.zoom = 14;
+                  item.verbose_name = item.name + ' - Lokasi Wisata';
                   places.push(item);
                   item['thumbnail_image'] = $resource(item.thumbnail).get();
                   Marker.addMarker(item);
