@@ -913,16 +913,16 @@
         <div layout="row" layout-align="left center">
           <md-autocomplete flex
                            md-search-text="search"
-                           md-items="travel_destination in travel_destinations.results | filter:search | orderBy: 'name'"
-                           md-item-text="travel_destination.name"
-                           md-selected-item-change="searchSelectedChange(travel_destination)"
+                           md-items="place in places | filter:search | orderBy: 'name'"
+                           md-item-text="place.name"
+                           md-selected-item-change="searchSelectedChange(place)"
                            md-search-text-change="searchTextChange(search)"
                            md-min-length="0"
-                           placeholder="Cari lokasi wisata ..."
+                           placeholder="Cari lokasi wisata, provinsi, kabupaten dan daerah ..."
                            class="animated fadeIn">
             <ng-md-icon icon="search" aria-label="search" style="padding-top: 7px"></ng-md-icon>
             <md-item-template>
-              <span class="animated fadeIn" md-highlight-text="search" md-highlight-flags="^i">{$travel_destination.name$}</span>
+              <span class="animated fadeIn" md-highlight-text="search" md-highlight-flags="^i">{$place.name$}</span>
             </md-item-template>
             <md-not-found>
             </md-not-found>

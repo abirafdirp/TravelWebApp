@@ -231,13 +231,16 @@ kompresApp.config(['$routeProvider', '$locationProvider',
           title: 'Discover Indonesia - Peta',
           controller: 'MapCtrl',
           resolve: {
-            "travel_destinations": function(TravelDestinations, $resource, Marker){
-              return TravelDestinations.list.query(function(response){
+            "places": function(TravelDestinations, Regions, Districts, Provinces, $resource, Marker){
+              var places = [];
+              TravelDestinations.list.query(function(response){
                 angular.forEach(response.results, function(item){
+                  places.push(item);
                   item['thumbnail_image'] = $resource(item.thumbnail).get();
                   Marker.addMarker(item);
                 });
               });
+              return places;
             }
           }
         }).

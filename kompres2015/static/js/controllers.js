@@ -897,9 +897,10 @@ kompresControllers.controller('SearchCtrl', ['$scope', 'ArticleSearch', '$timeou
   }
 ]);
 
-kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$routeParams', 'cachedResource', '$route',
-  'travel_destinations', 'Marker', 'uiGmapGoogleMapApi', '$rootScope', '$timeout',
-  function($scope, TravelDestinations, $routeParams, cachedResource, $route, travel_destinations, Marker, uiGmapGoogleMapApi, $rootScope, $timeout) {
+kompresControllers.controller('MapCtrl', ['$scope', '$routeParams', 'cachedResource', '$route',
+  'places', 'Marker', 'uiGmapGoogleMapApi', '$rootScope', '$timeout', 'TravelDestinations', 'Regions', 'Provinces', 'Districts', '$q',
+  function($scope, $routeParams, cachedResource, $route, places, Marker, uiGmapGoogleMapApi, $rootScope, $timeout,
+           TravelDestinations, Regions, Provinces, Districts, $q) {
     var map_options = {
       "panControl": false,
       "scaleControl": false
@@ -920,13 +921,32 @@ kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$rout
     $scope.show_loading = true;
     uiGmapGoogleMapApi.then(function() {
       $scope.show_loading = false;
-      $scope.travel_destination_names = [];
-      angular.forEach($scope.travel_destinations.results, function (item) {
-        $scope.travel_destination_names.push(item.name.toLowerCase());
+      $scope.place_names = [];
+
+      Regions.query(function(response){
+        angular.forEach(response.results, function(item){
+          item.zoom = 7;
+          $scope.places.push(item);
+          $scope.place_names.push(item.name.toLowerCase());
+        });
       });
-      $scope.windows_options= {
-          'zIndex': 10000
-          };
+      Provinces.query(function(response){
+        angular.forEach(response.results, function(item){
+          item.zoom = 9;
+          $scope.places.push(item);
+          $scope.place_names.push(item.name.toLowerCase());
+        });
+      });
+      Districts.list.query(function(response){
+        angular.forEach(response.results, function(item){
+          item.zoom = 12;
+          $scope.places.push(item);
+          $scope.place_names.push(item.name.toLowerCase());
+        });
+      });
+      angular.forEach($scope.places, function (item) {
+        $scope.place_names.push(item.name.toLowerCase());
+      });
     });
 
     $scope.prev_marker = null;
@@ -952,29 +972,30 @@ kompresControllers.controller('MapCtrl', ['$scope', 'TravelDestinations', '$rout
       $scope.map.zoom = 14;
     }
 
-    $scope.searchSelectedChange = function(destination){
-      $scope.map.center.latitude = destination.latitude;
-      $scope.map.center.longitude = destination.longitude;
-      $scope.map.zoom = 14;
+    $scope.searchSelectedChange = function(place){
+      $scope.map.center.latitude = place.latitude;
+      $scope.map.center.longitude = place.longitude;
+      $scope.map.zoom = place.zoom;
     };
 
     $scope.searchTextChange = function(search){
       if (search) {
         search = search.toLowerCase();
-      }
-      if ($rootScope.arrayContains($scope.travel_destination_names, search)){
-        angular.forEach($scope.travel_destinations.results, function(item){
-          if (item.name.toLowerCase() == search){
-            $scope.map.center.latitude = item.latitude;
-            $scope.map.center.longitude = item.longitude;
-            $scope.map.zoom = 14;
-          }
-        });
+
+        if ($rootScope.arrayContains($scope.place_names, search)){
+          angular.forEach($scope.places, function(item){
+            if (item.name.toLowerCase() == search){
+              $scope.map.center.latitude = item.latitude;
+              $scope.map.center.longitude = item.longitude;
+              $scope.map.zoom = item.zoom;
+            }
+          });
+        }
       }
     };
 
     $scope.markers = Marker.getMarkers();
-    $scope.travel_destinations = travel_destinations;
+    $scope.places = places;
   }
 ]);
 
