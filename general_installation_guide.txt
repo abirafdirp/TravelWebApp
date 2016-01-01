@@ -1,3 +1,5 @@
+copy project folder to your drive, open terminal and navigate to the project's directory
+
 sudo ./install_os_dependencies.sh install
 sudo pip install virtualenvwrapper
 
@@ -18,5 +20,35 @@ pip install -r requirements/local.txt
 navigate to your envs ~/.virtualenvs/kompres_local/bin
 
 add to postactivate
+
+#!/bin/bash
+# This hook is sourced after this virtualenv is activated.
+export DJANGO_SETTINGS_MODULE=config.settings.local
+export DATABASE_URL=<url database>
+export FB_CLIENTID=538377002985975
+export EMAIL_HOST_USER=<email gmail>
+export EMAIL_HOST_PASSWORD=<password gmail>
+export GMAPS_TOKEN=AIzaSyC72PSYYQFRLF_8cXUVu-Mu4xXFvwQoKZw
+
+
+add to postdeactivate
+
+#!/bin/bash
+# This hook is sourced after this virtualenv is deactivated.
+unset DJANGO_SETTINGS_MODULE
+unset DATABASE_URL
+unset FB_CLIENID
+unset GMAPS_TOKEN
+unset EMAIL_HOST_USER
+unset EMAIL_HOST_PASSWORD
+
+deactivate
+workon kompres_local
+
+python manage.py makemigrations
+python manage.py migrate
+python manage.py loaddata dump.json
+python manage.py runserver
+
 
 

@@ -5,7 +5,12 @@ from kompres2015.users.models import User
 
 
 def send_email(sender, instance, created, **kwargs):
-    users = list(User.objects.values_list('email', flat=True))
+    if instance.send_to_all_users is False or instance.send_to_all_users is None:
+        users = []
+        for user in instance.recipients.all():
+            users.append(user.email)
+    else:
+        users = list(User.objects.values_list('email', flat=True))
     mail.send_mail(
         instance.subject,
         instance.content_plaintext,
