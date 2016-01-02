@@ -1,5 +1,5 @@
 angular.module("tjsModelViewer", [])
-	.directive(
+		.directive(
 		"tjsModelViewer",
 		[function () {
 			return {
@@ -8,83 +8,138 @@ angular.module("tjsModelViewer", [])
 					assimpUrl: "=assimpUrl"
 				},
 				link: function (scope, elem, attr) {
-					var camera;
-					var scene;
-					var renderer;
-					var previous;
- 
-					// init scene
-					init();
- 
-					// Load jeep model using the AssimpJSONLoader
-					var loader1 = new THREE.AssimpJSONLoader();
- 
-					scope.$watch("assimpUrl", function(newValue, oldValue) {
-						if (newValue != oldValue) loadModel(newValue);
-					});
- 
-					function loadModel(modelUrl) {
-						loader1.load(modelUrl, function (assimpjson) {
-							assimpjson.scale.x = assimpjson.scale.y = assimpjson.scale.z = 0.2;
-							assimpjson.updateMatrix();
-							if (previous) scene.remove(previous);
-							scene.add(assimpjson);
- 
-							previous = assimpjson;
-						});
-					}
- 
-					loadModel(scope.assimpUrl);
-					animate();
- 
+					var scene, camera, renderer;
+
+					var WIDTH  = window.innerWidth;
+					var HEIGHT = window.innerHeight;
+
+					var SPEED = 0.01;
+
 					function init() {
-						camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 2000);
-						camera.position.set(2, 4, 5);
 						scene = new THREE.Scene();
-						scene.fog = new THREE.FogExp2(0x000000, 0.035);
-						// Lights
-						scene.add(new THREE.AmbientLight(0xcccccc));
-						var directionalLight = new THREE.DirectionalLight(/*Math.random() * 0xffffff*/0xeeeeee);
-						directionalLight.position.x = Math.random() - 0.5;
-						directionalLight.position.y = Math.random() - 0.5;
-						directionalLight.position.z = Math.random() - 0.5;
-						directionalLight.position.normalize();
-						scene.add(directionalLight);
- 
-						// Renderer
-						renderer = new THREE.WebGLRenderer();
+
+						scene.fog = new THREE.Fog( 0xffffff, 1, 5000 );
+						scene.fog.color.setHSL( 0.6, 0, 1 );
+
+						initMesh();
+						initCamera();
+						initLights();
+						initRenderer();
+					}
+
+					function initCamera() {
+						camera = new THREE.PerspectiveCamera(70, WIDTH / HEIGHT, 1, 10);
+						camera.position.set(5, 1, 5);
+						//camera.lookAt(scene.position);
+						//camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 1000 );
+						//camera.position.z = 500;
+					}
+
+					function initRenderer() {
+						renderer = new THREE.WebGLRenderer({ antialias: true });
 						renderer.setSize(window.innerWidth, window.innerHeight);
 						elem[0].appendChild(renderer.domElement);
- 
+
+						controls = new THREE.OrbitControls( camera, renderer.domElement );
+
+						controls.rotateSpeed = 0.2;
+						controls.zoomSpeed = 1.2;
+						controls.panSpeed = 0.8;
+
+						controls.enablePan = false;
+
+						controls.enableDamping = true;
+						controls.DampingFactor = 0.3;
+
+						controls.keys = [ 65, 83, 68 ];
+
+						//controls.addEventListener( 'change', render );
+
 						// Events
 						window.addEventListener('resize', onWindowResize, false);
 					}
- 
-					//
+
 					function onWindowResize(event) {
 						renderer.setSize(window.innerWidth, window.innerHeight);
 						camera.aspect = window.innerWidth / window.innerHeight;
 						camera.updateProjectionMatrix();
+						controls.handleResize();
 					}
- 
-					//
-					var t = 0;
- 
-					function animate() {
-						requestAnimationFrame(animate);
-						render();
+
+					function initLights() {
+						hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.6 );
+						hemiLight.color.setHSL( 0.6, 1, 0.6 );
+						hemiLight.groundColor.setHSL( 0.095, 1, 0.75 );
+						hemiLight.position.set( 0, 500, 0 );
+						scene.add( hemiLight );
+
+						dirLight = new THREE.DirectionalLight( 0xffffff, 1 );
+						dirLight.color.setHSL( 0.1, 1, 0.95 );
+						dirLight.position.set( -1, 1.75, 1 );
+						dirLight.position.multiplyScalar( 50 );
+						scene.add( dirLight );
+
+						dirLight.castShadow = true;
+
+						dirLight.shadowMapWidth = 2048;
+						dirLight.shadowMapHeight = 2048;
+
+						var d = 50;
+
+						dirLight.shadowCameraLeft = -d;
+						dirLight.shadowCameraRight = d;
+						dirLight.shadowCameraTop = d;
+						dirLight.shadowCameraBottom = -d;
+
+						dirLight.shadowCameraFar = 3500;
+						dirLight.shadowBias = -0.0001;
+						//dirLight.shadowCameraVisible = true;
+
+						// GROUND
+
+						var groundGeo = new THREE.PlaneBufferGeometry( 10000, 10000 );
+						var groundMat = new THREE.MeshPhongMaterial( { color: 0xffffff, specular: 0x050505 } );
+						groundMat.color.setHSL( 0.095, 1, 0.75 );
+
+						var ground = new THREE.Mesh( groundGeo, groundMat );
+						ground.rotation.x = -Math.PI/2;
+						ground.position.y = -33;
+						scene.add( ground );
+
+						ground.receiveShadow = true;
+
 					}
- 
-					//
+
+					var mesh = null;
+					function initMesh() {
+						var loader = new THREE.JSONLoader();
+						loader.load('partials/models/monumen%20nasional/', function(geometry, materials) {
+							mesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
+							mesh.scale.x = mesh.scale.y = mesh.scale.z = 0.2;
+							mesh.translation = THREE.GeometryUtils.center(geometry);
+							scene.add(mesh);
+						});
+					}
+
+					function rotateMesh() {
+						if (!mesh) {
+							return;
+						}
+
+						mesh.rotation.x -= SPEED * 2;
+						mesh.rotation.y -= SPEED;
+						mesh.rotation.z -= SPEED * 3;
+					}
+
 					function render() {
-						var timer = Date.now() * 0.0005;
-						camera.position.x = Math.cos(timer) * 10;
-						camera.position.y = 4;
-						camera.position.z = Math.sin(timer) * 10;
-						camera.lookAt(scene.position);
+						requestAnimationFrame(render);
+						//rotateMesh();
 						renderer.render(scene, camera);
 					}
+
+					init();
+					render();
 				}
 			}
 		}
-	]);
+		]);

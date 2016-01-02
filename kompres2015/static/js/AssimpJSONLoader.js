@@ -169,7 +169,7 @@ THREE.AssimpJSONLoader.prototype = {
 	},
 
 	parseMaterial : function(json) {
-		var mat = null, 
+		var mat = null,
 		scope = this, i, prop, has_textures = [],
 
 		init_props = {
@@ -271,7 +271,7 @@ THREE.AssimpJSONLoader.prototype = {
 				init_props[has_textures[i]] = defaultTexture();
 			}
 		}
-		
+
 		mat = new THREE.MeshPhongMaterial( init_props );
 		return mat;
 	},
