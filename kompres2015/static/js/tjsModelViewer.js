@@ -28,8 +28,8 @@ angular.module("tjsModelViewer", [])
 					}
 
 					function initCamera() {
-						camera = new THREE.PerspectiveCamera(70, WIDTH / HEIGHT, 1, 10);
-						camera.position.set(5, 1, 5);
+						camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 5000);
+						camera.position.set(0, 0, 250);
 						//camera.lookAt(scene.position);
 						//camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 1000 );
 						//camera.position.z = 500;
@@ -38,6 +38,17 @@ angular.module("tjsModelViewer", [])
 					function initRenderer() {
 						renderer = new THREE.WebGLRenderer({ antialias: true });
 						renderer.setSize(window.innerWidth, window.innerHeight);
+
+						renderer.setClearColor( scene.fog.color );
+						renderer.setPixelRatio( window.devicePixelRatio );
+
+						renderer.gammaInput = true;
+						renderer.gammaOutput = true;
+
+						renderer.shadowMap.enabled = true;
+						renderer.shadowMap.cullFace = THREE.CullFaceBack;
+
+
 						elem[0].appendChild(renderer.domElement);
 
 						controls = new THREE.OrbitControls( camera, renderer.domElement );
@@ -67,11 +78,15 @@ angular.module("tjsModelViewer", [])
 					}
 
 					function initLights() {
+						// LIGHTS
+
 						hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.6 );
 						hemiLight.color.setHSL( 0.6, 1, 0.6 );
 						hemiLight.groundColor.setHSL( 0.095, 1, 0.75 );
 						hemiLight.position.set( 0, 500, 0 );
 						scene.add( hemiLight );
+
+						//
 
 						dirLight = new THREE.DirectionalLight( 0xffffff, 1 );
 						dirLight.color.setHSL( 0.1, 1, 0.95 );
@@ -108,6 +123,26 @@ angular.module("tjsModelViewer", [])
 
 						ground.receiveShadow = true;
 
+						// SKYDOME
+
+						var vertexShader = document.getElementById( 'vertexShader' ).textContent;
+						var fragmentShader = document.getElementById( 'fragmentShader' ).textContent;
+						var uniforms = {
+							topColor: 	 { type: "c", value: new THREE.Color( 0x0077ff ) },
+							bottomColor: { type: "c", value: new THREE.Color( 0xffffff ) },
+							offset:		 { type: "f", value: 33 },
+							exponent:	 { type: "f", value: 0.6 }
+						};
+						uniforms.topColor.value.copy( hemiLight.color );
+
+						scene.fog.color.copy( uniforms.bottomColor.value );
+
+						var skyGeo = new THREE.SphereGeometry( 4000, 32, 15 );
+						var skyMat = new THREE.ShaderMaterial( { vertexShader: vertexShader, fragmentShader: fragmentShader, uniforms: uniforms, side: THREE.BackSide } );
+
+						var sky = new THREE.Mesh( skyGeo, skyMat );
+						scene.add( sky );
+
 					}
 
 					var mesh = null;
@@ -115,8 +150,11 @@ angular.module("tjsModelViewer", [])
 						var loader = new THREE.JSONLoader();
 						loader.load('partials/models/monumen%20nasional/', function(geometry, materials) {
 							mesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
-							mesh.scale.x = mesh.scale.y = mesh.scale.z = 0.2;
-							mesh.translation = THREE.GeometryUtils.center(geometry);
+
+							mesh.scale.x = mesh.scale.y = mesh.scale.z = 3;
+							mesh.castShadow = true;
+							mesh.receiveShadow = true;
+							mesh.position.y = -33;
 							scene.add(mesh);
 						});
 					}
