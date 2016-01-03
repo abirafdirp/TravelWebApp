@@ -236,7 +236,7 @@
     <script src="{% static 'js/services.js' %}" type="application/javascript"></script>
 
     <!-- directive for threejs -->
-    <script src="{% static 'js/tjsModelViewer.js' %}" type="application/javascript"></script>
+    <script src="{% static 'js/model-viewer.js' %}" type="application/javascript"></script>
 
     <!-- angular-django-registration auth -->
     <script src="{% static 'js/controllers/main.js' %}" type="application/javascript"></script>
@@ -1116,7 +1116,7 @@
 
   <script type="text/ng-template" id="3d_viewer.html">
     <div ng-controller="ModelViewerCtrl" layout="column" layout-fill flex="initial">
-      <tjs-model-viewer model-url="model_url"></tjs-model-viewer>
+      <model-viewer model-url="model_url"></model-viewer>
     </div>
   </script>
 

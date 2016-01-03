@@ -131,7 +131,7 @@ var kompresApp = angular.module('kompres', [
   'angularVideoBg',
   'angularUtils.directives.dirPagination',
   'satellizer',
-  'tjsModelViewer',
+  '3d-handler',
   'djds4rce.angular-socialshare',
 ]);
 

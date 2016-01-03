@@ -1,6 +1,6 @@
-angular.module("tjsModelViewer", [])
+angular.module("3d-handler", [])
 		.directive(
-		"tjsModelViewer",
+		"modelViewer",
 		[function () {
 			return {
 				restrict: "E",
@@ -34,9 +34,6 @@ angular.module("tjsModelViewer", [])
 					function initCamera() {
 						camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 5000);
 						camera.position.set(0, 0, 250);
-						//camera.lookAt(scene.position);
-						//camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 1000 );
-						//camera.position.z = 500;
 					}
 
 					function initRenderer() {
@@ -61,7 +58,7 @@ angular.module("tjsModelViewer", [])
 						controls.zoomSpeed = 1.2;
 						controls.panSpeed = 0.8;
 
-						controls.enablePan = false;
+						controls.enablePan = true;
 
 						controls.enableDamping = true;
 						controls.DampingFactor = 0.3;
@@ -88,7 +85,7 @@ angular.module("tjsModelViewer", [])
 						hemiLight.color.setHSL( 0.6, 1, 0.6 );
 						hemiLight.groundColor.setHSL( 0.095, 1, 0.75 );
 						hemiLight.position.set( 0, 500, 0 );
-						scene.add( hemiLight );
+						//scene.add( hemiLight );
 
 						//
 
@@ -114,10 +111,13 @@ angular.module("tjsModelViewer", [])
 						dirLight.shadowBias = -0.0001;
 						//dirLight.shadowCameraVisible = true;
 
+						//var light = new THREE.AmbientLight(0xffffff);
+						//scene.add(light);
+
 						// GROUND
 
 						var groundGeo = new THREE.PlaneBufferGeometry( 10000, 10000 );
-						var groundMat = new THREE.MeshPhongMaterial( { color: 0xffffff, specular: 0x050505 } );
+						var groundMat = new THREE.MeshPhongMaterial( { color: 0x404040, specular: 0x050505 } );
 						groundMat.color.setHSL( 0.095, 1, 0.75 );
 
 						var ground = new THREE.Mesh( groundGeo, groundMat );
