@@ -820,7 +820,7 @@ kompresApp.controller('ModelViewerCtrl', ['$scope', 'TravelDestinations', '$rout
     $scope.params = $routeParams;
     $rootScope.title = '3D - ' + $scope.params.travel_destination_name;
     $scope.travel_destination_name = $scope.params.travel_destination_name.replace(/-/g,'%20');
-    $scope.assimpModelUrl = 'partials/models/' + $scope.travel_destination_name + '/';
+    $scope.model_url = 'partials/models/' + $scope.travel_destination_name + '/';
   }]);
 
 kompresControllers.controller('ImagesCtrl', ['$scope', 'Images',

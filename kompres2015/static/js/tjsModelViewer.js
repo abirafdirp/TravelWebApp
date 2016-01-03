@@ -5,7 +5,7 @@ angular.module("tjsModelViewer", [])
 			return {
 				restrict: "E",
 				scope: {
-					assimpUrl: "=assimpUrl"
+					model_url: "=modelUrl"
 				},
 				link: function (scope, elem, attr) {
 					var scene, camera, renderer;
@@ -15,13 +15,17 @@ angular.module("tjsModelViewer", [])
 
 					var SPEED = 0.01;
 
+					scope.$watch("model_url", function(newValue, oldValue) {
+						if (newValue != oldValue) initMesh(newValue);
+					});
+
 					function init() {
 						scene = new THREE.Scene();
 
 						scene.fog = new THREE.Fog( 0xffffff, 1, 5000 );
 						scene.fog.color.setHSL( 0.6, 0, 1 );
 
-						initMesh();
+						initMesh(scope.model_url);
 						initCamera();
 						initLights();
 						initRenderer();
@@ -146,9 +150,10 @@ angular.module("tjsModelViewer", [])
 					}
 
 					var mesh = null;
-					function initMesh() {
+					function initMesh(modelUrl) {
+						// TODO ambientColor and DbgColor must be removed from the exported json model
 						var loader = new THREE.JSONLoader();
-						loader.load('partials/models/monumen%20nasional/', function(geometry, materials) {
+						loader.load(modelUrl, function(geometry, materials) {
 							mesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
 
 							mesh.scale.x = mesh.scale.y = mesh.scale.z = 3;
