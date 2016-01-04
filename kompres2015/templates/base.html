@@ -276,8 +276,9 @@
         $FB.init('{% fb_clientid %}');
       });
     </script>
+  {% endcompress %}
 
-    <script type="x-shader/x-vertex" id="vertexShader">
+  <script type="x-shader/x-vertex" id="vertexShader">
 
 			varying vec3 vWorldPosition;
 
@@ -292,7 +293,7 @@
 
 		</script>
 
-    <script type="x-shader/x-fragment" id="fragmentShader">
+  <script type="x-shader/x-fragment" id="fragmentShader">
 
 			uniform vec3 topColor;
 			uniform vec3 bottomColor;
@@ -309,7 +310,6 @@
 			}
 
 		</script>
-  {% endcompress %}
 
   <script src="//cdnjs.cloudflare.com/ajax/libs/SVG-Morpheus/0.1.8/svg-morpheus.js"></script>
   <script src="//platform.twitter.com/widgets.js"></script>
