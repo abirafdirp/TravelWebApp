@@ -216,7 +216,7 @@
     <script src="{% static 'js/angular-carousel.min.js'%}" type="application/javascript"></script>
     <script src="{% static 'js/angular-material-icons.min.js'%}" type="application/javascript"></script>
     <script src="{% static 'js/ng-file-upload.min.js'%}" type="application/javascript"></script>
-    <script src="{% static 'js/angular-video-bg.min.js'%}" type="application/javascript"></script>
+    <script src="{% static 'js/angular-video-bg-http.min.js'%}" type="application/javascript"></script>
     <script src="{% static 'js/dirPagination.js'%}" type="application/javascript"></script>
     <script src="{% static 'js/satellizer.min.js'%}" type="application/javascript"></script>
     <script src="{% static 'js/angular-social-share.min.js'%}" type="application/javascript" ></script>
@@ -553,10 +553,10 @@
   </script>
 
   <script type="text/ng-template" id="report.html">
-    <md-dialog aria-label="komplain">
+    <md-dialog aria-label="Masukan">
       <md-toolbar>
         <div class="md-toolbar-tools">
-          <h2>komplain</h2>
+          <h2>Masukan</h2>
           <span flex></span>
           <md-button class="md-icon-button" ng-click="closeDialog()">
             <ng-md-icon icon="close" aria-label="close dialog"></ng-md-icon>
@@ -610,8 +610,8 @@
 
 
             <md-input-container class="md-block">
-              <label for="id_report">Isi Komplain</label>
-              <textarea name="report" id="id_report" class="form-control" type="text" ng-model="newReport.report" placeholder="Isi Komplain" required></textarea>
+              <label for="id_report">Isi Masukan</label>
+              <textarea name="report" id="id_report" class="form-control" type="text" ng-model="newReport.report" placeholder="Isi Masukan" required></textarea>
               <div ng-messages="reportForm.report.$error">
                 <div ng-message="required" ng-repeat="error in errors.report">{$error$}</div>
               </div>
@@ -637,7 +637,7 @@
 				</span>
               <div flex></div>
               <div layout="column" layout-align="center center">
-                <md-button class="md-raised md-primary" ng-click="save()">Laporkan</md-button>
+                <md-button class="md-raised md-primary" ng-click="save()">Kirim Masukan</md-button>
               </div>
             </div>
           </form>
@@ -648,7 +648,7 @@
   </script>
 
   <script type="text/ng-template" id="visit.html">
-    <md-dialog aria-label="komplain">
+    <md-dialog aria-label="Masukan">
       <md-toolbar>
         <div class="md-toolbar-tools">
           <h2>Kunjungan</h2>
@@ -820,7 +820,7 @@
           </md-tab>
           <md-tab label="Komplain">
             <md-content class="md-padding" ng-controller="ReportListCtrl" layout="row" layout-align="center center" layout-wrap>
-              <h4 class="md-subheading">Tanda ceklis menandakan komplain anda sudah berhasil diverifikasi. Terima kasih atas kontribusinya.</h4>
+              <h4 class="md-subheading">Tanda ceklis menandakan masukan anda sudah berhasil diverifikasi. Terima kasih atas kontribusinya.</h4>
               <md-list flex="100">
                 <div dir-paginate="report in reports_resolved | itemsPerPage: 4" pagination-id="report">
                   <md-list-item class="md-3-line md-long-text" ng-controller="ReportListRepeatCtrl" flex>
@@ -1282,7 +1282,7 @@
               <div ng-controller="ReportCtrl" ng-show="authenticated" layout="row"  flex-xs="100">
                 <div flex="10" flex-md="0" flex-sm="0" flex-xs="0"></div>
                 <md-button class="md-raised md-warn" ng-click="showReport(travel_destination)" flex>
-                  <ng-md-icon icon="report_problem" size="20" aria-label="tanggal"></ng-md-icon> komplain&nbsp;
+                  <ng-md-icon icon="mail" size="20" aria-label="tanggal"></ng-md-icon>Beri Masukan&nbsp;
                 </md-button>
                 <div flex="20" flex-md="5" flex-sm="0" flex-xs="0"></div>
               </div>
@@ -1292,7 +1292,7 @@
                   <md-tooltip md-direction="down">
                     anda harus masuk terlebih dahulu
                   </md-tooltip>
-                  <ng-md-icon icon="report_problem" size="20" aria-label="tanggal"></ng-md-icon> komplain&nbsp;
+                  <ng-md-icon icon="mail" size="20" aria-label="tanggal"></ng-md-icon>Beri Masukan&nbsp;
                 </md-button>
                 <div flex="20" flex-md="5" flex-sm="0" flex-xs="0"></div>
               </div>
@@ -1585,7 +1585,7 @@
         <md-progress-circular md-mode="indeterminate"></md-progress-circular>
       </div>
 
-      <div layout="row" layout-align="center center" flex="100">
+      <div layout="row" layout-align="center center" flex="100" ng-if="show_loading == true">
         <md-autocomplete flex="65"
                          md-search-text="district_search"
                          md-items="district in districts.results | filter:search | orderBy: 'name'"
@@ -1602,7 +1602,7 @@
         </md-autocomplete>
       </div>
 
-      <div layout="row" flex="100">
+      <div layout="row" flex="100" ng-if="show_loading == true">
         <md-list flex="100" flex-md="80" flex-lg="80" flex-gt-lg="80" flex-offset="0" flex-offset-md="10" flex-offset-lg="10" flex-offset-gt-lg="10">
           <md-list-item dir-paginate="transportation in transportations.results | filter: district_search | itemsPerPage: 5" class="md-3-line md-long-text" flex>
             <img ng-src="{$transportation.image$}" class="md-avatar" alt=""/>
@@ -1630,7 +1630,7 @@
           </md-list-item>
         </md-list>
       </div>
-      <div layout="row" flex="100" layout-align="center" layout-margin layout-padding style="margin-bottom: 20px">
+      <div layout="row" flex="100" layout-align="center" layout-margin layout-padding style="margin-bottom: 20px" ng-if="show_loading == true">
         <dir-pagination-controls></dir-pagination-controls>
       </div>
     </div>
