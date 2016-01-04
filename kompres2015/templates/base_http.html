@@ -1585,7 +1585,7 @@
         <md-progress-circular md-mode="indeterminate"></md-progress-circular>
       </div>
 
-      <div layout="row" layout-align="center center" flex="100" ng-if="show_loading == true">
+      <div layout="row" layout-align="center center" flex="100" ng-if="show_loading == false">
         <md-autocomplete flex="65"
                          md-search-text="district_search"
                          md-items="district in districts.results | filter:search | orderBy: 'name'"
@@ -1602,7 +1602,7 @@
         </md-autocomplete>
       </div>
 
-      <div layout="row" flex="100" ng-if="show_loading == true">
+      <div layout="row" flex="100" ng-if="show_loading == false">
         <md-list flex="100" flex-md="80" flex-lg="80" flex-gt-lg="80" flex-offset="0" flex-offset-md="10" flex-offset-lg="10" flex-offset-gt-lg="10">
           <md-list-item dir-paginate="transportation in transportations.results | filter: district_search | itemsPerPage: 5" class="md-3-line md-long-text" flex>
             <img ng-src="{$transportation.image$}" class="md-avatar" alt=""/>
@@ -1630,7 +1630,7 @@
           </md-list-item>
         </md-list>
       </div>
-      <div layout="row" flex="100" layout-align="center" layout-margin layout-padding style="margin-bottom: 20px" ng-if="show_loading == true">
+      <div layout="row" flex="100" layout-align="center" layout-margin layout-padding style="margin-bottom: 20px" ng-if="show_loading == false">
         <dir-pagination-controls></dir-pagination-controls>
       </div>
     </div>
