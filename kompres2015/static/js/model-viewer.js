@@ -109,7 +109,7 @@ angular.module("3d-handler", [])
 
 						dirLight.shadowCameraFar = 3500;
 						dirLight.shadowBias = -0.0001;
-						//dirLight.shadowCameraVisible = true;
+						dirLight.shadowCameraVisible = true;
 
 						//var light = new THREE.AmbientLight(0xffffff);
 						//scene.add(light);
@@ -156,7 +156,8 @@ angular.module("3d-handler", [])
 						loader.load(modelUrl, function(geometry, materials) {
 							mesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
 
-							mesh.scale.x = mesh.scale.y = mesh.scale.z = 3;
+
+							mesh.scale.x = mesh.scale.y = mesh.scale.z = 5;
 							mesh.castShadow = true;
 							mesh.receiveShadow = true;
 							mesh.position.y = -33;

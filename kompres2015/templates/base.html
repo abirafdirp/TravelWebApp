@@ -191,11 +191,11 @@
   </footer>
 
 
-  <script src="{% static 'js/three.min.js' %}" type="application/javascript"></script>
+  <script src="{% static 'js/three.js' %}" type="application/javascript"></script>
   <script src="{% static 'js/AssimpJSONLoader.js' %}" type="application/javascript"></script>
 
   {% compress js %}
-		 <script src="{% static 'js/trackballcontrols.js' %}" type="application/javascript"></script>
+    <script src="{% static 'js/trackballcontrols.js' %}" type="application/javascript"></script>
 
     <!-- angular v1.4.2 -->
     <script src="{% static 'js/angular.js' %}" type="application/javascript"></script>
@@ -276,6 +276,39 @@
         $FB.init('{% fb_clientid %}');
       });
     </script>
+
+    <script type="x-shader/x-vertex" id="vertexShader">
+
+			varying vec3 vWorldPosition;
+
+			void main() {
+
+				vec4 worldPosition = modelMatrix * vec4( position, 1.0 );
+				vWorldPosition = worldPosition.xyz;
+
+				gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+
+			}
+
+		</script>
+
+    <script type="x-shader/x-fragment" id="fragmentShader">
+
+			uniform vec3 topColor;
+			uniform vec3 bottomColor;
+			uniform float offset;
+			uniform float exponent;
+
+			varying vec3 vWorldPosition;
+
+			void main() {
+
+				float h = normalize( vWorldPosition + offset ).y;
+				gl_FragColor = vec4( mix( bottomColor, topColor, max( pow( max( h , 0.0), exponent ), 0.0 ) ), 1.0 );
+
+			}
+
+		</script>
   {% endcompress %}
 
   <script src="//cdnjs.cloudflare.com/ajax/libs/SVG-Morpheus/0.1.8/svg-morpheus.js"></script>
@@ -1083,7 +1116,7 @@
 
   <script type="text/ng-template" id="3d_viewer.html">
     <div ng-controller="ModelViewerCtrl" layout="column" layout-fill flex="initial">
-      <tjs-model-viewer assimp-url="assimpModelUrl"></tjs-model-viewer>
+      <model-viewer model-url="model_url"></model-viewer>
     </div>
   </script>
 
