@@ -325,7 +325,7 @@
         <div ng-controller="PageCtrl" hide-sm hide-md hide-xs>
           <div class="faux-image-container">
             <input ng-show="search_opened" class="search-input" ng-model="$parent.ArticleSearch.search" flex="grow"
-                   flex-offset="5" autofocus spellcheck="false" type="search" placeholder="judul artikel dan deskripsi singkat.....">
+                   flex-offset="5" autofocus spellcheck="false" type="search-white" placeholder="judul artikel dan deskripsi singkat.....">
             <img id="faux-image" ng-src="{$ page.results[0].article_list_image $}">
             <h3 class="md-display-1 article-title" ng-if="page.results[0].article_list_tagline" flex>{$ page.results[0].article_list_tagline $}</h3>
           </div>
@@ -1315,7 +1315,7 @@
         <div ng-controller="PageCtrl" hide-sm hide-md hide-xs>
           <div class="faux-image-container">
             <input ng-show="search_opened" class="search-input" ng-model="$parent.TravelDestinationSearch.search" flex="grow"
-                   flex-offset="5" autofocus spellcheck="false" placeholder="nama lokasi wisata dan deskripsi singkat....." type="search">
+                   flex-offset="5" autofocus spellcheck="false" placeholder="nama lokasi wisata dan deskripsi singkat....." type="search-white">
             <img id="faux-image" ng-src="{$ page.results[0].travel_destination_list_image $}">
             <h3 class="md-display-1 article-title" flex>{$ page.results[0].travel_destination_list_tagline $}</h3>
           </div>

@@ -730,19 +730,19 @@ md-card a {
     top: 60px;
 }
 
-input[type="search"]::-webkit-input-placeholder {
+input[type="search-white"]::-webkit-input-placeholder {
     color: white !important;
 }
 
-input[type="search"]:-moz-placeholder { /* Firefox 18- */
+input[type="search-white"]:-moz-placeholder { /* Firefox 18- */
     color: white !important;
 }
 
-input[type="search"]::-moz-placeholder {  /* Firefox 19+ */
+input[type="search-white"]::-moz-placeholder {  /* Firefox 19+ */
     color: white !important;
 }
 
-input[type="search"]:-ms-input-placeholder {
+input[type="search-white"]:-ms-input-placeholder {
     color: white !important;
 }
 
