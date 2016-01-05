@@ -730,6 +730,22 @@ md-card a {
     top: 60px;
 }
 
+input[type="search"]::-webkit-input-placeholder {
+    color: white !important;
+}
+
+input[type="search"]:-moz-placeholder { /* Firefox 18- */
+    color: white !important;
+}
+
+input[type="search"]::-moz-placeholder {  /* Firefox 19+ */
+    color: white !important;
+}
+
+input[type="search"]:-ms-input-placeholder {
+    color: white !important;
+}
+
 .dest-side {
     margin-top: 100px;
 }

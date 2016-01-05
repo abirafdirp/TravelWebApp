@@ -207,6 +207,14 @@ kompresControllers.controller('TransportationRepeatCtrl', ['$scope', 'cachedReso
   }
 ]);
 
+kompresControllers.controller('PaginationCtrl', ['$scope',
+  function($scope) {
+    $scope.scrollToTop = function() {
+      window.scrollTo(0, 0);
+    }
+  }
+]);
+
 
 kompresControllers.controller('TravelDestinationListCtrl', ['$scope', '$route', '$routeParams', 'cachedResource', '$rootScope', 'TravelDestinations', 'Districts',
   'Provinces', 'Regions', 'Marker', 'djangoAuth', '$filter', 'Visits', '$resource', '$timeout',
