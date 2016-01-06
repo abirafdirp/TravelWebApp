@@ -46,9 +46,6 @@ angular.module("3d-handler", [])
 						renderer.gammaInput = true;
 						renderer.gammaOutput = true;
 
-						renderer.shadowMap.enabled = true;
-						renderer.shadowMap.cullFace = THREE.CullFaceBack;
-
 
 						elem[0].appendChild(renderer.domElement);
 
@@ -95,21 +92,7 @@ angular.module("3d-handler", [])
 						dirLight.position.multiplyScalar( 50 );
 						scene.add( dirLight );
 
-						dirLight.castShadow = true;
-
-						dirLight.shadowMapWidth = 2048;
-						dirLight.shadowMapHeight = 2048;
-
 						var d = 50;
-
-						dirLight.shadowCameraLeft = -d;
-						dirLight.shadowCameraRight = d;
-						dirLight.shadowCameraTop = d;
-						dirLight.shadowCameraBottom = -d;
-
-						dirLight.shadowCameraFar = 3500;
-						dirLight.shadowBias = -0.0001;
-						dirLight.shadowCameraVisible = true;
 
 						//var light = new THREE.AmbientLight(0xffffff);
 						//scene.add(light);
@@ -124,8 +107,6 @@ angular.module("3d-handler", [])
 						ground.rotation.x = -Math.PI/2;
 						ground.position.y = -33;
 						scene.add( ground );
-
-						ground.receiveShadow = true;
 
 						// SKYDOME
 
@@ -158,8 +139,6 @@ angular.module("3d-handler", [])
 
 
 							mesh.scale.x = mesh.scale.y = mesh.scale.z = 5;
-							mesh.castShadow = true;
-							mesh.receiveShadow = true;
 							mesh.position.y = -33;
 							scene.add(mesh);
 						});
