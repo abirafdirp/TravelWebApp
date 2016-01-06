@@ -89,7 +89,7 @@
     <md-sidenav md-component-id='left' flex ng-cloak
                 class='fixed-nav md-sidenav-left md-whiteframe-z2'>
       <md-toolbar>
-        <h3 class='md-toolbar-tools' layout="row" layout-align="center">DiscoverIndonesia</h3>
+        <h3 class='md-toolbar-tools' layout="row" layout-align="center">Discover Indonesia</h3>
       </md-toolbar>
       <md-content flex layout="column" layout-margin layout-padding>
         <md-button ng-click="TravelDestinationSearch.clearAllSearch(); toggleMenu('/lokasi-wisata')">
@@ -1587,7 +1587,8 @@
       <div layout="row" layout-align="center center" flex="100" ng-if="show_loading == false">
         <md-autocomplete flex="65"
                          md-search-text="district_search"
-                         md-items="district in districts.results | filter:search | orderBy: 'name'"
+												 md-search-text-change="searchTextChange(district_search)"
+                         md-items="district in districts.results | filter:district_search | orderBy: 'name'"
                          md-item-text="district.name"
                          md-min-length="0"
                          placeholder="Cari berdasarkan kabupaten ..."

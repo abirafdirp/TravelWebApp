@@ -180,6 +180,11 @@ kompresControllers.controller('TransportationListCtrl', ['$scope', 'Transportati
     $scope.districts = Districts.list.query();
     $scope.transportation_search = '';
     $scope.show_loading = true;
+
+    $scope.searchTextChange = function(search){
+      $scope.district_search = search;
+    };
+
     $scope.transportations = Transportations.list.query(function(response){
       $scope.show_loading = false;
       angular.forEach(response.results, function(transportation){
