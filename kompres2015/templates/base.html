@@ -31,7 +31,7 @@
 <body ng-controller="MasterCtrl" ng-cloak>
 
 <div ng-controller="NavCtrl" layout="column" layout-fill>
-  <header>
+  <header flex="none">
     <md-toolbar class="md-primary navbar" ng-cloak>
       <div class="md-toolbar-tools" layout="row" layout-wrap>
         <div flex="20" >
@@ -85,7 +85,7 @@
 
   </header>
 
-  <div layout="row" flex="auto">
+  <div layout="row" flex="noshrink">
     <md-sidenav md-component-id='left' flex ng-cloak
                 class='fixed-nav md-sidenav-left md-whiteframe-z2'>
       <md-toolbar>
@@ -129,7 +129,7 @@
     <main ng-view flex="grow"></main>
   </div>
 
-  <footer ng-cloak layout="column" hide show-lg show-gt-lg>
+  <footer ng-cloak layout="column" hide show-lg show-gt-lg flex="none">
     <div class="material-blue" flex="100" layout="row" layout-align="center center">
       <h4 class="md-subheading">Temukan Berbagai Keindahan dan Lokasi Wisata di Indonesia - Discover Indonesia</h4>
     </div>
@@ -1035,7 +1035,6 @@
             <md-card ng-repeat="home_link in page.home_links | orderBy: 'id'"
                      ng-if="home_link.type == 'at video'"
                      ng-href="{$home_link.link$}"
-                     flex
                      style="margin: 30px 20px 0 20px"
                      class="no-outline no-padding"
                      ng-mouseenter="icon = 'keyboard_tab'"
