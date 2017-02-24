@@ -25,10 +25,10 @@ add to postactivate
 # This hook is sourced after this virtualenv is activated.
 export DJANGO_SETTINGS_MODULE=config.settings.local
 export DATABASE_URL=<url database>
-export FB_CLIENTID=538377002985975
+export FB_CLIENTID=<fb_client_id>
 export EMAIL_HOST_USER=<email gmail>
 export EMAIL_HOST_PASSWORD=<password gmail>
-export GMAPS_TOKEN=AIzaSyC72PSYYQFRLF_8cXUVu-Mu4xXFvwQoKZw
+export GMAPS_TOKEN=<gmaps_token>
 
 
 add to postdeactivate
